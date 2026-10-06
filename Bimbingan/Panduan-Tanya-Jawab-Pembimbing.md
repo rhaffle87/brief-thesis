@@ -52,11 +52,11 @@
 ---
 
 ### Pertanyaan 5: "Bagaimana status pengujian Live Traffic (E5) di Proxmox? Apakah ini wajib diselesaikan?"
-- **Strategi Jawaban:** *Eksperimen Validasi Nilai Tambah (Opsional).*
-- **Poin Jawaban:**
-  1. **Syarat Kelulusan Inti:** Eksperimen E0 s.d. E4 menggunakan dataset standar berlabel CIC-IDS2017 (5 seed acak) sudah memenuhi seluruh target ilmiah untuk menjawab Rumusan Masalah 1 dan 2.
-  2. **Peran E5 sebagai Demonstrator:** Uji live traffic Proxmox (VLAN terisolasi: attacker $\to$ target $\to$ sensor) disiapkan sebagai studi validasi kelayakan implementasi inferensi di testbed private cloud.
-  3. Skenario E5 dijalankan di Minggu 13–14 tanpa *retraining*, khusus untuk mendemonstrasikan bahwa model hasil E4 mampu menerima input ekstraksi CICFlowMeter secara pasif bila diminta oleh tim penguji saat seminar proposal/sidang.
+- **Status Akhir Bimbingan (2026-10-06):** *Resmi Ditiadakan oleh Dosen Pembimbing.*
+- **Poin Kesepakatan:**
+  1. **Eliminasi Parameter Noise:** Dosen pembimbing menegaskan bahwa injeksi live traffic (menggunakan VM 400 generator serangan) membawa terlalu banyak parameter dinamis non-algoritmik (dropped packets, timing jitter, buffer overrun, bridge throughput limits) yang berisiko mengaburkan fokus pembuktian ilmiah algoritma FL-CL.
+  2. **Fokus Riset Terkunci:** Seluruh target skripsi E0 s.d. E4 diselesaikan 100% menggunakan data benchmark berlabel CIC-IDS2017 pada skenario terdistribusi non-IID 2 client.
+  3. **Staging Testbed:** Realisasi testbed dieksekusi bertahap: local first (Docker Compose / isolated venv), kemudian dilanjutkan simulasi server VM pada Proxmox VE.
 
 ---
 
@@ -65,7 +65,7 @@
 1. **Cetakan Fisik / PDF Siap Tampil (2–3 Halaman):**  
    - Buka: [[Bahan-Paparan-Pembimbing]] atau [[Ringkasan-Untuk-Pembimbing]].
 2. **Naskah Proposal Lengkap (Referensi Detail):**  
-   - Buka: [[Briefing Scope TA_Federated-Continual Learning untuk Deteksi Intrusi]].
+   - Buka: [[Briefing Scope TA]].
 3. **Dokumen Bukti Empiris Data (Jika Dosen Minta Angka Riil):**  
    - Buka: [[EDA-CIC-IDS2017]] (menunjukkan tabel 10 kolom konstan, grafik port leakage 96,44%, dan distribusi DoS).
 4. **Daftar Pustaka 5 Tahun Terakhir:**  

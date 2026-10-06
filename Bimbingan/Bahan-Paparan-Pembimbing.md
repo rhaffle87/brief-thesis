@@ -5,7 +5,7 @@ Analisis Kinerja Deteksi Network Traffic Intrusion Menggunakan Metode Federated-
 
 **Mahasiswa:** Rafli Alif Ihza Hartono (NRP 5022211233)  
 **Departemen:** Teknik Elektro, FTEIC, Institut Teknologi Sepuluh Nopember (ITS)  
-**Dokumen Pendukung Utama:** [[Ringkasan-Untuk-Pembimbing]], [[Briefing Scope TA_Federated-Continual Learning untuk Deteksi Intrusi]], [[EDA-CIC-IDS2017]], [[Crosscheck]]  
+**Dokumen Pendukung Utama:** [[Ringkasan-Untuk-Pembimbing]], [[Briefing Scope TA]], [[EDA-CIC-IDS2017]], [[Crosscheck]]  
 
 ---
 
@@ -58,15 +58,17 @@ Berdasarkan pemindaian menyeluruh 1,53 juta baris data mentah:
 
 ## 📋 Bagian 4: Tujuh Poin Konfirmasi dengan Dosen Pembimbing
 
-| No | Poin Keputusan | Bukti / Dasar Pertimbangan | Rekomendasi Mahasiswa | Status Konfirmasi |
+| No | Poin Keputusan | Bukti / Dasar Pertimbangan | Keputusan Pembimbing | Status Konfirmasi |
 |---|---|---|---|---|
-| **1** | **Dataset & 63 Fitur** | Anomali 10 konstan & 5 duplikat terbukti via array hashing | Pakai CIC-IDS2017 resmi dengan 63 fitur unik | ⏸️ Menunggu Persetujuan |
-| **2** | **Partisi Data Normal** | Klasifikasi Normal Selasa vs Rabu akurasi 62,44% (ada pola hari) | Random split data Normal dari 3 hari (hindari bias hari) | ⏸️ Menunggu Persetujuan |
-| **3** | **Komposisi Kelas DoS** | Total DoS 193.748 baris; DoS Hulk mendominasi 89,2% | Pertahankan distribusi alami (volumetrik realistis) | ⏸️ Menunggu Persetujuan |
-| **4** | **Plafon Subsampling** | SSH-Patator unik hanya 3.219 baris | Batasi ~3.200 sampel/kelas (evaluasi seimbang) | ⏸️ Menunggu Persetujuan |
-| **5** | **Perlakuan Port** | Port-only F1 = 96,44% (*shortcut learning*) | Buang Destination Port sebagai default | ⏸️ Menunggu Persetujuan |
-| **6** | **Fokus Metrik Evaluasi** | Akurasi global jenuh di 98–99% | Prioritaskan Recall SSH & Backward Transfer (BWT) | ⏸️ Menunggu Persetujuan |
-| **7** | **Partisi Non-IID Klien** | Client A (SSH) vs Client B (DoS), urutan SSH $\to$ DoS | Skema 2 klien dengan label-skew terpisah | ⏸️ Menunggu Persetujuan |
+| **1** | **Dataset & 63 Fitur** | Anomali 10 konstan & 5 duplikat terbukti via array hashing | Pakai solely CIC-IDS2017 resmi dengan 63 fitur unik | ✅ **DISETUJUI** |
+| **2** | **Partisi Data Normal** | Klasifikasi Normal Selasa vs Rabu akurasi 62,44% (ada pola hari) | Random split 50/50 data Normal all-days (hindari bias hari) | ✅ **DISETUJUI (Opsi A)** |
+| **3** | **Komposisi Kelas DoS** | Total DoS 193.748 baris; DoS Hulk mendominasi 89,2% | Pertahankan distribusi alami (volumetrik realistis) | ✅ **DISETUJUI (Opsi A)** |
+| **4** | **Handling Imbalance** | Menghindari data loss 99% akibat subsampling ekstrem | Weighted Loss (Keep All Clean Data ~1.53M baris) | ✅ **DISETUJUI (Opsi C)** |
+| **5** | **Perlakuan Port** | Port-only F1 = 96,44% (*shortcut learning*) | Buang Destination Port (fokus ke dinamika flow) | ✅ **DISETUJUI** |
+| **6** | **Injeksi Trafik** | Terlalu banyak parameter jaringan dinamis | Dieliminasi (fokus evaluasi offline batch) | ✅ **DISETUJUI (Ditiadakan)** |
+| **7** | **Staging Testbed** | Memastikan kestabilan pipeline sebelum masuk server | Local First → Simulasi Server Proxmox VE | ✅ **DISETUJUI** |
+| **8** | **Keseimbangan Bobot** | Penalti EWC λ dan class weights harus seimbang | Penyeimbangan bobot metode & parameter + Gradient Clipping | ✅ **DISETUJUI** |
+| **9** | **Hyperparameter Tuning**| Menjamin ketahanan dan reproduktifitas model | Grid/Random search sistematis pada 5 seed | ✅ **DISETUJUI** |
 
 ---
 
@@ -89,7 +91,7 @@ Berdasarkan pemindaian menyeluruh 1,53 juta baris data mentah:
 - **E2 (Lokal EWC):** Pelatihan sekuensial lokal dengan penalti kuadratik Fisher. Mengukur pemulihan retensi.
 - **E3 (FedAvg Naive):** Pelatihan terdistribusi 2 klien tanpa continual learning.
 - **E4 (FedAvg + EWC):** **Metode usulan utama**. Menjawab apakah FL dan EWC saling melengkapi.
-- **E5 (Live Traffic - Opsional):** Inferensi model E4 pada lab Proxmox (VLAN terisolasi), disiapkan jika diminta saat ujian.
+- **E5 (Live Traffic):** ❌ **Dieliminasi**. Injeksi live traffic resmi ditiadakan oleh pembimbing untuk menjaga kemurnian evaluasi algoritma FL-CL.
 
 *Setiap eksperimen dieksekusi pada **5 seed acak terstandarisasi (42, 43, 44, 45, 46)** dan disajikan dalam format Mean ± Std.*
 

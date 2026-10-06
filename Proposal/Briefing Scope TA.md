@@ -20,7 +20,7 @@ Untuk memastikan kejelasan komunikasi akademik dan pembelaan skripsi, seluruh si
 * **TA (Tugas Akhir):** Karya ilmiah mandiri mahasiswa sarjana sebagai syarat kelulusan di Departemen Teknik Elektro FTEIC ITS.
 * **IDS / NIDS (Intrusion Detection System / Network Intrusion Detection System):** Sistem pemantau lalu lintas jaringan komputer yang bertugas mendeteksi aktivitas mencurigakan, pelanggaran kebijakan, atau serangan siber.
 * **FL (Federated Learning):** Paradigma pembelajaran mesin terdistribusi yang melatih model secara kolaboratif lintas node klien (*client*) tanpa mentransmisikan data mentah lokal, melainkan hanya mempertukarkan bobot parameter model ke server agregator.
-* **CL (Continual Learning Learning):** Paradigma pembelajaran mesin yang memungkinkan model beradaptasi mempelajari aliran tugas (*tasks*) baru secara sekuensial tanpa mengalami fenomena lupa ingatan drastis (*catastrophic forgetting*) terhadap tugas yang telah dipelajari sebelumnya.
+* **CL (Continual Learning):** Paradigma pembelajaran mesin yang memungkinkan model beradaptasi mempelajari aliran tugas (*tasks*) baru secara sekuensial tanpa mengalami fenomena lupa ingatan drastis (*catastrophic forgetting*) terhadap tugas yang telah dipelajari sebelumnya.
 * **FCL (Federated Continual Learning):** Integrasi sinergis antara Federated Learning dan Continual Learning, di mana model terdistribusi beradaptasi terhadap ancaman baru secara bertahap sekaligus menjaga privasi data lokal.
 * **FedAvg (Federated Averaging):** Algoritma agregasi parameter federated standar (McMahan et al., 2017) yang menghitung rata-rata tertimbang bobot model lokal berdasarkan proporsi jumlah data di masing-masing client.
 * **EWC (Elastic Weight Consolidation):** Algoritma continual learning berbasis regularisasi kuadratik (Kirkpatrick et al., 2017) yang memperlambat laju pembaruan parameter model yang penting bagi tugas terdahulu dengan memanfaatkan Matriks Informasi Fisher (*Fisher Information Matrix*).
@@ -112,25 +112,29 @@ Fitur nomor port tujuan (`Destination Port`) dieksklusi secara sengaja dari inpu
 
 ---
 
-## ⚖️ 5. Keputusan Subsampling Dataset: Decision-Making
+## ⚖️ 5. Keputusan Penanganan Imbalance & Retensi Data: Weighted Loss (Keep All Clean Data)
 
 ### 5.1 Realitas Data Mentah Pasca-Deduplikasi
-Setelah seluruh baris duplikat mentah dibersihkan dari CSV hari Senin, Selasa, dan Rabu:
+Setelah seluruh baris duplikat mentah dibersihkan dari CSV hari Senin, Selasa, dan Rabu (menggunakan 63 fitur unik):
 * **Normal (BENIGN):** 1.332.710 flow (87,1%)
-* **DoS (Hulk, GoldenEye, dll):** 193.748 flow (12,7%)
+* **DoS (Hulk, GoldenEye, slowloris, slowhttptest):** 193.748 flow (12,7%)
 * **SSH-Patator (Brute Force):** **Hanya 3.219 flow unik** (0,2%)
+* **Total Keseluruhan Data Bersih:** **1.529.677 flow unik** (Rasio ketimpangan ~ 414 : 60 : 1).
 
-### 5.2 Pertimbangan & Keputusan
-* **Opsi SMOTE (Ditolak):** Membuat sampel sintetis untuk mendongkrak SSH-Patator dari 3.200 ke 1,3 juta baris akan merusak distribusi fisik paket jaringan (menghasilkan flow artifisial yang tidak valid secara protokol).
-* **Opsi Subsampling Terkontrol (DIPILIH):** Mengunci plafon evaluasi seimbang pada jumlah kelas terkecil, yaitu **~3.200 sampel per kelas**:
-  * Normal: 3.200 sampel
-  * SSH-Patator: 3.200 sampel (seluruh flow unik)
-  * DoS: 3.200 sampel (distribusi alami didominasi Hulk 89%, GoldenEye, slowloris, slowhttptest)
-* **Partisi Data (Stratified Split 70% Train / 15% Val / 15% Test):**
-  * **Data Latih (Train):** ~2.253 flow per kelas.
-  * **Data Validasi (Val):** ~483 flow per kelas.
-  * **Data Uji (Test):** ~483 flow per kelas.
-* **Manfaat Ilmiah:** Menghilangkan bias mayoritas semu, menjamin kecepatan pelatihan lintas 5 seed acak, serta memastikan bahwa metrik evaluasi benar-benar mencerminkan kemampuan diskriminasi fitur.
+### 5.2 Keputusan Bimbingan: Opsi C (Weighted Loss, Keep All Data)
+Berdasarkan arahan dosen pembimbing, pemangkasan ekstrem (*undersampling* hingga 3.200 sampel per kelas) dihindari karena akan membuang 99,6% data Normal dan 98% data DoS yang berharga. Keputusan yang dibekukan adalah **Pilihan C: Weighted Loss (Keep All Clean Data)**:
+
+1. **Retensi Data Maksimal:** Seluruh 1,53 juta baris data unik dipertahankan, memastikan model terpapar pada variabilitas trafik riil skala besar.
+2. **Formulasi Weighted Cross-Entropy Loss:**
+   $$\mathcal{L}_{	ext{CE}}(y, \hat{y}) = - \sum_{c=1}^{C} w_c \cdot y_c \log(\hat{y}_c)$$
+   Di mana bobot kelas $w_c$ dihitung berdasarkan kebalikan frekuensi sampel terstandarisasi:
+   $$w_c = rac{N}{|C| 	imes N_c}$$
+   Dengan demikian, kesalahan prediksi pada kelas minoritas SSH-Patator dikenai penalti gradien yang jauh lebih berat dibanding kelas mayoritas Normal, mencegah model terbias menjadi *majority classifier*.
+3. **Pengamanan Gradient Clipping (Norm $\le 1.0$):**
+   Untuk mencegah terjadinya lonjakan gradien (*gradient explosion*) saat batch kebetulan memuat banyak sampel SSH, loop optimasi PyTorch wajib menerapkan `torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)`.
+4. **Profil Ganda (Production vs. Fast Dev Profile):**
+   * **Profil Utama (Skripsi):** Pelatihan penuh pada 1,53 juta flow untuk pelaporan hasil akhir.
+   * **Profil Cepat (Dev/Debug):** Sub-profil 5.000 sampel per kelas untuk verifikasi cepat alur kode dan pipeline lokal sebelum eksekusi skala penuh.
 
 ---
 
@@ -154,6 +158,19 @@ $$\text{Input}(63) \longrightarrow \text{Linear}(64) + \text{ReLU} + \text{Dropo
 
 ![Visualisasi Graph Komputasi MLP pada Netron](file:///e:/Projects/thesis/Aset/netron_mlp_architecture.png)  
 *Gambar 4b: Graph komputasi arsitektur MLP skripsi (Input: `flow_features_63` $\to$ Gemm/Linear: 64 $\to$ Relu $\to$ Dropout: 0.2 $\to$ Gemm/Linear: 32 $\to$ Relu $\to$ Gemm/Linear: 3 $\to$ `class_logits_3`) yang diekspor dari PyTorch ke format ONNX ([Aset/mlp_intrusion_model.onnx](file:///e:/Projects/thesis/Aset/mlp_intrusion_model.onnx)) dan divisualisasikan melalui [Netron](https://netron.app).*
+
+### 6.2 Protokol Sistematis Hyperparameter Tuning & Penyeimbangan Parameter
+Sesuai arahan pembimbing bahwa metode dan parameter harus seimbang bobotnya, proses pencarian parameter (*hyperparameter search*) dirancang terstruktur menggunakan data validasi (15% split terstratifikasi) lintas 5 seed acak:
+
+| Komponen | Hyperparameter | Ruang Pencarian (*Search Space*) | Nilai Baseline Default | Justifikasi & Peran Penyeimbang |
+|---|---|---|---|---|
+| **Optimasi Lokal** | Learning Rate ($\eta$) | $\{10^{-4}, 5 \times 10^{-4}, 10^{-3}\}$ | $10^{-3}$ (Adam) | Menyeimbangkan kecepatan konvergensi vs stabilitas loss permukaan |
+| **Batching** | Batch Size ($B$) | $\{64, 128, 256\}$ | $128$ | Menjaga stabilitas estimasi gradien pada data berbobot |
+| **Regularisasi Model**| Dropout Rate ($p$) | $\{0.1, 0.2, 0.3\}$ | $0.2$ | Mencegah overfitting fitur dominan |
+| **EWC Regularizer** | Penalti Fisher ($\lambda$) | $\{10^1, 10^2, 10^3, 10^4, 10^5\}$ | $10^3$ | **Kunci Keseimbangan:** $\lambda$ kecil $\to$ forgetting; $\lambda$ besar $\to$ plasticity freeze |
+| **Estimasi Fisher** | Ukuran Sampel ($N_{\text{fisher}}$) | $\{500, 1000, 2000\}$ | $1000$ per kelas | Efisiensi memori RAM vs akurasi diagonal Hessian |
+| **Federated Learning**| Local Epochs ($E$) | $\{1, 3, 5\}$ | $3$ | Menyeimbangkan beban komputasi lokal klien |
+| **Federated Learning**| Communication Rounds ($R$) | $\{10, 20\}$ | $10$ | Konvergensi agregasi parameter global FedAvg |
 
 ---
 
@@ -192,9 +209,9 @@ flowchart TD
 | Dimensi | Desain Awal: CREEPED (`fl-cl`) | Desain Terkunci: SCOPED (`thesis`) | Justifikasi Perubahan |
 |---|---|---|---|
 | **Penyediaan Data** | *Live Sniffing* via `NFStream` ke RAMDisk `/mnt/ramdisk/flows/` secara real-time. | Pembacaan data tabular *CIC-IDS2017* (parquet/CSV terpartisi) langsung dari disk lokal. | Menghilangkan risiko dropped-packet, overhead sniffing, dan menjamin replikasi data identik di setiap seed. |
-| **Injeksi Trafik** | VM 400 (Traffic Gen) aktif menembakkan Hydra, Slowloris, dan raw socket terus menerus. | **Dimatikan (Idle)** selama eksperimen inti E0–E4. Hanya disiapkan untuk E5 opsional. | Menghemat beban CPU/RAM cluster; fokus eksperimen adalah analisis algoritma FL-CL, bukan kapasitas jaringan. |
-| **Port Mirroring** | Hookscript Perl (`pve-portmirror-hookscript.pl`) menyalin trafik fisik ke interface TAP defender. | **Tidak Digunakan** pada E0–E4. | Mengeliminasi potensi bug bridging layer-2 Proxmox. |
-| **Skalabilitas & Fallback** | Ketergantungan absolut pada 3 server fisik Dell PowerEdge Proxmox VE. | **Arsitektur Dual-Mode:** Dapat berjalan di Proxmox VE (VM 300, 310, 320) dan memiliki replika **Docker Compose lokal** di laptop. | Jika server lab Proxmox mengalami pemeliharaan daya (*down*), eksperimen tetap dapat selesai tepat waktu via Docker. |
+| **Injeksi Trafik** | VM 400 (Traffic Gen) aktif menembakkan Hydra, Slowloris, dan raw socket terus menerus. | ❌ **TIDAK DIPERLUKAN (Dieliminasi Penuh)** sesuai arahan resmi pembimbing. | Mengeliminasi interferensi parameter jaringan eksternal (packet loss, timing jitter, buffer overrun) yang mengaburkan riset. |
+| **Port Mirroring** | Hookscript Perl (`pve-portmirror-hookscript.pl`) menyalin trafik fisik ke interface TAP defender. | ❌ **Tidak Digunakan (Ditiadakan)**. | Menghilangkan kompleksitas bridging layer-2; data dibaca langsung secara offline tabular. |
+| **Staging Eksekusi Testbed** | Ketergantungan absolut pada cluster fisik server Proxmox VE sejak awal. | 💻 **Protokol Dua Tahap (Local First $	o$ Simulasi Server Proxmox):** Tahap 1 realisasi lokal (Docker Compose / isolated venv), Tahap 2 simulasi cluster VM Proxmox VE. | Memastikan stabilitas algoritma 100% bebas bug sebelum dieksekusi di server; mitigasi risiko server lab down. |
 | **Komunikasi FL** | Flower via gRPC + MLflow Server port 5000 + Telegram Alerts + Webhook Sheets. | Flower via gRPC murni dengan local metric logging terstruktur. | MLOps kompleks dipangkas agar tidak mengaburkan fokus riset. |
 
 ---
@@ -313,6 +330,15 @@ Sebagai perancang arsitektur penelitian, tiga poin penting berikut ditambahkan u
 * Dalam penelitian skripsi sarjana teknik elektro, **hasil eksperimen yang menunjukkan trade-off atau penurunan performa pada skenario tertentu tetap memiliki nilai akademik setinggi hasil positif**.
 * Jika EWC pada FL non-IID menunjukkan *stability-plasticity dilemma* (misal: EWC berhasil mempertahankan Recall SSH sebesar 85%, namun memperlambat konvergensi kelas DoS sebesar 3%), temuan ini adalah **kontribusi ilmiah analitis yang sangat berharga**. Tugas akhir ini bertujuan menguji dan menganalisis secara objektif, bukan merekayasa klaim akurasi artifisial 100%.
 
+### 10.4 Prinsip Keseimbangan Bobot Metode dan Parameter (*Balanced Weighting Policy*)
+Sesuai arahan pembimbing:
+* **Penyeimbangan Loss EWC vs Task:** Parameter $\lambda$ diatur proporsional sehingga kontribusi penalti kuadratik Fisher tidak menenggelamkan loss tugas kedua.
+* **Penyeimbangan Bobot Kelas:** Bobot invers frekuensi pada Weighted Cross-Entropy Loss dihaluskan dan dijaga dengan gradient clipping (norm $\le 1.0$) agar kelas minoritas mendapatkan porsi pembaruan bobot yang setara tanpa merusak kestabilan numerik model.
+
+### 10.5 Protokol Eksekusi Bertahap (Local First $\to$ Simulasi Server)
+* **Fase 1 (Realisasi Lokal):** Pengembangan seluruh komponen (preprocessing, pipeline PyTorch, EWC loss, Flower client/server) dituntaskan dan divalidasi pada workstation lokal.
+* **Fase 2 (Simulasi Server):** Kode yang telah stabil dideploy ke VM Proxmox VE (VM 300, 310, 320) untuk mensimulasikan lingkungan terdistribusi real.
+
 ---
 
 ## 📊 11. Matriks Pengujian Akhir (E0 s.d. E4)
@@ -341,11 +367,17 @@ flowchart LR
 ![Diagram Alur Metode Penelitian](file:///e:/Projects/thesis/Aset/alur_metode_penelitian.png)  
 *Gambar 11: Diagram Alur Metode Penelitian Terstruktur dari Praproses hingga Evaluasi BWT. Sumber aset lokal: Aset/alur_metode_penelitian.png.*
 
-| Kode | Moda FL | Moda CL | Deskripsi Pengujian | Target Bukti Ilmiah |
-|---|---|---|---|---|
-| **E0** | – | – | *Centralized Joint Training* (semua kelas dilatih simultan) | Batas atas ideal performa (*Upper Bound Benchmark*). |
-| **E1** | Lokal | *Naive* | Pelatihan lokal sekuensial Task 1 $\to$ Task 2 tanpa regularisasi | Membuktikan secara empiris terjadinya *catastrophic forgetting* lokal ($BWT \ll 0$). |
-| **E2** | Lokal | **EWC** | Pelatihan lokal sekuensial Task 1 $\to$ Task 2 dengan penalti Fisher | Mengukur efektivitas EWC mempertahankan memori lokal. |
-| **E3** | **FedAvg** | *Naive* | Pelatihan terdistribusi 2 client non-IID tanpa regularisasi CL | Mengukur dampak kolaborasi FedAvg murni pada data non-IID. |
-| **E4** | **FedAvg** | **EWC** | **Sistem Usulan (FL-CL):** FedAvg 2-client terdistribusi + regularisasi EWC | Membuktikan integrasi FL-CL mampu menekan forgetting lintas client non-IID. |
-| **E5** | – | – | *(Opsional)* Uji inferensi live traffic pada lab Proxmox | Demonstrasi inferensi pasif testbed bila diminta penguji. |
+| Kode   | Moda FL    | Moda CL | Deskripsi Pengujian                                                         | Target Bukti Ilmiah                                                                  |     |
+| ------ | ---------- | ------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | --- |
+| **E0** | –          | –       | *Centralized Joint Training* (semua kelas dilatih simultan)                 | Batas atas ideal performa (*Upper Bound Benchmark*).                                 |     |
+| **E1** | Lokal      | *Naive* | Pelatihan lokal sekuensial Task 1 $\to$ Task 2 tanpa regularisasi           | Membuktikan secara empiris terjadinya *catastrophic forgetting* lokal ($BWT \ll 0$). |     |
+| **E2** | Lokal      | **EWC** | Pelatihan lokal sekuensial Task 1 $\to$ Task 2 dengan penalti Fisher        | Mengukur efektivitas EWC mempertahankan memori lokal.                                |     |
+| **E3** | **FedAvg** | *Naive* | Pelatihan terdistribusi 2 client non-IID tanpa regularisasi CL              | Mengukur dampak kolaborasi FedAvg murni pada data non-IID.                           |     |
+| **E4** | **FedAvg** | **EWC** | **Sistem Usulan (FL-CL):** FedAvg 2-client terdistribusi + regularisasi EWC | Membuktikan integrasi FL-CL mampu menekan forgetting lintas client non-IID.          |     |
+| **E5** | –          | –       | ❌ **Dieliminasi dari Target Wajib** (Injeksi live traffic resmi ditiadakan pembimbing) | Pengujian dibatasi murni pada data benchmark offline CIC-IDS2017 (E0 s.d. E4).       |     |
+
+---
+
+## 🟢 KESIMPULAN STATUS RUANG LINGKUP: READY FOR PREPROCESSING DATASETS
+
+Seluruh keputusan metodologis (1 s.d. 8) telah disetujui resmi oleh dosen pembimbing. Tidak ada lagi parameter ambigu atau risiko scope creep. Pipeline ekstraksi dataset (`scripts/preprocess_cicids2017.py`) resmi dinyatakan **READY TO RUN**.

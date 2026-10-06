@@ -27,13 +27,14 @@ updated: 2026-10-04
 
 | Komponen | Keputusan Final | Dibekukan Minggu |
 |----------|-----------------|------------------|
-| **Dataset** | CIC-IDS2017 (3 kelas: Normal, SSH-Patator, DoS; **63 fitur unik + 1 Label**) | Minggu 4 |
-| **Model** | MLP only (Input: 63 → 64 → 32 → Output: 3) | Minggu 6 |
-| **FL Algorithm** | FedAvg only (2 client + 1 server) | Minggu 10 |
-| **CL Algorithm** | EWC only vs naive fine-tuning | Minggu 8 |
+| **Dataset** | CIC-IDS2017 (3 kelas: Normal, SSH-Patator, DoS; **63 fitur unik + 1 Label**; Weighted Loss - Keep All Clean Data) | Minggu 4 (TERKUNCI) |
+| **Model** | MLP only (Input: 63 → 64 → 32 → Output: 3) + Hyperparameter Tuning | Minggu 6 |
+| **FL Algorithm** | FedAvg only (2 client + 1 server, Local First → Proxmox Simulation) | Minggu 10 |
+| **CL Algorithm** | EWC only vs naive fine-tuning (Balanced Weighting λ) | Minggu 8 |
 
-**Diluar Scope:**
-- ❌ GEM, A-GEM, LwF
+**Diluar Scope (Resmi Dieliminasi Pembimbing):**
+- ❌ Injeksi Trafik Riil (VM 400 Hydra/Slowloris ditiadakan)
+- ❌ GEM, A-GEM, LwF (Memory replay dilarang demi privasi)
 - ❌ Krum, TrimmedMean, Byzantine attacks
 - ❌ Differential Privacy, Secure Aggregation
 - ❌ CNN, Transformer
@@ -50,11 +51,11 @@ updated: 2026-10-04
 | E1 | Tidak | Naive | Lokal sekuensial tanpa CL | ⬜ TODO | - |
 | E2 | Tidak | EWC | Lokal sekuensial dengan EWC | ⬜ TODO | - |
 | E3 | FedAvg | Naive | Federated tanpa CL | ⬜ TODO | - |
-| E4 | FedAvg | EWC | **FL-CL (Target Utama)** | ⬜ TODO | - |
-| E5 | – | – | Validasi live traffic (OPSIONAL) | ⬜ SKIP | - |
+| E4 | FedAvg | EWC | **FL-CL (Target Utama Skripsi)** | ⬜ TODO | - |
+| E5 | – | – | Validasi live traffic | ❌ DIELIMINASI | Injeksi trafik ditiadakan pembimbing |
 
-**Target Seed:** 3-5 kali pengulangan per eksperimen (seed: 42, 43, 44, 45, 46)  
-**Metrik Utama:** Macro-F1, per-class recall/F1, BWT
+**Target Seed:** 5 kali pengulangan per eksperimen (seed: 42, 43, 44, 45, 46)  
+**Metrik Utama:** Macro-F1, per-class recall/F1, BWT (Backward Transfer)
 
 **Perbandingan Inti:**
 - E1 vs E2 → Efek EWC
@@ -67,18 +68,18 @@ updated: 2026-10-04
 
 | Minggu | Target | Status | Catatan |
 |--------|--------|--------|---------|
-| **1-2** | Finalisasi desain, studi literatur, audit EDA | ✅ DONE | Scope disetujui, EDA diverifikasi |
-| **3-4** | Preprocessing CIC-IDS2017, partisi client/task | 🟡 DOING | **Dataset freeze** (63 fitur) |
-| **5-6** | Baseline MLP training (E0) | ⬜ TODO | Baseline valid |
+| **1-2** | Finalisasi desain, studi literatur, audit EDA, bimbingan dosen | ✅ DONE | **Keputusan Resmi Disetujui Pembimbing** |
+| **3-4** | Preprocessing CIC-IDS2017, partisi client/task | 🟢 READY TO RUN | **Dataset freeze** (63 fitur, Weighted Loss, All Days 50/50) |
+| **5-6** | Baseline MLP training & tuning (E0) | ⬜ TODO | Baseline valid |
 | **7-8** | Naive vs EWC lokal (E1, E2) | ⬜ TODO | Forgetting selesai |
-| **9-10** | FL Flower + FedAvg di Proxmox (E3) | ⬜ TODO | FL berjalan |
+| **9-10** | FL Flower + FedAvg lokal & Proxmox (E3) | ⬜ TODO | FL berjalan |
 | **11-12** | FL+EWC dan eksperimen inti (E4) | ⬜ TODO | Core selesai |
-| **13** | Multi-seed, persiapan E5 (opsional) | ⬜ TODO | Mean ± std |
+| **13** | Multi-seed aggregation (5 seeds) | ⬜ TODO | Mean ± std |
 | **14** | Analisis hasil, grafik, tabel | ⬜ TODO | Draft hasil |
 | **15-16** | Penulisan buku TA, revisi, sidang | ⬜ TODO | Final |
 
-**Minggu Saat Ini:** Minggu 2 (2026-10-04)  
-**Progress:** 12.5% (2/16 minggu)
+**Minggu Saat Ini:** Minggu 2 (2026-10-06)  
+**Progress:** 15.0% (Tahap Keputusan Metodologi Selesai 100%)
 
 ---
 
@@ -147,7 +148,7 @@ E:\Projects\thesis/
 ## 📝 Quick Links
 
 - [[Ringkasan-Untuk-Pembimbing]] (7 pertanyaan & bukti untuk dosen pembimbing)
-- [[Briefing Scope TA_Federated-Continual Learning untuk Deteksi Intrusi]] (Dokumen final scope TA)
+- [[Briefing Scope TA]] (Dokumen final scope TA)
 - [[EDA-CIC-IDS2017]] (Laporan lengkap EDA & port leakage test)
 - [[Crosscheck]] (Tabel verifikasi metadata 18 paper)
 - [[Timeline-16-Minggu]] (Jadwal detail 16 minggu)
