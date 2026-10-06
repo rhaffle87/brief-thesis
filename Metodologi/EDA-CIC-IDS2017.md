@@ -28,15 +28,15 @@
 - 79 kolom = 78 fitur + 1 Label
 
 **Kolom yang dibuang:**
-- 10 kolom konstan (zero variance): Bwd PSH Flags, Fwd URG Flags, Bwd URG Flags, CWE Flag Count, Fwd Avg Bytes/Bulk, Fwd Avg Packets/Bulk, Fwd Avg Bulk Rate, Bwd Avg Bytes/Bulk, Bwd Avg Packets/Bulk, Bwd Avg Bulk Rate
-- 3 kolom identik (duplicates): Fwd Header Length.1, Subflow Fwd Bytes, Subflow Bwd Bytes
+- 10 kolom konstan (zero variance): `Bwd PSH Flags`, `Fwd URG Flags`, `Bwd URG Flags`, `CWE Flag Count`, `Fwd Avg Bytes/Bulk`, `Fwd Avg Packets/Bulk`, `Fwd Avg Bulk Rate`, `Bwd Avg Bytes/Bulk`, `Bwd Avg Packets/Bulk`, `Bwd Avg Bulk Rate`
+- 5 kolom identik (duplicates): `Fwd Header Length.1`, `Subflow Fwd Bytes`, `Subflow Fwd Packets`, `Subflow Bwd Packets`, `SYN Flag Count`
 
 **Hasil akhir:**
-- 78 − 10 − 3 = **63 fitur unik**
+- 78 − 10 − 5 = **63 fitur unik numerik**
 - + 1 Label
-- = **66 kolom final**
+- = **64 kolom final dataset bersih** (+ 2 kolom metadata `Day` & `Label_Original` = 66 kolom di dataframe interim)
 
-**Catatan:** Cache parquet memiliki 81 kolom (ditambah Day dan Label_Original), tetapi kolom tambahan tersebut bukan fitur dari CSV asli.
+**Catatan:** Cache parquet interim memiliki 66 kolom bersih (63 fitur + 1 Label + Day + Label_Original) yang siap dipartisi. Kolom metadata `Day` dan `Label_Original` dikeluarkan sebelum pelatihan.
 
 ---
 
@@ -267,65 +267,48 @@ High no-port performance (98%) is partly due to OTHER shortcuts, not solely "int
 
 ---
 
-## 📋 5 CRITICAL DECISIONS FOR PEMBIMBING
+## 📋 5 KEPUTUSAN METODOLOGIS HASIL BIMBINGAN (TERKUNCI)
 
-### 1. Dataset Version ✅ DECIDED
-**Decision:** CIC-IDS2017 Original (79 features)  
-**Rationale:** Literature compatibility, standard tools (CICFlowMeter for E5)
+### 1. Versi Dataset ✅ DISETUJUI
+**Keputusan:** CIC-IDS2017 Original (Senin, Selasa, Rabu) dengan 63 fitur unik numerik + 1 Label.  
+**Justifikasi:** Kompatibilitas literatur, pemetaan anomali tervalidasi peer-reviewed (*Rosay 2022; Dube 2024*).
 
-### 2. Normal Split Strategy ⏸️ PENDING
-Random 50/50 vs Tuesday→Task1, Wednesday→Task2  
-**Evidence:** Tue vs Wed classification (no port) = 62.44% ± 0.34% accuracy (moderate day pattern)  
-**Recommendation:** Random split (avoid day-of-week confound)
+### 2. Strategi Partisi Normal ✅ DISETUJUI (Opsi A)
+**Keputusan:** Random Split 50/50 dari gabungan data Normal seluruh hari (Senin, Selasa, Rabu).  
+**Bukti Empiris:** Klasifikasi Normal Selasa vs Rabu menghasilkan akurasi 62,44% ± 0,34% (menandakan adanya variasi latar belakang antar-hari). Random split 50/50 mengeliminasi *day-of-week confound* tersebut.
 
-### 3. DoS Composition ⏸️ PENDING
-Keep Hulk-dominated (89.2% after dedup) vs balance 4 variants  
-**Recommendation:** Keep as-is (realistic)
+### 3. Komposisi Serangan DoS ✅ DISETUJUI (Opsi A)
+**Keputusan:** Keep As-Is (Distribusi Alami).  
+**Justifikasi:** Mempertahankan proporsi realistis serangan DoS volumetrik (Hulk 89,2%, GoldenEye 5,3%, slowloris 2,8%, Slowhttptest 2,7%) sebagai satu kelas agregat DoS (193.748 flow).
 
-### 4. Class Imbalance ⏸️ PENDING
-**Challenge:** SSH only 3,219 after dedup → practical limit ~3.2K per class (not 10K from briefing)  
-**Impact:** Train set SSH ≈ 2,250 samples after 70/15/15 split  
-**Options:**
-- A) Undersample to SSH limit (3.2K each) - Balanced, minimal data loss
-- B) Weighted loss on full data - Preserve Normal/DoS samples, risk SSH underfit
-- C) Dedup after split (not before) - May leak duplicates across splits
+### 4. Penanganan Class Imbalance ✅ DISETUJUI (Opsi C: Weighted Loss, Keep All Data)
+**Keputusan:** Mempertahankan seluruh 1.529.677 flow bersih tanpa *undersampling* ekstrem.  
+**Justifikasi:** Undersampling ekstrem (hingga batas 3.200 sampel SSH) membuang 99,6% data Normal dan 98% data DoS. Ketimpangan diatasi dengan **Weighted Cross-Entropy Loss** berbasis bobot invers frekuensi dan dilindungi oleh *gradient clipping* (norm $\le 1.0$).
 
-**Recommendation:** Option A (undersample to 3.2K) - Briefing allows "~10K max", SSH limit forces lower bound
-
-### 5. Destination Port Treatment ⏸️ **CRITICAL - UPDATED**
-**Problem:** Port achieves 96.44%, but OTHER features also act as shortcuts (Bwd Packet Length Std = 90.93% alone)  
-**Measured Evidence (5 seeds, full data):**
-- Port only: 96.44% ± 0.16%
-- NO port: 98.02% ± 0.34%
-- All features: 99.35% ± 0.17%
-- **Single feature shortcuts:** Bwd Packet Length Std (90.93%), Bwd Header Length (88.37%)
-
-**Interpretation:** High performance WITHOUT port reflects OTHER shortcuts (attack-tool fingerprints in packet statistics), not elimination of all shortcuts.
-
-**Options:**
-- A) **Remove Destination Port** - Eliminate most obvious shortcut; accept that tool-specific patterns remain
-- B) Keep port - Practical IDS performance, mixed with tool fingerprints
-- C) Remove ALL shortcut features - Risk losing legitimate intrusion signals
-
-**Recommendation:** **Option A** - Remove Destination Port as default. Acknowledge in methodology that high separability (98%) reflects attack-tool characteristics (packet size patterns, header statistics) rather than protocol-agnostic intrusion signatures. Forgetting experiments measure "tool-specific pattern retention," not "universal intrusion detection."
-
-**Status:** BELUM DISETUJUI - Awaiting pembimbing decision
+### 5. Perlakuan Destination Port ✅ DISETUJUI (Dibuang / Opsi A)
+**Keputusan:** **Remove Destination Port**.  
+**Bukti Empiris (5 seeds):**
+- Port only: 96,44% ± 0,16% (shortcut learning menghafal port 22/80)
+- Tanpa port: 98,02% ± 0,34%
+- Semua fitur: 99,35% ± 0,17%  
+**Justifikasi:** Destination Port dieliminasi agar model fokus mempelajari representasi statistik flow alih-alih nomor port.
 
 ---
 
-## 📝 Justified Defaults (Per Briefing Scope)
+## 📝 Konfigurasi Default Praproses (Terkunci)
 
-- ❌ Exclude FTP-Patator (5,933), Heartbleed (11) - out of 3-class scope
-- Remove 132,909 duplicate rows (7.97%) - ALL 79 columns checked
-- Remove 10 constant columns (all zeros)
-- Remove duplicate column 'Average Packet Size' (keep 'Packet Length Mean')
-- **70/15/15 train/val/test split, stratified** (per briefing)
-- **Undersampling with per-class cap** (per briefing "~10K flow" limit)
-- StandardScaler per client (fit on train only)
-- **Deduplicate BEFORE split** (prevent leak)
+- ❌ Exclude FTP-Patator (5.933), Heartbleed (11) - di luar lingkup 3 kelas.
+- Remove 132.909 baris duplikat identik (7,97%) pada 79 kolom.
+- Remove 10 kolom konstan (zero variance).
+- Remove 5 kolom duplikat identik (`Fwd Header Length.1`, `Subflow Fwd Bytes`, `Subflow Fwd Packets`, `Subflow Bwd Packets`, `SYN Flag Count`).
+- Remove `Destination Port` (shortcut leakage).
+- **70/15/15 train/val/test stratified split**.
+- **Weighted Cross-Entropy Loss** (mempertahankan 1,53 juta sampel bersih).
+- StandardScaler per client (fit pada train set saja).
+- **Deduplikasi sebelum splitting** (mencegah data leakage).
 
 ---
 
-**Status:** ✅ EDA Complete (measured with pandas, all columns)  
-**Hafizh skripsi:** ✅ Confirmed at Proposal/ (1.8 MB)  
-**Next:** Pembimbing approval on 5 decisions (especially port treatment)
+**Status:** ✅ EDA Selesai & Seluruh Keputusan Metodologis Resmi Disetujui Pembimbing  
+**Rujukan:** [[Keputusan-Untuk-Pembimbing]], [[Ringkasan-Untuk-Pembimbing]]  
+**Tahap Berikutnya:** Implementasi Pipeline Praproses Dataset (`cic_3class_dedup.parquet`)

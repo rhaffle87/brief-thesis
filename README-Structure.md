@@ -26,12 +26,12 @@ E:\Projects\thesis/
 │
 ├── Literatur/               # Catatan literatur per paper & repositori PDF
 │   ├── Daftar-Pustaka.md    # Daftar pustaka format akademik
-│   ├── Crosscheck.md        # Verifikasi metadata 18 paper (100% verified)
-│   ├── Inventaris-PDF.md    # Inventaris 18 berkas PDF lokal
-│   ├── [Paper-Notes].md     # 18 catatan telaah paper individual
-│   └── PDFs/                # Berkas PDF fisik (18 berkas)
+│   ├── Crosscheck.md        # Verifikasi metadata 25 paper (100% verified)
+│   ├── Inventaris-PDF.md    # Inventaris 25 berkas PDF lokal
+│   ├── [Paper-Notes].md     # 25 catatan telaah paper individual
+│   └── PDFs/                # Berkas PDF fisik (25 berkas)
 │       ├── (13 Paper Inti)  # McMahan, Kirkpatrick, Sharafaldin, Rosay, Dube, dll.
-│       └── Opsional/        # (5 Paper Pendukung: Avalanche, EWC-DR, GFCL, dll.)
+│       └── Opsional/        # (12 Paper Pendukung: Avalanche, EWC-DR, GFCL, DeLange, Wang, dll.)
 │
 ├── Metodologi/              # Desain data, EDA, & verifikasi fitur
 │   ├── CRITICAL-CIC-IDS2017-Issues.md # Rekapitulasi anomali/bug dataset
@@ -90,14 +90,14 @@ E:\Projects\thesis/
 |---|---|---|---|
 | **Dashboard/** | 4 | ✅ Aktif | Central hub, timeline, checklist, matriks E0-E5 |
 | **Proposal/** | 2 | ✅ Lengkap | Briefing scope TA & referensi skripsi kakak tingkat |
-| **Literatur/** | 22 md + 19 di PDFs/ | ✅ Terverifikasi | 18 paper terverifikasi 100%, 0 broken links |
+| **Literatur/** | 25 md + 25 di PDFs/ | ✅ Terverifikasi | 25 paper terverifikasi 100%, 0 broken links |
 | **Metodologi/** | 6 | ✅ Terverifikasi | Dokumentasi EDA 63 fitur, verifikasi & skrip bantu |
 | **Eksperimen/** | 1 | ⬜ Menunggu | Alokasi pencatatan log E0-E5 (README panduan siap) |
 | **Hasil/** | 1 | ⬜ Menunggu | Alokasi tabel, grafik, & perbandingan BWT (README siap) |
 | **Penulisan/** | 1 | ⬜ Menunggu | Alokasi draf Bab 1-5 (README panduan siap) |
 | **Bimbingan/** | 2 | ✅ Siap Paparan | Bahan paparan & panduan tanya-jawab pembimbing |
 | **Keputusan/** | 4 | ✅ Terkunci | Scope CL/FL dibekukan, ringkasan pembimbing siap |
-| **Aset/** | 2 | ✅ Lengkap | 2 diagram PNG resmi metodologi & arsitektur |
+| **Aset/** | 16 file + README | ✅ Lengkap | 15 gambar/vektor diagram resmi + 1 model ONNX |
 | **Laporan/** | 2 | ✅ Terkonsolidasi | Audit-Bukti aktif & Arsip-Riwayat-Sesi-Konsolidasi |
 | **Arsip/** | 6 | 📦 Diarsipkan | Naskah lama, draf keputusan awal & catatan historis |
 | **Templates/** | 2 | ✅ Lengkap | Template standar catatan literatur & log eksperimen |
@@ -134,5 +134,5 @@ E:\Projects\thesis/
 | **Ringkasan untuk Pembimbing** | `Keputusan/Ringkasan-Untuk-Pembimbing.md` | Dokumen panduan utama diskusi dosen (7 pertanyaan) |
 | **Dashboard Proyek** | `Dashboard/Dashboard.md` | Status timeline mingguan dan matriks |
 | **Laporan EDA & Fitur** | `Metodologi/EDA-CIC-IDS2017.md` | Analisis fitur, distribusi label, & port leakage |
-| **Verifikasi Literatur** | `Literatur/Crosscheck.md` | Tabel verifikasi metadata 18 paper inti |
+| **Verifikasi Literatur** | `Literatur/Crosscheck.md` | Tabel verifikasi metadata 25 paper |
 | **Bukti Audit Empiris** | `Laporan/Audit-Bukti-2026-10-03.md` | Catatan eksekusi perintah dan keluaran mentah terminal |

@@ -84,8 +84,8 @@ updated: 2026-10-06
 
 ## 📚 Literatur Progress
 
-**Status:** 18/18 Paper Terverifikasi & Tersedia Lengkap (100% PDF lokal)  
-**Rincian:** 13 Paper Inti (`Literatur/PDFs/`) + 5 Paper Pendukung (`Literatur/PDFs/Opsional/`)
+**Status:** ✅ 25/25 Paper Terverifikasi & Tersedia Lengkap (100% PDF lokal)  
+**Rincian:** 13 Paper Inti (`Literatur/PDFs/`) + 12 Paper Pendukung (`Literatur/PDFs/Opsional/`)
 
 ### ✅ Paper Inti (13 Dokumen)
 1. ✅ McMahan et al. (2017) - FedAvg [[McMahan-2017-FedAvg]]
@@ -102,12 +102,19 @@ updated: 2026-10-06
 12. ✅ Beutel et al. (2020) - Flower Framework [[Beutel-2020-Flower]]
 13. ✅ Lopez-Paz & Ranzato (2017) - GEM [[Lopez-Paz-2017-GEM]]
 
-### 📂 Paper Pendukung / Framework (Opsional - 5 Dokumen)
+### 📂 Paper Pendukung / Framework (Opsional - 12 Dokumen)
 14. 📂 Carta et al. (2023) - Avalanche JMLR [[Carta-2023-Avalanche-JMLR]]
 15. 📂 Lomonaco et al. (2021) - Avalanche CVPRW [[Lomonaco-2021-Avalanche-CVPRW]]
 16. 📂 Liu & Chang (2026) - EWC-DR [[Liu-2026-EWC-DR]]
 17. 📂 Agrawal et al. (2021) - FL-IDS Concepts [[Agrawal-2021-FL-IDS-Concepts]]
 18. 📂 Talpur et al. (2022) - GFCL [[Talpur-2022-GFCL]]
+19. 📂 Engelen et al. (2021) - Troubleshooting CICIDS2017 [[Engelen-2021-Troubleshooting]]
+20. 📂 Zhao et al. (2018) - FL with Non-IID Data [[Zhao-2018-FL-NonIID]]
+21. 📂 Hsu et al. (2019) - Non-IID Dirichlet [[Hsu-2019-NonIID-Dirichlet]]
+22. 📂 Li et al. (2020) - FedProx [[Li-2020-FedProx]]
+23. 📂 De Lange et al. (2021) - Continual Learning Survey [[DeLange-2021-CL-Survey]]
+24. 📂 van de Ven & Tolias (2019) - Three Scenarios for CL [[VandeVen-2019-CL-Scenarios]]
+25. 📂 Wang et al. (2023) - Comprehensive Survey of CL [[Wang-2023-CL-Survey]]
 
 ---
 

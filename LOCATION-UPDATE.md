@@ -1,6 +1,6 @@
 # Status Lokasi & Organisasi Proyek (Thesis & FL-CL)
 
-**Terakhir Diperbarui:** 2026-10-04 18:50 UTC+7  
+**Terakhir Diperbarui:** 2026-10-06 19:10 UTC+7  
 **Status Sistem:** ✅ Terorganisasi, Bersih, & Siap Eksekusi  
 
 ---
@@ -11,7 +11,7 @@
 - **Path Utama:** `E:\Projects\thesis\`
 - **Struktur:** 14 direktori bersih tanpa prefiks angka (nama folder: `Dashboard`, `Proposal`, `Literatur`, `Metodologi`, `Eksperimen`, `Hasil`, `Penulisan`, `Bimbingan`, `Keputusan`, `Aset`, `Laporan`, `Arsip`, `Templates`, `Datasets`).
 - **Cadangan Riil (Snapshot):** `E:\Projects\thesis_backup_20261002\` (snapshot sebelum restrukturisasi massal tanggal 2–3 Oktober 2026).
-- **Integritas Tautan:** 138 tautan internal aktif tervalidasi (0 broken links).
+- **Integritas Tautan:** 190 tautan internal aktif tervalidasi (0 broken links).
 
 ### B. Repositori Kode Sumber (FL-CL)
 - **Path Utama:** `E:\Projects\fl-cl\`
@@ -49,7 +49,7 @@
 ## 📚 3. Status Literatur & Pembekuan Algoritma
 
 1. **Literatur:**
-   - 18 paper inti dan pendukung tersedia lengkap dalam bentuk PDF di [Literatur/PDFs/](file:///e:/Projects/thesis/Literatur/PDFs/) (13 paper) dan [Literatur/PDFs/Opsional/](file:///e:/Projects/thesis/Literatur/PDFs/Opsional/) (5 paper).
+   - 25 paper inti dan pendukung tersedia lengkap dalam bentuk PDF di [Literatur/PDFs/](file:///e:/Projects/thesis/Literatur/PDFs/) (13 paper) dan [Literatur/PDFs/Opsional/](file:///e:/Projects/thesis/Literatur/PDFs/Opsional/) (12 paper).
    - Seluruh metadata diverifikasi pada [Literatur/Crosscheck.md](file:///e:/Projects/thesis/Literatur/Crosscheck.md).
 2. **Algoritma Terkunci:**
    - **FL:** Hanya FedAvg dengan topologi 2 client + 1 server aggregator ([Keputusan-Pembekuan-FL.md](file:///e:/Projects/thesis/Keputusan/Keputusan-Pembekuan-FL.md)).

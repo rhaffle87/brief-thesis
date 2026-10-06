@@ -102,18 +102,20 @@ Metode: Hashing nilai array per kolom pada 1.529.677 baris.
 - Dikurangi kolom konstan (zero variance): 10 kolom
 - Sisa fitur setelah eliminasi konstan: 78 - 10 = 68 fitur
 
-### Opsi A (Standar yang Disepakati untuk Diskusi Pembimbing):
-- Kolom duplikat yang dibuang (3 kolom):
+### Opsi A (Standar Baku yang Disepakati & Disetujui Pembimbing):
+- Kolom duplikat yang dibuang (5 kolom 100% identik):
   1. `Fwd Header Length.1` (duplikat persis `Fwd Header Length`)
   2. `Subflow Fwd Bytes` (duplikat persis `Total Length of Fwd Packets`)
-  3. `Subflow Bwd Bytes` (duplikat 99,99% `Total Length of Bwd Packets`)
-- Perhitungan: 78 fitur - 10 konstan - 3 duplikat = **63 fitur unik** (+ 1 kolom `Label` = 66 kolom total).
+  3. `Subflow Fwd Packets` (duplikat persis `Total Fwd Packets`)
+  4. `Subflow Bwd Packets` (duplikat persis `Total Backward Packets`)
+  5. `SYN Flag Count` (duplikat persis `Fwd PSH Flags`)
+- Perhitungan: 78 fitur - 10 konstan - 5 duplikat = **63 fitur unik numerik** (+ 1 kolom `Label` = **64 kolom dataset bersih**, atau 66 kolom jika menyertakan kolom pembantu `Day` dan `Label_Original` di dataframe interim).
 
-### Opsi B (Pembersihan Lengkap Semua Redundansi Rosay 2022):
+### Opsi B (Pembersihan Lengkap Termasuk Pasangan Floating-Point Rosay 2022):
 - Menghapus 8 kolom redundan (`Fwd Header Length.1`, `Subflow Fwd Bytes`, `Subflow Bwd Bytes`, `Subflow Fwd Packets`, `Subflow Bwd Packets`, `Avg Fwd Segment Size`, `Avg Bwd Segment Size`, `SYN Flag Count`):
 - Perhitungan: 78 fitur - 10 konstan - 8 duplikat = **60 fitur unik** (+ 1 kolom `Label` = 61 kolom total).
 
-*Catatan penting: Cache parquet memiliki 81 kolom karena menambahkan kolom metadata `Day` dan `Label_Original`. Kedua kolom ini bukan fitur dari CSV asli dan wajib dikeluarkan sebelum pelatihan.*
+*Catatan penting: Cache parquet interim memiliki 66 kolom karena menyertakan kolom metadata `Day` dan `Label_Original`. Kedua kolom pembantu ini dikeluarkan sebelum pelatihan sehingga menyisakan 63 input fitur + 1 label target.*
 
 ---
 
