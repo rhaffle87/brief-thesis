@@ -1,0 +1,16 @@
+# Obsidian workspace runtime state
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache/
+
+# Large dataset files (exceeding GitHub 100MB limit)
+Datasets/**/*.csv
+Datasets/**/*.parquet
+*.csv
+*.parquet
+
+# OS and Temporary files
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.tmp
