@@ -33,6 +33,12 @@ Berdasarkan sesi tatap muka bimbingan Tugas Akhir, 8 poin keputusan metodologis 
   1. **10 Kolom Konstan (Variansi = 0):** `Bwd PSH Flags`, `Fwd URG Flags`, `Bwd URG Flags`, `CWE Flag Count`, `Fwd Avg Bytes/Bulk`, `Fwd Avg Packets/Bulk`, `Fwd Avg Bulk Rate`, `Bwd Avg Bytes/Bulk`, `Bwd Avg Packets/Bulk`, `Bwd Avg Bulk Rate`.
   2. **5 Kolom Duplikat 100% Identik (Hash Match):** `Fwd Header Length.1`, `Subflow Fwd Bytes`, `Subflow Fwd Packets`, `Subflow Bwd Packets`, `SYN Flag Count`.
   3. **1 Kolom Shortcut Leakage:** `Destination Port` dibuang agar model tidak sekadar menghafal nomor port (port 22 vs port 80).
+* **Justifikasi Eksklusif Berkas Senin, Selasa, dan Rabu (Eliminasi Kamis & Jumat):**
+  - **Senin (Monday):** Menyediakan 529.918 flow **Normal murni** tanpa kontaminasi serangan sebagai baseline.
+  - **Selasa (Tuesday):** Menyediakan kelas **SSH-Patator** (3.219 flow bersih) untuk **Task 1 (Client A)**.
+  - **Rabu (Wednesday):** Menyediakan kelas **DoS** 4 varian lengkap (193.748 flow bersih) untuk **Task 2 (Client B)**.
+  - **Kamis Dieliminasi:** Web Attacks & Infiltration mengalami **kelangkaan sampel ekstrem** (Sql Injection hanya 21 baris, Infiltration hanya 36 baris; tidak layak statistik) serta menderita **cacat desinkronisasi pelabelan pcap parah** (*Rosay et al., 2022*).
+  - **Jumat Dieliminasi:** PortScan adalah reconnaissance pasif (bukan intrusi eksploitasi), Botnet ARES cacat fragmentasi alur (Dube et al., 2024), dan DDoS LOIC menimbulkan bias kerancuan (*confounding*) dengan DoS Rabu tanpa menambah sampel SSH/DoS baru.
 * **Transparansi Akademik:** Kritik Rosay et al. (2022) dan Dube et al. (2024) dikutip secara transparan di Bab 3 skripsi sebagai konteks integritas riset.
 
 ---

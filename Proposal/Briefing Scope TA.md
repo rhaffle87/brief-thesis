@@ -73,6 +73,21 @@ Dalam penelitian keamanan siber dan deteksi anomali trafik jaringan, terdapat be
 ![Topologi Testbed Jaringan CIC-IDS2017](file:///e:/Projects/thesis/Aset/cicids2017_testbed_architecture_sharafaldin2018.png)  
 *Gambar 3: Topologi Testbed Jaringan CIC-IDS2017 (Victim-Network dan Attack-Network terisolasi). Sumber publikasi resmi: Sharafaldin, I., Lashkari, A. H., & Ghorbani, A. A. (2018). "Toward Generating a New Intrusion Detection Dataset and Intrusion Traffic Characterization". Proceedings of the 4th International Conference on Information Systems Security and Privacy (ICISSP), SCITEPRESS, Fig. 1. DOI: [10.5220/0006639801080116](https://doi.org/10.5220/0006639801080116).*
 
+### 3.2 Alasan Spesifik Pemilihan Hari: Mengapa Hanya Senin, Selasa, dan Rabu? (Eliminasi Kamis & Jumat)
+
+Dataset resmi CIC-IDS2017 terdiri atas 8 berkas CSV yang merekam aktivitas selama 5 hari kerja (Senin s.d. Jumat) dengan total 2,83 juta baris. Penelitian Tugas Akhir ini **secara spesifik dan eksklusif hanya menggunakan berkas hari Senin, Selasa, dan Rabu** (1.668.530 baris mentah; 1.529.677 baris bersih). Keputusan ini didasarkan pada lima (5) pertimbangan ilmiah yang ketat:
+
+| Hari | File CSV & Karakteristik Trafik | Volume Baris | Status & Peran Ilmiah dalam Penelitian |
+|---|---|---|---|
+| **Senin (Monday)** | `Monday-WorkingHours.pcap_ISCX.csv`<br>Trafik Normal (BENIGN) 100% murni. | 529.918 | ✅ **DIPAKAI (Baseline Normal)**: Menyediakan distribusi trafik normal murni tanpa kontaminasi serangan sama sekali sebagai representasi aktivitas operasional rutin. |
+| **Selasa (Tuesday)** | `Tuesday-WorkingHours.pcap_ISCX.csv`<br>Normal + FTP-Patator + **SSH-Patator**. | 445.909 | ✅ **DIPAKAI (Task 1 / Client A)**: Menyediakan kelas **SSH-Patator** (3.219 flow bersih) sebagai representasi serangan Brute Force autentikasi. *(FTP-Patator dieksklusi karena di luar 3 kelas cakupan).* |
+| **Rabu (Wednesday)** | `Wednesday-workingHours.pcap_ISCX.csv`<br>Normal + **DoS (Hulk, GoldenEye, slowloris, slowhttptest)** + Heartbleed. | 692.703 | ✅ **DIPAKAI (Task 2 / Client B)**: Menyediakan kelas **DoS** (193.748 flow bersih) dengan 4 subvarian lengkap sebagai representasi serangan penolakan layanan web. *(Heartbleed dieksklusi karena hanya 11 flow).* |
+| **Kamis (Thursday)** | `Thursday-...-WebAttacks.csv`<br>`Thursday-...-Infilteration.csv`<br>Web Attacks & Infiltration. | 458.968 | ❌ **DIELIMINASI (Cacat Sampel & Labeling Parah)**:<br>1. *Kelangkaan Sampel Ekstrem*: Sql Injection hanya 21 baris, Infiltration hanya 36 baris, XSS 652 baris. Jumlah ini tidak memenuhi syarat daya statistik (*statistical power*) untuk dibagi ke 2 client FL, train/val/test split, dan 5 seeds.<br>2. *Desinkronisasi Label Parah*: Rosay et al. (2022) membuktikan berkas hari Kamis memiliki cacat desinkronisasi waktu (*timestamp offset*) parah di mana ribuan flow normal salah dilabeli sebagai serangan dan sebaliknya. |
+| **Jumat (Friday)** | `Friday-...-Morning.csv` (Botnet)<br>`Friday-...-PortScan.csv`<br>`Friday-...-DDos.csv` (DDoS LOIC) | 703.245 | ❌ **DIELIMINASI (Tidak Relevan & Confounding)**:<br>1. *PortScan (158K)*: Merupakan aktivitas pemindaian (*reconnaissance*), bukan eksploitasi aktif jaringan.<br>2. *Botnet ARES (1,9K)*: Mengalami *flow fragmentation bug* pada CICFlowMeter (koneksi terpecah menjadi flow 1-paket kosong).<br>3. *DDoS LOIC (128K)*: Tumpang tindih secara konseptual dengan DoS hari Rabu, namun membawa fingerprint alat LOIC yang berbeda. Memasukkannya akan menimbulkan bias: apakah model gagal mendeteksi karena *forgetting* atau karena perbedaan signature alat serang.<br>4. *Overhead Nirfaedah*: Menambah 700K baris tanpa menambah kelas SSH/DoS yang diteliti. |
+
+**Kesimpulan Penegasan:**  
+Senin, Selasa, dan Rabu memuat **100% kelas yang menjadi fokus penelitian** (Normal, SSH-Patator, dan DoS) dengan volume 1,53 juta flow bersih. Mengeliminasi hari Kamis dan Jumat melindungi penelitian dari cacat pelabelan pcap, anomali kelas mikro (21 sampel), dan pembengkakan waktu komputasi yang tidak memberikan kontribusi ilmiah terhadap Rumusan Masalah 1 dan 2.
+
 ---
 
 ## 🔍 4. Audit & Spesifikasi Fitur: Dari 79 Kolom Mentah Menjadi 63 Fitur Unik

@@ -60,6 +60,29 @@
 
 ---
 
+### Pertanyaan 6: "Mengapa dataset yang dipakai hanya Senin, Selasa, dan Rabu? Mengapa berkas Kamis dan Jumat tidak digunakan?"
+- **Strategi Jawaban:** *Kesesuaian Ruang Lingkup 3 Kelas, Validitas Statistik Sampel, dan Mitigasi Cacat Labeling.*
+- **Poin Jawaban:**
+  1. **Korespondensi Penuh dengan 3 Kelas Penelitian:**
+     - Tugas akhir ini secara spesifik membatasi lingkup pada 3 kelas: **Normal, SSH-Patator (Task 1), dan DoS (Task 2)**.
+     - **Senin:** Menyediakan 529.918 flow **Normal murni** (tanpa serangan) sebagai baseline aktivitas rutin.
+     - **Selasa:** Menyediakan serangan **SSH-Patator** (3.219 flow unik bersih) untuk Client A / Task 1.
+     - **Rabu:** Menyediakan serangan **DoS** 4 varian lengkap (193.748 flow unik bersih) untuk Client B / Task 2.
+     - Ketiga berkas hari ini sudah mencakup **100% kelas penelitian** secara lengkap dan berimbang.
+  2. **Kelangkaan Sampel Ekstrem pada Hari Kamis:**
+     - Hari Kamis memuat Web Attacks dan Infiltration, dengan volume serangan mikro: *Sql Injection hanya 21 baris*, *Infiltration hanya 36 baris*, dan *XSS hanya 652 baris*.
+     - Kuantitas sekecil ini secara metodologis **tidak memenuhi syarat daya statistik (*statistical power*)** untuk dipartisi ke dalam 2 client non-IID, 3 split (train 70%, val 15%, test 15%), dan 5 random seed tanpa memicu overfitting parah atau kegagalan konvergensi.
+  3. **Cacat Desinkronisasi Pelabelan Parah pada Hari Kamis (Rosay et al., 2022):**
+     - Literatur audit dataset (*Rosay et al., 2022*) membuktikan bahwa berkas hari Kamis menderita *pcap timestamp offset* parah, di mana ribuan paket normal salah diberi label serangan dan sebaliknya. Menyertakan hari Kamis justru merusak integritas evaluasi model.
+  4. **Karakteristik Trafik Hari Jumat Tidak Sesuai Desain Skenario:**
+     - *PortScan (158K flow):* Merupakan reconnaissance scanning, bukan intrusi eksploitasi aktif.
+     - *Botnet ARES (1,9K flow):* Menderita bug fragmentasi alur TCP pada CICFlowMeter (Dube et al., 2024).
+     - *DDoS LOIC (128K flow):* Secara konseptual tumpang tindih dengan DoS Rabu, namun membawa fingerprint alat LOIC yang memicu bias kerancuan (*confounding*): model tidak bisa dibedakan apakah lupa karena catastrophic forgetting atau karena perbedaan signature alat serang.
+  5. **Efisiensi Komputasi:**
+     - Memasukkan Kamis dan Jumat akan menambah 1,16 juta baris data tanpa menyumbang satupun sampel SSH atau DoS baru, melainkan hanya memperlambat waktu komputasi pelatihan 5 seed secara sia-sia.
+
+---
+
 ## 📋 Checklist Berkas yang Dibawa Saat Bimbingan
 
 1. **Cetakan Fisik / PDF Siap Tampil (2–3 Halaman):**  

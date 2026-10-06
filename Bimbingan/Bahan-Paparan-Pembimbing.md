@@ -53,6 +53,12 @@ Berdasarkan pemindaian menyeluruh 1,53 juta baris data mentah:
    - Fitur `Destination Port` saja menghasilkan **Macro-F1 96,44%** (model hanya menghafal nomor port 22/80).
    - Tanpa port, Macro-F1 tetap mencapai **98,02%**, dan satu fitur `Bwd Packet Length Std` secara mandiri mencapai **Macro-F1 90,93%**.
    - **Kesimpulan:** Separabilitas tinggi dataset mencerminkan *fingerprint* alat serang, bukan kecerdasan deteksi intrusi murni. Maka Destination Port **diusulkan dibuang** agar model belajar pola statistik flow.
+4. **Justifikasi Pemilihan Berkas Senin, Selasa, dan Rabu (Eliminasi Kamis & Jumat):**
+   - **Senin (529K flow):** Menyediakan trafik Normal murni baseline tanpa serangan.
+   - **Selasa (445K flow):** Menyediakan serangan SSH-Patator (3.219 flow bersih) untuk Task 1.
+   - **Rabu (692K flow):** Menyediakan serangan DoS 4 subvarian (193.748 flow bersih) untuk Task 2.
+   - **Kamis Dieliminasi:** Web Attacks & Infiltration memiliki sampel terlalu sedikit (Sql Injection 21, Infiltration 36; tidak layak secara statistik) serta mengalami desinkronisasi pelabelan pcap parah (*Rosay et al., 2022*).
+   - **Jumat Dieliminasi:** PortScan adalah reconnaissance pasif, Botnet cacat fragmentasi alur, dan DDoS LOIC memicu bias confounding dengan DoS Rabu tanpa menyumbang kelas baru.
 
 ---
 
