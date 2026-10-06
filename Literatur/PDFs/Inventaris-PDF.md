@@ -2,7 +2,7 @@
 
 **Lokasi Repositori:** `E:/Projects/thesis/Literatur/PDFs/`  
 **Terakhir Diperbarui:** 2026-10-06  
-**Total Berkas Fisik:** 22 PDF (13 Paper Inti + 9 Paper Pendukung di `Opsional/`)  
+**Total Berkas Fisik:** 25 PDF (13 Paper Inti + 12 Paper Pendukung di `Opsional/`)  
 **Status Unduhan & Akses:** ✅ 100% Tersedia Lokal di Disk  
 
 ---
@@ -27,7 +27,7 @@
 
 ---
 
-## 📂 2. Paper Pendukung & Framework (9 Berkas di `Literatur/PDFs/Opsional/`)
+## 📂 2. Paper Pendukung & Framework (12 Berkas di `Literatur/PDFs/Opsional/`)
 
 | No | Berkas PDF | Ukuran | Referensi & Catatan | Status |
 |---|---|---|---|---|
@@ -40,3 +40,6 @@
 | 20 | `Zhao-2018-FL-NonIID.pdf` | 823 KB | [[Zhao-2018-FL-NonIID]] (Federated Learning with Non-IID Data, arXiv:1806.00582) | ✔ Verified |
 | 21 | `Hsu-2019-NonIID-Visual-FL.pdf` | 814 KB | [[Hsu-2019-NonIID-Dirichlet]] (Measuring Non-IID Data Dirichlet, arXiv:1909.06335) | ✔ Verified |
 | 22 | `Li-2020-FedProx.pdf` | 3,2 MB | [[Li-2020-FedProx]] (Federated Optimization in Heterogeneous Networks, MLSys) | ✔ Verified |
+| 23 | `DeLange-2021-CL-Survey.pdf` | 1,38 MB | [[DeLange-2021-CL-Survey]] (A Continual Learning Survey, IEEE TPAMI 2021) | ✔ Verified |
+| 24 | `VandeVen-2019-CL-Scenarios.pdf` | 1,06 MB | [[VandeVen-2019-CL-Scenarios]] (Three Scenarios for Continual Learning, arXiv:1904.07734) | ✔ Verified |
+| 25 | `Wang-2023-CL-Survey.pdf` | 4,93 MB | [[Wang-2023-CL-Survey]] (A Comprehensive Survey of Continual Learning, IEEE TPAMI 2024) | ✔ Verified |

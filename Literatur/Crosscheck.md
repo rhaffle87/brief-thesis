@@ -2,11 +2,11 @@
 
 **Tanggal Akses Terakhir:** 2026-10-06 18:55 UTC+7  
 **Metode:** Crossref REST API (`https://api.crossref.org/works/`), arXiv Export API (`http://export.arxiv.org/api/query`), JMLR direct URL, dan PyMuPDF local verification  
-**Status Keseluruhan:** ✅ 22/22 Terverifikasi Metadata & Berkas PDF (100% dari korpus 22 PDF lokal) — **SELESAI / MARKED DONE**
+**Status Keseluruhan:** ✅ 25/25 Terverifikasi Metadata & Berkas PDF (100% dari korpus 25 PDF lokal) — **SELESAI / MARKED DONE**
 
 ---
 
-## 1. Tabel Lengkap Verifikasi Metadata (22 Paper Lingkup TA)
+## 1. Tabel Lengkap Verifikasi Metadata (25 Paper Lingkup TA)
 
 | No | Referensi (Kunci) | Sumber Metadata (URL) | Tanggal Akses | Bidang Judul | Bidang Penulis | Bidang Tahun | Bidang Venue / Penerbit | Bidang Identifier (DOI / arXiv) | Status |
 |---|---|---|---|---|---|---|---|---|---|
@@ -32,6 +32,9 @@
 | 20 | **Zhao 2018** (FL Non-IID) | `http://export.arxiv.org/api/query?id_list=1806.00582` | 2026-10-06 | Federated Learning with Non-IID Data | Y. Zhao, M. Li, L. Lai, N. Suda, D. Civin, V. Chandra | 2018 | arXiv preprint | arXiv:1806.00582 | ✔ Verified |
 | 21 | **Hsu 2019** (Non-IID Dirichlet) | `http://export.arxiv.org/api/query?id_list=1909.06335` | 2026-10-06 | Measuring the Effects of Non-Identical Data Distribution for Federated Visual Classification | T. H. Hsu, H. Qi, M. Brown | 2019 | arXiv preprint | arXiv:1909.06335 | ✔ Verified |
 | 22 | **Li 2020** (FedProx) | `https://proceedings.mlsys.org/paper_files/paper/2020/file/38af86134b65d0f10fe33d30dd76442e-Paper.pdf` | 2026-10-06 | Federated Optimization in Heterogeneous Networks | T. Li, A. K. Sahu, M. Zaheer, M. Sanjabi, A. Talwalkar, V. Smith | 2020 | MLSys 2020 / arXiv | arXiv:1812.06127 | ✔ Verified |
+| 23 | **DeLange 2021** (CL Survey) | `https://api.crossref.org/works/10.1109/TPAMI.2021.3057446` | 2026-10-06 | A Continual Learning Survey: Defying Forgetting in Classification Tasks | M. De Lange, R. Aljundi, M. Masana et al. | 2021 | IEEE TPAMI, Vol 44, No 7 | DOI: 10.1109/TPAMI.2021.3057446 | ✔ Verified |
+| 24 | **Van de Ven 2019** (CL Scenarios) | `http://export.arxiv.org/api/query?id_list=1904.07734` | 2026-10-06 | Three scenarios for continual learning | G. M. van de Ven, A. S. Tolias | 2019 | arXiv / Nature Communications | arXiv:1904.07734 | ✔ Verified |
+| 25 | **Wang 2023** (CL Survey) | `https://api.crossref.org/works/10.1109/TPAMI.2024.3367324` | 2026-10-06 | A Comprehensive Survey of Continual Learning: Theory, Method and Application | L. Wang, X. Zhang, H. Su, J. Zhu | 2024 | IEEE TPAMI, Vol 46, No 8 | DOI: 10.1109/TPAMI.2024.3367324 | ✔ Verified |
 
 ---
 

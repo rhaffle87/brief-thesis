@@ -34,20 +34,26 @@
 15. **[[Rehman-2026-Incremental-FL-IDS]]** — Incremental FL-IDS dengan EWC vs GEM pada IoT
 16. **[[Talpur-2022-GFCL]]** — Gradient-based Federated Continual Learning untuk IDS
 
-### 6. Survei Komprehensif FL-IDS & FCL (4)
+### 6. Survei Komprehensif FL-IDS & FCL (5)
 17. **[[Hernandez-Ramos-2025-FL-IDS-Survey]]** — Survei komprehensif FL-IDS (ACM Computing Surveys 2025)
 18. **[[Buyuktanir-2025-FL-IDS-nonIID]]** — Survei FL-IDS & data non-IID (Cluster Computing 2025)
 19. **[[Hamedi-2025-FCL-Survey]]** — Survei konsep & tantangan Federated Continual Learning (2025)
 20. **[[Gholizade-2026-FCL-Survey]]** — Survei taksonomi komprehensif FCL (Juni 2026)
 21. **[[Agrawal-2021-FL-IDS-Concepts]]** — Survei konsep & arsitektur FL-IDS (2021)
 
+### 7. Survei Fondasi Continual Learning (3)
+22. **[[DeLange-2021-CL-Survey]]** — Taksonomi komprehensif CL (IEEE TPAMI 2021)
+23. **[[VandeVen-2019-CL-Scenarios]]** — Formulasi 3 skenario evaluasi CL (Nature Communications / arXiv:1904.07734)
+24. **[[Wang-2023-CL-Survey]]** — Teori, metode, & aplikasi CL mutakhir (IEEE TPAMI 2024)
+
 ---
 
 ## 📊 Statistik Akhir
 
-- **Total Paper dalam Lingkup:** 22 Paper  
-- **Total Berkas PDF di Disk:** 22 PDF (100% Tersedia di `Literatur/PDFs/`)  
-- **Catatan Literatur (.md):** 22 / 22 (100% Lengkap)  
+- **Total Paper dalam Lingkup:** 25 Paper  
+- **Total Berkas PDF di Disk:** 25 PDF (100% Tersedia di `Literatur/PDFs/` dan `Opsional/`)  
+- **Catatan Literatur (.md):** 25 / 25 (100% Lengkap)  
 - **Tautan Vault:** 100% Valid & Teresolusi  
 - **Status Arsip:** ✅ **SELESAI / MARKED DONE**
+
 

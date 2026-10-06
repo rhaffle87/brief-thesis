@@ -2,9 +2,8 @@
 type: dashboard
 status: active
 created: 2026-10-02
-updated: 2026-10-04
+updated: 2026-10-06
 ---
-
 # Dashboard Tugas Akhir - FL-CL IDS
 
 **Judul:** Analisis Kinerja Deteksi Network Traffic Intrusion Menggunakan Metode Federated-Continual Learning pada Testbed Private Cloud Server

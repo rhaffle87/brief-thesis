@@ -2,17 +2,17 @@
 
 **Tanggal Pembaruan:** 2026-10-06 18:55 UTC+7  
 **Metode Verifikasi:** Crossref REST API, arXiv Export API, Web Retrieval, dan Pemeriksaan Integritas Berkas Lokal (PyMuPDF)  
-**Status Keseluruhan:** ✅ **22/22 TERVERIFIKASI & TERSEDIA LENGKAP (100%) — SELESAI / MARKED DONE**  
-**Lokasi Berkas Fisik:** `E:/Projects/thesis/Literatur/PDFs/` (13 Paper Inti) dan `E:/Projects/thesis/Literatur/PDFs/Opsional/` (9 Paper Pendukung)  
+**Status Keseluruhan:** ✅ **25/25 TERVERIFIKASI & TERSEDIA LENGKAP (100%) — SELESAI / MARKED DONE**  
+**Lokasi Berkas Fisik:** `E:/Projects/thesis/Literatur/PDFs/` (13 Paper Inti) dan `E:/Projects/thesis/Literatur/PDFs/Opsional/` (12 Paper Pendukung)  
 
 ---
 
 ## 📊 Ringkasan Status Verifikasi
 
-- **Total Literatur:** 22 Dokumen  
-- **Terverifikasi Metadata & DOI/arXiv:** 22 / 22 (100%)  
-- **Tersedia File PDF Lokal di Disk:** 22 / 22 (100% — semua berkas utuh, valid, dan dapat dibaca)  
-- **Catatan Literatur (.md):** 22 / 22 (100% — seluruh berkas note tersedia di `Literatur/`)  
+- **Total Literatur:** 25 Dokumen  
+- **Terverifikasi Metadata & DOI/arXiv:** 25 / 25 (100%)  
+- **Tersedia File PDF Lokal di Disk:** 25 / 25 (100% — semua berkas utuh, valid, dan dapat dibaca)  
+- **Catatan Literatur (.md):** 25 / 25 (100% — seluruh berkas note tersedia di `Literatur/`)  
 - **Isu Tertunda (Pending Issues):** **0 (Semua Isu & Kandidat Telah Selesai Diverifikasi)**  
 - **Tanda Verifikasi:** ✅ **SELESAI / MARKED DONE**  
 
@@ -202,13 +202,42 @@
 * **Catatan Literatur:** [[Li-2020-FedProx]]
 * **Status:** ✅ **VERIFIED**
 
+### 23. De Lange et al. (2021) — A Continual Learning Survey
+* **Identifier:** `DOI: 10.1109/TPAMI.2021.3057446 / arXiv:1909.08383`
+* **Judul:** *"A Continual Learning Survey: Defying Forgetting in Classification Tasks"*
+* **Penulis:** Matthias De Lange, Rahaf Aljundi, Marc Masana, Sarah Parisot, Xu Jia, Ales Leonardis, Gregory Slabaugh, Tinne Tuytelaars
+* **Venue/Penerbit:** IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), Vol. 44, No. 7, pp. 3366–3385 (2022)
+* **Berkas Fisik:** `Literatur/PDFs/Opsional/DeLange-2021-CL-Survey.pdf` (1.356 KB, 29 halaman)
+* **Catatan Literatur:** [[DeLange-2021-CL-Survey]]
+* **Aset Terkait:** `Aset/continual_learning_taxonomy_delange2021.png`
+* **Status:** ✅ **VERIFIED**
+
+### 24. van de Ven & Tolias (2019) — Three Scenarios for Continual Learning
+* **Identifier:** `DOI: 10.1038/s41467-022-28057-4 / arXiv:1904.07734`
+* **Judul:** *"Three scenarios for continual learning"*
+* **Penulis:** Gido M. van de Ven, Andreas S. Tolias
+* **Venue/Penerbit:** Nature Communications / arXiv:1904.07734 [cs.LG]
+* **Berkas Fisik:** `Literatur/PDFs/Opsional/VandeVen-2019-CL-Scenarios.pdf` (1.036 KB, 18 halaman)
+* **Catatan Literatur:** [[VandeVen-2019-CL-Scenarios]]
+* **Status:** ✅ **VERIFIED**
+
+### 25. Wang et al. (2023) — Comprehensive Survey of Continual Learning
+* **Identifier:** `DOI: 10.1109/TPAMI.2024.3367324 / arXiv:2302.00487`
+* **Judul:** *"A Comprehensive Survey of Continual Learning: Theory, Method and Application"*
+* **Penulis:** Liyuan Wang, Xingxing Zhang, Hang Su, Jun Zhu
+* **Venue/Penerbit:** IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), Vol. 46, No. 8, pp. 5362–5383 (2024)
+* **Berkas Fisik:** `Literatur/PDFs/Opsional/Wang-2023-CL-Survey.pdf` (4.815 KB, 33 halaman)
+* **Catatan Literatur:** [[Wang-2023-CL-Survey]]
+* **Aset Terkait:** `Aset/continual_learning_framework_wang2023.png`
+* **Status:** ✅ **VERIFIED**
+
 ---
 
 ## 🔒 Kesimpulan Akhir Verifikasi
 
-1. **Kelengkapan Dokumen:** Seluruh 22 artikel ilmiah telah diverifikasi secara ganda melalui identifier resmi (DOI/arXiv) dan pemeriksaan langsung isi berkas PDF lokal.
-2. **Ketersediaan Fisik:** 22 dari 22 berkas PDF (100%) tersimpan di `Literatur/PDFs/` (13 paper inti) dan `Literatur/PDFs/Opsional/` (9 paper pendukung), dapat dibuka tanpa korupsi berkas, dan siap disitasi pada naskah skripsi.
-3. **Catatan Literatur:** Seluruh 22 catatan markdown individual di `Literatur/` telah dibuat dan sinkron dengan wikilinks Obsidian vault.
-4. **Penyelesaian Isu:** Semua isu metadata, paper kandidat, dan keabsahan berkas telah selesai dituntaskan 100%.
+1. **Kelengkapan Dokumen:** Seluruh 25 artikel ilmiah telah diverifikasi secara ganda melalui identifier resmi (DOI/arXiv) dan pemeriksaan langsung isi berkas PDF lokal.
+2. **Ketersediaan Fisik:** 25 dari 25 berkas PDF (100%) tersimpan di `Literatur/PDFs/` (13 paper inti) dan `Literatur/PDFs/Opsional/` (12 paper pendukung), dapat dibuka tanpa korupsi berkas, dan siap disitasi pada naskah skripsi.
+3. **Catatan Literatur:** Seluruh 25 catatan markdown individual di `Literatur/` telah dibuat dan sinkron dengan wikilinks Obsidian vault.
+4. **Penyelesaian Isu:** Semua isu metadata, paper kandidat, dan keabsahan berkas telah selesai dituntaskan 100%. Berkas PDF survei yang sebelumnya berada di `Aset/` telah dipindahkan dan diinventarisasi secara resmi di `Literatur/PDFs/Opsional/`.
 5. **Status Verifikasi:** ✅ **SELESAI / MARKED DONE**
 
