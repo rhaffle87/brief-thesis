@@ -14,3 +14,4 @@ Datasets/**/*.parquet
 Thumbs.db
 Desktop.ini
 *.tmp
+Aset/*.pdf

@@ -65,7 +65,7 @@
 1. **Cetakan Fisik / PDF Siap Tampil (2–3 Halaman):**  
    - Buka: [[Bahan-Paparan-Pembimbing]] atau [[Ringkasan-Untuk-Pembimbing]].
 2. **Naskah Proposal Lengkap (Referensi Detail):**  
-   - Buka: [[Briefing Scope TA_ Federated-Continual Learning untuk Deteksi Intrusi]].
+   - Buka: [[Briefing Scope TA_Federated-Continual Learning untuk Deteksi Intrusi]].
 3. **Dokumen Bukti Empiris Data (Jika Dosen Minta Angka Riil):**  
    - Buka: [[EDA-CIC-IDS2017]] (menunjukkan tabel 10 kolom konstan, grafik port leakage 96,44%, dan distribusi DoS).
 4. **Daftar Pustaka 5 Tahun Terakhir:**  

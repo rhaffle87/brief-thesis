@@ -126,7 +126,7 @@ Analisis Kinerja Deteksi Network Traffic Intrusion Menggunakan Metode Federated-
 ---
 
 ## 📌 Dokumen Rujukan Terkait di Vault
-- Dokumen Proposal Lengkap: [[Briefing Scope TA_ Federated-Continual Learning untuk Deteksi Intrusi]]
+- Dokumen Proposal Lengkap: [[Briefing Scope TA_Federated-Continual Learning untuk Deteksi Intrusi]]
 - Laporan Lengkap EDA: [[EDA-CIC-IDS2017]]
 - Rekapitulasi Verifikasi Metadata: [[Crosscheck]]
 - Bukti Audit Terminal: [[Audit-Bukti-2026-10-03]]

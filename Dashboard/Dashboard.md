@@ -147,7 +147,7 @@ E:\Projects\thesis/
 ## 📝 Quick Links
 
 - [[Ringkasan-Untuk-Pembimbing]] (7 pertanyaan & bukti untuk dosen pembimbing)
-- [[Briefing Scope TA_ Federated-Continual Learning untuk Deteksi Intrusi]] (Dokumen final scope TA)
+- [[Briefing Scope TA_Federated-Continual Learning untuk Deteksi Intrusi]] (Dokumen final scope TA)
 - [[EDA-CIC-IDS2017]] (Laporan lengkap EDA & port leakage test)
 - [[Crosscheck]] (Tabel verifikasi metadata 18 paper)
 - [[Timeline-16-Minggu]] (Jadwal detail 16 minggu)

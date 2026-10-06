@@ -20,7 +20,7 @@ Untuk memastikan kejelasan komunikasi akademik dan pembelaan skripsi, seluruh si
 * **TA (Tugas Akhir):** Karya ilmiah mandiri mahasiswa sarjana sebagai syarat kelulusan di Departemen Teknik Elektro FTEIC ITS.
 * **IDS / NIDS (Intrusion Detection System / Network Intrusion Detection System):** Sistem pemantau lalu lintas jaringan komputer yang bertugas mendeteksi aktivitas mencurigakan, pelanggaran kebijakan, atau serangan siber.
 * **FL (Federated Learning):** Paradigma pembelajaran mesin terdistribusi yang melatih model secara kolaboratif lintas node klien (*client*) tanpa mentransmisikan data mentah lokal, melainkan hanya mempertukarkan bobot parameter model ke server agregator.
-* **CL (Continual Learning / Lifelong Learning):** Paradigma pembelajaran mesin yang memungkinkan model beradaptasi mempelajari aliran tugas (*tasks*) baru secara sekuensial tanpa mengalami fenomena lupa ingatan drastis (*catastrophic forgetting*) terhadap tugas yang telah dipelajari sebelumnya.
+* **CL (Continual Learning Learning):** Paradigma pembelajaran mesin yang memungkinkan model beradaptasi mempelajari aliran tugas (*tasks*) baru secara sekuensial tanpa mengalami fenomena lupa ingatan drastis (*catastrophic forgetting*) terhadap tugas yang telah dipelajari sebelumnya.
 * **FCL (Federated Continual Learning):** Integrasi sinergis antara Federated Learning dan Continual Learning, di mana model terdistribusi beradaptasi terhadap ancaman baru secara bertahap sekaligus menjaga privasi data lokal.
 * **FedAvg (Federated Averaging):** Algoritma agregasi parameter federated standar (McMahan et al., 2017) yang menghitung rata-rata tertimbang bobot model lokal berdasarkan proporsi jumlah data di masing-masing client.
 * **EWC (Elastic Weight Consolidation):** Algoritma continual learning berbasis regularisasi kuadratik (Kirkpatrick et al., 2017) yang memperlambat laju pembaruan parameter model yang penting bagi tugas terdahulu dengan memanfaatkan Matriks Informasi Fisher (*Fisher Information Matrix*).
@@ -41,7 +41,7 @@ Untuk memastikan kejelasan komunikasi akademik dan pembelaan skripsi, seluruh si
 
 ## 🎯 2. Latar Belakang & Rumusan Masalah
 
-### 2.1 Konteks Masalah & Paradigma Pembelajaran Terdistribusi
+### 2.1 Konteks Masalah & Paradigma Distributed Learning
 1. **Dinamika Ancaman & Catastrophic Forgetting:** Serangan jaringan muncul secara sekuensial di dunia nyata. Ketika model deteksi dilatih ulang pada kelas serangan baru (misal DoS), bobot neural network tertimpa sehingga model melupakan serangan terdahulu (misal Brute Force SSH). Regularisasi EWC membatasi pergeseran bobot krusial tersebut.
 2. **Privasi Lalu Lintas Jaringan:** Sentralisasi log trafik mentah melanggar konfidensialitas dan regulasi pelindungan data (UU PDP No. 27/2022). FedAvg memungkinkan pelatihan kolaboratif hanya melalui pertukaran bobot parameter.
 3. **Kesenjangan Riset (Research Gap):** Mayoritas riset FL-IDS berasumsi data statis satu waktu, sementara riset CL-IDS berasumsi pelatihan terpusat (*centralized*). Integrasi FCL pada data non-IID trafik jaringan nyata masih sangat minim dievaluasi secara empiris.
@@ -207,13 +207,24 @@ flowchart TD
 * **Client B (Sensor Jaringan DMZ / Web Server Publik):**
   * Mengamati aliran trafik: **Normal + DoS (Hulk, GoldenEye, slowloris, slowhttptest)**.
 
-### 8.2 Intuisi Ruang Parameter EWC
+### 8.2 Kerangka Konseptual Continual Learning & Mitigasi Catastrophic Forgetting
+Dalam sistem deteksi intrusi jaringan (NIDS) yang dinamis, model machine learning menghadapi dua tantangan mendasar saat dihadapkan pada pola serangan baru secara berkelanjutan:
+1. **Catastrophic Forgetting (Kelupaan Katastropik):** Jaringan syaraf tiruan standar yang dilatih secara gradien pada tugas baru ($Task\ 2$) cenderung menimpa (*overwrite*) bobot parameter yang sebelumnya krusial untuk mengenali tugas lama ($Task\ 1$). Akibatnya, kemampuan model mendeteksi serangan lama runtuh mendekati 0%.
+2. **Stability-Plasticity Dilemma:** Model dituntut memiliki fleksibilitas (*plasticity*) memadai untuk mempelajari distribusi ancaman baru yang belum pernah dilihat, sembari mempertahankan kekokohan (*stability*) representasi pengetahuan lama.
+
+![Kerangka Konseptual Continual Learning](file:///e:/Projects/thesis/Aset/continual_learning_framework_wang2023.png)  
+*Gambar 6: Kerangka Konseptual Continual Learning: (a) Kebutuhan model beradaptasi terhadap urutan tugas inkremental dengan distribusi data dinamis; (b) Manajemen trade-off antara stabilitas memori (retensi pengetahuan lama) dan plastisitas pembelajaran (akuisisi pengetahuan baru), serta kemampuan generalisasi intra/inter-task; (c) Klasifikasi metodologi mitigasi catastrophic forgetting; (d) Penyesuaian skenario implementasi praktis. Sumber publikasi resmi: Wang, L., Zhang, X., Su, H., & Zhu, J. (2024). "A Comprehensive Survey of Continual Learning: Theory, Method and Application". IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), arXiv:2302.00487. DOI: [10.1109/TPAMI.2024.3367329](https://doi.org/10.1109/TPAMI.2024.3367329).*
+
+![Taksonomi Rumpun Metode Continual Learning](file:///e:/Projects/thesis/Aset/continual_learning_taxonomy_delange2021.png)  
+*Gambar 7: Diagram Pohon Taksonomi Metode Continual Learning: Klasifikasi komprehensif atas metode Replay (berbasis buffer memori), Regularization-based (termasuk EWC pada cabang pendekatan bobot prior-focused), dan Parameter Isolation. Sumber publikasi resmi: De Lange, M. et al. (2022). "A Continual Learning Survey: Defying Forgetting in Classification Tasks". IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), Vol. 44, No. 7, pp. 3366–3385, Fig. 1. DOI: [10.1109/TPAMI.2021.3057446](https://doi.org/10.1109/TPAMI.2021.3057446).*
+
+### 8.3 Intuisi Ruang Parameter EWC (Elastic Weight Consolidation)
 Penelitian Kirkpatrick et al. (2017) membuktikan bahwa ruang parameter jaringan syaraf memiliki kelenturan (*overparameterization*). Terdapat konfigurasi bobot parameter yang mampu memuaskan kedua tugas sekaligus, asalkan pembaruan parameter yang krusial bagi tugas lama dilindungi oleh penalti kuadratik berbasis informasi Fisher:
 
 ![Schematic Trajectories in Parameter Space of EWC](file:///e:/Projects/thesis/Aset/ewc_parameter_space_kirkpatrick2017.png)  
-*Gambar 6: Ilustrasi skematik ruang parameter EWC. Lintasan tanpa penalti (biru) menyebabkan forgetting total pada Task A; penalti seragam (hijau) terlalu restriktif; sedangkan penalti berbobot Fisher EWC (merah) menuntun model menuju irisan performa optimal untuk Task A dan Task B secara simultan. Sumber publikasi resmi: Kirkpatrick, J. et al. (2017). "Overcoming catastrophic forgetting in neural networks". PNAS, Vol. 114, No. 13, Fig. 1. DOI: [10.1073/pnas.1611835114](https://doi.org/10.1073/pnas.1611835114).*
+*Gambar 8: Ilustrasi skematik ruang parameter EWC. Lintasan tanpa penalti (biru) menyebabkan forgetting total pada Task A; penalti seragam (hijau) terlalu restriktif; sedangkan penalti berbobot Fisher EWC (merah) menuntun model menuju irisan performa optimal untuk Task A dan Task B secara simultan. Sumber publikasi resmi: Kirkpatrick, J. et al. (2017). "Overcoming catastrophic forgetting in neural networks". PNAS, Vol. 114, No. 13, Fig. 1. DOI: [10.1073/pnas.1611835114](https://doi.org/10.1073/pnas.1611835114).*
 
-### 8.3 Diagram Sekuensial Alur Kerja (Workflow Task FL-CL)
+### 8.4 Diagram Sekuensial Alur Kerja (Workflow Task FL-CL)
 
 ```mermaid
 sequenceDiagram
@@ -249,10 +260,10 @@ sequenceDiagram
 Evaluasi dihitung berdasarkan Matriks Kontingensi (*Confusion Matrix*) multikelas: $TP_c$ (True Positive), $FP_c$ (False Positive), $TN_c$ (True Negative), dan $FN_c$ (False Negative) untuk masing-masing kelas $c \in \{\text{Normal}, \text{SSH-Patator}, \text{DoS}\}$.
 
 ![Visualisasi Presisi dan Recall](file:///e:/Projects/thesis/Aset/precision_recall_diagram_walber2014.png)  
-*Gambar 7: Visualisasi komparatif antara Presisi (relevansi hasil prediksi) dan Recall (kelengkapan penemuan seluruh anomali sebenarnya). Sumber: Walber (2014), "Precision and Recall Diagram", Wikimedia Commons, lisensi CC BY-SA 4.0.*
+*Gambar 9: Visualisasi komparatif antara Presisi (relevansi hasil prediksi) dan Recall (kelengkapan penemuan seluruh anomali sebenarnya). Sumber: Walber (2014), "Precision and Recall Diagram", Wikimedia Commons, lisensi CC BY-SA 4.0.*
 
 ![Diagram Lengkap Confusion Matrix dan Metrik Evaluasi](file:///e:/Projects/thesis/Aset/confusion_matrix_detailed_web.png)  
-*Gambar 8: Struktur Komprehensif Matriks Kontingensi (Confusion Matrix) dengan formulasi True Positive (TP), False Positive (FP), True Negative (TN), False Negative (FN), serta metrik turunan Accuracy, Sensitivity/Recall, Specificity, dan Precision. Sumber: Wikimedia Commons, lisensi CC BY-SA 4.0.*
+*Gambar 10: Struktur Komprehensif Matriks Kontingensi (Confusion Matrix) dengan formulasi True Positive (TP), False Positive (FP), True Negative (TN), False Negative (FN), serta metrik turunan Accuracy, Sensitivity/Recall, Specificity, dan Precision. Sumber: Wikimedia Commons, lisensi CC BY-SA 4.0.*
 
 ### 1. Akurasi (Accuracy)
 Persentase total prediksi yang tepat terhadap seluruh populasi data uji:
@@ -328,7 +339,7 @@ flowchart LR
 ```
 
 ![Diagram Alur Metode Penelitian](file:///e:/Projects/thesis/Aset/alur_metode_penelitian.png)  
-*Gambar 9: Diagram Alur Metode Penelitian Terstruktur dari Praproses hingga Evaluasi BWT. Sumber aset lokal: Aset/alur_metode_penelitian.png.*
+*Gambar 11: Diagram Alur Metode Penelitian Terstruktur dari Praproses hingga Evaluasi BWT. Sumber aset lokal: Aset/alur_metode_penelitian.png.*
 
 | Kode | Moda FL | Moda CL | Deskripsi Pengujian | Target Bukti Ilmiah |
 |---|---|---|---|---|
