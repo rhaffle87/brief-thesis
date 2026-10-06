@@ -1,12 +1,12 @@
 # Crosscheck Literatur - Verifikasi Metadata & Sumber
 
-**Tanggal Akses Terakhir:** 2026-10-03 09:15 UTC+7  
-**Metode:** Crossref REST API (`https://api.crossref.org/works/`), arXiv Export API (`http://export.arxiv.org/api/query`), JMLR direct URL  
-**Status Keseluruhan:** 18/18 Terverifikasi Metadata (100% dari korpus 18 PDF lokal)
+**Tanggal Akses Terakhir:** 2026-10-06 18:55 UTC+7  
+**Metode:** Crossref REST API (`https://api.crossref.org/works/`), arXiv Export API (`http://export.arxiv.org/api/query`), JMLR direct URL, dan PyMuPDF local verification  
+**Status Keseluruhan:** ✅ 22/22 Terverifikasi Metadata & Berkas PDF (100% dari korpus 22 PDF lokal) — **SELESAI / MARKED DONE**
 
 ---
 
-## 1. Tabel Lengkap Verifikasi Metadata (18 Paper Lingkup TA)
+## 1. Tabel Lengkap Verifikasi Metadata (22 Paper Lingkup TA)
 
 | No | Referensi (Kunci) | Sumber Metadata (URL) | Tanggal Akses | Bidang Judul | Bidang Penulis | Bidang Tahun | Bidang Venue / Penerbit | Bidang Identifier (DOI / arXiv) | Status |
 |---|---|---|---|---|---|---|---|---|---|
@@ -28,6 +28,10 @@
 | 16 | **Talpur 2022** (GFCL) | `http://export.arxiv.org/api/query?id_list=2204.11010` | 2026-10-03 | Gradient-based Federated Continual Learning for Intrusion Detection | S. Talpur et al. | 2022 | arXiv preprint | arXiv:2204.11010 | ✔ Verified |
 | 17 | **Rehman 2026** (Incremental FL-IDS) | `http://export.arxiv.org/api/query?id_list=2603.10776` | 2026-10-02 | Incremental Federated Learning for Intrusion Detection Systems | A. Rehman et al. | 2026 | arXiv preprint | arXiv:2603.10776 | ✔ Verified |
 | 18 | **Gholizade 2026** (FCL Survey) | `http://export.arxiv.org/api/query?id_list=2606.11272` | 2026-10-02 | Federated Continual Learning: A Comprehensive Survey | S. Gholizade et al. | 2026 | arXiv preprint | arXiv:2606.11272 | ✔ Verified |
+| 19 | **Engelen 2021** (CICIDS2017) | `https://api.crossref.org/works/10.1109/SPW53761.2021.00009` | 2026-10-06 | Troubleshooting an Intrusion Detection Dataset: the CICIDS2017 Case Study | G. Engelen, V. Rimmer, W. Joosen | 2021 | IEEE SPW 2021 / WTMC | DOI: 10.1109/SPW53761.2021.00009 | ✔ Verified |
+| 20 | **Zhao 2018** (FL Non-IID) | `http://export.arxiv.org/api/query?id_list=1806.00582` | 2026-10-06 | Federated Learning with Non-IID Data | Y. Zhao, M. Li, L. Lai, N. Suda, D. Civin, V. Chandra | 2018 | arXiv preprint | arXiv:1806.00582 | ✔ Verified |
+| 21 | **Hsu 2019** (Non-IID Dirichlet) | `http://export.arxiv.org/api/query?id_list=1909.06335` | 2026-10-06 | Measuring the Effects of Non-Identical Data Distribution for Federated Visual Classification | T. H. Hsu, H. Qi, M. Brown | 2019 | arXiv preprint | arXiv:1909.06335 | ✔ Verified |
+| 22 | **Li 2020** (FedProx) | `https://proceedings.mlsys.org/paper_files/paper/2020/file/38af86134b65d0f10fe33d30dd76442e-Paper.pdf` | 2026-10-06 | Federated Optimization in Heterogeneous Networks | T. Li, A. K. Sahu, M. Zaheer, M. Sanjabi, A. Talwalkar, V. Smith | 2020 | MLSys 2020 / arXiv | arXiv:1812.06127 | ✔ Verified |
 
 ---
 

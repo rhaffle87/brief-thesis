@@ -1,18 +1,20 @@
 # Crosscheck Literatur - Verifikasi Metadata & Berkas PDF
 
-**Tanggal Pembaruan:** 2026-10-06 18:42 UTC+7  
-**Metode Verifikasi:** Crossref REST API, arXiv Export API, dan Pemeriksaan Integritas Berkas Lokal (PyMuPDF)  
-**Status Keseluruhan:** **18/18 TERVERIFIKASI & TERSEDIA LENGKAP (100%)**  
-**Lokasi Berkas Fisik:** `E:/Projects/thesis/Literatur/PDFs/` (13 Paper Inti) dan `E:/Projects/thesis/Literatur/PDFs/Opsional/` (5 Paper Pendukung)  
+**Tanggal Pembaruan:** 2026-10-06 18:55 UTC+7  
+**Metode Verifikasi:** Crossref REST API, arXiv Export API, Web Retrieval, dan Pemeriksaan Integritas Berkas Lokal (PyMuPDF)  
+**Status Keseluruhan:** ✅ **22/22 TERVERIFIKASI & TERSEDIA LENGKAP (100%) — SELESAI / MARKED DONE**  
+**Lokasi Berkas Fisik:** `E:/Projects/thesis/Literatur/PDFs/` (13 Paper Inti) dan `E:/Projects/thesis/Literatur/PDFs/Opsional/` (9 Paper Pendukung)  
 
 ---
 
 ## 📊 Ringkasan Status Verifikasi
 
-- **Total Literatur:** 18 Dokumen  
-- **Terverifikasi Metadata & DOI/arXiv:** 18 / 18 (100%)  
-- **Tersedia File PDF Lokal di Disk:** 18 / 18 (100% — tidak ada berkas yang hilang/corrupted)  
-- **Isu Tertunda (Pending Issues):** **0 (Semua Isu Telah Diselesaikan)**  
+- **Total Literatur:** 22 Dokumen  
+- **Terverifikasi Metadata & DOI/arXiv:** 22 / 22 (100%)  
+- **Tersedia File PDF Lokal di Disk:** 22 / 22 (100% — semua berkas utuh, valid, dan dapat dibaca)  
+- **Catatan Literatur (.md):** 22 / 22 (100% — seluruh berkas note tersedia di `Literatur/`)  
+- **Isu Tertunda (Pending Issues):** **0 (Semua Isu & Kandidat Telah Selesai Diverifikasi)**  
+- **Tanda Verifikasi:** ✅ **SELESAI / MARKED DONE**  
 
 ---
 
@@ -164,10 +166,49 @@
 * **Berkas Fisik:** `Literatur/PDFs/Gholizade-2026-FCL-Survey.pdf` (1.581 KB, 77 halaman)
 * **Status:** ✅ **VERIFIED**
 
+### 19. Engelen et al. (2021) — Troubleshooting CICIDS2017
+* **Identifier:** `DOI: 10.1109/SPW53761.2021.00009`
+* **Judul:** *"Troubleshooting an Intrusion Detection Dataset: the CICIDS2017 Case Study"*
+* **Penulis:** Gints Engelen, Vera Rimmer, Wouter Joosen (imec-DistriNet, KU Leuven)
+* **Venue/Penerbit:** 2021 IEEE Security and Privacy Workshops (SPW) / 6th WTMC, pp. 7–12
+* **Berkas Fisik:** `Literatur/PDFs/Opsional/Engelen-2021-CICIDS2017-Troubleshooting.pdf` (151 KB, 6 halaman)
+* **Catatan Literatur:** [[Engelen-2021-Troubleshooting]]
+* **Status:** ✅ **VERIFIED**
+
+### 20. Zhao et al. (2018) — Non-IID Data in FL
+* **Identifier:** `arXiv:1806.00582`
+* **Judul:** *"Federated Learning with Non-IID Data"*
+* **Penulis:** Yue Zhao, Meng Li, Liangzhen Lai, Naveen Suda, Damon Civin, Vikas Chandra (Arm Inc.)
+* **Venue/Penerbit:** arXiv:1806.00582 [cs.LG]
+* **Berkas Fisik:** `Literatur/PDFs/Opsional/Zhao-2018-FL-NonIID.pdf` (823 KB, 12 halaman)
+* **Catatan Literatur:** [[Zhao-2018-FL-NonIID]]
+* **Status:** ✅ **VERIFIED**
+
+### 21. Hsu et al. (2019) — Measuring Effects of Non-IID Data (Dirichlet)
+* **Identifier:** `arXiv:1909.06335`
+* **Judul:** *"Measuring the Effects of Non-Identical Data Distribution for Federated Visual Classification"*
+* **Penulis:** Tzu-Ming Harry Hsu, Hang Qi, Matthew Brown (MIT CSAIL & Google Research)
+* **Venue/Penerbit:** arXiv:1909.06335 [cs.LG]
+* **Berkas Fisik:** `Literatur/PDFs/Opsional/Hsu-2019-NonIID-Visual-FL.pdf` (814 KB, 5 halaman)
+* **Catatan Literatur:** [[Hsu-2019-NonIID-Dirichlet]]
+* **Status:** ✅ **VERIFIED**
+
+### 22. Li et al. (2020) — FedProx Optimization
+* **Identifier:** `MLSys 2020 / arXiv:1812.06127`
+* **Judul:** *"Federated Optimization in Heterogeneous Networks"*
+* **Penulis:** Tian Li, Anit Kumar Sahu, Manzil Zaheer, Maziar Sanjabi, Ameet Talwalkar, Virginia Smith (Carnegie Mellon University)
+* **Venue/Penerbit:** Proceedings of Machine Learning and Systems (MLSys 2020), Vol. 2, pp. 429–450
+* **Berkas Fisik:** `Literatur/PDFs/Opsional/Li-2020-FedProx.pdf` (3.208 KB, 22 halaman)
+* **Catatan Literatur:** [[Li-2020-FedProx]]
+* **Status:** ✅ **VERIFIED**
+
 ---
 
 ## 🔒 Kesimpulan Akhir Verifikasi
 
-1. **Kelengkapan Dokumen:** Seluruh 18 artikel ilmiah telah diverifikasi secara ganda melalui identifier resmi (DOI/arXiv) dan pemeriksaan langsung isi berkas PDF lokal.
-2. **Ketersediaan Fisik:** 18 dari 18 berkas PDF (100%) tersimpan di `Literatur/PDFs/` dan `Literatur/PDFs/Opsional/`, dapat dibuka tanpa korupsi berkas, dan siap disitasi pada naskah skripsi.
-3. **Penyelesaian Isu:** Catatan peringatan pada Liu 2026 (EWC Done Right) dan parsing error pada Hernandez-Ramos 2025 (ACM CSUR) telah diselesaikan dan diverifikasi valid 100%.
+1. **Kelengkapan Dokumen:** Seluruh 22 artikel ilmiah telah diverifikasi secara ganda melalui identifier resmi (DOI/arXiv) dan pemeriksaan langsung isi berkas PDF lokal.
+2. **Ketersediaan Fisik:** 22 dari 22 berkas PDF (100%) tersimpan di `Literatur/PDFs/` (13 paper inti) dan `Literatur/PDFs/Opsional/` (9 paper pendukung), dapat dibuka tanpa korupsi berkas, dan siap disitasi pada naskah skripsi.
+3. **Catatan Literatur:** Seluruh 22 catatan markdown individual di `Literatur/` telah dibuat dan sinkron dengan wikilinks Obsidian vault.
+4. **Penyelesaian Isu:** Semua isu metadata, paper kandidat, dan keabsahan berkas telah selesai dituntaskan 100%.
+5. **Status Verifikasi:** ✅ **SELESAI / MARKED DONE**
+
