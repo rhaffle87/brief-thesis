@@ -1,8 +1,8 @@
 # Inventaris Berkas PDF Literatur
 
 **Lokasi Repositori:** `E:/Projects/thesis/Literatur/PDFs/`  
-**Terakhir Diperbarui:** 2026-10-04  
-**Total Berkas Fisik:** 18 PDF (13 Paper Inti + 5 Paper Pendukung di `Opsional/`)  
+**Terakhir Diperbarui:** 2026-10-06  
+**Total Berkas Fisik:** 22 PDF (13 Paper Inti + 9 Paper Pendukung di `Opsional/`)  
 **Status Unduhan & Akses:** ✅ 100% Tersedia Lokal di Disk  
 
 ---
@@ -27,7 +27,7 @@
 
 ---
 
-## 📂 2. Paper Pendukung & Framework (5 Berkas di `Literatur/PDFs/Opsional/`)
+## 📂 2. Paper Pendukung & Framework (9 Berkas di `Literatur/PDFs/Opsional/`)
 
 | No | Berkas PDF | Ukuran | Referensi & Catatan | Status |
 |---|---|---|---|---|
@@ -36,3 +36,7 @@
 | 16 | `Liu-2026-EWC-DR.pdf` | 781 KB | [[Liu-2026-EWC-DR]] (EWC Done Right - Analisis Fisher Matrix) | ✔ Verified |
 | 17 | `Agrawal-2021-FL-IDS-Survey.pdf` | 1,3 MB | [[Agrawal-2021-FL-IDS-Concepts]] (Konsep & Arsitektur FL-IDS) | ✔ Verified |
 | 18 | `Talpur-2022-GFCL.pdf` | 2,0 MB | [[Talpur-2022-GFCL]] (Gradient-based FCL untuk IDS) | ✔ Verified |
+| 19 | `Engelen-2021-CICIDS2017-Troubleshooting.pdf` | 151 KB | [[Engelen-2021-Troubleshooting]] (Troubleshooting CICIDS2017 Case Study, SPW) | ✔ Verified |
+| 20 | `Zhao-2018-FL-NonIID.pdf` | 823 KB | [[Zhao-2018-FL-NonIID]] (Federated Learning with Non-IID Data, arXiv:1806.00582) | ✔ Verified |
+| 21 | `Hsu-2019-NonIID-Visual-FL.pdf` | 814 KB | [[Hsu-2019-NonIID-Dirichlet]] (Measuring Non-IID Data Dirichlet, arXiv:1909.06335) | ✔ Verified |
+| 22 | `Li-2020-FedProx.pdf` | 3,2 MB | [[Li-2020-FedProx]] (Federated Optimization in Heterogeneous Networks, MLSys) | ✔ Verified |
