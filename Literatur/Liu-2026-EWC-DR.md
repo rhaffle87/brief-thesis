@@ -6,7 +6,7 @@ year: 2026
 venue: "Preprint (arXiv)"
 doi: "arXiv:2603.18596"
 arxiv: "2603.18596"
-pdf: "[[PDFs/Liu-2026-EWC-DR.pdf]]"
+pdf: "PDFs/Liu-2026-EWC-DR.pdf"
 status: ✔ terverifikasi
 tags: [literatur, continual-learning, EWC, EWC-DR, gradient-vanishing, Fisher-Information-Matrix, logits-reversal]
 rm_supported: RM2
@@ -26,7 +26,7 @@ prioritas: opsional
 **Institusi:** Sun Yat-sen University, China  
 **Tahun:** 2026 (arXiv v3, March 26, 2026) **VERY RECENT!**  
 **Venue:** Preprint (arXiv:2603.18596v3)  
-**PDF Lokal:** [[PDFs/Liu-2026-EWC-DR.pdf]]
+**PDF Lokal:** [Liu-2026-EWC-DR.pdf](PDFs/Opsional/Liu-2026-EWC-DR.pdf)
 
 **Status Verifikasi:** ✔ Terverifikasi via arXiv  
 **Relevansi Scope:** ⭐⭐⭐⭐ HIGH - Identifies critical EWC limitations  
@@ -168,7 +168,7 @@ loss = CrossEntropy(logits_reversed, y)  # gradient never vanish!
 ## 🔗 Hubungan dengan Paper Lain
 
 **Mengutik:**
-- [[Kirkpatrick-2017-EWC]] - Original EWC (identify its limitation)
+- [Kirkpatrick-2017-EWC](Kirkpatrick-2017-EWC.md) - Original EWC (identify its limitation)
 - MAS (Memory Aware Synapses)
 - SI (Synaptic Intelligence)
 
@@ -176,9 +176,9 @@ loss = CrossEntropy(logits_reversed, y)  # gradient never vanish!
 - Too recent (March 2026), no citations yet
 
 **Related:**
-- [[Kirkpatrick-2017-EWC]] - Original method (our baseline)
-- [[Lopez-Paz-2017-GEM]] - Alternative CL approach (memory-based)
-- [[Gholizade-2026-FCL-Survey]] - Surveys FCL (doesn't include EWC-DR)
+- [Kirkpatrick-2017-EWC](Kirkpatrick-2017-EWC.md) - Original method (our baseline)
+- [Lopez-Paz-2017-GEM](Lopez-Paz-2017-GEM.md) - Alternative CL approach (memory-based)
+- [Gholizade-2026-FCL-Survey](Gholizade-2026-FCL-Survey.md) - Surveys FCL (doesn't include EWC-DR)
 
 **Our Position:**
 - **Baseline:** Vanilla EWC (Kirkpatrick 2017) - E2/E4

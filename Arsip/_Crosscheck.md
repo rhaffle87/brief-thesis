@@ -3,7 +3,7 @@
 **Tanggal Pembaruan:** 2026-10-06 18:55 UTC+7  
 **Metode Verifikasi:** Crossref REST API, arXiv Export API, Web Retrieval, dan Pemeriksaan Integritas Berkas Lokal (PyMuPDF)  
 **Status Keseluruhan:** ✅ **25/25 TERVERIFIKASI & TERSEDIA LENGKAP (100%) — SELESAI / MARKED DONE**  
-**Lokasi Berkas Fisik:** `E:/Projects/thesis/Literatur/PDFs/` (13 Paper Inti) dan `E:/Projects/thesis/Literatur/PDFs/Opsional/` (12 Paper Pendukung)  
+**Lokasi Berkas Fisik:** [Literatur/PDFs/](../Literatur/PDFs/) (13 Paper Inti) dan [Literatur/PDFs/Opsional/](../Literatur/PDFs/Opsional/) (12 Paper Pendukung)  
 
 ---
 
@@ -25,7 +25,7 @@
 * **Judul:** *"Communication-Efficient Learning of Deep Networks from Decentralized Data"*
 * **Penulis:** H. Brendan McMahan, Eider Moore, Daniel Ramage, Seth Hampson, Blaise Agüera y Arcas
 * **Venue/Penerbit:** AISTATS 2017 / Proceedings of Machine Learning Research (PMLR)
-* **Berkas Fisik:** `Literatur/PDFs/McMahan-2017-FedAvg.pdf` (1.280 KB, 11 halaman)
+* **Berkas Fisik:** [McMahan-2017-FedAvg.pdf](../Literatur/PDFs/McMahan-2017-FedAvg.pdf) (1.280 KB, 11 halaman)
 * **Status:** ✅ **VERIFIED**
 
 ### 2. Sharafaldin et al. (2018) — CIC-IDS2017
@@ -33,7 +33,7 @@
 * **Judul:** *"Toward Generating a New Intrusion Detection Dataset and Intrusion Traffic Characterization"*
 * **Penulis:** Iman Sharafaldin, Arash Habibi Lashkari, Ali A. Ghorbani
 * **Venue/Penerbit:** Proceedings of the 4th International Conference on Information Systems Security and Privacy (ICISSP 2018), SCITEPRESS
-* **Berkas Fisik:** `Literatur/PDFs/Sharafaldin-2018-CIC-IDS2017.pdf` (426 KB, 9 halaman)
+* **Berkas Fisik:** [Sharafaldin-2018-CIC-IDS2017.pdf](../Literatur/PDFs/Sharafaldin-2018-CIC-IDS2017.pdf) (426 KB, 9 halaman)
 * **Status:** ✅ **VERIFIED**
 
 ### 3. Kirkpatrick et al. (2017) — EWC
@@ -41,7 +41,7 @@
 * **Judul:** *"Overcoming catastrophic forgetting in neural networks"*
 * **Penulis:** James Kirkpatrick, Razvan Pascanu, Neil Rabinowitz, Joel Veness, Guillaume Desjardins, Andrei A. Rusu, et al.
 * **Venue/Penerbit:** Proceedings of the National Academy of Sciences (PNAS), Vol. 114, No. 13, pp. 3521–3526
-* **Berkas Fisik:** `Literatur/PDFs/Kirkpatrick-2017-EWC.pdf` (694 KB, 6 halaman)
+* **Berkas Fisik:** [Kirkpatrick-2017-EWC.pdf](../Literatur/PDFs/Kirkpatrick-2017-EWC.pdf) (694 KB, 6 halaman)
 * **Status:** ✅ **VERIFIED**
 
 ### 4. Rosay et al. (2022) — Analisis CIC-IDS2017 & LycoSTand
@@ -49,7 +49,7 @@
 * **Judul:** *"Network Intrusion Detection: A Comprehensive Analysis of CIC-IDS2017"*
 * **Penulis:** Arnaud Rosay, Florent Carlier, Pascal Leroux
 * **Venue/Penerbit:** Computers & Security (Elsevier), Vol. 120, Article 102675
-* **Berkas Fisik:** `Literatur/PDFs/Rosay-2022-CIC-IDS2017-Analysis.pdf` (377 KB, 12 halaman)
+* **Berkas Fisik:** [Rosay-2022-CIC-IDS2017-Analysis.pdf](../Literatur/PDFs/Rosay-2022-CIC-IDS2017-Analysis.pdf) (377 KB, 12 halaman)
 * **Status:** ✅ **VERIFIED**
 
 ### 5. Jin et al. (2024) — FL-IIDS & Concept Drift
@@ -57,7 +57,7 @@
 * **Judul:** *"A federated learning approach for collaborative intrusion detection against concept drift"*
 * **Penulis:** Hai Jin, Xiang Dai, Jiang Xiao, Bao Li
 * **Venue/Penerbit:** Computers & Security (Elsevier), Vol. 136, Article 103577 (Online 2023, Terbit 2024)
-* **Berkas Fisik:** `Literatur/PDFs/Jin-2024-FL-IIDS.pdf` (3.187 KB, 14 halaman)
+* **Berkas Fisik:** [Jin-2024-FL-IIDS.pdf](../Literatur/PDFs/Jin-2024-FL-IIDS.pdf) (3.187 KB, 14 halaman)
 * **Status:** ✅ **VERIFIED**
 
 ### 6. Lopez-Paz & Ranzato (2017) — GEM & Metrik BWT
@@ -65,7 +65,7 @@
 * **Judul:** *"Gradient Episodic Memory for Continual Learning"*
 * **Penulis:** David Lopez-Paz, Marc'Aurelio Ranzato
 * **Venue/Penerbit:** Advances in Neural Information Processing Systems (NeurIPS 2017)
-* **Berkas Fisik:** `Literatur/PDFs/LopezPaz-2017-GEM.pdf` (509 KB, 17 halaman)
+* **Berkas Fisik:** [LopezPaz-2017-GEM.pdf](../Literatur/PDFs/LopezPaz-2017-GEM.pdf) (509 KB, 17 halaman)
 * **Status:** ✅ **VERIFIED**
 
 ### 7. Beutel et al. (2020) — Flower Framework
@@ -73,7 +73,7 @@
 * **Judul:** *"Flower: A Friendly Federated Learning Research Framework"*
 * **Penulis:** Daniel J. Beutel, Taner Topal, Akhil Mathur, Xinchi Qiu, Titouan Parcollet, Pedro P. B. de Gusmão, Nicholas D. Lane
 * **Venue/Penerbit:** arXiv:2007.14390 [cs.LG]
-* **Berkas Fisik:** `Literatur/PDFs/Beutel-2020-Flower.pdf` (526 KB, 15 halaman)
+* **Berkas Fisik:** [Beutel-2020-Flower.pdf](../Literatur/PDFs/Beutel-2020-Flower.pdf) (526 KB, 15 halaman)
 * **Status:** ✅ **VERIFIED**
 
 ### 8. Liu & Chang (2026) — EWC-DR (EWC Done Right)
@@ -81,7 +81,7 @@
 * **Judul:** *"Elastic Weight Consolidation Done Right for Continual Learning"*
 * **Penulis:** Xuan Liu, Xiaobin Chang
 * **Venue/Penerbit:** arXiv:2603.18596 [cs.CV / cs.LG] (Maret 2026)
-* **Berkas Fisik:** `Literatur/PDFs/Opsional/Liu-2026-EWC-DR.pdf` (762 KB, 13 halaman)
+* **Berkas Fisik:** [Liu-2026-EWC-DR.pdf](../Literatur/PDFs/Opsional/Liu-2026-EWC-DR.pdf) (762 KB, 13 halaman)
 * **Status:** ✅ **VERIFIED & RESOLVED**  
   *(Klarifikasi Isu: Sebelumnya ditandai "Filename Mismatch" karena disangka survei FedIDS. Berkas ini 100% cocok dengan judul aslinya "EWC-DR" dan merupakan rujukan teoretis esensial untuk formulasi estimasi matriks Fisher pada EWC).*
 
@@ -90,7 +90,7 @@
 * **Judul:** *"Federated learning in intrusion detection: advancements, applications, and future directions"*
 * **Penulis:** Busra Buyuktanir, Şahsene Altinkaya, Gozde Karatas Baydogmus
 * **Venue/Penerbit:** Cluster Computing (Springer), Februari 2025
-* **Berkas Fisik:** `Literatur/PDFs/Buyuktanir-2025-FL-IDS.pdf` (1.953 KB, 25 halaman)
+* **Berkas Fisik:** [Buyuktanir-2025-FL-IDS.pdf](../Literatur/PDFs/Buyuktanir-2025-FL-IDS.pdf) (1.953 KB, 25 halaman)
 * **Status:** ✅ **VERIFIED**
 
 ### 10. Dube et al. (2024) — Audit Kritis Dataset CIC-IDS2017
@@ -98,7 +98,7 @@
 * **Judul:** *"Faulty use of the CIC-IDS 2017 dataset in information security research"*
 * **Penulis:** Rohit Dube, Roshan Neupane, et al.
 * **Venue/Penerbit:** Journal of Computer Virology and Hacking Techniques (Springer), Vol. 20, pp. 203–211 (2024)
-* **Berkas Fisik:** `Literatur/PDFs/Dube-2024-Faulty-CIC-IDS2017.pdf` (533 KB, 9 halaman)
+* **Berkas Fisik:** [Dube-2024-Faulty-CIC-IDS2017.pdf](../Literatur/PDFs/Dube-2024-Faulty-CIC-IDS2017.pdf) (533 KB, 9 halaman)
 * **Status:** ✅ **VERIFIED**
 
 ### 11. Lomonaco et al. (2021) — Avalanche Framework
@@ -106,7 +106,7 @@
 * **Judul:** *"Avalanche: an End-to-End Library for Continual Learning"*
 * **Penulis:** Vincenzo Lomonaco, Lorenzo Pellegrini, Andrea Cossu, Antonio Carta, et al.
 * **Venue/Penerbit:** IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW 2021)
-* **Berkas Fisik:** `Literatur/PDFs/Opsional/Lomonaco-2021-Avalanche-CVPRW.pdf` (1.136 KB, 11 halaman)
+* **Berkas Fisik:** [Lomonaco-2021-Avalanche-CVPRW.pdf](../Literatur/PDFs/Opsional/Lomonaco-2021-Avalanche-CVPRW.pdf) (1.136 KB, 11 halaman)
 * **Status:** ✅ **VERIFIED**
 
 ### 12. Carta et al. (2023) — Avalanche JMLR
@@ -114,7 +114,7 @@
 * **Judul:** *"Avalanche: A PyTorch Library for Continual Learning"*
 * **Penulis:** Antonio Carta, Lorenzo Pellegrini, Andrea Cossu, Hamed Hemati, Vincenzo Lomonaco
 * **Venue/Penerbit:** Journal of Machine Learning Research (JMLR), Vol. 24, No. 363, pp. 1–6 (2023)
-* **Berkas Fisik:** `Literatur/PDFs/Opsional/Carta-2023-Avalanche-JMLR.pdf` (291 KB, 6 halaman)
+* **Berkas Fisik:** [Carta-2023-Avalanche-JMLR.pdf](../Literatur/PDFs/Opsional/Carta-2023-Avalanche-JMLR.pdf) (291 KB, 6 halaman)
 * **Status:** ✅ **VERIFIED**
 
 ### 13. Hernandez-Ramos et al. (2025) — FL-IDS Systematic Review
@@ -122,7 +122,7 @@
 * **Judul:** *"Intrusion Detection Based on Federated Learning: A Systematic Review"*
 * **Penulis:** Jose Luis Hernandez-Ramos, Georgios Karopoulos, Eirini Chatzoglou
 * **Venue/Penerbit:** ACM Computing Surveys (CSUR), Vol. 57, No. 12, Article 291 (Januari 2025)
-* **Berkas Fisik:** `Literatur/PDFs/HernandezRamos-2025-FL-IDS-Survey.pdf` (1.220 KB, 65 halaman)
+* **Berkas Fisik:** [HernandezRamos-2025-FL-IDS-Survey.pdf](../Literatur/PDFs/HernandezRamos-2025-FL-IDS-Survey.pdf) (1.220 KB, 65 halaman)
 * **Status:** ✅ **VERIFIED & RESOLVED**  
   *(Klarifikasi Isu: Sebelumnya terkendala karakter kontrol API. Metadata dan file PDF 65 halaman telah diverifikasi utuh dan valid di disk).*
 
@@ -131,7 +131,7 @@
 * **Judul:** *"A Survey on Federated Continual Learning: Concepts, Challenges, and Approaches"*
 * **Penulis:** Mehdi Hamedi, et al.
 * **Venue/Penerbit:** arXiv:2502.07059 [cs.LG] (Februari 2025)
-* **Berkas Fisik:** `Literatur/PDFs/Hamedi-2025-FCL-Survey.pdf` (1.562 KB, 30 halaman)
+* **Berkas Fisik:** [Hamedi-2025-FCL-Survey.pdf](../Literatur/PDFs/Hamedi-2025-FCL-Survey.pdf) (1.562 KB, 30 halaman)
 * **Status:** ✅ **VERIFIED**
 
 ### 15. Agrawal et al. (2021) — FL-IDS Concepts & Directions
@@ -139,7 +139,7 @@
 * **Judul:** *"Federated Learning for Intrusion Detection System: Concepts, Challenges and Future Directions"*
 * **Penulis:** Neha Agrawal, Shruti Tapaswi, et al.
 * **Venue/Penerbit:** arXiv:2106.09527 [cs.CR] (2021)
-* **Berkas Fisik:** `Literatur/PDFs/Opsional/Agrawal-2021-FL-IDS-Survey.pdf` (1.265 KB, 19 halaman)
+* **Berkas Fisik:** [Agrawal-2021-FL-IDS-Survey.pdf](../Literatur/PDFs/Opsional/Agrawal-2021-FL-IDS-Survey.pdf) (1.265 KB, 19 halaman)
 * **Status:** ✅ **VERIFIED**
 
 ### 16. Talpur & Gurusamy (2022) — GFCL (Federated CL for IDS)
@@ -147,7 +147,7 @@
 * **Judul:** *"GFCL: A GRU-based Federated Continual Learning Framework for Intrusion Detection"*
 * **Penulis:** S. Talpur, Mohan Gurusamy
 * **Venue/Penerbit:** arXiv:2204.11010 [cs.CR] (2022)
-* **Berkas Fisik:** `Literatur/PDFs/Opsional/Talpur-2022-GFCL.pdf` (1.957 KB, 11 halaman)
+* **Berkas Fisik:** [Talpur-2022-GFCL.pdf](../Literatur/PDFs/Opsional/Talpur-2022-GFCL.pdf) (1.957 KB, 11 halaman)
 * **Status:** ✅ **VERIFIED**
 
 ### 17. Rehman et al. (2026) — Incremental FL-IDS
@@ -155,7 +155,7 @@
 * **Judul:** *"Incremental Federated Learning for Intrusion Detection Systems in IoT Networks"*
 * **Penulis:** Ammar Rehman, et al.
 * **Venue/Penerbit:** arXiv:2603.10776v2 [cs.CR] (Maret 2026)
-* **Berkas Fisik:** `Literatur/PDFs/Rehman-2026-Incremental-FL-IDS.pdf` (2.469 KB, 9 halaman)
+* **Berkas Fisik:** [Rehman-2026-Incremental-FL-IDS.pdf](../Literatur/PDFs/Rehman-2026-Incremental-FL-IDS.pdf) (2.469 KB, 9 halaman)
 * **Status:** ✅ **VERIFIED**
 
 ### 18. Gholizade et al. (2026) — FCL Comprehensive Survey
@@ -163,7 +163,7 @@
 * **Judul:** *"Federated Continual Learning: A Comprehensive Survey on Lifelong and Privacy-Preserving Learning"*
 * **Penulis:** S. Gholizade, et al.
 * **Venue/Penerbit:** arXiv:2606.11272 [cs.LG] (Juni 2026)
-* **Berkas Fisik:** `Literatur/PDFs/Gholizade-2026-FCL-Survey.pdf` (1.581 KB, 77 halaman)
+* **Berkas Fisik:** [Gholizade-2026-FCL-Survey.pdf](../Literatur/PDFs/Gholizade-2026-FCL-Survey.pdf) (1.581 KB, 77 halaman)
 * **Status:** ✅ **VERIFIED**
 
 ### 19. Engelen et al. (2021) — Troubleshooting CICIDS2017
@@ -171,8 +171,8 @@
 * **Judul:** *"Troubleshooting an Intrusion Detection Dataset: the CICIDS2017 Case Study"*
 * **Penulis:** Gints Engelen, Vera Rimmer, Wouter Joosen (imec-DistriNet, KU Leuven)
 * **Venue/Penerbit:** 2021 IEEE Security and Privacy Workshops (SPW) / 6th WTMC, pp. 7–12
-* **Berkas Fisik:** `Literatur/PDFs/Opsional/Engelen-2021-CICIDS2017-Troubleshooting.pdf` (151 KB, 6 halaman)
-* **Catatan Literatur:** [[Engelen-2021-Troubleshooting]]
+* **Berkas Fisik:** [Engelen-2021-CICIDS2017-Troubleshooting.pdf](../Literatur/PDFs/Opsional/Engelen-2021-CICIDS2017-Troubleshooting.pdf) (151 KB, 6 halaman)
+* **Catatan Literatur:** [Engelen-2021-Troubleshooting](../Literatur/Engelen-2021-Troubleshooting.md)
 * **Status:** ✅ **VERIFIED**
 
 ### 20. Zhao et al. (2018) — Non-IID Data in FL
@@ -180,8 +180,8 @@
 * **Judul:** *"Federated Learning with Non-IID Data"*
 * **Penulis:** Yue Zhao, Meng Li, Liangzhen Lai, Naveen Suda, Damon Civin, Vikas Chandra (Arm Inc.)
 * **Venue/Penerbit:** arXiv:1806.00582 [cs.LG]
-* **Berkas Fisik:** `Literatur/PDFs/Opsional/Zhao-2018-FL-NonIID.pdf` (823 KB, 12 halaman)
-* **Catatan Literatur:** [[Zhao-2018-FL-NonIID]]
+* **Berkas Fisik:** [Zhao-2018-FL-NonIID.pdf](../Literatur/PDFs/Opsional/Zhao-2018-FL-NonIID.pdf) (823 KB, 12 halaman)
+* **Catatan Literatur:** [Zhao-2018-FL-NonIID](../Literatur/Zhao-2018-FL-NonIID.md)
 * **Status:** ✅ **VERIFIED**
 
 ### 21. Hsu et al. (2019) — Measuring Effects of Non-IID Data (Dirichlet)
@@ -189,8 +189,8 @@
 * **Judul:** *"Measuring the Effects of Non-Identical Data Distribution for Federated Visual Classification"*
 * **Penulis:** Tzu-Ming Harry Hsu, Hang Qi, Matthew Brown (MIT CSAIL & Google Research)
 * **Venue/Penerbit:** arXiv:1909.06335 [cs.LG]
-* **Berkas Fisik:** `Literatur/PDFs/Opsional/Hsu-2019-NonIID-Visual-FL.pdf` (814 KB, 5 halaman)
-* **Catatan Literatur:** [[Hsu-2019-NonIID-Dirichlet]]
+* **Berkas Fisik:** [Hsu-2019-NonIID-Visual-FL.pdf](../Literatur/PDFs/Opsional/Hsu-2019-NonIID-Visual-FL.pdf) (814 KB, 5 halaman)
+* **Catatan Literatur:** [Hsu-2019-NonIID-Dirichlet](../Literatur/Hsu-2019-NonIID-Dirichlet.md)
 * **Status:** ✅ **VERIFIED**
 
 ### 22. Li et al. (2020) — FedProx Optimization
@@ -198,8 +198,8 @@
 * **Judul:** *"Federated Optimization in Heterogeneous Networks"*
 * **Penulis:** Tian Li, Anit Kumar Sahu, Manzil Zaheer, Maziar Sanjabi, Ameet Talwalkar, Virginia Smith (Carnegie Mellon University)
 * **Venue/Penerbit:** Proceedings of Machine Learning and Systems (MLSys 2020), Vol. 2, pp. 429–450
-* **Berkas Fisik:** `Literatur/PDFs/Opsional/Li-2020-FedProx.pdf` (3.208 KB, 22 halaman)
-* **Catatan Literatur:** [[Li-2020-FedProx]]
+* **Berkas Fisik:** [Li-2020-FedProx.pdf](../Literatur/PDFs/Opsional/Li-2020-FedProx.pdf) (3.208 KB, 22 halaman)
+* **Catatan Literatur:** [Li-2020-FedProx](../Literatur/Li-2020-FedProx.md)
 * **Status:** ✅ **VERIFIED**
 
 ### 23. De Lange et al. (2021) — A Continual Learning Survey
@@ -207,8 +207,8 @@
 * **Judul:** *"A Continual Learning Survey: Defying Forgetting in Classification Tasks"*
 * **Penulis:** Matthias De Lange, Rahaf Aljundi, Marc Masana, Sarah Parisot, Xu Jia, Ales Leonardis, Gregory Slabaugh, Tinne Tuytelaars
 * **Venue/Penerbit:** IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), Vol. 44, No. 7, pp. 3366–3385 (2022)
-* **Berkas Fisik:** `Literatur/PDFs/Opsional/DeLange-2021-CL-Survey.pdf` (1.356 KB, 29 halaman)
-* **Catatan Literatur:** [[DeLange-2021-CL-Survey]]
+* **Berkas Fisik:** [DeLange-2021-CL-Survey.pdf](../Literatur/PDFs/Opsional/DeLange-2021-CL-Survey.pdf) (1.356 KB, 29 halaman)
+* **Catatan Literatur:** [DeLange-2021-CL-Survey](../Literatur/DeLange-2021-CL-Survey.md)
 * **Aset Terkait:** `Aset/continual_learning_taxonomy_delange2021.png`
 * **Status:** ✅ **VERIFIED**
 
@@ -217,8 +217,8 @@
 * **Judul:** *"Three scenarios for continual learning"*
 * **Penulis:** Gido M. van de Ven, Andreas S. Tolias
 * **Venue/Penerbit:** Nature Communications / arXiv:1904.07734 [cs.LG]
-* **Berkas Fisik:** `Literatur/PDFs/Opsional/VandeVen-2019-CL-Scenarios.pdf` (1.036 KB, 18 halaman)
-* **Catatan Literatur:** [[VandeVen-2019-CL-Scenarios]]
+* **Berkas Fisik:** [VandeVen-2019-CL-Scenarios.pdf](../Literatur/PDFs/Opsional/VandeVen-2019-CL-Scenarios.pdf) (1.036 KB, 18 halaman)
+* **Catatan Literatur:** [VandeVen-2019-CL-Scenarios](../Literatur/VandeVen-2019-CL-Scenarios.md)
 * **Status:** ✅ **VERIFIED**
 
 ### 25. Wang et al. (2023) — Comprehensive Survey of Continual Learning
@@ -226,8 +226,8 @@
 * **Judul:** *"A Comprehensive Survey of Continual Learning: Theory, Method and Application"*
 * **Penulis:** Liyuan Wang, Xingxing Zhang, Hang Su, Jun Zhu
 * **Venue/Penerbit:** IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), Vol. 46, No. 8, pp. 5362–5383 (2024)
-* **Berkas Fisik:** `Literatur/PDFs/Opsional/Wang-2023-CL-Survey.pdf` (4.815 KB, 33 halaman)
-* **Catatan Literatur:** [[Wang-2023-CL-Survey]]
+* **Berkas Fisik:** [Wang-2023-CL-Survey.pdf](../Literatur/PDFs/Opsional/Wang-2023-CL-Survey.pdf) (4.815 KB, 33 halaman)
+* **Catatan Literatur:** [Wang-2023-CL-Survey](../Literatur/Wang-2023-CL-Survey.md)
 * **Aset Terkait:** `Aset/continual_learning_framework_wang2023.png`
 * **Status:** ✅ **VERIFIED**
 

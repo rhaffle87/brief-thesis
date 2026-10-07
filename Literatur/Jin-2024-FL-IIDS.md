@@ -6,7 +6,7 @@ year: 2024
 venue: Future Generation Computer Systems (Elsevier)
 doi: 10.1016/j.future.2023.09.019
 arxiv: ""
-pdf: "[[Jin-2024-FL-IIDS.pdf]]"
+pdf: "Jin-2024-FL-IIDS.pdf"
 status: ✔ terverifikasi
 tags:
   - literatur
@@ -34,7 +34,7 @@ prioritas: inti-terkait
 **Tahun:** 2024 (published September 2023, volume 151)  
 **Venue:** Future Generation Computer Systems (Elsevier)  
 **DOI:** 10.1016/j.future.2023.09.019  
-**PDF Lokal:** [[Jin-2024-FL-IIDS.pdf]]
+**PDF Lokal:** [Jin-2024-FL-IIDS.pdf](PDFs/Jin-2024-FL-IIDS.pdf)
 
 **Status Verifikasi:** ✔ Terverifikasi via Elsevier  
 **Relevansi Scope:** ⭐⭐⭐⭐ HIGH - Similar FL-IDS incremental approach  
@@ -164,12 +164,12 @@ prioritas: inti-terkait
 - EWC & GEM (references but doesn't use)
 
 **Dikutik oleh:**
-- [[Rehman-2026-Incremental-FL-IDS]] - cites as baseline [5]
+- [Rehman-2026-Incremental-FL-IDS](Rehman-2026-Incremental-FL-IDS.md) - cites as baseline [5]
 
 **Related:**
-- [[Rehman-2026-Incremental-FL-IDS]] - Similar incremental FL-IDS, different methods
-- [[Gholizade-2026-FCL-Survey]] - Surveys FCL approaches
-- [[Buyuktanir-2025-FL-IDS-nonIID]] - Non-IID FL-IDS without incremental
+- [Rehman-2026-Incremental-FL-IDS](Rehman-2026-Incremental-FL-IDS.md) - Similar incremental FL-IDS, different methods
+- [Gholizade-2026-FCL-Survey](Gholizade-2026-FCL-Survey.md) - Surveys FCL approaches
+- [Buyuktanir-2025-FL-IDS-nonIID](Buyuktanir-2025-FL-IDS-nonIID.md) - Non-IID FL-IDS without incremental
 
 **Comparison:**
 | Aspect | Jin 2024 FL-IIDS | Rehman 2026 | Our Work |

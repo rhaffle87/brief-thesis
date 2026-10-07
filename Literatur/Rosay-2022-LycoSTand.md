@@ -6,7 +6,7 @@ year: 2022
 venue: ICISSP 2022 (8th International Conference on Information Systems Security and Privacy)
 doi: 10.5220/0010774000003120
 arxiv: ""
-pdf: "[[Rosay-2022-CIC-IDS2017-Analysis.pdf]]"
+pdf: "Rosay-2022-CIC-IDS2017-Analysis.pdf"
 status: ✔ terverifikasi
 tags:
   - literatur
@@ -34,7 +34,7 @@ prioritas: inti
 **Venue:** ICISSP 2022  
 **DOI:** 10.5220/0010774000003120  
 **Publisher:** SCITEPRESS  
-**PDF Lokal:** [[Rosay-2022-CIC-IDS2017-Analysis.pdf]]
+**PDF Lokal:** [Rosay-2022-CIC-IDS2017-Analysis.pdf](PDFs/Rosay-2022-CIC-IDS2017-Analysis.pdf)
 
 **Status Verifikasi:** ✔ Terverifikasi via SCITEPRESS  
 **Relevansi Scope:** ⭐⭐⭐⭐⭐ CRITICAL - Dataset quality validation  
@@ -165,11 +165,11 @@ prioritas: inti
 ## 🔗 Hubungan dengan Paper Lain
 
 **Mengutip:**
-- [[Sharafaldin-2018-CIC-IDS2017]] (original dataset paper)
+- [Sharafaldin-2018-CIC-IDS2017](Sharafaldin-2018-CIC-IDS2017.md) (original dataset paper)
 - KDD-Cup99, NSL-KDD (previous datasets with issues)
 
 **Dikutik oleh:**
-- [[Dube-2024-Faulty-CIC-IDS2017]] (validates findings, adds more warnings)
+- [Dube-2024-Faulty-CIC-IDS2017](Dube-2024-Faulty-CIC-IDS2017.md) (validates findings, adds more warnings)
 - Future work citing LYCOS as corrected version
 
 **Extends:**

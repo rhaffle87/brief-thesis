@@ -6,7 +6,7 @@ year: 2021
 venue: "IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)"
 doi: "10.1109/CVPRW53098.2021.00399"
 arxiv: "2104.00405"
-pdf: "[[PDFs/Opsional/Lomonaco-2021-Avalanche-CVPRW.pdf]]"
+pdf: "PDFs/Opsional/Lomonaco-2021-Avalanche-CVPRW.pdf"
 dibaca_dari_pdf: ya
 status: ✔ terverifikasi
 tags:
@@ -29,7 +29,7 @@ prioritas: opsional-pendukung
 **Tahun:** 2021  
 **Venue:** IEEE/CVF CVPRW 2021  
 **DOI:** 10.1109/CVPRW53098.2021.00399  
-**PDF Lokal:** [[PDFs/Opsional/Lomonaco-2021-Avalanche-CVPRW.pdf]]  
+**PDF Lokal:** [Lomonaco-2021-Avalanche-CVPRW.pdf](PDFs/Opsional/Lomonaco-2021-Avalanche-CVPRW.pdf)  
 **Status Verifikasi:** ✔ Terverifikasi dari naskah PDF CVPRW  
 **Relevansi Scope:** ⭐⭐⭐⭐ HIGH - Makalah pendiri pustaka Avalanche untuk standardisasi Continual Learning  
 

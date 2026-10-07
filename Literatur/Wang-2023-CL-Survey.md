@@ -6,7 +6,7 @@ year: 2023
 venue: "IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)"
 doi: "10.1109/TPAMI.2024.3367339"
 arxiv: "2302.00487"
-pdf: "[[PDFs/Opsional/Wang-2023-CL-Survey.pdf]]"
+pdf: "PDFs/Opsional/Wang-2023-CL-Survey.pdf"
 dibaca_dari_pdf: ya
 status: ✔ terverifikasi
 tags:
@@ -29,7 +29,7 @@ prioritas: opsional-pendukung
 **Tahun:** 2023 / 2024  
 **Venue:** IEEE TPAMI (arXiv:2302.00487)  
 **DOI:** 10.1109/TPAMI.2024.3367339  
-**PDF Lokal:** [[PDFs/Opsional/Wang-2023-CL-Survey.pdf]]  
+**PDF Lokal:** [Wang-2023-CL-Survey.pdf](PDFs/Opsional/Wang-2023-CL-Survey.pdf)  
 **Status Verifikasi:** ✔ Terverifikasi dari naskah PDF IEEE TPAMI (33 halaman)  
 **Relevansi Scope:** ⭐⭐⭐⭐ HIGH - Survey teori dan metode continual learning modern dan mutakhir  
 

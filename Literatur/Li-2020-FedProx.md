@@ -6,7 +6,7 @@ year: 2020
 venue: "Proceedings of Machine Learning and Systems (MLSys)"
 doi: "10.48550/arXiv.1812.06127"
 arxiv: "1812.06127"
-pdf: "[[PDFs/Opsional/Li-2020-FedProx.pdf]]"
+pdf: "PDFs/Opsional/Li-2020-FedProx.pdf"
 dibaca_dari_pdf: ya
 status: ✔ terverifikasi
 tags:
@@ -28,7 +28,7 @@ prioritas: opsional-pendukung
 **Institusi:** Carnegie Mellon University, Google  
 **Tahun:** 2020  
 **Venue:** MLSys 2020 (arXiv:1812.06127)  
-**PDF Lokal:** [[PDFs/Opsional/Li-2020-FedProx.pdf]]  
+**PDF Lokal:** [Li-2020-FedProx.pdf](PDFs/Opsional/Li-2020-FedProx.pdf)  
 **Status Verifikasi:** ✔ Terverifikasi dari naskah PDF MLSys (22 halaman)  
 **Relevansi Scope:** ⭐⭐⭐⭐ HIGH - Algoritma optimasi federasi standar untuk menangani heterogenitas data dan sistem  
 

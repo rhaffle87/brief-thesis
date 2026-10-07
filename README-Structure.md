@@ -118,7 +118,7 @@ E:\Projects\thesis/
   `Avg Fwd Segment Size`, `Avg Bwd Segment Size`, `Subflow Bwd Bytes`.
 
 ### 2. Aturan Tautan Obsidian
-- Penulisan tautan wajib menggunakan format nama berkas tanpa prefiks usang: `[​[Nama-Berkas]​]` (misal `[[Dashboard]]`).
+- Penulisan tautan wajib menggunakan format nama berkas tanpa prefiks usang: `[​[Nama-Berkas]​]` (misal `[Dashboard](Dashboard/Dashboard.md)`).
 - Seluruh PDF tersimpan di `Literatur/PDFs/` atau `Literatur/PDFs/Opsional/`.
 - Validasi tautan dapat dijalankan sewaktu-waktu menggunakan:
   ```bash

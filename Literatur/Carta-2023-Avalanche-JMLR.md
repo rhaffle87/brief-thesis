@@ -6,7 +6,7 @@ year: 2023
 venue: "Journal of Machine Learning Research (JMLR)"
 doi: ""
 arxiv: "2302.01766"
-pdf: "[[PDFs/Opsional/Carta-2023-Avalanche-JMLR.pdf]]"
+pdf: "PDFs/Opsional/Carta-2023-Avalanche-JMLR.pdf"
 dibaca_dari_pdf: ya
 status: ✔ terverifikasi
 tags:
@@ -28,7 +28,7 @@ prioritas: opsional-pendukung
 **Institusi:** University of Pisa, ContinualAI Foundation, University of Zurich  
 **Tahun:** 2023  
 **Venue:** Journal of Machine Learning Research (JMLR), Vol. 24, pp. 1-6  
-**PDF Lokal:** [[PDFs/Opsional/Carta-2023-Avalanche-JMLR.pdf]]  
+**PDF Lokal:** [Carta-2023-Avalanche-JMLR.pdf](PDFs/Opsional/Carta-2023-Avalanche-JMLR.pdf)  
 **Status Verifikasi:** ✔ Terverifikasi dari naskah PDF JMLR  
 **Relevansi Scope:** ⭐⭐⭐⭐ HIGH - Pustaka standar industri untuk desain arsitektur dan evaluasi Continual Learning  
 

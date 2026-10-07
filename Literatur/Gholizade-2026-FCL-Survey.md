@@ -6,7 +6,7 @@ year: 2026
 venue: Preprint (arXiv)
 doi: arXiv:2606.11272
 arxiv: "2606.11272"
-pdf: "[[Gholizade-2026-FCL-Survey.pdf]]"
+pdf: "Gholizade-2026-FCL-Survey.pdf"
 status: ✔ terverifikasi
 tags:
   - literatur
@@ -34,7 +34,7 @@ prioritas: pendukung
 **Tahun:** 2026  
 **Venue:** Preprint (arXiv)  
 **DOI:** arXiv:2606.11272  
-**PDF Lokal:** [[Gholizade-2026-FCL-Survey.pdf]]
+**PDF Lokal:** [Gholizade-2026-FCL-Survey.pdf](PDFs/Gholizade-2026-FCL-Survey.pdf)
 
 **Status Verifikasi:** ✔ Terverifikasi via arXiv  
 **Relevansi Scope:** ⭐⭐⭐⭐⭐ CRITICAL - Recent comprehensive FCL survey  
@@ -134,13 +134,13 @@ prioritas: pendukung
 - Too recent (June 2026), minimal citations yet
 
 **Related surveys:**
-- [[Hernandez-Ramos-2025-FL-IDS-Survey]] - FL for IDS (no CL)
-- [[Hamedi-2025-FCL-Survey]] - FCL concepts (less comprehensive)
-- [[Buyuktanir-2025-FL-IDS-nonIID]] - Non-IID FL for IDS (no CL)
+- [Hernandez-Ramos-2025-FL-IDS-Survey](Hernandez-Ramos-2025-FL-IDS-Survey.md) - FL for IDS (no CL)
+- [Hamedi-2025-FCL-Survey](Hamedi-2025-FCL-Survey.md) - FCL concepts (less comprehensive)
+- [Buyuktanir-2025-FL-IDS-nonIID](Buyuktanir-2025-FL-IDS-nonIID.md) - Non-IID FL for IDS (no CL)
 
 **Complements:**
-- [[Rehman-2026-Incremental-FL-IDS]] - Incremental FL-IDS with EWC
-- [[Jin-2024-FL-IIDS]] - FL-IIDS application (no CL)
+- [Rehman-2026-Incremental-FL-IDS](Rehman-2026-Incremental-FL-IDS.md) - Incremental FL-IDS with EWC
+- [Jin-2024-FL-IIDS](Jin-2024-FL-IIDS.md) - FL-IIDS application (no CL)
 
 ---
 
@@ -159,8 +159,8 @@ prioritas: pendukung
 - ⬜ FWT (Forward Transfer) - less relevant for sequential tasks
 
 **Implementation Notes:**
-- Survey mentions **Avalanche** library for CL ([[Carta-2023-Avalanche-JMLR]])
-- Survey mentions **Flower** library for FL ([[Beutel-2020-Flower]])
+- Survey mentions **Avalanche** library for CL ([Carta-2023-Avalanche-JMLR](Carta-2023-Avalanche-JMLR.md))
+- Survey mentions **Flower** library for FL ([Beutel-2020-Flower](Beutel-2020-Flower.md))
 - Our stack: PyTorch + Flower + Avalanche = aligned with survey tools
 
 **Open Challenges (from Survey) Relevant to Us:**

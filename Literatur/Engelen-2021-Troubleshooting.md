@@ -6,7 +6,7 @@ year: 2021
 venue: "IEEE Security & Privacy Workshops (SPW)"
 doi: "10.1109/SPW53761.2021.00011"
 arxiv: "2101.06093"
-pdf: "[[PDFs/Opsional/Engelen-2021-CICIDS2017-Troubleshooting.pdf]]"
+pdf: "PDFs/Opsional/Engelen-2021-CICIDS2017-Troubleshooting.pdf"
 dibaca_dari_pdf: ya
 status: ✔ terverifikasi
 tags:
@@ -29,7 +29,7 @@ prioritas: inti-terkait
 **Tahun:** 2021  
 **Venue:** IEEE Security and Privacy Workshops (SPW) 2021  
 **DOI:** 10.1109/SPW53761.2021.00011  
-**PDF Lokal:** [[PDFs/Opsional/Engelen-2021-CICIDS2017-Troubleshooting.pdf]]  
+**PDF Lokal:** [Engelen-2021-CICIDS2017-Troubleshooting.pdf](PDFs/Opsional/Engelen-2021-CICIDS2017-Troubleshooting.pdf)  
 **Status Verifikasi:** ✔ Terverifikasi dari naskah PDF IEEE SPW  
 **Relevansi Scope:** ⭐⭐⭐⭐⭐ CRITICAL - Studi forensik anomali dan cacat data pada CIC-IDS2017  
 

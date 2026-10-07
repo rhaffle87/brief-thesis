@@ -124,11 +124,11 @@ tags: [eksperimen, {{EXP_ID}}, seed-{{SEED}}]
 ## Action Items
 
 - [ ] Verify hasil dengan re-run 1 seed
-- [ ] Update tabel agregat di [[Matriks-E0-E5]]
+- [ ] Update tabel agregat di [Matriks-E0-E5](../Dashboard/Matriks-E0-E5.md)
 - [ ] Generate confusion matrix untuk Bab 4
 - [ ] Tulis interpretasi untuk Bab 5
 
 ---
 
 **Status:** {{STATUS}}  
-**Link:** [[Matriks-E0-E5]]
+**Link:** [Matriks-E0-E5](../Dashboard/Matriks-E0-E5.md)

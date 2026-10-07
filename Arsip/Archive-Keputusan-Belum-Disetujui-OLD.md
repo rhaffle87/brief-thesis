@@ -3,7 +3,7 @@
 **Tanggal Draf Awal:** 2026-10-02 14:05 UTC+7  
 **Tanggal Rekonsiliasi & Penutupan:** 2026-10-06 19:15 UTC+7  
 **Status Dokumen:** ✅ **SELESAI / ARSIP TERTUTUP (SELURUH POIN TELAH DISETUJUI & DIKUNCI OLEH DOSEN PEMBIMBING)**  
-**Rujukan Resmi Terkunci:** [[Keputusan-Untuk-Pembimbing]] dan [[Ringkasan-Untuk-Pembimbing]]  
+**Rujukan Resmi Terkunci:** [Keputusan-Untuk-Pembimbing](../Keputusan/Keputusan-Untuk-Pembimbing.md) dan [Ringkasan-Untuk-Pembimbing](../Keputusan/Ringkasan-Untuk-Pembimbing.md)  
 
 ---
 
@@ -21,7 +21,7 @@ Dokumen ini merupakan catatan historis opsi-opsi metodologi yang semula berstatu
 * **Fakta Aktual Codebase & Keputusan Final (6 Okt 2026):**
   * **Status:** ✅ **DISETUJUI / TERKUNCI (Opsi CIC-IDS2017 Original)**.
   * **Keputusan Pembimbing:** Menggunakan secara eksklusif berkas resmi UNB **CIC-IDS2017 (Senin, Selasa, Rabu)**.
-  * **Strategi Pembersihan:** Transparansi penuh mengutip kritik Rosay et al. (2022) [[Rosay-2022-LycoSTand]] dan Dube et al. (2024) [[Dube-2024-Faulty-CIC-IDS2017]].
+  * **Strategi Pembersihan:** Transparansi penuh mengutip kritik Rosay et al. (2022) [Rosay-2022-LycoSTand](../Literatur/Rosay-2022-LycoSTand.md) dan Dube et al. (2024) [Dube-2024-Faulty-CIC-IDS2017](../Literatur/Dube-2024-Faulty-CIC-IDS2017.md).
   * Menghapus 10 kolom konstan bervariansi 0, 5 kolom duplikat identik, serta `Destination Port` (mencegah *shortcut learning*). Menyisakan **63 fitur unik numerik + 1 Label**.
 
 ---

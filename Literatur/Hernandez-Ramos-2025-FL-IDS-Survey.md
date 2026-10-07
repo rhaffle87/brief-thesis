@@ -6,7 +6,7 @@ year: 2025
 venue: "IEEE Communications Surveys & Tutorials"
 doi: "10.1109/COMST.2024.3499824"
 arxiv: ""
-pdf: "[[PDFs/HernandezRamos-2025-FL-IDS-Survey.pdf]]"
+pdf: "PDFs/HernandezRamos-2025-FL-IDS-Survey.pdf"
 dibaca_dari_pdf: ya
 status: ✔ terverifikasi
 tags:
@@ -29,7 +29,7 @@ prioritas: inti-terkait
 **Tahun:** 2025  
 **Venue:** IEEE Communications Surveys & Tutorials (IEEE COMST), Vol. 27  
 **DOI:** 10.1109/COMST.2024.3499824  
-**PDF Lokal:** [[PDFs/HernandezRamos-2025-FL-IDS-Survey.pdf]]  
+**PDF Lokal:** [HernandezRamos-2025-FL-IDS-Survey.pdf](PDFs/HernandezRamos-2025-FL-IDS-Survey.pdf)  
 **Status Verifikasi:** ✔ Terverifikasi dari naskah PDF IEEE COMST (65 halaman)  
 **Relevansi Scope:** ⭐⭐⭐⭐⭐ CRITICAL - Tinjauan sistematis terlengkap tentang state-of-the-art arsitektur FL untuk IDS  
 

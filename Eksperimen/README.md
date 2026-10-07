@@ -10,4 +10,4 @@ Direktori ini dialokasikan untuk menyimpan log eksekusi, rekaman metrik training
 - `E4_FedAvg_EWC/`: Log FL-CL usulan (FedAvg + EWC)
 - `E5_Live_Traffic/`: (Opsional) Log uji inferensi testbed Proxmox
 
-Template format log eksperimen mengacu pada [[Template-Log-Eksperimen]].
+Template format log eksperimen mengacu pada [Template-Log-Eksperimen](../Templates/Template-Log-Eksperimen.md).

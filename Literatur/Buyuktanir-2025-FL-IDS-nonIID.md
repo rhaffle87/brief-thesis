@@ -6,7 +6,7 @@ year: 2025
 venue: "Artificial Intelligence Review (Springer)"
 doi: "10.1007/s10462-025-11231-6"
 arxiv: ""
-pdf: "[[PDFs/Buyuktanir-2025-FL-IDS.pdf]]"
+pdf: "PDFs/Buyuktanir-2025-FL-IDS.pdf"
 dibaca_dari_pdf: ya
 status: ✔ terverifikasi
 tags:
@@ -29,7 +29,7 @@ prioritas: inti-terkait
 **Tahun:** 2025 (Published August 2025)  
 **Venue:** Artificial Intelligence Review (Springer)  
 **DOI:** 10.1007/s10462-025-11231-6  
-**PDF Lokal:** [[PDFs/Buyuktanir-2025-FL-IDS.pdf]]  
+**PDF Lokal:** [Buyuktanir-2025-FL-IDS.pdf](PDFs/Buyuktanir-2025-FL-IDS.pdf)  
 **Status Verifikasi:** ✔ Terverifikasi dari naskah PDF Springer  
 **Relevansi Scope:** ⭐⭐⭐⭐⭐ CRITICAL - Survey komprehensif terkini (2025) fokus pada FL-IDS, non-IID data, dan dinamika serangan baru  
 

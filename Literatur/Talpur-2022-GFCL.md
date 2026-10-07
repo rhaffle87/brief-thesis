@@ -6,7 +6,7 @@ year: 2022
 venue: "IEEE Internet of Things Journal"
 doi: "10.1109/JIOT.2022.3217436"
 arxiv: ""
-pdf: "[[PDFs/Opsional/Talpur-2022-GFCL.pdf]]"
+pdf: "PDFs/Opsional/Talpur-2022-GFCL.pdf"
 dibaca_dari_pdf: ya
 status: ✔ terverifikasi
 tags:
@@ -29,7 +29,7 @@ prioritas: opsional-pendukung
 **Tahun:** 2022  
 **Venue:** IEEE Internet of Things Journal  
 **DOI:** 10.1109/JIOT.2022.3217436  
-**PDF Lokal:** [[PDFs/Opsional/Talpur-2022-GFCL.pdf]]  
+**PDF Lokal:** [Talpur-2022-GFCL.pdf](PDFs/Opsional/Talpur-2022-GFCL.pdf)  
 **Status Verifikasi:** ✔ Terverifikasi dari naskah PDF IEEE JIOT  
 **Relevansi Scope:** ⭐⭐⭐⭐ HIGH - Salah satu studi pionir yang menggabungkan Federated Learning dan Continual Learning untuk deteksi anomali jaringan IoT  
 

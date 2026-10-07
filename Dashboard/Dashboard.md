@@ -88,33 +88,33 @@ updated: 2026-10-06
 **Rincian:** 13 Paper Inti (`Literatur/PDFs/`) + 12 Paper Pendukung (`Literatur/PDFs/Opsional/`)
 
 ### ✅ Paper Inti (13 Dokumen)
-1. ✅ McMahan et al. (2017) - FedAvg [[McMahan-2017-FedAvg]]
-2. ✅ Kirkpatrick et al. (2017) - EWC [[Kirkpatrick-2017-EWC]]
-3. ✅ Sharafaldin et al. (2018) - CIC-IDS2017 [[Sharafaldin-2018-CIC-IDS2017]]
-4. ✅ Rosay et al. (2022) - LycoSTand / CIC-IDS2017 [[Rosay-2022-LycoSTand]]
-5. ✅ Dube et al. (2024) - Faulty CIC-IDS2017 [[Dube-2024-Faulty-CIC-IDS2017]]
-6. ✅ Jin et al. (2024) - FL-IIDS Concept Drift [[Jin-2024-FL-IIDS]]
-7. ✅ Rehman et al. (2026) - Incremental FL-IDS [[Rehman-2026-Incremental-FL-IDS]]
-8. ✅ Hernandez-Ramos et al. (2025) - FL-IDS Survey [[Hernandez-Ramos-2025-FL-IDS-Survey]]
-9. ✅ Buyuktanir et al. (2025) - FL-IDS non-IID [[Buyuktanir-2025-FL-IDS-nonIID]]
-10. ✅ Hamedi et al. (2025) - FCL Survey [[Hamedi-2025-FCL-Survey]]
-11. ✅ Gholizade et al. (2026) - FCL Survey [[Gholizade-2026-FCL-Survey]]
-12. ✅ Beutel et al. (2020) - Flower Framework [[Beutel-2020-Flower]]
-13. ✅ Lopez-Paz & Ranzato (2017) - GEM [[Lopez-Paz-2017-GEM]]
+1. ✅ McMahan et al. (2017) - FedAvg [McMahan-2017-FedAvg](../Literatur/McMahan-2017-FedAvg.md)
+2. ✅ Kirkpatrick et al. (2017) - EWC [Kirkpatrick-2017-EWC](../Literatur/Kirkpatrick-2017-EWC.md)
+3. ✅ Sharafaldin et al. (2018) - CIC-IDS2017 [Sharafaldin-2018-CIC-IDS2017](../Literatur/Sharafaldin-2018-CIC-IDS2017.md)
+4. ✅ Rosay et al. (2022) - LycoSTand / CIC-IDS2017 [Rosay-2022-LycoSTand](../Literatur/Rosay-2022-LycoSTand.md)
+5. ✅ Dube et al. (2024) - Faulty CIC-IDS2017 [Dube-2024-Faulty-CIC-IDS2017](../Literatur/Dube-2024-Faulty-CIC-IDS2017.md)
+6. ✅ Jin et al. (2024) - FL-IIDS Concept Drift [Jin-2024-FL-IIDS](../Literatur/Jin-2024-FL-IIDS.md)
+7. ✅ Rehman et al. (2026) - Incremental FL-IDS [Rehman-2026-Incremental-FL-IDS](../Literatur/Rehman-2026-Incremental-FL-IDS.md)
+8. ✅ Hernandez-Ramos et al. (2025) - FL-IDS Survey [Hernandez-Ramos-2025-FL-IDS-Survey](../Literatur/Hernandez-Ramos-2025-FL-IDS-Survey.md)
+9. ✅ Buyuktanir et al. (2025) - FL-IDS non-IID [Buyuktanir-2025-FL-IDS-nonIID](../Literatur/Buyuktanir-2025-FL-IDS-nonIID.md)
+10. ✅ Hamedi et al. (2025) - FCL Survey [Hamedi-2025-FCL-Survey](../Literatur/Hamedi-2025-FCL-Survey.md)
+11. ✅ Gholizade et al. (2026) - FCL Survey [Gholizade-2026-FCL-Survey](../Literatur/Gholizade-2026-FCL-Survey.md)
+12. ✅ Beutel et al. (2020) - Flower Framework [Beutel-2020-Flower](../Literatur/Beutel-2020-Flower.md)
+13. ✅ Lopez-Paz & Ranzato (2017) - GEM [Lopez-Paz-2017-GEM](../Literatur/Lopez-Paz-2017-GEM.md)
 
 ### 📂 Paper Pendukung / Framework (Opsional - 12 Dokumen)
-14. 📂 Carta et al. (2023) - Avalanche JMLR [[Carta-2023-Avalanche-JMLR]]
-15. 📂 Lomonaco et al. (2021) - Avalanche CVPRW [[Lomonaco-2021-Avalanche-CVPRW]]
-16. 📂 Liu & Chang (2026) - EWC-DR [[Liu-2026-EWC-DR]]
-17. 📂 Agrawal et al. (2021) - FL-IDS Concepts [[Agrawal-2021-FL-IDS-Concepts]]
-18. 📂 Talpur et al. (2022) - GFCL [[Talpur-2022-GFCL]]
-19. 📂 Engelen et al. (2021) - Troubleshooting CICIDS2017 [[Engelen-2021-Troubleshooting]]
-20. 📂 Zhao et al. (2018) - FL with Non-IID Data [[Zhao-2018-FL-NonIID]]
-21. 📂 Hsu et al. (2019) - Non-IID Dirichlet [[Hsu-2019-NonIID-Dirichlet]]
-22. 📂 Li et al. (2020) - FedProx [[Li-2020-FedProx]]
-23. 📂 De Lange et al. (2021) - Continual Learning Survey [[DeLange-2021-CL-Survey]]
-24. 📂 van de Ven & Tolias (2019) - Three Scenarios for CL [[VandeVen-2019-CL-Scenarios]]
-25. 📂 Wang et al. (2023) - Comprehensive Survey of CL [[Wang-2023-CL-Survey]]
+14. 📂 Carta et al. (2023) - Avalanche JMLR [Carta-2023-Avalanche-JMLR](../Literatur/Carta-2023-Avalanche-JMLR.md)
+15. 📂 Lomonaco et al. (2021) - Avalanche CVPRW [Lomonaco-2021-Avalanche-CVPRW](../Literatur/Lomonaco-2021-Avalanche-CVPRW.md)
+16. 📂 Liu & Chang (2026) - EWC-DR [Liu-2026-EWC-DR](../Literatur/Liu-2026-EWC-DR.md)
+17. 📂 Agrawal et al. (2021) - FL-IDS Concepts [Agrawal-2021-FL-IDS-Concepts](../Literatur/Agrawal-2021-FL-IDS-Concepts.md)
+18. 📂 Talpur et al. (2022) - GFCL [Talpur-2022-GFCL](../Literatur/Talpur-2022-GFCL.md)
+19. 📂 Engelen et al. (2021) - Troubleshooting CICIDS2017 [Engelen-2021-Troubleshooting](../Literatur/Engelen-2021-Troubleshooting.md)
+20. 📂 Zhao et al. (2018) - FL with Non-IID Data [Zhao-2018-FL-NonIID](../Literatur/Zhao-2018-FL-NonIID.md)
+21. 📂 Hsu et al. (2019) - Non-IID Dirichlet [Hsu-2019-NonIID-Dirichlet](../Literatur/Hsu-2019-NonIID-Dirichlet.md)
+22. 📂 Li et al. (2020) - FedProx [Li-2020-FedProx](../Literatur/Li-2020-FedProx.md)
+23. 📂 De Lange et al. (2021) - Continual Learning Survey [DeLange-2021-CL-Survey](../Literatur/DeLange-2021-CL-Survey.md)
+24. 📂 van de Ven & Tolias (2019) - Three Scenarios for CL [VandeVen-2019-CL-Scenarios](../Literatur/VandeVen-2019-CL-Scenarios.md)
+25. 📂 Wang et al. (2023) - Comprehensive Survey of CL [Wang-2023-CL-Survey](../Literatur/Wang-2023-CL-Survey.md)
 
 ---
 
@@ -153,13 +153,13 @@ E:\Projects\thesis/
 
 ## 📝 Quick Links
 
-- [[Ringkasan-Untuk-Pembimbing]] (7 pertanyaan & bukti untuk dosen pembimbing)
-- [[Briefing-Scope-TA]] (Dokumen final scope TA)
-- [[EDA-CIC-IDS2017]] (Laporan lengkap EDA & port leakage test)
-- [[Crosscheck]] (Tabel verifikasi metadata 18 paper)
-- [[Timeline-16-Minggu]] (Jadwal detail 16 minggu)
-- [[Checklist-Selesai]] (Definisi selesai per fase)
-- [[Matriks-E0-E5]] (Rincian matriks eksperimen)
+- [Ringkasan-Untuk-Pembimbing](../Keputusan/Ringkasan-Untuk-Pembimbing.md) (7 pertanyaan & bukti untuk dosen pembimbing)
+- [Briefing-Scope-TA](../Proposal/Briefing-Scope-TA.md) (Dokumen final scope TA)
+- [EDA-CIC-IDS2017](../Metodologi/EDA-CIC-IDS2017.md) (Laporan lengkap EDA & port leakage test)
+- [Crosscheck](../Literatur/Crosscheck.md) (Tabel verifikasi metadata 18 paper)
+- [Timeline-16-Minggu](Timeline-16-Minggu.md) (Jadwal detail 16 minggu)
+- [Checklist-Selesai](Checklist-Selesai.md) (Definisi selesai per fase)
+- [Matriks-E0-E5](Matriks-E0-E5.md) (Rincian matriks eksperimen)
 
 ---
 

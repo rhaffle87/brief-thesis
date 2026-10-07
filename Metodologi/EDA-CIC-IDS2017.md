@@ -308,5 +308,5 @@ High no-port performance (98%) is partly due to OTHER shortcuts, not solely "int
 ---
 
 **Status:** ✅ EDA Selesai & Seluruh Keputusan Metodologis Resmi Disetujui Pembimbing  
-**Rujukan:** [[Keputusan-Untuk-Pembimbing]], [[Ringkasan-Untuk-Pembimbing]]  
+**Rujukan:** [Keputusan-Untuk-Pembimbing](../Keputusan/Keputusan-Untuk-Pembimbing.md), [Ringkasan-Untuk-Pembimbing](../Keputusan/Ringkasan-Untuk-Pembimbing.md)  
 **Tahap Berikutnya:** Implementasi Pipeline Praproses Dataset (`cic_3class_dedup.parquet`)

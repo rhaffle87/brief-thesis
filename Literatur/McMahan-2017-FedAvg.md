@@ -6,7 +6,7 @@ year: 2017
 venue: AISTATS 2017
 doi: arXiv:1602.05629
 arxiv: "1602.05629"
-pdf: "[[McMahan-2017-FedAvg.pdf]]"
+pdf: "McMahan-2017-FedAvg.pdf"
 status: ✔ terverifikasi
 tags:
   - literatur
@@ -34,7 +34,7 @@ prioritas: inti
 **Venue:** AISTATS 2017  
 **DOI:** arXiv:1602.05629  
 **arXiv:** 1602.05629  
-**PDF Lokal:** [[McMahan-2017-FedAvg.pdf]]
+**PDF Lokal:** [McMahan-2017-FedAvg.pdf](PDFs/McMahan-2017-FedAvg.pdf)
 
 **Status Verifikasi:** ✔ Terverifikasi  
 **Relevansi Scope:** ⭐⭐⭐⭐⭐ CRITICAL - FedAvg Original Paper  
@@ -106,9 +106,9 @@ prioritas: inti
 ## 🔗 Hubungan dengan Paper Lain
 
 - Mengutip: Dean et al. (2012) - Large Scale Distributed Deep Networks
-- Dikutip oleh: [[Jin-2024-FL-IIDS]], [[Hernandez-Ramos-2025-FL-IDS-Survey]]
-- Diperlukan untuk memahami: [[Kirkpatrick-2017-EWC]] (akan dikombinasikan dengan FedAvg)
-- Topik serupa (aggregation): [[Buyuktanir-2025-FL-IDS-nonIID]]
+- Dikutip oleh: [Jin-2024-FL-IIDS](Jin-2024-FL-IIDS.md), [Hernandez-Ramos-2025-FL-IDS-Survey](Hernandez-Ramos-2025-FL-IDS-Survey.md)
+- Diperlukan untuk memahami: [Kirkpatrick-2017-EWC](Kirkpatrick-2017-EWC.md) (akan dikombinasikan dengan FedAvg)
+- Topik serupa (aggregation): [Buyuktanir-2025-FL-IDS-nonIID](Buyuktanir-2025-FL-IDS-nonIID.md)
 
 ---
 
@@ -121,12 +121,12 @@ prioritas: inti
 - `learning_rate`: 0.01 (start), turun jika divergen pada non-IID
 
 **Implementation Notes:**
-- FedAvg sudah tersedia di Flower framework ([[Beutel-2020-Flower]])
+- FedAvg sudah tersedia di Flower framework ([Beutel-2020-Flower](Beutel-2020-Flower.md))
 - Server aggregation: simple weighted average by num_samples per client
 - Client selection: fixed 2 client (tidak ada sampling)
 
 **Decision Log:**
-- 2026-10-02: FedAvg dipilih sebagai satu-satunya FL algorithm (Krum/TrimmedMean out of scope) [[Keputusan-Pembekuan-FL]]
+- 2026-10-02: FedAvg dipilih sebagai satu-satunya FL algorithm (Krum/TrimmedMean out of scope) [Keputusan-Pembekuan-FL](../Keputusan/Keputusan-Pembekuan-FL.md)
 
 ---
 

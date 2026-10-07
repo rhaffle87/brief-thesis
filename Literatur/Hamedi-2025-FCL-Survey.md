@@ -6,7 +6,7 @@ year: 2025
 venue: "IEEE Communications Surveys & Tutorials / arXiv preprint"
 doi: "10.48550/arXiv.2402.14815"
 arxiv: "2402.14815"
-pdf: "[[PDFs/Hamedi-2025-FCL-Survey.pdf]]"
+pdf: "PDFs/Hamedi-2025-FCL-Survey.pdf"
 dibaca_dari_pdf: ya
 status: ✔ terverifikasi
 tags:
@@ -28,7 +28,7 @@ prioritas: inti-terkait
 **Institusi:** Amirkabir University of Technology, Tehran, Iran  
 **Tahun:** 2025  
 **Venue:** arXiv:2402.14815  
-**PDF Lokal:** [[PDFs/Hamedi-2025-FCL-Survey.pdf]]  
+**PDF Lokal:** [Hamedi-2025-FCL-Survey.pdf](PDFs/Hamedi-2025-FCL-Survey.pdf)  
 **Status Verifikasi:** ✔ Terverifikasi dari naskah PDF  
 **Relevansi Scope:** ⭐⭐⭐⭐⭐ CRITICAL - Survey komprehensif 30 halaman yang membedah irisan Federated Learning dan Continual Learning  
 

@@ -6,7 +6,7 @@ year: 2018
 venue: ICISSP 2018 (4th International Conference on Information Systems Security and Privacy)
 doi: 10.5220/0006639801080116
 arxiv: ""
-pdf: "[[Sharafaldin-2018-CIC-IDS2017.pdf]]"
+pdf: "Sharafaldin-2018-CIC-IDS2017.pdf"
 status: ✔ terverifikasi
 tags:
   - literatur
@@ -35,7 +35,7 @@ prioritas: inti
 **Venue:** ICISSP 2018 (4th International Conference on Information Systems Security and Privacy)  
 **DOI:** 10.5220/0006639801080116  
 **Publisher:** SCITEPRESS  
-**PDF Lokal:** [[Sharafaldin-2018-CIC-IDS2017.pdf]]
+**PDF Lokal:** [Sharafaldin-2018-CIC-IDS2017.pdf](PDFs/Sharafaldin-2018-CIC-IDS2017.pdf)
 
 **Status Verifikasi:** ✔ Terverifikasi via SCITEPRESS  
 **Relevansi Scope:** ⭐⭐⭐⭐⭐ CRITICAL - Dataset Original Paper  
@@ -113,9 +113,9 @@ prioritas: inti
 
 ## ⚠️ Batasan & Catatan Kritis (PENTING!)
 
-**MAJOR ISSUES (dari [[Dube-2024-Faulty-CIC-IDS2017]] - belum didownload):**
+**MAJOR ISSUES (dari [Dube-2024-Faulty-CIC-IDS2017](Dube-2024-Faulty-CIC-IDS2017.md) - belum didownload):**
 - CSV features **inadequate for production ML models** (Dube 2024 warning)
-- Feature extraction errors documented in [[Rosay-2022-LycoSTand]] (belum didownload)
+- Feature extraction errors documented in [Rosay-2022-LycoSTand](Rosay-2022-LycoSTand.md) (belum didownload)
 - Paper ini TIDAK memberikan data statistics lengkap (class distribution, imbalance ratio)
 
 **Dataset Limitations:**
@@ -143,10 +143,10 @@ prioritas: inti
 ## 🔗 Hubungan dengan Paper Lain
 
 - Mengutip: DARPA98, KDD99, NSL-KDD, ISCX2012 (previous datasets)
-- Dikutip oleh: [[Jin-2024-FL-IIDS]], [[Hernandez-Ramos-2025-FL-IDS-Survey]]
+- Dikutip oleh: [Jin-2024-FL-IIDS](Jin-2024-FL-IIDS.md), [Hernandez-Ramos-2025-FL-IDS-Survey](Hernandez-Ramos-2025-FL-IDS-Survey.md)
 - **CRITICAL CORRECTIONS:**
-  - [[Dube-2024-Faulty-CIC-IDS2017]] - CSV inadequacy warning (belum didownload)
-  - [[Rosay-2022-LycoSTand]] - Feature extraction correction tool (belum didownload)
+  - [Dube-2024-Faulty-CIC-IDS2017](Dube-2024-Faulty-CIC-IDS2017.md) - CSV inadequacy warning (belum didownload)
+  - [Rosay-2022-LycoSTand](Rosay-2022-LycoSTand.md) - Feature extraction correction tool (belum didownload)
 - Related work: UNSW-NB15, CSE-CIC-IDS2018 (newer alternatives)
 
 ---

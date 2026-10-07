@@ -6,7 +6,7 @@ year: 2019
 venue: "arXiv preprint"
 doi: "10.48550/arXiv.1909.06335"
 arxiv: "1909.06335"
-pdf: "[[PDFs/Opsional/Hsu-2019-NonIID-Visual-FL.pdf]]"
+pdf: "PDFs/Opsional/Hsu-2019-NonIID-Visual-FL.pdf"
 dibaca_dari_pdf: ya
 status: ✔ terverifikasi
 tags:
@@ -28,7 +28,7 @@ prioritas: opsional-pendukung
 **Institusi:** Carnegie Mellon University, Google  
 **Tahun:** 2019  
 **Venue:** arXiv:1909.06335  
-**PDF Lokal:** [[PDFs/Opsional/Hsu-2019-NonIID-Visual-FL.pdf]]  
+**PDF Lokal:** [Hsu-2019-NonIID-Visual-FL.pdf](PDFs/Opsional/Hsu-2019-NonIID-Visual-FL.pdf)  
 **Status Verifikasi:** ✔ Terverifikasi dari naskah PDF  
 **Relevansi Scope:** ⭐⭐⭐⭐ HIGH - Makalah seminal yang memperkenalkan partisi Non-IID berbasis Distribusi Dirichlet $\mathrm{Dir}(lpha)$  
 

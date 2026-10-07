@@ -6,7 +6,7 @@ year: 2018
 venue: "arXiv preprint"
 doi: "10.48550/arXiv.1806.00582"
 arxiv: "1806.00582"
-pdf: "[[PDFs/Opsional/Zhao-2018-FL-NonIID.pdf]]"
+pdf: "PDFs/Opsional/Zhao-2018-FL-NonIID.pdf"
 dibaca_dari_pdf: ya
 status: ✔ terverifikasi
 tags:
@@ -28,7 +28,7 @@ prioritas: inti-terkait
 **Institusi:** Arm Inc., San Jose, CA, USA  
 **Tahun:** 2018  
 **Venue:** arXiv:1806.00582  
-**PDF Lokal:** [[PDFs/Opsional/Zhao-2018-FL-NonIID.pdf]]  
+**PDF Lokal:** [Zhao-2018-FL-NonIID.pdf](PDFs/Opsional/Zhao-2018-FL-NonIID.pdf)  
 **Status Verifikasi:** ✔ Terverifikasi dari naskah PDF Arm Inc. (12 halaman)  
 **Relevansi Scope:** ⭐⭐⭐⭐⭐ CRITICAL - Studi fundamental tentang Weight Divergence akibat Non-IID data pada FedAvg  
 

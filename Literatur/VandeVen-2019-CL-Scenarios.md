@@ -6,7 +6,7 @@ year: 2019
 venue: "arXiv preprint / Nature Communications"
 doi: "10.48550/arXiv.1904.07734"
 arxiv: "1904.07734"
-pdf: "[[PDFs/Opsional/VandeVen-2019-CL-Scenarios.pdf]]"
+pdf: "PDFs/Opsional/VandeVen-2019-CL-Scenarios.pdf"
 dibaca_dari_pdf: ya
 status: ✔ terverifikasi
 tags:
@@ -28,7 +28,7 @@ prioritas: inti-terkait
 **Institusi:** Baylor College of Medicine, Houston, TX, USA  
 **Tahun:** 2019  
 **Venue:** arXiv:1904.07734 / Nature Communications  
-**PDF Lokal:** [[PDFs/Opsional/VandeVen-2019-CL-Scenarios.pdf]]  
+**PDF Lokal:** [VandeVen-2019-CL-Scenarios.pdf](PDFs/Opsional/VandeVen-2019-CL-Scenarios.pdf)  
 **Status Verifikasi:** ✔ Terverifikasi dari naskah PDF  
 **Relevansi Scope:** ⭐⭐⭐⭐⭐ CRITICAL - Kerangka konseptual seminal yang mendefinisikan 3 skenario Continual Learning  
 

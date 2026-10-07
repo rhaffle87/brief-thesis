@@ -6,7 +6,7 @@ year: 2020
 venue: "arXiv preprint"
 doi: "10.48550/arXiv.2007.14390"
 arxiv: "2007.14390"
-pdf: "[[PDFs/Beutel-2020-Flower.pdf]]"
+pdf: "PDFs/Beutel-2020-Flower.pdf"
 dibaca_dari_pdf: ya
 status: ✔ terverifikasi
 tags:
@@ -28,7 +28,7 @@ prioritas: inti-terkait
 **Institusi:** University of Cambridge, Adap, Samsung AI Center  
 **Tahun:** 2020  
 **Venue:** arXiv:2007.14390  
-**PDF Lokal:** [[PDFs/Beutel-2020-Flower.pdf]]  
+**PDF Lokal:** [Beutel-2020-Flower.pdf](PDFs/Beutel-2020-Flower.pdf)  
 **Status Verifikasi:** ✔ Terverifikasi dari naskah PDF  
 **Relevansi Scope:** ⭐⭐⭐⭐ HIGH - Framework FL utama yang mendasari orkestrasi federasi penelitian  
 

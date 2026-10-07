@@ -6,7 +6,7 @@ year: 2021
 venue: "arXiv preprint"
 doi: "10.48550/arXiv.2106.09527"
 arxiv: "2106.09527"
-pdf: "[[PDFs/Opsional/Agrawal-2021-FL-IDS-Survey.pdf]]"
+pdf: "PDFs/Opsional/Agrawal-2021-FL-IDS-Survey.pdf"
 dibaca_dari_pdf: ya
 status: ✔ terverifikasi
 tags:
@@ -28,7 +28,7 @@ prioritas: opsional-pendukung
 **Institusi:** Vellore Institute of Technology (India), University of Nantes (France)  
 **Tahun:** 2021  
 **Venue:** arXiv preprint (`arXiv:2106.09527`)  
-**PDF Lokal:** [[PDFs/Opsional/Agrawal-2021-FL-IDS-Survey.pdf]]  
+**PDF Lokal:** [Agrawal-2021-FL-IDS-Survey.pdf](PDFs/Opsional/Agrawal-2021-FL-IDS-Survey.pdf)  
 **Status Verifikasi:** ✔ Terverifikasi dari naskah PDF  
 **Relevansi Scope:** ⭐⭐⭐ MEDIUM - Survey komprehensif implementasi FL pada deteksi intrusi jaringan  
 

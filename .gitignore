@@ -3,11 +3,12 @@
 .obsidian/workspace-mobile.json
 .obsidian/cache/
 
-# Large dataset files (exceeding GitHub 100MB limit)
-Datasets/**/*.csv
-Datasets/**/*.parquet
+# Datasets directory (local only, do not commit to repository)
+Datasets/
 *.csv
 *.parquet
+*.parquet.*
+
 
 # OS and Temporary files
 .DS_Store

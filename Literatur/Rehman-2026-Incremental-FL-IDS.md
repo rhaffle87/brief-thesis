@@ -6,7 +6,7 @@ year: 2026
 venue: Preprint (arXiv)
 doi: arXiv:2603.10776
 arxiv: "2603.10776"
-pdf: "[[Rehman-2026-Incremental-FL-IDS.pdf]]"
+pdf: "Rehman-2026-Incremental-FL-IDS.pdf"
 status: ✔ terverifikasi
 tags:
   - literatur
@@ -33,7 +33,7 @@ prioritas: inti-terkait
 **Institusi:** Tallinn University of Technology (Estonia), Northern Arizona University (USA)  
 **Tahun:** 2026  
 **Venue:** Preprint (arXiv:2603.10776v2, March 13, 2026)  
-**PDF Lokal:** [[Rehman-2026-Incremental-FL-IDS.pdf]]
+**PDF Lokal:** [Rehman-2026-Incremental-FL-IDS.pdf](PDFs/Rehman-2026-Incremental-FL-IDS.pdf)
 
 **Status Verifikasi:** ✔ Terverifikasi via arXiv  
 **Relevansi Scope:** ⭐⭐⭐⭐⭐ CRITICAL - Most similar to our work!  
@@ -163,7 +163,7 @@ prioritas: inti-terkait
 ## 🔗 Hubungan dengan Paper Lain
 
 **Mengutik:**
-- [[Jin-2024-FL-IIDS]] - FL-IIDS incremental baseline (paper #5 mereka)
+- [Jin-2024-FL-IIDS](Jin-2024-FL-IIDS.md) - FL-IIDS incremental baseline (paper #5 mereka)
 - FedAvg (McMahan 2017)
 - LSTM for IDS (various)
 
@@ -171,9 +171,9 @@ prioritas: inti-terkait
 - Too recent (March 2026), minimal citations
 
 **Related:**
-- [[Jin-2024-FL-IIDS]] - Similar incremental FL-IDS (UNSW-NB15)
-- [[Gholizade-2026-FCL-Survey]] - FCL taxonomy (cites EWC/GEM but not this paper)
-- [[Buyuktanir-2025-FL-IDS-nonIID]] - Non-IID FL-IDS (no drift)
+- [Jin-2024-FL-IIDS](Jin-2024-FL-IIDS.md) - Similar incremental FL-IDS (UNSW-NB15)
+- [Gholizade-2026-FCL-Survey](Gholizade-2026-FCL-Survey.md) - FCL taxonomy (cites EWC/GEM but not this paper)
+- [Buyuktanir-2025-FL-IDS-nonIID](Buyuktanir-2025-FL-IDS-nonIID.md) - Non-IID FL-IDS (no drift)
 
 **Our Contribution vs Rehman:**
 - **Rehman:** IID + Drift, replay-based, CICIoMT2024, LSTM, no EWC

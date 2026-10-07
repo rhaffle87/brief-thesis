@@ -6,7 +6,7 @@ year: 2017
 venue: Proceedings of the National Academy of Sciences (PNAS)
 doi: 10.1073/pnas.1611835114
 arxiv: ""
-pdf: "[[Kirkpatrick-2017-EWC.pdf]]"
+pdf: "Kirkpatrick-2017-EWC.pdf"
 status: ✔ terverifikasi
 tags:
   - literatur
@@ -33,7 +33,7 @@ prioritas: inti
 **Tahun:** 2017  
 **Venue:** Proceedings of the National Academy of Sciences (PNAS)  
 **DOI:** 10.1073/pnas.1611835114  
-**PDF Lokal:** [[Kirkpatrick-2017-EWC.pdf]]
+**PDF Lokal:** [Kirkpatrick-2017-EWC.pdf](PDFs/Kirkpatrick-2017-EWC.pdf)
 
 **Status Verifikasi:** ✔ Terverifikasi via PNAS  
 **Relevansi Scope:** ⭐⭐⭐⭐⭐ CRITICAL - EWC Original Paper  
@@ -64,7 +64,7 @@ prioritas: inti
 **Metodologi:**
 - Adoption: Fisher diagonal approximation F_i ≈ E[(∂log p(y|x,θ)/∂θ_i)²]
 - Lambda tuning: λ ∈ [100, 1000, 10000] (grid search, paper menggunakan berbagai nilai)
-- Implementation: Avalanche library menyediakan EWC plugin [[Carta-2023-Avalanche-JMLR]]
+- Implementation: Avalanche library menyediakan EWC plugin [Carta-2023-Avalanche-JMLR](Carta-2023-Avalanche-JMLR.md)
 
 ---
 
@@ -109,10 +109,10 @@ prioritas: inti
 ## 🔗 Hubungan dengan Paper Lain
 
 - Mengutip: Hinton & Plaut (1987) - Catastrophic interference
-- Dikutik oleh: [[Rehman-2026-Incremental-FL-IDS]], [[Hamedi-2025-FCL-Survey]]
-- Comparison baseline: [[Lopez-Paz-2017-GEM]] (GEM, out of scope tetapi digunakan untuk BWT metric)
+- Dikutik oleh: [Rehman-2026-Incremental-FL-IDS](Rehman-2026-Incremental-FL-IDS.md), [Hamedi-2025-FCL-Survey](Hamedi-2025-FCL-Survey.md)
+- Comparison baseline: [Lopez-Paz-2017-GEM](Lopez-Paz-2017-GEM.md) (GEM, out of scope tetapi digunakan untuk BWT metric)
 - Alternative method: LwF (Learning without Forgetting), A-GEM (out of scope)
-- Integration: [[McMahan-2017-FedAvg]] + EWC = FedAvg+EWC (E4)
+- Integration: [McMahan-2017-FedAvg](McMahan-2017-FedAvg.md) + EWC = FedAvg+EWC (E4)
 
 ---
 
@@ -130,12 +130,12 @@ prioritas: inti
 - Perlu modifikasi untuk federated: server aggregates θ*, client compute Fisher lokal lalu aggregate
 - Decision: Fisher dihitung di client (privacy-preserving), hanya aggregated weights yang dikirim ke server
 
-**Potential Issues (dari [[Liu-2026-EWC-DR]]):**
+**Potential Issues (dari [Liu-2026-EWC-DR](Liu-2026-EWC-DR.md)):**
 - Fisher estimation bias: paper baru (2026) menunjukkan diagonal Fisher bisa bias di vision task
 - Mitigasi: compare dengan naive baseline dulu (E1 vs E2), jika EWC tidak membantu → investigate Fisher quality
 
 **Decision Log:**
-- 2026-10-02: EWC dipilih sebagai satu-satunya CL method (GEM/A-GEM out of scope) [[Keputusan-Pembekuan-CL]]
+- 2026-10-02: EWC dipilih sebagai satu-satunya CL method (GEM/A-GEM out of scope) [Keputusan-Pembekuan-CL](../Keputusan/Keputusan-Pembekuan-CL.md)
 - Lambda grid search: 3 nilai (computational constraint, 2 client x 3-5 seed sudah banyak)
 
 ---

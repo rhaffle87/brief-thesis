@@ -156,33 +156,33 @@ UNRESOLVED: 45
 | `Dashboard/Dashboard.md` | `[[kirkpatrick-et-al-2017]]` | Format nama tidak baku (seharusnya `Kirkpatrick-2017-EWC`) |
 | `Dashboard/Dashboard.md` | `[[FL-IIDS]]` | Catatan bernama `Jin-2024-FL-IIDS` |
 | `Dashboard/Dashboard.md` | `[[Avalanche_CVPRW]]` | Berkas belum dibuat / ada di Opsional |
-| `Dashboard/Dashboard.md` | `[[Timeline-16-Minggu]]` | Catatan linimasa belum dibuat |
-| `Dashboard/Dashboard.md` | `[[Checklist-Selesai]]` | Catatan checklist belum dibuat |
-| `Dashboard/Dashboard.md` | `[[Matriks-E0-E5]]` | Catatan matriks belum dibuat |
+| `Dashboard/Dashboard.md` | `[Timeline-16-Minggu](../Dashboard/Timeline-16-Minggu.md)` | Catatan linimasa belum dibuat |
+| `Dashboard/Dashboard.md` | `[Checklist-Selesai](../Dashboard/Checklist-Selesai.md)` | Catatan checklist belum dibuat |
+| `Dashboard/Dashboard.md` | `[Matriks-E0-E5](../Dashboard/Matriks-E0-E5.md)` | Catatan matriks belum dibuat |
 | `Laporan/2026-10-02-Final-Corrections-Summary.md` | `[[...]]` | Placeholder teks |
 | `Laporan/2026-10-02-FINAL-Status.md` | `[[...]]` | Placeholder teks |
 | `Laporan/2026-10-02-Final-Task-Report.md` | `[[...]]` | Placeholder teks |
 | `Laporan/2026-10-02-Final-Task-Report.md` | `[[PDFs/...]]` | Placeholder teks |
-| `Literatur/Gholizade-2026-FCL-Survey.md` | `[[Hernandez-Ramos-2025-FL-IDS-Survey]]` | Catatan .md belum dibuat (PDF ada di PDFs/) |
-| `Literatur/Gholizade-2026-FCL-Survey.md` | `[[Hamedi-2025-FCL-Survey]]` | Catatan .md belum dibuat (PDF ada di PDFs/) |
-| `Literatur/Gholizade-2026-FCL-Survey.md` | `[[Buyuktanir-2025-FL-IDS-nonIID]]` | Catatan .md belum dibuat (PDF ada di PDFs/) |
-| `Literatur/Gholizade-2026-FCL-Survey.md` | `[[Carta-2023-Avalanche-JMLR]]` | Catatan .md belum dibuat (PDF di Opsional) |
-| `Literatur/Gholizade-2026-FCL-Survey.md` | `[[Beutel-2020-Flower]]` | Catatan .md belum dibuat (PDF di PDFs/) |
-| `Literatur/Jin-2024-FL-IIDS.md` | `[[Buyuktanir-2025-FL-IDS-nonIID]]` | Catatan .md belum dibuat |
-| `Literatur/Kirkpatrick-2017-EWC.md` | `[[Carta-2023-Avalanche-JMLR]]` | Catatan .md belum dibuat |
-| `Literatur/Kirkpatrick-2017-EWC.md` | `[[Hamedi-2025-FCL-Survey]]` | Catatan .md belum dibuat |
+| `Literatur/Gholizade-2026-FCL-Survey.md` | `[Hernandez-Ramos-2025-FL-IDS-Survey](../Literatur/Hernandez-Ramos-2025-FL-IDS-Survey.md)` | Catatan .md belum dibuat (PDF ada di PDFs/) |
+| `Literatur/Gholizade-2026-FCL-Survey.md` | `[Hamedi-2025-FCL-Survey](../Literatur/Hamedi-2025-FCL-Survey.md)` | Catatan .md belum dibuat (PDF ada di PDFs/) |
+| `Literatur/Gholizade-2026-FCL-Survey.md` | `[Buyuktanir-2025-FL-IDS-nonIID](../Literatur/Buyuktanir-2025-FL-IDS-nonIID.md)` | Catatan .md belum dibuat (PDF ada di PDFs/) |
+| `Literatur/Gholizade-2026-FCL-Survey.md` | `[Carta-2023-Avalanche-JMLR](../Literatur/Carta-2023-Avalanche-JMLR.md)` | Catatan .md belum dibuat (PDF di Opsional) |
+| `Literatur/Gholizade-2026-FCL-Survey.md` | `[Beutel-2020-Flower](../Literatur/Beutel-2020-Flower.md)` | Catatan .md belum dibuat (PDF di PDFs/) |
+| `Literatur/Jin-2024-FL-IIDS.md` | `[Buyuktanir-2025-FL-IDS-nonIID](../Literatur/Buyuktanir-2025-FL-IDS-nonIID.md)` | Catatan .md belum dibuat |
+| `Literatur/Kirkpatrick-2017-EWC.md` | `[Carta-2023-Avalanche-JMLR](../Literatur/Carta-2023-Avalanche-JMLR.md)` | Catatan .md belum dibuat |
+| `Literatur/Kirkpatrick-2017-EWC.md` | `[Hamedi-2025-FCL-Survey](../Literatur/Hamedi-2025-FCL-Survey.md)` | Catatan .md belum dibuat |
 | `Literatur/Kirkpatrick-2017-EWC.md` | `[[Liu-Chang-2026-EWC-DR]]` | Catatan .md bernama `Liu-2026-EWC-DR` |
 | `Literatur/Kirkpatrick-2017-EWC.md` | `[[Decision-CL-Algorithm-Lock]]` | Catatan keputusan belum dibuat |
-| `Literatur/McMahan-2017-FedAvg.md` | `[[Hernandez-Ramos-2025-FL-IDS-Survey]]` | Catatan .md belum dibuat |
-| `Literatur/McMahan-2017-FedAvg.md` | `[[Buyuktanir-2025-FL-IDS-nonIID]]` | Catatan .md belum dibuat |
-| `Literatur/McMahan-2017-FedAvg.md` | `[[Beutel-2020-Flower]]` | Catatan .md belum dibuat |
+| `Literatur/McMahan-2017-FedAvg.md` | `[Hernandez-Ramos-2025-FL-IDS-Survey](../Literatur/Hernandez-Ramos-2025-FL-IDS-Survey.md)` | Catatan .md belum dibuat |
+| `Literatur/McMahan-2017-FedAvg.md` | `[Buyuktanir-2025-FL-IDS-nonIID](../Literatur/Buyuktanir-2025-FL-IDS-nonIID.md)` | Catatan .md belum dibuat |
+| `Literatur/McMahan-2017-FedAvg.md` | `[Beutel-2020-Flower](../Literatur/Beutel-2020-Flower.md)` | Catatan .md belum dibuat |
 | `Literatur/McMahan-2017-FedAvg.md` | `[[Decision-FL-Algorithm-Lock]]` | Catatan keputusan belum dibuat |
-| `Literatur/Rehman-2026-Incremental-FL-IDS.md` | `[[Buyuktanir-2025-FL-IDS-nonIID]]` | Catatan .md belum dibuat |
+| `Literatur/Rehman-2026-Incremental-FL-IDS.md` | `[Buyuktanir-2025-FL-IDS-nonIID](../Literatur/Buyuktanir-2025-FL-IDS-nonIID.md)` | Catatan .md belum dibuat |
 | `Literatur/Sharafaldin-2018-CIC-IDS2017.md` | `[[Dube-2024-Faulty-Use-CIC-IDS2017]]` (x2) | Catatan .md bernama `Dube-2024-Faulty-CIC-IDS2017` |
-| `Literatur/Sharafaldin-2018-CIC-IDS2017.md` | `[[Hernandez-Ramos-2025-FL-IDS-Survey]]` | Catatan .md belum dibuat |
+| `Literatur/Sharafaldin-2018-CIC-IDS2017.md` | `[Hernandez-Ramos-2025-FL-IDS-Survey](../Literatur/Hernandez-Ramos-2025-FL-IDS-Survey.md)` | Catatan .md belum dibuat |
 | `Literatur/_Daftar-Pustaka.md` | 7 tautan paper yang belum ada berkas catatannya | Belum dibuatkan berkas .md masing-masing |
 | `Templates/Template-Literatur.md` | `[[{{PDF_FILENAME}}]]`, `[[Paper A-D]]` | Template variabel, bukan broken link nyata |
-| `Templates/Template-Log-Eksperimen.md` | `[[Matriks-E0-E5]]` | Catatan belum dibuat |
+| `Templates/Template-Log-Eksperimen.md` | `[Matriks-E0-E5](../Dashboard/Matriks-E0-E5.md)` | Catatan belum dibuat |
 
 ---
 

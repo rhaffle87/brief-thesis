@@ -2,7 +2,7 @@
 
 **Status:** ARSIP HISTORIS KONSOLIDASI (SUPERSEDED)  
 **Tanggal Pengarsipan:** 2026-10-04  
-**Catatan:** Seluruh laporan sesi tanggal 02–03 Oktober 2026 telah dipadatkan dan dikonsolidasikan ke dalam satu berkas ini untuk menjaga kebersihan vault. Sumber status aktual dan bukti empiris resmi mengacu pada [[Audit-Bukti-2026-10-03]].
+**Catatan:** Seluruh laporan sesi tanggal 02–03 Oktober 2026 telah dipadatkan dan dikonsolidasikan ke dalam satu berkas ini untuk menjaga kebersihan vault. Sumber status aktual dan bukti empiris resmi mengacu pada [Audit-Bukti-2026-10-03](Audit-Bukti-2026-10-03.md).
 
 ---
 
@@ -1511,8 +1511,8 @@ Continue with 5 remaining high-priority papers OR verify 4 unverified notes befo
 **Reason:** Would require patching multiple files (Dashboard.md, _Daftar-Pustaka.md, individual note files)
 
 **Broken Links Found:**
-- [[PDFs/McMahan-2017-FedAvg.pdf]] → should be [[McMahan-2017-FedAvg.pdf]]
-- [[PDFs/LopezPaz-2017-GEM.pdf]] → should be [[PDFs/LopezPaz-2017-GEM.pdf]]
+- [McMahan-2017-FedAvg.pdf](../Literatur/PDFs/McMahan-2017-FedAvg.pdf) → should be [McMahan-2017-FedAvg.pdf](../Literatur/PDFs/McMahan-2017-FedAvg.pdf)
+- [LopezPaz-2017-GEM.pdf](../Literatur/PDFs/LopezPaz-2017-GEM.pdf) → should be [LopezPaz-2017-GEM.pdf](../Literatur/PDFs/LopezPaz-2017-GEM.pdf)
 - And 11 others (see execute_code output above)
 
 **Action Required:** User can fix manually or request Hermes to fix after pembimbing meeting
@@ -1785,7 +1785,7 @@ Hasil:
 ### 4. Broken Links
 **Status:** All fixed
 - Dashboard.md: 10 links corrected
-- Sharafaldin-2018-CIC-IDS2017.md: `[[PDFs/Sharafaldin-2018-CIC-IDS2017.pdf]]` → `[[PDFs/Sharafaldin-2018-CIC-IDS2017.pdf]]`
+- Sharafaldin-2018-CIC-IDS2017.md: `[Sharafaldin-2018-CIC-IDS2017.pdf](../Literatur/PDFs/Sharafaldin-2018-CIC-IDS2017.pdf)` → `[Sharafaldin-2018-CIC-IDS2017.pdf](../Literatur/PDFs/Sharafaldin-2018-CIC-IDS2017.pdf)`
 - Total: 11/11 links now correct
 
 ### 5. Folder Structure

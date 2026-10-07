@@ -6,7 +6,7 @@ year: 2017
 venue: NeurIPS 2017
 doi: arXiv:1706.08840
 arxiv: "1706.08840"
-pdf: "[[LopezPaz-2017-GEM.pdf]]"
+pdf: "LopezPaz-2017-GEM.pdf"
 status: ✔ terverifikasi
 tags:
   - literatur
@@ -34,7 +34,7 @@ prioritas: inti
 **Tahun:** 2017 (NIPS 2017, updated arXiv v6 Sep 2022)  
 **Venue:** NIPS 2017 (Long Beach, CA)  
 **DOI:** arXiv:1706.08840v6  
-**PDF Lokal:** [[LopezPaz-2017-GEM.pdf]]
+**PDF Lokal:** [LopezPaz-2017-GEM.pdf](PDFs/LopezPaz-2017-GEM.pdf)
 
 **Status Verifikasi:** ✔ Terverifikasi via arXiv & NIPS  
 **Relevansi Scope:** ⭐⭐⭐⭐⭐ CRITICAL - Defines BWT/FWT metrics we use!  
@@ -172,18 +172,18 @@ BWT = (1/(T-1)) × Σ[i=1 to T-1] (R_T,i - R_i,i)
 ## 🔗 Hubungan dengan Paper Lain
 
 **Mengutik:**
-- EWC ([[Kirkpatrick-2017-EWC]]) - baseline comparison
+- EWC ([Kirkpatrick-2017-EWC](Kirkpatrick-2017-EWC.md)) - baseline comparison
 - iCaRL (incremental learning vision)
 - Catastrophic forgetting (McCloskey 1989)
 
 **Dikutik oleh:**
-- [[Gholizade-2026-FCL-Survey]] - FCL taxonomy
-- [[Rehman-2026-Incremental-FL-IDS]] - cites BWT metric
-- [[Jin-2024-FL-IIDS]] - references GEM [30]
+- [Gholizade-2026-FCL-Survey](Gholizade-2026-FCL-Survey.md) - FCL taxonomy
+- [Rehman-2026-Incremental-FL-IDS](Rehman-2026-Incremental-FL-IDS.md) - cites BWT metric
+- [Jin-2024-FL-IIDS](Jin-2024-FL-IIDS.md) - references GEM [30]
 - 2000+ citations (highly influential)
 
 **Related:**
-- [[Kirkpatrick-2017-EWC]] - Alternative CL approach (regularization vs memory)
+- [Kirkpatrick-2017-EWC](Kirkpatrick-2017-EWC.md) - Alternative CL approach (regularization vs memory)
 - A-GEM (Averaged GEM) - later variant with improved efficiency
 - PackNet, Progressive Neural Networks - other CL approaches
 

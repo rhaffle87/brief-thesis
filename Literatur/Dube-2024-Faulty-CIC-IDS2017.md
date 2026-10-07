@@ -6,7 +6,7 @@ year: 2024
 venue: Journal of Computer Virology and Hacking Techniques
 doi: 10.1007/s11416-023-00509-7
 arxiv: ""
-pdf: "[[Dube-2024-Faulty-CIC-IDS2017.pdf]]"
+pdf: "Dube-2024-Faulty-CIC-IDS2017.pdf"
 status: ✔ terverifikasi
 tags:
   - literatur
@@ -35,7 +35,7 @@ prioritas: inti
 **Venue:** Journal of Computer Virology and Hacking Techniques, Vol. 20, pp. 203-211  
 **DOI:** 10.1007/s11416-023-00509-7  
 **Publisher:** Springer  
-**PDF Lokal:** [[Dube-2024-Faulty-CIC-IDS2017.pdf]]
+**PDF Lokal:** [Dube-2024-Faulty-CIC-IDS2017.pdf](PDFs/Dube-2024-Faulty-CIC-IDS2017.pdf)
 
 **Status Verifikasi:** ✔ Terverifikasi via Springer  
 **Relevansi Scope:** ⭐⭐⭐⭐⭐ CRITICAL - Dataset quality & research integrity  
@@ -114,8 +114,8 @@ prioritas: inti
 ## 🔗 Hubungan dengan Paper Lain
 
 **Builds on:**
-- [[Rosay-2022-LycoSTand]] - Technical bug analysis
-- [[Sharafaldin-2018-CIC-IDS2017]] - Original dataset
+- [Rosay-2022-LycoSTand](Rosay-2022-LycoSTand.md) - Technical bug analysis
+- [Sharafaldin-2018-CIC-IDS2017](Sharafaldin-2018-CIC-IDS2017.md) - Original dataset
 
 **Cited by:**
 - Recent 2024-2026 papers (slowly increasing awareness)

@@ -6,7 +6,7 @@ year: 2021
 venue: "IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)"
 doi: "10.1109/TPAMI.2021.3057446"
 arxiv: "1909.08383"
-pdf: "[[PDFs/Opsional/DeLange-2021-CL-Survey.pdf]]"
+pdf: "PDFs/Opsional/DeLange-2021-CL-Survey.pdf"
 dibaca_dari_pdf: ya
 status: ✔ terverifikasi
 tags:
@@ -29,7 +29,7 @@ prioritas: opsional-pendukung
 **Tahun:** 2021  
 **Venue:** IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), Vol. 44, No. 7  
 **DOI:** 10.1109/TPAMI.2021.3057446  
-**PDF Lokal:** [[PDFs/Opsional/DeLange-2021-CL-Survey.pdf]]  
+**PDF Lokal:** [DeLange-2021-CL-Survey.pdf](PDFs/Opsional/DeLange-2021-CL-Survey.pdf)  
 **Status Verifikasi:** ✔ Terverifikasi dari naskah PDF IEEE TPAMI  
 **Relevansi Scope:** ⭐⭐⭐⭐ HIGH - Survey definitif taksonomi continual learning dan penanganan catastrophic forgetting  
 

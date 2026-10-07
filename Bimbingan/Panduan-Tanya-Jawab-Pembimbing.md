@@ -86,10 +86,10 @@
 ## 📋 Checklist Berkas yang Dibawa Saat Bimbingan
 
 1. **Cetakan Fisik / PDF Siap Tampil (2–3 Halaman):**  
-   - Buka: [[Bahan-Paparan-Pembimbing]] atau [[Ringkasan-Untuk-Pembimbing]].
+   - Buka: [Bahan-Paparan-Pembimbing](Bahan-Paparan-Pembimbing.md) atau [Ringkasan-Untuk-Pembimbing](../Keputusan/Ringkasan-Untuk-Pembimbing.md).
 2. **Naskah Proposal Lengkap (Referensi Detail):**  
-   - Buka: [[Briefing-Scope-TA]].
+   - Buka: [Briefing-Scope-TA](../Proposal/Briefing-Scope-TA.md).
 3. **Dokumen Bukti Empiris Data (Jika Dosen Minta Angka Riil):**  
-   - Buka: [[EDA-CIC-IDS2017]] (menunjukkan tabel 10 kolom konstan, grafik port leakage 96,44%, dan distribusi DoS).
+   - Buka: [EDA-CIC-IDS2017](../Metodologi/EDA-CIC-IDS2017.md) (menunjukkan tabel 10 kolom konstan, grafik port leakage 96,44%, dan distribusi DoS).
 4. **Daftar Pustaka 5 Tahun Terakhir:**  
-   - Buka: [[Daftar-Pustaka]] dan [[Crosscheck]] (menunjukkan 13 paper 2021–2026 yang 100% PDF-nya sudah tersedia di laptop).
+   - Buka: [Daftar-Pustaka](../Literatur/Daftar-Pustaka.md) dan [Crosscheck](../Literatur/Crosscheck.md) (menunjukkan 13 paper 2021–2026 yang 100% PDF-nya sudah tersedia di laptop).

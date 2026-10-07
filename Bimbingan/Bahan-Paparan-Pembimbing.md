@@ -5,7 +5,7 @@ Analisis Kinerja Deteksi Network Traffic Intrusion Menggunakan Metode Federated-
 
 **Mahasiswa:** Rafli Alif Ihza Hartono (NRP 5022211233)  
 **Departemen:** Teknik Elektro, FTEIC, Institut Teknologi Sepuluh Nopember (ITS)  
-**Dokumen Pendukung Utama:** [[Ringkasan-Untuk-Pembimbing]], [[Briefing-Scope-TA]], [[EDA-CIC-IDS2017]], [[Crosscheck]]  
+**Dokumen Pendukung Utama:** [Ringkasan-Untuk-Pembimbing](../Keputusan/Ringkasan-Untuk-Pembimbing.md), [Briefing-Scope-TA](../Proposal/Briefing-Scope-TA.md), [EDA-CIC-IDS2017](../Metodologi/EDA-CIC-IDS2017.md), [Crosscheck](../Literatur/Crosscheck.md)  
 
 ---
 
