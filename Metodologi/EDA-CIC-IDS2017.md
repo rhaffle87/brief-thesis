@@ -227,9 +227,7 @@ High no-port performance (98%) is partly due to OTHER shortcuts, not solely "int
 - **Rationale:** Removing most obvious shortcut (port→label mapping); classes remain well-separated
 - **Trade-off:** Lose ~1.3 points vs full feature set (acceptable for cleaner forgetting signal)
 - **Caveat:** Other features may contain attack-tool artifacts (needs feature importance analysis)
-- **Implementation:** Remove Destination Port in preprocessing, pending pembimbing approval
-
-**Alternative:** Keep port if pembimbing prioritizes practical IDS performance over forgetting clarity. Tree classifier results (this section) serve as evidence without requiring additional ablation experiments.
+- **Implementation:** Remove Destination Port in preprocessing (Disetujui pembimbing pada briefing 06 Oktober 2026, locked pada Opsi A)
 
 ---
 

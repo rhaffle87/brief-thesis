@@ -16,7 +16,7 @@ tags:
   - cybersecurity
 rm_supported: Both
 relevance: ⭐⭐⭐⭐⭐
-dibaca_dari_pdf: tidak
+dibaca_dari_pdf: ya
 created: 2026-10-02
 reviewed: ⬜ belum
 cited_in_bab: []
