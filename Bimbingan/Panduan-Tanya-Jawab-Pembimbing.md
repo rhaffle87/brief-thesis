@@ -83,6 +83,33 @@
 
 ---
 
+### Pertanyaan 7: "Apakah penelitian ini mengukur parameter QoS jaringan seperti bandwidth, throughput, delay, jitter, dan packet loss?"
+- **Strategi Jawaban:** *Fokus Machine Learning IDS, Justifikasi Eliminasi Injeksi Trafik, dan Komunikasi FL.*
+- **Poin Jawaban:**
+  1. **Keselarasan dengan Arahan Pembimbing (Poin 1 Briefing 2026-10-06):** Injeksi live traffic resmi dieliminasi karena membawa terlalu banyak parameter dinamis non-algoritmik (variabel transport L3/L4) yang mengaburkan esensi pembuktian algoritma FL-CL.
+  2. **Karakteristik Metrik:** Jitter, packet loss, dan bandwidth adalah metrik performa protokol transport jaringan, bukan metrik efektivitas mitigasi *catastrophic forgetting* (CL) maupun agregasi model (FL). Jika diukur di testbed lokal, metrik tersebut hanya mencerminkan karakteristik *virtual bridge* internal Linux, bukan performa algoritma.
+  3. **Pengganti Relevan yang Diukur:** Kami menggantinya dengan **Communication Overhead FL**, yaitu mengukur ukuran payload bobot model MLP yang ditransfer antara client dan server Flower per round federasi ($2 \times \text{Size}(\theta) \times R$) dalam kilobyte/megabyte. Ini membuktikan secara langsung efisiensi penghematan bandwidth FL dibanding pengiriman data mentah terpusat.
+
+---
+
+### Pertanyaan 8: "Parameter komputasi dan instans apa saja yang diukur pada model dan testbed? (Mengacu pada referensi Skripsi Hafizh, 2024)"
+- **Strategi Jawaban:** *Adopsi Profiling Komputasi Real-Time & Bukti Keunggulan Memori EWC.*
+- **Poin Jawaban:**
+  1. **Inference Latency Profiling (Waktu Inferensi per Flow dalam $\mu\text{s}$):**
+     - Mengacu pada skripsi Hafizh (2024, Hal. 102) yang mengukur latensi 10,07 $\mu\text{s}$ per flow untuk membuktikan kesiapan *near real-time*.
+     - Model MLP kompak kita (Input 63 $\to$ Linear 64 $\to$ Linear 32 $\to$ Linear 3) diuji rata-rata waktu inferensinya per flow pada test set untuk membuktikan kelayakan implementasi pada gateway sensor edge berkecepatan tinggi.
+  2. **Memory Footprint (Pembuktian EWC vs Replay Buffer):**
+     - EWC hanya membutuhkan penyimpanan parameter bobot optimal $\theta^*$ dan matriks informasi Fisher diagonal $F_i$ (ukurannya konstan dan identik dengan ukuran parameter model MLP, hanya beberapa puluh kilobyte).
+     - Sebaliknya, Experience Replay mengharuskan buffer memori menyimpan ribuan data flow mentah (puluhan hingga ratusan megabyte). Pengukuran alokasi RAM membuktikan keunggulan efisiensi memori EWC pada perangkat edge.
+  3. **Waktu Komputasi Pelatihan CPU (CPU Training Duration):**
+     - Mengukur durasi pelatihan lokal per round di client guna mengetahui overhead komputasi kalkulasi penalti gradien kuadratik EWC dibanding pelatihan naive.
+  4. **Hyperparameter Tuning Sistematis (Optuna / 5 Seeds):**
+     - Seperti pada skripsi Hafizh (Gambar 4.1–4.9) dan arahan pembimbing (Poin 4), tuning dilakukan untuk penalti $\lambda$ EWC, *learning rate*, dan jumlah *local epochs* ($E$).
+  5. **Confusion Matrix Komparatif Sebelum vs Sesudah Task 2:**
+     - Memvisualisasikan matriks prediksi untuk membuktikan secara visual bahwa kelas SSH-Patator (Task 1) tidak tertelan/terlupakan setelah model mempelajari serangan DoS (Task 2).
+
+---
+
 ## 📋 Checklist Berkas yang Dibawa Saat Bimbingan
 
 1. **Cetakan Fisik / PDF Siap Tampil (2–3 Halaman):**  

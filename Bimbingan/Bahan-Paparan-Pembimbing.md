@@ -103,7 +103,25 @@ Berdasarkan pemindaian menyeluruh 1,53 juta baris data mentah:
 
 ---
 
-## 📚 Bagian 6: Landasan Pustaka 5 Tahun Terakhir (2021 – 2026)
+## ⚙️ Bagian 6: Parameter Evaluasi Komputasi vs QoS Jaringan (Mengacu pada Skripsi Hafizh, 2024)
+
+1. **Parameter QoS Jaringan Mentah Ditiadakan (Out of Scope):**  
+   - Metrik fisik seperti throughput, bandwidth link, packet loss, dan jitter ditiadakan selaras dengan peniadaan injeksi live traffic oleh pembimbing.  
+   - *Pengganti Relevan untuk FL:* **Communication Overhead FL** (mengukur ukuran payload parameter model dalam KB per round yang ditransfer antara client dan server Flower: $2 \times \text{Size}(\theta) \times R$).
+2. **Evaluasi Resource Instance Komputasi Diadopsi:**  
+   - **Memory Footprint (EWC vs Replay Buffer):** Membuktikan bahwa EWC hanya membutuhkan alokasi memori bobot $\theta^*$ dan matriks Fisher diagonal $F_i$ (konstan $\approx$ beberapa puluh KB), jauh lebih efisien dibanding buffer Experience Replay yang menyimpan ribuan sampel flow mentah di RAM.  
+   - **CPU Training Duration:** Mengukur overhead durasi komputasi perhitungan penalti EWC per *local epoch*.  
+   - **Ukuran Model (.pt / .onnx):** Mengukur ukuran biner model MLP siap pakai di edge.
+3. **Waktu Inferensi per Flow ($\mu\text{s}$):**  
+   - Mengadopsi metodologi Hafizh (2024, Hal. 102) yang mengukur latensi inferensi 10,07 $\mu\text{s}$/flow. Model MLP kita (63 $\to$ 64 $\to$ 32 $\to$ 3) diukur rata-rata waktu inferensinya pada test set untuk membuktikan kesiapan *near real-time detection*.
+4. **Hyperparameter Tuning Sistematis (Optuna / 5 Seeds):**  
+   - Melakukan tuning parameter optimal untuk penalti EWC ($\lambda$), *learning rate* ($\eta$), dan jumlah *local epochs* ($E$) dengan evaluasi multi-seed.
+5. **Confusion Matrix Komparatif Sebelum vs Sesudah Task 2:**  
+   - Memvisualisasikan matriks prediksi untuk membuktikan secara empiris bahwa kelas SSH (Task 1) tidak terlupakan setelah model mempelajari serangan DoS (Task 2).
+
+---
+
+## 📚 Bagian 7: Landasan Pustaka 5 Tahun Terakhir (2021 – 2026)
 
 Tugas akhir ini didukung oleh **13 artikel jurnal/prosiding internasional bereputasi dalam 5 tahun terakhir**:
 
@@ -128,7 +146,7 @@ Serta didukung **3 buku teks akademik terkini**:
 
 ---
 
-## 🗓️ Bagian 7: Rencana Kerja & Milestone Berikutnya
+## 🗓️ Bagian 8: Rencana Kerja & Milestone Berikutnya
 
 - **Minggu 1–2 (Saat Ini):** Konfirmasi 7 poin ruang lingkup dan persetujuan dosen pembimbing.
 - **Minggu 3–4:** Ekstraksi data 63 fitur, stratified split seimbang, pembekuan dataset (*Freeze Point 1*).

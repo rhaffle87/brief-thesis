@@ -12,7 +12,13 @@
 | **E5** | – | – | Injeksi Live Traffic Testbed | ❌ DIELIMINASI | Ditiadakan resmi oleh pembimbing |
 
 **Target Seed:** 5 kali pengulangan per eksperimen (Seed: 42, 43, 44, 45, 46)  
-**Metrik Utama:** Macro-F1, per-class Recall & F1, Backward Transfer (BWT)  
+**Metrik Evaluasi Utama (Deteksi ML):** Macro-F1, per-class Recall & Precision, Backward Transfer (BWT)  
+**Metrik Profiling Komputasi & Instance (Ref. Skripsi Hafizh, 2024):**  
+- **Inference Latency per Flow ($\mu\text{s}$):** Mengukur kecepatan prediksi per flow untuk validasi *near real-time*.  
+- **Memory Footprint (RAM / Storage):** Membuktikan efisiensi EWC ($\approx$ puluhan KB untuk bobot $\theta^*$ dan Fisher $F_i$) vs Experience Replay (puluhan/ratusan MB buffer data mentah).  
+- **CPU Training Duration:** Waktu latih lokal per round untuk mengukur overhead komputasi penalti kuadratik EWC.  
+- **Communication Overhead FL:** Ukuran payload parameter model (KB per round) yang dipertukarkan antara client dan server Flower ($2 \times \text{Size}(\theta) \times R$).  
+*(Catatan: Parameter QoS jaringan fisik seperti jitter, bandwidth link, dan packet loss resmi ditiadakan karena E5 dieliminasi).*  
 **Loss Function:** Weighted Cross-Entropy Loss (Penyeimbangan frekuensi kelas + Gradient Clipping norm 1.0)  
 **Staging:** Local Workstation First $\to$ Proxmox VE Server Simulation
 

@@ -46,10 +46,10 @@ Untuk memastikan kejelasan komunikasi akademik dan pembelaan skripsi, seluruh si
 2. **Privasi Lalu Lintas Jaringan:** Sentralisasi log trafik mentah melanggar konfidensialitas dan regulasi pelindungan data (UU PDP No. 27/2022). FedAvg memungkinkan pelatihan kolaboratif hanya melalui pertukaran bobot parameter.
 3. **Kesenjangan Riset (Research Gap):** Mayoritas riset FL-IDS berasumsi data statis satu waktu, sementara riset CL-IDS berasumsi pelatihan terpusat (*centralized*). Integrasi FCL pada data non-IID trafik jaringan nyata masih sangat minim dievaluasi secara empiris.
 
-![Perbandingan Paradigma Centralized vs Federated Learning](file:///e:/Projects/thesis/Aset/centralized_vs_fl_hernandezramos2025.png)  
+![Perbandingan Paradigma Centralized vs Federated Learning](../Aset/centralized_vs_fl_hernandezramos2025.png)  
 *Gambar 1: Perbandingan komparatif arsitektur Centralized Machine Learning (mentransmisikan data mentah rentan privasi) versus Federated Learning (hanya mentransmisikan bobot parameter $\theta$ ke server agregasi). Sumber publikasi resmi: Hernandez-Ramos, J. L., Karopoulos, G., & Chatzoglou, E. (2025). "Intrusion Detection Based on Federated Learning: A Systematic Review". ACM Computing Surveys (CSUR), Vol. 57, No. 12, Fig. 3. DOI: [10.1145/3731596](https://doi.org/10.1145/3731596).*
 
-![Protokol Komunikasi Federated Learning Terpusat](file:///e:/Projects/thesis/Aset/federated_learning_architecture_web.png)  
+![Protokol Komunikasi Federated Learning Terpusat](../Aset/federated_learning_architecture_web.png)  
 *Gambar 2: Siklus protokol Federated Learning terpusat: Server menginisialisasi model global $\theta_0$, klien mengunduh bobot dan melakukan pelatihan lokal pada data privat, kemudian mengirim pembaruan parameter kembali ke server untuk diagregasi menggunakan FedAvg. Sumber: MarcT0K (2023), "Centralized federated learning protocol", Wikimedia Commons, lisensi CC BY-SA 4.0.*
 
 ### 2.2 Rumusan Masalah (FINAL & TERKUNCI)
@@ -70,7 +70,7 @@ Dalam penelitian keamanan siber dan deteksi anomali trafik jaringan, terdapat be
 | **TON_IoT / BoT-IoT** | Dirancang khusus untuk protokol IoT (MQTT, CoAP, Modbus). | Fokus pada edge-IoT/smart home, tidak representatif untuk arsitektur private cloud / enterprise network server yang menjadi judul penelitian ini. | ❌ Ditolak |
 | **CIC-IDS2017 (Dipilih)** | Rekaman lalu lintas enterprise berdurasi 5 hari kerja (Senin–Jumat) mencakup flow HTTP, SSH, DoS (Hulk, GoldenEye, slowloris). | **Alasan Pemilihan:** Merupakan benchmark de-facto terpopuler di literatur NIDS. Yang paling krusial, **seluruh bug, cacat ekstraksi, dan anomali dataset ini telah dipetakan secara transparan dan tervalidasi peer-reviewed** (*Rosay et al., 2022; Dube et al., 2024*). Hal ini memungkinkan penulis melakukan pembersihan data berbasis bukti ilmiah yang kuat. | ✅ **DIPILIH** |
 
-![Topologi Testbed Jaringan CIC-IDS2017](file:///e:/Projects/thesis/Aset/cicids2017_testbed_architecture_sharafaldin2018.png)  
+![Topologi Testbed Jaringan CIC-IDS2017](../Aset/cicids2017_testbed_architecture_sharafaldin2018.png)  
 *Gambar 3: Topologi Testbed Jaringan CIC-IDS2017 (Victim-Network dan Attack-Network terisolasi). Sumber publikasi resmi: Sharafaldin, I., Lashkari, A. H., & Ghorbani, A. A. (2018). "Toward Generating a New Intrusion Detection Dataset and Intrusion Traffic Characterization". Proceedings of the 4th International Conference on Information Systems Security and Privacy (ICISSP), SCITEPRESS, Fig. 1. DOI: [10.5220/0006639801080116](https://doi.org/10.5220/0006639801080116).*
 
 ### 3.2 Alasan Spesifik Pemilihan Hari: Mengapa Hanya Senin, Selasa, dan Rabu? (Eliminasi Kamis & Jumat)
@@ -168,11 +168,11 @@ Perbandingan komprehensif pemilihan arsitektur model deteksi intrusi:
 **Spesifikasi Arsitektur MLP Baku:**
 $$\text{Input}(63) \longrightarrow \text{Linear}(64) + \text{ReLU} + \text{Dropout}(0.2) \longrightarrow \text{Linear}(32) + \text{ReLU} \longrightarrow \text{Linear}(3) + \text{Softmax}$$
 
-![Arsitektur Multi-Layer Perceptron (MLP) Feedforward](file:///e:/Projects/thesis/Aset/mlp_architecture_diagram_web.png)  
+![Arsitektur Multi-Layer Perceptron (MLP) Feedforward](../Aset/mlp_architecture_diagram_web.png)  
 *Gambar 4a: Topologi Jaringan Syaraf Tiruan Feedforward (Multi-Layer Perceptron) dengan Input Layer (63 fitur), Hidden Layers (64 dan 32 neuron teraktivasi ReLU), dan Output Layer (3 neuron klasifikasi softmax). Sumber: Glosser.ca (2013), "Colored neural network", Wikimedia Commons, lisensi CC BY-SA 3.0.*
 
-![Visualisasi Graph Komputasi MLP pada Netron](file:///e:/Projects/thesis/Aset/netron_mlp_architecture.png)  
-*Gambar 4b: Graph komputasi arsitektur MLP skripsi (Input: `flow_features_63` $\to$ Gemm/Linear: 64 $\to$ Relu $\to$ Dropout: 0.2 $\to$ Gemm/Linear: 32 $\to$ Relu $\to$ Gemm/Linear: 3 $\to$ `class_logits_3`) yang diekspor dari PyTorch ke format ONNX ([Aset/mlp_intrusion_model.onnx](file:///e:/Projects/thesis/Aset/mlp_intrusion_model.onnx)) dan divisualisasikan melalui [Netron](https://netron.app).*
+![Visualisasi Graph Komputasi MLP pada Netron](../Aset/netron_mlp_architecture.png)  
+*Gambar 4b: Graph komputasi arsitektur MLP skripsi (Input: `flow_features_63` $\to$ Gemm/Linear: 64 $\to$ Relu $\to$ Dropout: 0.2 $\to$ Gemm/Linear: 32 $\to$ Relu $\to$ Gemm/Linear: 3 $\to$ `class_logits_3`) yang diekspor dari PyTorch ke format ONNX ([Aset/mlp_intrusion_model.onnx](../Aset/mlp_intrusion_model.onnx)) dan divisualisasikan melalui [Netron](https://netron.app).*
 
 ### 6.2 Protokol Sistematis Hyperparameter Tuning & Penyeimbangan Parameter
 Sesuai arahan pembimbing bahwa metode dan parameter harus seimbang bobotnya, proses pencarian parameter (*hyperparameter search*) dirancang terstruktur menggunakan data validasi (15% split terstratifikasi) lintas 5 seed acak:
@@ -218,7 +218,7 @@ flowchart TD
     end
 ```
 
-![Arsitektur Fisik Testbed Private Cloud Server FL-CL](file:///e:/Projects/thesis/Aset/arsitektur_testbed_fl_cl.png)  
+![Arsitektur Fisik Testbed Private Cloud Server FL-CL](../Aset/arsitektur_testbed_fl_cl.png)  
 *Gambar 5: Diagram Topologi Fisik Testbed Private Cloud Server FL-CL pada Proxmox VE Cluster. Sumber aset lokal: Aset/arsitektur_testbed_fl_cl.png.*
 
 | Dimensi | Desain Awal: CREEPED (`fl-cl`) | Desain Terkunci: SCOPED (`thesis`) | Justifikasi Perubahan |
@@ -244,16 +244,16 @@ Dalam sistem deteksi intrusi jaringan (NIDS) yang dinamis, model machine learnin
 1. **Catastrophic Forgetting (Kelupaan Katastropik):** Jaringan syaraf tiruan standar yang dilatih secara gradien pada tugas baru ($Task\ 2$) cenderung menimpa (*overwrite*) bobot parameter yang sebelumnya krusial untuk mengenali tugas lama ($Task\ 1$). Akibatnya, kemampuan model mendeteksi serangan lama runtuh mendekati 0%.
 2. **Stability-Plasticity Dilemma:** Model dituntut memiliki fleksibilitas (*plasticity*) memadai untuk mempelajari distribusi ancaman baru yang belum pernah dilihat, sembari mempertahankan kekokohan (*stability*) representasi pengetahuan lama.
 
-![Kerangka Konseptual Continual Learning](file:///e:/Projects/thesis/Aset/continual_learning_framework_wang2023.png)  
+![Kerangka Konseptual Continual Learning](../Aset/continual_learning_framework_wang2023.png)  
 *Gambar 6: Kerangka Konseptual Continual Learning: (a) Kebutuhan model beradaptasi terhadap urutan tugas inkremental dengan distribusi data dinamis; (b) Manajemen trade-off antara stabilitas memori (retensi pengetahuan lama) dan plastisitas pembelajaran (akuisisi pengetahuan baru), serta kemampuan generalisasi intra/inter-task; (c) Klasifikasi metodologi mitigasi catastrophic forgetting; (d) Penyesuaian skenario implementasi praktis. Sumber publikasi resmi: Wang, L., Zhang, X., Su, H., & Zhu, J. (2024). "A Comprehensive Survey of Continual Learning: Theory, Method and Application". IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), arXiv:2302.00487. DOI: [10.1109/TPAMI.2024.3367329](https://doi.org/10.1109/TPAMI.2024.3367329).*
 
-![Taksonomi Rumpun Metode Continual Learning](file:///e:/Projects/thesis/Aset/continual_learning_taxonomy_delange2021.png)  
+![Taksonomi Rumpun Metode Continual Learning](../Aset/continual_learning_taxonomy_delange2021.png)  
 *Gambar 7: Diagram Pohon Taksonomi Metode Continual Learning: Klasifikasi komprehensif atas metode Replay (berbasis buffer memori), Regularization-based (termasuk EWC pada cabang pendekatan bobot prior-focused), dan Parameter Isolation. Sumber publikasi resmi: De Lange, M. et al. (2022). "A Continual Learning Survey: Defying Forgetting in Classification Tasks". IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), Vol. 44, No. 7, pp. 3366–3385, Fig. 1. DOI: [10.1109/TPAMI.2021.3057446](https://doi.org/10.1109/TPAMI.2021.3057446).*
 
 ### 8.3 Intuisi Ruang Parameter EWC (Elastic Weight Consolidation)
 Penelitian Kirkpatrick et al. (2017) membuktikan bahwa ruang parameter jaringan syaraf memiliki kelenturan (*overparameterization*). Terdapat konfigurasi bobot parameter yang mampu memuaskan kedua tugas sekaligus, asalkan pembaruan parameter yang krusial bagi tugas lama dilindungi oleh penalti kuadratik berbasis informasi Fisher:
 
-![Schematic Trajectories in Parameter Space of EWC](file:///e:/Projects/thesis/Aset/ewc_parameter_space_kirkpatrick2017.png)  
+![Schematic Trajectories in Parameter Space of EWC](../Aset/ewc_parameter_space_kirkpatrick2017.png)  
 *Gambar 8: Ilustrasi skematik ruang parameter EWC. Lintasan tanpa penalti (biru) menyebabkan forgetting total pada Task A; penalti seragam (hijau) terlalu restriktif; sedangkan penalti berbobot Fisher EWC (merah) menuntun model menuju irisan performa optimal untuk Task A dan Task B secara simultan. Sumber publikasi resmi: Kirkpatrick, J. et al. (2017). "Overcoming catastrophic forgetting in neural networks". PNAS, Vol. 114, No. 13, Fig. 1. DOI: [10.1073/pnas.1611835114](https://doi.org/10.1073/pnas.1611835114).*
 
 ### 8.4 Diagram Sekuensial Alur Kerja (Workflow Task FL-CL)
@@ -291,10 +291,10 @@ sequenceDiagram
 
 Evaluasi dihitung berdasarkan Matriks Kontingensi (*Confusion Matrix*) multikelas: $TP_c$ (True Positive), $FP_c$ (False Positive), $TN_c$ (True Negative), dan $FN_c$ (False Negative) untuk masing-masing kelas $c \in \{\text{Normal}, \text{SSH-Patator}, \text{DoS}\}$.
 
-![Visualisasi Presisi dan Recall](file:///e:/Projects/thesis/Aset/precision_recall_diagram_walber2014.png)  
+![Visualisasi Presisi dan Recall](../Aset/precision_recall_diagram_walber2014.png)  
 *Gambar 9: Visualisasi komparatif antara Presisi (relevansi hasil prediksi) dan Recall (kelengkapan penemuan seluruh anomali sebenarnya). Sumber: Walber (2014), "Precision and Recall Diagram", Wikimedia Commons, lisensi CC BY-SA 4.0.*
 
-![Diagram Lengkap Confusion Matrix dan Metrik Evaluasi](file:///e:/Projects/thesis/Aset/confusion_matrix_detailed_web.png)  
+![Diagram Lengkap Confusion Matrix dan Metrik Evaluasi](../Aset/confusion_matrix_detailed_web.png)  
 *Gambar 10: Struktur Komprehensif Matriks Kontingensi (Confusion Matrix) dengan formulasi True Positive (TP), False Positive (FP), True Negative (TN), False Negative (FN), serta metrik turunan Accuracy, Sensitivity/Recall, Specificity, dan Precision. Sumber: Wikimedia Commons, lisensi CC BY-SA 4.0.*
 
 ### 1. Akurasi (Accuracy)
@@ -379,7 +379,7 @@ flowchart LR
     E3 -.->|"Efek Tambah EWC pada FL"| E4
 ```
 
-![Diagram Alur Metode Penelitian](file:///e:/Projects/thesis/Aset/alur_metode_penelitian.png)  
+![Diagram Alur Metode Penelitian](../Aset/alur_metode_penelitian.png)  
 *Gambar 11: Diagram Alur Metode Penelitian Terstruktur dari Praproses hingga Evaluasi BWT. Sumber aset lokal: Aset/alur_metode_penelitian.png.*
 
 | Kode   | Moda FL    | Moda CL | Deskripsi Pengujian                                                         | Target Bukti Ilmiah                                                                  |     |
@@ -393,6 +393,41 @@ flowchart LR
 
 ---
 
+## ⚙️ 12. Parameter Evaluasi Komputasi & Batasan Parameter Jaringan (Mengacu pada Skripsi Hafizh, 2024)
+
+Mengacu pada skripsi [Referensi-Skripsi-Hafizh.pdf](Referensi-Skripsi-Hafizh.pdf) (Hafizh Athallah Rinandri, 2024, Pembimbing: Dr.Ir. Achmad Affandi, DEA) dan arahan pembimbing:
+
+### 12.1 Eliminasi Parameter QoS Jaringan Mentah & Pengganti Communication Overhead FL
+* **Parameter QoS Ditiadakan:** Metrik fisik jaringan seperti *bandwidth*, *throughput*, *delay*, *jitter*, dan *packet loss* resmi ditiadakan dari target evaluasi.
+  * *Justifikasi Ilmiah:* Skenario injeksi live traffic (E5) telah resmi dieliminasi oleh pembimbing; metrik jaringan transport (L3/L4) tidak mengukur keberhasilan mitigasi *catastrophic forgetting* atau konvergensi FL. Jika diukur pada lingkungan virtual lokal, metrik tersebut hanya mencerminkan karakteristik *virtual bridge* internal Linux workstation, bukan performa algoritma IDS.
+* **Pengganti Relevan untuk Federated Learning (Communication Overhead):**
+  * Mengukur ukuran payload bobot model MLP yang ditransfer antara client dan server Flower per round agregasi ($2 \times \text{Size}(\theta) \times R$) dalam kilobyte/megabyte. Ini membuktikan secara kuantitatif efisiensi penghematan bandwidth FL dibanding pengiriman data mentah terpusat.
+
+### 12.2 Evaluasi Resource Instance Komputasi (CPU, RAM, Storage)
+* **Memory Footprint (EWC vs Replay Buffer):**
+  * EWC hanya membutuhkan penyimpanan vektor parameter optimal $\theta^*$ dan matriks informasi Fisher diagonal $F_i$. Ukuran alokasi memori ini konstan dan sama persis dengan ukuran parameter model MLP kita ($\approx$ puluhan KB).
+  * Sebaliknya, metode Experience Replay mengharuskan penyimpanan buffer data paket/flow mentah di memori lokal (puluhan hingga ratusan megabyte). Profiling alokasi memori RAM membuktikan secara empiris keunggulan efisiensi penyimpanan EWC pada perangkat edge IDS.
+* **Waktu Pelatihan CPU (CPU Training Duration):**
+  * Mengukur durasi komputasi pelatihan lokal per round di client guna memetakan overhead komputasi dari kalkulasi penalti gradien kuadratik EWC dibanding pelatihan naive.
+* **Ukuran Penyimpanan Model (Model Size):**
+  * Mengukur ukuran biner model siap pakai dalam format `.pt` (PyTorch) dan `.onnx`.
+
+### 12.3 Metrik Efisiensi Inferensi Near Real-Time (Latency per Flow $\mu\text{s}$)
+* Mengadopsi metodologi Hafizh (2024, Hal. 102) yang mengukur latensi inferensi 10,07 $\mu\text{s}$ per flow.
+* Model MLP kompak penelitian ini (Input 63 $\to$ Linear 64 $\to$ Linear 32 $\to$ Linear 3) diuji rata-rata waktu inferensinya per flow pada test set untuk memvalidasi bahwa model sangat ringan dan siap dioperasikan pada throughput data tinggi di gateway jaringan.
+
+### 12.4 Hyperparameter Tuning Terstruktur (Optuna / 5-Seed Grid)
+* Melakukan pencarian konfigurasi parameter optimal secara sistematis untuk:
+  * Bobot regularisasi EWC ($\lambda$).
+  * *Learning rate* lokal klien ($\eta$).
+  * Jumlah *local epoch* ($E$) per round federasi (untuk mengendalikan *weight divergence* sesuai Zhao et al., 2018).
+
+### 12.5 Visualisasi Dinamis Confusion Matrix & Desain Arsitektur Konseptual Edge (Bab 3)
+* **Confusion Matrix Sebelum vs Sesudah Task 2:** Menampilkan matriks kebingungan untuk membuktikan secara visual bahwa kelas SSH-Patator (Task 1) tidak tertelan/terlupakan setelah model mempelajari serangan DoS (Task 2).
+* **Desain Arsitektur Konseptual Real-Time:** Mengadopsi diagram alur penempatan sistem deteksi pada infrastruktur jaringan nyata (TAP/Mirror $\to$ Flow Extractor $\to$ Client FL) di Bab 3 Metodologi sebagai perancangan arsitektural tanpa memerlukan uji coba injeksi aktif yang rentan noise.
+
+---
+
 ## 🟢 KESIMPULAN STATUS RUANG LINGKUP: READY FOR PREPROCESSING DATASETS
 
-Seluruh keputusan metodologis (1 s.d. 8) telah disetujui resmi oleh dosen pembimbing. Tidak ada lagi parameter ambigu atau risiko scope creep. Pipeline ekstraksi dataset (`scripts/preprocess_cicids2017.py`) resmi dinyatakan **READY TO RUN**.
+Seluruh keputusan metodologis (1 s.d. 9) telah disetujui resmi oleh dosen pembimbing. Tidak ada lagi parameter ambigu atau risiko scope creep. Pipeline ekstraksi dataset (`scripts/preprocess_cicids2017.py`) resmi dinyatakan **READY TO RUN**.

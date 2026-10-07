@@ -71,13 +71,18 @@ tags: [eksperimen, {{EXP_ID}}, seed-{{SEED}}]
 | **BWT** | {{BWT}} | Backward Transfer |
 | **SSH F1 Drop** | {{SSH_DROP}}% | T1 → T2 retention |
 
-### System Metrics
+### System & Computational Profiling Metrics (Ref: Skripsi Hafizh 2024)
 
-| Metrik | Nilai |
-|--------|-------|
-| **Training Time** | {{TRAIN_TIME}} seconds |
-| **Communication Rounds** | {{ROUNDS}} (jika FL) |
-| **Payload Size** | {{PAYLOAD_KB}} KB (jika FL) |
+| Metrik | Nilai | Keterangan |
+|--------|-------|------------|
+| **Inference Latency** | {{INFERENCE_US}} $\mu\text{s}$/flow | Latensi komputasi inferensi per sampel |
+| **RAM Peak / Memory Footprint** | {{RAM_MB}} MB | Alokasi memori runtime (EWC Fisher vs Replay Buffer) |
+| **Training Time (CPU)** | {{TRAIN_TIME}} seconds | Total durasi pelatihan komputasi |
+| **Model Size (.pt / .onnx)** | {{MODEL_KB}} KB | Ukuran artefak biner model |
+| **Communication Rounds** | {{ROUNDS}} | Jumlah putaran federasi (jika FL) |
+| **Communication Overhead** | {{PAYLOAD_KB}} KB / round | Ukuran payload parameter bobot FL |
+
+*(Catatan: Parameter QoS jaringan fisik seperti jitter, bandwidth, dan packet loss ditiadakan sejalan eliminasi live traffic).*
 
 ---
 

@@ -4,9 +4,9 @@ Direktori ini memuat seluruh bank telaah literatur ilmiah, verifikasi metadata, 
 
 ## 📂 Dokumen Utama:
 
-- **[Crosscheck.md](file:///e:/Projects/thesis/Literatur/Crosscheck.md)** — Tabel verifikasi metadata resmi dan status keabsahan naskah untuk 25 paper ilmiah (100% verified via Crossref & arXiv).
-- **[Daftar-Pustaka.md](file:///e:/Projects/thesis/Literatur/Daftar-Pustaka.md)** — Kompilasi bibliografi berstandar akademik siap sitasi untuk naskah skripsi.
-- **[Inventaris-PDF.md](file:///e:/Projects/thesis/Literatur/PDFs/Inventaris-PDF.md)** — Katalog inventaris 25 berkas PDF lokal yang tersimpan di subdirektori `PDFs/`.
+- **[Crosscheck.md](Crosscheck.md)** — Tabel verifikasi metadata resmi dan status keabsahan naskah untuk 25 paper ilmiah (100% verified via Crossref & arXiv).
+- **[Daftar-Pustaka.md](Daftar-Pustaka.md)** — Kompilasi bibliografi berstandar akademik siap sitasi untuk naskah skripsi.
+- **[Inventaris-PDF.md](PDFs/Inventaris-PDF.md)** — Katalog inventaris 25 berkas PDF lokal yang tersimpan di subdirektori `PDFs/`.
 - **`[25 Catatan Paper Individu]`** — Telaah mendalam per paper dengan metadata lengkap, 3 temuan kunci, dan relevansi langsung terhadap RM1/RM2.
 
 ## 📁 Subdirektori:

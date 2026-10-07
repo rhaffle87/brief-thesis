@@ -21,6 +21,7 @@ Berdasarkan sesi tatap muka bimbingan Tugas Akhir, 8 poin keputusan metodologis 
 | **6** | **Partisi Data Normal** | 🔀 **Random Split 50/50 All Days (Opsi A)** | Data Normal dari Senin, Selasa, dan Rabu digabung lalu dibagi acak 50% untuk Task 1 dan 50% untuk Task 2 guna mengeliminasi bias pola harian (*day-pattern confound*). |
 | **7** | **Komposisi Kelas DoS** | 🌊 **Keep As-Is (Opsi A)** | Mempertahankan distribusi alami 4 subvarian DoS (Hulk ~89%, GoldenEye ~5%, slowloris ~3%, Slowhttptest ~3%) yang digabung menjadi satu kelas "DoS" volumetrik realistis. |
 | **8** | **Handling Imbalance** | ⚖️ **Weighted Loss / Keep All Data (Opsi C)** | Mempertahankan seluruh data bersih (~1,53 juta baris unik) tanpa pemangkasan data massal. Ketimpangan kelas diatasi menggunakan Weighted Cross-Entropy Loss dengan bobot invers frekuensi terkalibrasi. |
+| **9** | **Parameter Komputasi vs QoS** | 📊 **Profiling Instance & Overhead FL (QoS Ditiadakan)** | QoS jaringan fisik (jitter, packet loss, bandwidth) ditiadakan. Diadopsi profiling instance (RAM footprint EWC vs Replay, CPU duration, latensi inferensi per flow dalam $\mu\text{s}$, dan communication overhead FL) mengacu pada standar skripsi Hafizh (2024). |
 
 ---
 
@@ -115,6 +116,25 @@ Sesuai arahan pembimbing terkait keseimbangan metode, parameter, dan kehati-hati
 ### 5. Protokol Staging Arsitektur Testbed (Local First $\to$ Server Simulation)
 * **Fase 1 (Local Realization):** Seluruh modul algoritma (preprocessing, training loop PyTorch, perhitungan Fisher, klien Flower, strategi agregasi FedAvg) diuji dan diverifikasi secara lokal di laptop (lingkungan Python virtual/Docker lokal).
 * **Fase 2 (Server Simulation):** Setelah kode lokal lolos uji unit dan menghasilkan metrik valid pada 5 seed, konfigurasi dideploy ke lingkungan virtual Proxmox VE (Server agregator, VM Client A, VM Client B) untuk pelaporan infrastruktur.
+
+---
+
+### KEPUTUSAN 5 (Tambahan): Parameter Evaluasi Komputasi & Batasan Parameter Jaringan (Mengacu pada Skripsi Hafizh, 2024)
+
+Mengacu pada skripsi [Referensi-Skripsi-Hafizh.pdf](../Proposal/Referensi-Skripsi-Hafizh.pdf) (Hafizh, 2024, Pembimbing: Dr.Ir. Achmad Affandi, DEA) dan arahan pembimbing:
+1. **Parameter QoS Jaringan Mentah Ditiadakan (Out of Scope):**  
+   - Metrik fisik seperti bandwidth link, throughput, delay, jitter, dan packet loss resmi ditiadakan sejalan dengan eliminasi injeksi trafik langsung.  
+   - *Pengganti Relevan untuk FL:* **Communication Overhead FL** (ukuran payload bobot parameter model dalam KB/MB per round agregasi: $2 \times \text{Size}(\theta) \times R$).
+2. **Evaluasi Resource Instance Komputasi Diadopsi:**  
+   - **Memory Footprint (RAM EWC vs Replay Buffer):** Membuktikan efisiensi EWC yang hanya menyimpan bobot optimal $\theta^*$ dan Fisher diagonal $F_i$ ($\approx$ puluhan KB) dibanding Experience Replay yang membebani RAM/disk dengan ribuan data flow mentah.  
+   - **CPU Training Duration per Round:** Mengukur overhead durasi perhitungan penalti EWC per *local epoch*.  
+   - **Model Storage Size (.pt & .onnx):** Mengukur ukuran file model siap pakai di edge.
+3. **Inference Latency per Flow ($\mu\text{s}$):**  
+   - Mengadopsi pengukuran latensi komputasi inferensi seperti pada Hafizh (2024, Hal. 102) yang menghasilkan 10,07 $\mu\text{s}$/flow. Model MLP kita diuji waktu inferensinya per flow untuk membuktikan kesiapan *near real-time detection*.
+4. **Hyperparameter Tuning Sistematis (Optuna / 5 Seeds):**  
+   - Melakukan tuning sistematis (Bayesian/Grid) untuk bobot penalti $\lambda$ EWC, *learning rate* $\eta$, dan jumlah *local epochs* $E$ melintasi 5 random seed (42 s.d. 46).
+5. **Confusion Matrix Komparatif Sebelum vs Sesudah Task 2:**  
+   - Menampilkan visualisasi matriks prediksi untuk membuktikan secara empiris bahwa kelas SSH (Task 1) tidak tertimpa/terlupakan setelah model mempelajari serangan DoS (Task 2).
 
 ---
 

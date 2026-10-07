@@ -143,6 +143,15 @@ Eksperimen diuji melintasi 5 random seed (42, 43, 44, 45, 46) untuk memastikan s
 
 *(Catatan: E5 Live Traffic Injection secara resmi dieliminasi dari lingkup penelitian berdasarkan arahan pembimbing pada 06 Oktober 2026).*
 
+### 📈 Metrik Evaluasi & Profiling Komputasi (Ref. Skripsi Hafizh, 2024):
+1. **Metrik Deteksi ML:** Macro-F1, per-class Precision & Recall, dan Backward Transfer (BWT).
+2. **Profiling Instance & Efisiensi Komputasi:**
+   - **Inference Latency per Flow ($\mu\text{s}$):** Mengukur kecepatan klasifikasi per flow untuk validasi *near real-time* di edge.
+   - **Memory Footprint (RAM / Storage):** Membuktikan efisiensi EWC ($\approx$ puluhan KB untuk parameter $\theta^*$ dan matriks Fisher $F_i$) dibanding Experience Replay yang membebani memori dengan buffer paket mentah.
+   - **Communication Overhead FL:** Mengukur ukuran payload parameter model (KB/MB per round) antara client dan server Flower ($2 \times \text{Size}(\theta) \times R$).
+   - *(Catatan: Parameter QoS jaringan fisik seperti bandwidth link, delay, jitter, dan packet loss ditiadakan sejalan eliminasi live traffic).*
+3. **Visualisasi:** Confusion Matrix sebelum vs sesudah Task 2 untuk memvisualisasikan retensi memori deteksi.
+
 ---
 
 ## 🛠️ Reproduksibilitas & Eksekusi

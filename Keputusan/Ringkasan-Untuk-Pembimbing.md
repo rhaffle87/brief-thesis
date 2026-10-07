@@ -52,6 +52,15 @@ Berdasarkan hasil tatap muka bimbingan bersama dosen pembimbing, seluruh poin kr
 - **Status:** **DISETUJUI (Pilihan C)**
 - **Justifikasi Pembimbing:** Mempertahankan seluruh 1.529.677 baris data bersih tanpa pemangkasan massal. Menggunakan fungsi Weighted Cross-Entropy Loss dengan bobot invers frekuensi terkalibrasi untuk melindungi kelas minoritas (SSH-Patator).
 
+### 9. Parameter Evaluasi Komputasi & Eliminasi QoS Jaringan (Mengacu Skripsi Hafizh, 2024)
+- **Status:** **DISETUJUI (Profiling Instance & Overhead Komunikasi)**
+- **Justifikasi Pembimbing:**
+  - **QoS Mentah (Bandwidth, Delay, Jitter, Packet Loss):** Resmi ditiadakan selaras dengan eliminasi injeksi trafik riil.
+  - **Communication Overhead FL:** Diadopsi untuk mengukur ukuran payload bobot model (KB per round) antara client dan server Flower ($2 \times \text{Size}(\theta) \times R$).
+  - **Resource Instance:** Diadopsi pengukuran alokasi memori RAM (membuktikan efisiensi memori EWC $\approx$ puluhan KB vs buffer Experience Replay), waktu komputasi CPU per local epoch, dan ukuran biner model (.pt / .onnx).
+  - **Inference Latency:** Diadopsi pengukuran latensi komputasi inferensi per flow ($\mu\text{s}$) mengacu pada standar skripsi Hafizh (2024, Hal. 102).
+  - **Visualisasi Dinamis:** Menyajikan Confusion Matrix sebelum vs sesudah Task 2 untuk memvisualisasikan retensi memori deteksi.
+
 ---
 
 ## 📊 Matriks Eksperimen yang Dibekukan

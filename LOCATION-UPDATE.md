@@ -32,7 +32,7 @@
   - `Tuesday-WorkingHours.pcap_ISCX.csv` (BENIGN + SSH-Patator + FTP-Patator)
   - `Wednesday-workingHours.pcap_ISCX.csv` (BENIGN + 4 varian DoS: Hulk, GoldenEye, slowloris, Slowhttptest)
 - **Lokasi Cache Dedup:** `E:\Projects\thesis\Datasets\interim\cic_3class_dedup.parquet` (1.529.677 baris, 3 kelas).
-- **Catatan LYCOS-IDS2017:** Tautan unduh resmi server Universitas Le Mans berstatus *404 Not Found*. Diputuskan secara formal menggunakan CIC-IDS2017 resmi dengan batasan terdokumentasi (lihat [DATASET-UNAVAILABLE-LYCOS.md](file:///e:/Projects/thesis/Metodologi/DATASET-UNAVAILABLE-LYCOS.md)).
+- **Catatan LYCOS-IDS2017:** Tautan unduh resmi server Universitas Le Mans berstatus *404 Not Found*. Diputuskan secara formal menggunakan CIC-IDS2017 resmi dengan batasan terdokumentasi (lihat [DATASET-UNAVAILABLE-LYCOS.md](Metodologi/DATASET-UNAVAILABLE-LYCOS.md)).
 
 ### B. Aturan Seleksi Fitur (63 Fitur Unik + 1 Label)
 - **Total Kolom Awal:** 79 kolom (78 fitur + 1 Label).
@@ -49,21 +49,21 @@
 ## 📚 3. Status Literatur & Pembekuan Algoritma
 
 1. **Literatur:**
-   - 25 paper inti dan pendukung tersedia lengkap dalam bentuk PDF di [Literatur/PDFs/](file:///e:/Projects/thesis/Literatur/PDFs/) (13 paper) dan [Literatur/PDFs/Opsional/](file:///e:/Projects/thesis/Literatur/PDFs/Opsional/) (12 paper).
-   - Seluruh metadata diverifikasi pada [Literatur/Crosscheck.md](file:///e:/Projects/thesis/Literatur/Crosscheck.md).
+   - 25 paper inti dan pendukung tersedia lengkap dalam bentuk PDF di [Literatur/PDFs/](Literatur/PDFs) (13 paper) dan [Literatur/PDFs/Opsional/](Literatur/PDFs/Opsional) (12 paper).
+   - Seluruh metadata diverifikasi pada [Literatur/Crosscheck.md](Literatur/Crosscheck.md).
 2. **Algoritma Terkunci:**
-   - **FL:** Hanya FedAvg dengan topologi 2 client + 1 server aggregator ([Keputusan-Pembekuan-FL.md](file:///e:/Projects/thesis/Keputusan/Keputusan-Pembekuan-FL.md)).
-   - **CL:** Hanya EWC vs Naive Fine-Tuning sekuensial ([Keputusan-Pembekuan-CL.md](file:///e:/Projects/thesis/Keputusan/Keputusan-Pembekuan-CL.md)).
+   - **FL:** Hanya FedAvg dengan topologi 2 client + 1 server aggregator ([Keputusan-Pembekuan-FL.md](Keputusan/Keputusan-Pembekuan-FL.md)).
+   - **CL:** Hanya EWC vs Naive Fine-Tuning sekuensial ([Keputusan-Pembekuan-CL.md](Keputusan/Keputusan-Pembekuan-CL.md)).
    - **Arsitektur Model:** Single MLP (Input: 63 → Dense: 64 (ReLU) → Dense: 32 (ReLU) → Output: 3 (Softmax)).
 
 ---
 
 ## 🎯 4. Dokumen Kunci untuk Tahap Sekarang
 
-1. **Briefing Pembimbing:** [Keputusan/Ringkasan-Untuk-Pembimbing.md](file:///e:/Projects/thesis/Keputusan/Ringkasan-Untuk-Pembimbing.md) (memuat 7 pertanyaan konfirmasi scope, dataset, dan evaluasi).
-2. **Dashboard Proyek:** [Dashboard/Dashboard.md](file:///e:/Projects/thesis/Dashboard/Dashboard.md) (monitoring mingguan dan matriks E0-E5).
-3. **Hasil Verifikasi EDA:** [Metodologi/EDA-CIC-IDS2017.md](file:///e:/Projects/thesis/Metodologi/EDA-CIC-IDS2017.md) dan [Metodologi/EDA-Verifikasi.md](file:///e:/Projects/thesis/Metodologi/EDA-Verifikasi.md).
-4. **Struktur Lengkap Vault:** [README-Structure.md](file:///e:/Projects/thesis/README-Structure.md).
+1. **Briefing Pembimbing:** [Keputusan/Ringkasan-Untuk-Pembimbing.md](Keputusan/Ringkasan-Untuk-Pembimbing.md) (memuat 7 pertanyaan konfirmasi scope, dataset, dan evaluasi).
+2. **Dashboard Proyek:** [Dashboard/Dashboard.md](Dashboard/Dashboard.md) (monitoring mingguan dan matriks E0-E5).
+3. **Hasil Verifikasi EDA:** [Metodologi/EDA-CIC-IDS2017.md](Metodologi/EDA-CIC-IDS2017.md) dan [Metodologi/EDA-Verifikasi.md](Metodologi/EDA-Verifikasi.md).
+4. **Struktur Lengkap Vault:** [README-Structure.md](README-Structure.md).
 
 ---
 
