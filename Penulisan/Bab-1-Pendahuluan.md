@@ -62,7 +62,7 @@ Tujuan yang ingin dicapai melalui pelaksanaan penelitian tugas akhir ini adalah:
 
 ---
 
-## 1.5 Manfaat Penelitian
+## 1.5 Manfaat
 
 Pelaksanaan penelitian ini diharapkan dapat memberikan kontribusi dan manfaat teoretis maupun praktis:
 1. **Manfaat Teoretis (Akademik):**
@@ -71,15 +71,3 @@ Pelaksanaan penelitian ini diharapkan dapat memberikan kontribusi dan manfaat te
 2. **Manfaat Praktis (Teknologi & Industri):**
    - Menyediakan kerangka arsitektur deteksi intrusi adaptif yang aman privasi dan hemat *bandwidth* untuk diaplikasikan pada sensor *edge gateway* jaringan enterprise atau *smart campus*.
    - Membuktikan bahwa pembaruan model keamanan dapat dilakukan secara berkala dan berkesinambungan tanpa perlu mengirimkan log rekaman data mentah pengguna ke server eksternal dan tanpa kehilangan kapabilitas mendeteksi ancaman masa lalu.
-
----
-
-## 1.6 Sistematika Penulisan
-
-Buku skripsi ini disusun ke dalam lima bab dengan sistematika penulisan sebagai berikut:
-
-- **BAB 1 PENDAHULUAN:** Menguraikan latar belakang penelitian mengenai urgensi NIDS adaptif, tantangan privasi FL, heterogenitas non-IID, dan *catastrophic forgetting* pada CL, dilanjutkan dengan perumusan masalah, batasan masalah yang terdefinisi ketat, tujuan, manfaat penelitian, serta sistematika penulisan.
-- **BAB 2 TINJAUAN PUSTAKA:** Membahas landasan teori fundamental mengenai keamanan jaringan, taksonomi serangan siber (SSH brute-force dan DoS), karakteristik dataset CIC-IDS2017 beserta isu kritisnya, konsep Federated Learning dan optimasi FedAvg, konsep Continual Learning dan skenario Class-IL, formulasi matematis Elastic Weight Consolidation (EWC) dan Matriks Informasi Fisher, arsitektur Multilayer Perceptron (MLP), metrik evaluasi deteksi dan komputasi, serta telaah kritis terhadap penelitian terdahulu lima tahun terakhir.
-- **BAB 3 METODOLOGI PENELITIAN:** Menjelaskan tahapan alur penelitian sistematis, diagram alir metode, prosedur audit dan praproses dataset (deduplikasi, eliminasi 10 kolom konstan, 5 duplikat, dan *Destination Port*), skema partisi non-IID 50/50 normal *all-days*, penanganan ketimpangan kelas via *Weighted Loss*, perancangan arsitektur sistem FL-CL IDS, perancangan arsitektur konseptual *real-time* di tingkat edge, matriks pengujian eksperimen E0 s.d. E4, serta protokol evaluasi multi-seed dan *hyperparameter tuning*.
-- **BAB 4 PENGUJIAN DAN ANALISIS:** Menyajikan hasil eksperimen komparatif melintasi lima random seed (E0 s.d. E4), analisis mendalam terhadap rumusan masalah 1 (FL vs Lokal non-IID) dan rumusan masalah 2 (mitigasi forgetting via EWC), visualisasi dinamika kurva konvergensi dan *Confusion Matrix* pergeseran retensi memori, analisis sensitivitas *hyperparameter* EWC ($\lambda$), serta evaluasi metrik komputasi (waktu inferensi per flow, alokasi memori RAM EWC vs Replay, dan *communication overhead*).
-- **BAB 5 KESIMPULAN DAN SARAN:** Memuat kesimpulan akhir yang menjawab rumusan masalah penelitian secara ringkas dan objektif berbasis data empiris, serta memberikan saran-saran strategis untuk pengembangan penelitian lanjutan di masa mendatang.
