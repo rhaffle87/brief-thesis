@@ -6,7 +6,7 @@
 
 ## STATUS VERIFIKASI DARI BRIEFING SCOPE
 
-Berdasarkan `Briefing Scope TA_ Federated-Continual Learning untuk Deteksi Intrusi.md`, berikut verifikasi DOI lengkap:
+Berdasarkan `Briefing-Scope-TA_ Federated-Continual Learning untuk Deteksi Intrusi.md`, berikut verifikasi DOI lengkap:
 
 ### ✔ VERIFIED - READY TO CITE
 

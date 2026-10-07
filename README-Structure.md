@@ -21,7 +21,7 @@ E:\Projects\thesis/
 │   └── Timeline-16-Minggu.md# Rencana kerja mingguan terstruktur
 │
 ├── Proposal/                # Briefing proposal TA & referensi skripsi
-│   ├── Briefing Scope TA_ Federated-Continual Learning untuk Deteksi Intrusi.md
+│   ├── Briefing-Scope-TA_ Federated-Continual Learning untuk Deteksi Intrusi.md
 │   └── Referensi-Skripsi-Hafizh.pdf
 │
 ├── Literatur/               # Catatan literatur per paper & repositori PDF

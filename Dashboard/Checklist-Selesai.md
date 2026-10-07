@@ -1,7 +1,7 @@
 # Checklist Selesai Proyek TA
 
 ## Checklist Tahapan
-- [x] Briefing Scope TA dan Rumusan Masalah dibekukan
+- [x] Briefing-Scope-TA dan Rumusan Masalah dibekukan
 - [x] Unduh dan verifikasi 25 paper literatur (13 inti + 12 pendukung, 100% tervalidasi di disk)
 - [x] Audit komprehensif dataset CIC-IDS2017 (EDA, duplikat, port leakage, kolom konstan/identik)
 - [x] Restrukturisasi vault nama sederhana (14 folder) dan perbaikan tautan

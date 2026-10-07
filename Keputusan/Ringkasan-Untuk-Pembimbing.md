@@ -79,6 +79,6 @@ Berdasarkan hasil tatap muka bimbingan bersama dosen pembimbing, seluruh poin kr
 
 ## 📌 Dokumen Rujukan Terkait di Vault
 - Dokumen Keputusan Lengkap: [[Keputusan-Untuk-Pembimbing]]
-- Dokumen Proposal Lengkap: [[Briefing Scope TA]]
+- Dokumen Proposal Lengkap: [[Briefing-Scope-TA]]
 - Laporan Lengkap EDA: [[EDA-CIC-IDS2017]]
 - Rekapitulasi Verifikasi Metadata: [[Crosscheck]]

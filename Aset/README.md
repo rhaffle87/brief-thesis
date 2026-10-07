@@ -71,6 +71,6 @@ Dengan demikian, direktori `Aset/` saat ini murni memuat aset visual dan biner m
 ## 🔗 3. Referensi Integrasi dalam Naskah & Dokumen
 
 Seluruh aset di atas telah dihubungkan langsung ke dalam dokumen perencanaan dan naskah:
-- `Proposal/Briefing Scope TA.md` (bagian 1, 2, 3, 6, 8, dan 10)
+- `Proposal/Briefing-Scope-TA.md` (bagian 1, 2, 3, 6, 8, dan 10)
 - `README-Structure.md` (ikhtisar repositori)
 - Naskah Bab 2 (Landasan Teori) dan Bab 3 (Metodologi Penelitian)
