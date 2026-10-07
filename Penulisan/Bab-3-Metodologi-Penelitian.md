@@ -92,7 +92,22 @@ Dari 79 kolom mentah, dilakukan eliminasi fitur:
 1. **10 Fitur Zero-Variance:** Kolom bernilai konstan 0 (`Bwd PSH Flags`, `Bwd URG Flags`, `Fwd Avg Bytes/Bulk`, `Fwd Avg Packets/Bulk`, `Fwd Avg Bulk Rate`, `Bwd Avg Bytes/Bulk`, `Bwd Avg Packets/Bulk`, `Bwd Avg Bulk Rate`, `CWE Flag Count`, `Fwd URG Flags`) dieliminasi.
 2. **5 Kolom Duplikat via Hash:** Kolom yang 100% identik seperti `Fwd Header Length.1` dibuang guna mengeliminasi multikolinearitas mutlak.
 3. **Eliminasi Destination Port:** Fitur `Destination Port` **secara sengaja dibuang** untuk memitigasi bias *port leakage* dan memaksa model mempelajari karakteristik statistik paket murni (Engelen et al., 2021).  
-Hasil akhir menghasilkan **63 fitur statistik numerik bersih** ditambah 1 label.
+Hasil akhir menghasilkan **63 fitur statistik numerik bersih** ditambah 1 label. Rincian 63 fitur masukan model NIDS disajikan pada Tabel 3.1.
+
+*Tabel 3.1 Ringkasan 63 Fitur Statistik Numerik Aliran Bersih CIC-IDS2017.*
+| Kategori Fitur | Jumlah | Nama Fitur |
+| :--- | :---: | :--- |
+| **Statistik Waktu & Durasi** | 4 | `Flow Duration`, `Flow IAT Mean`, `Flow IAT Std`, `Flow IAT Max` |
+| **Inter-Arrival Time (IAT)** | 8 | `Flow IAT Min`, `Fwd IAT Tot`, `Fwd IAT Mean`, `Fwd IAT Std`, `Fwd IAT Max`, `Fwd IAT Min`, `Bwd IAT Tot`, `Bwd IAT Mean` |
+| **Statistik Paket Maju (Fwd)** | 10 | `Total Fwd Packets`, `Total Length of Fwd Packets`, `Fwd Packet Length Max`, `Fwd Packet Length Min`, `Fwd Packet Length Mean`, `Fwd Packet Length Std`, `Fwd IAT Max`, `Fwd IAT Min`, `Fwd Header Length`, `Fwd Act Data Pkts` |
+| **Statistik Paket Balik (Bwd)** | 8 | `Total Backward Packets`, `Total Length of Bwd Packets`, `Bwd Packet Length Max`, `Bwd Packet Length Min`, `Bwd Packet Length Mean`, `Bwd Packet Length Std`, `Bwd IAT Std`, `Bwd IAT Min` |
+| **Kecepatan Transfer (Rates)** | 2 | `Flow Bytes/s`, `Flow Packets/s` |
+| **Statistik Ukuran Paket** | 7 | `Packet Length Min`, `Packet Length Max`, `Packet Length Mean`, `Packet Length Std`, `Packet Length Variance`, `Average Packet Size`, `Avg Fwd Segment Size` |
+| **Bendera TCP (Flags)** | 10 | `FIN Flag Count`, `SYN Flag Count`, `RST Flag Count`, `PSH Flag Count`, `ACK Flag Count`, `URG Flag Count`, `ECE Flag Count`, `Down/Up Ratio`, `Fwd PSH Flags`, `SYN Flag Count` |
+| **Parameter Segmen & Buffer** | 6 | `Avg Bwd Segment Size`, `Fwd Header Length`, `Fwd Min Seg Size Forward`, `Subflow Fwd Packets`, `Subflow Fwd Bytes`, `Subflow Bwd Packets` |
+| **Statistik Window & Aktif** | 8 | `Subflow Bwd Bytes`, `Init_Win_bytes_forward`, `Init_Win_bytes_backward`, `Active Mean`, `Active Std`, `Active Max`, `Active Min`, `Idle Mean` |
+| **Statistik Waktu Idle** | 3 | `Idle Std`, `Idle Max`, `Idle Min` |
+| **Total Fitur Input** | **63** | *Seluruhnya bertipe numerik kontinu / diskret* |
 
 #### 3.2.2.4 Data Transformation
 Fitur numerik diskalakan menggunakan transformasi statistik Z-score standar:
@@ -200,14 +215,25 @@ flowchart LR
 ## 3.4 Rancangan Pengujian
 
 ### 3.4.1 Setup Pengujian
-Pengujian dijalankan pada lingkungan komputasi dengan spesifikasi:
-- **Perangkat Keras:** Prosessor Intel Core i7 / AMD Ryzen (Multi-core $\ge 8$ core), RAM 16 GB DDR4/DDR5, GPU NVIDIA (VRAM $\ge 8$ GB dengan dukungan CUDA Cores), dan penyimpanan NVMe SSD $\ge 512$ GB.
-- **Perangkat Lunak:** Sistem Operasi Linux Ubuntu 22.04 LTS / Windows 11 64-bit, Python 3.10+, PyTorch 2.2+, CUDA Toolkit 12.x, Flower Framework (`flwr` $\ge 1.7.0$), Optuna ($\ge 3.5.0$), Pandas, NumPy, dan Scikit-learn.
+Pengujian dijalankan pada lingkungan komputasi terstandarisasi untuk menjamin reproduktibilitas hasil eksperimen, dengan rincian spesifikasi perangkat keras dan perangkat lunak sebagaimana disajikan pada Tabel 3.2.
+
+*Tabel 3.2 Spesifikasi Lingkungan Perangkat Keras dan Perangkat Lunak.*
+| Kategori | Komponen | Spesifikasi Teknis |
+| :--- | :--- | :--- |
+| **Perangkat Keras** | Prosessor (CPU) | Intel Core i7 / AMD Ryzen (Multi-core $\ge 8$ core) |
+| | Memori Utama (RAM) | 16 GB DDR4/DDR5 |
+| | Kartu Grafis (GPU) | NVIDIA GPU (VRAM $\ge 8$ GB dengan dukungan CUDA Cores) |
+| | Media Penyimpanan | Solid State Drive (NVMe SSD) $\ge 512$ GB |
+| **Perangkat Lunak** | Sistem Operasi | Linux Ubuntu 22.04 LTS / Windows 11 64-bit |
+| | Lingkungan Eksekusi | Python 3.10+, PyTorch 2.2+, CUDA Toolkit 12.x |
+| | Kerangka Kerja FL | Flower Framework (`flwr` $\ge 1.7.0$) |
+| | Penyetelan Bayesian | Optuna Framework ($\ge 3.5.0$) |
+| | Pustaka Analisis Data | Pandas, NumPy, Scikit-learn, PyArrow |
 
 ### 3.4.2 Skenario Pengujian
-Matriks pengujian komparatif dirancang mencakup lima skenario utama (E0 s.d. E4), sebagaimana disajikan pada Tabel 3.1.
+Matriks pengujian komparatif dirancang mencakup lima skenario utama (E0 s.d. E4), sebagaimana disajikan pada Tabel 3.3.
 
-*Tabel 3.1 Matriks Skenario Pengujian Eksperimen E0–E4.*
+*Tabel 3.3 Matriks Skenario Pengujian Eksperimen E0–E4.*
 | Skenario | Topologi Pelatihan | Urutan Pembelajaran | Metode Mitigasi Forgetting | Tujuan Pengujian |
 | :---: | :--- | :--- | :--- | :--- |
 | **E0** | Sentralisasi Penuh | Simultan (Task 1 & Task 2 Bersama) | Tidak Perlu (*Joint*) | Batas atas (*upper bound*) performa model teoretis. |
@@ -249,9 +275,9 @@ Evaluasi penyetelan hiperparameter dijalankan melalui 50 *trials* Optuna dengan 
 
 ## 3.5 Jadwal Pelaksanaan Penelitian
 
-Rencana pelaksanaan penelitian dijadwalkan dalam durasi enam bulan sebagaimana dirangkum pada diagram Gantt Tabel 3.2.
+Rencana pelaksanaan penelitian dijadwalkan dalam durasi enam bulan sebagaimana dirangkum pada diagram Gantt Tabel 3.4.
 
-*Tabel 3.2 Jadwal Pelaksanaan Penelitian (Gantt Chart).*
+*Tabel 3.4 Jadwal Pelaksanaan Penelitian (Gantt Chart).*
 | No | Aktivitas / Tahapan Kerja | Bulan 1 | Bulan 2 | Bulan 3 | Bulan 4 | Bulan 5 | Bulan 6 |
 | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | 1 | Studi Literatur dan Penyusunan Proposal | $\blacksquare\blacksquare$ | | | | | |

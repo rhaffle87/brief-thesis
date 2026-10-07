@@ -11,6 +11,22 @@ Prinsip dasar keamanan informasi berakar pada model triad **Confidentiality, Int
 
 Untuk menegakkan prinsip CIA Triad, infrastruktur jaringan enterprise mengadopsi model pertahanan berlapis (*Defense-in-Depth*). Dalam kerangka ini, sistem pertahanan tidak hanya mengandalkan perimeter luar (*firewall*), melainkan menyematkan kontrol keamanan pada setiap lapisan jaringan, mulai dari penyaringan paket, segmentasi jaringan (*Virtual LAN* / VLAN), hingga inspeksi aktif terhadap aliran lalu lintas data.
 
+```mermaid
+flowchart TD
+    subgraph CIA_Triad [Model Triad CIA Keamanan Informasi]
+        C[Confidentiality / Kerahasiaan]
+        I[Integrity / Integritas]
+        A[Availability / Ketersediaan]
+        C --- I --- A --- C
+    end
+    subgraph Defense_in_Depth [Lapisan Pertahanan Berlapis Enterprise]
+        FW[Firewall Perimeter & Akses Kontrol] --> NIDS[Sensor Inspeksi Aliran: NIDS]
+        NIDS --> HOST[Host Keamanan & Endpoint Protection]
+    end
+    CIA_Triad -.-> Defense_in_Depth
+```
+*Gambar 2.1 Model CIA Triad dan Konsep Pertahanan Berlapis Jaringan.*
+
 ---
 
 ## 2.2 Klasifikasi Serangan Siber
@@ -69,6 +85,24 @@ Secara umum, arsitektur FL terdiri atas:
 1. **Server Agregator:** Menginisialisasi parameter bobot global $w_0$, menyiarkan parameter model ke klien yang berpartisipasi pada setiap ronde komunikasi, mengumpulkan pembaruan bobot lokal, serta menghitung parameter model global baru melalui fungsi agregasi.
 2. **Klien Federasi ($K$ Klien):** Setiap klien menyimpan dataset lokal $\mathcal{D}_k$ secara privat. Pada setiap ronde komunikasi $t$, klien mengunduh bobot global $w_t$, melakukan optimasi lokal berbasis *Stochastic Gradient Descent* (SGD) atau AdamW selama $E$ epoch menggunakan data lokalnya, lalu mengirimkan bobot terlatih $w_{t+1}^k$ kembali ke server.
 
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Server as Server Agregator
+    actor ClientA as Klien A (Subnet SSH)
+    actor ClientB as Klien B (DMZ DoS)
+    
+    Server->>ClientA: Broadcast Bobot Global w_t
+    Server->>ClientB: Broadcast Bobot Global w_t
+    Note over ClientA: Latih Model Lokal E Epoch (Data A)
+    Note over ClientB: Latih Model Lokal E Epoch (Data B)
+    ClientA->>Server: Kirim Parameter Lokal w_{t+1}^A
+    ClientB->>Server: Kirim Parameter Lokal w_{t+1}^B
+    Note over Server: Agregasi Bobot: FedAvg
+    Server-->>Server: Update w_{t+1} = n_A/n*w_A + n_B/n*w_B
+```
+*Gambar 2.2 Siklus Pelatihan dan Agregasi Bobot pada Federated Learning (FedAvg).*
+
 ### 2.4.2 Algoritma Federated Averaging (FedAvg)
 Algoritma standar paling populer dalam FL adalah *Federated Averaging* (FedAvg). Pada setiap ronde komunikasi $t \in \{1, 2, \dots, T\}$:
 $$w_{t+1} = \sum_{k=1}^{K} \frac{n_k}{n} w_{t+1}^k$$
@@ -97,6 +131,17 @@ Secara umum, terdapat tiga kelompok strategi mitigasi lupa:
 - **Replay-based:** Menyimpan sebagian data mentah masa lalu dalam *replay buffer* (misal: *Experience Replay*). Kelemahan: membebani kapasitas RAM dan melanggar prinsip privasi data pada FL.
 - **Architecture-based:** Menambah kapasitas neuron atau modul khusus untuk setiap tugas baru. Kelemahan: parameter model terus membengkak seiring bertambahnya tugas.
 - **Regularization-based:** Menambahkan suku penalti pada fungsi kerugian untuk membatasi pergeseran bobot penting masa lalu tanpa memerlukan penyimpanan sampel data mentah.
+
+```mermaid
+flowchart LR
+    subgraph Continual_Learning_Approaches [Taksonomi Pendekatan Mitigasi Forgetting]
+        R[Replay-based: Simpan Buffer Raw Data]
+        A[Architecture-based: Tambah Neuron / Modul Dinamis]
+        REG[Regularization-based: Penalti Bobot / EWC]
+    end
+    REG -->|Privasi Aman & Parameter Ringan| FCL[Solusi Optimal Federated Continual Learning]
+```
+*Gambar 2.3 Taksonomi Pendekatan Mitigasi Catastrophic Forgetting.*
 
 ---
 
@@ -172,6 +217,16 @@ Ketika model dilatih pada tugas kedua, fungsi kerugian total lokal dimodifikasi 
 $$\mathcal{L}_{\text{total}}(\theta) = \mathcal{L}_2(\theta) + \sum_{i} \frac{\lambda}{2} F_i (\theta_i - \theta_{1, i}^*)^2$$
 di mana $\lambda$ adalah koefisien hiperparameter penalti EWC yang mengontrol seberapa kuat model mempertahankan memori tugas lama dibandingkan mempelajari tugas baru.
 
+```mermaid
+flowchart TD
+    subgraph EWC_Mechanism [Konsep Penalti Kuadratik Elastic Weight Consolidation]
+        T1[Parameter Optimal Tugas 1: Theta_1*] --> CALC[Hitung FIM Diagonal: F_i]
+        CALC --> T2[Pelatihan Tugas 2: Loss_Total = Loss_2 + lambda/2 * F_i * Delta_Theta^2]
+        T2 --> RES[Solusi Optimal: Keseimbangan Tugas 1 & Tugas 2]
+    end
+```
+*Gambar 2.4 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis.*
+
 ### 2.9.3 Weighted Cross-Entropy dan Gradient Clipping
 Untuk mengatasi ketimpangan kelas yang parah, fungsi kerugian dasar $\mathcal{L}_2(\theta)$ menggunakan pembobotan invers frekuensi kelas:
 $$\mathcal{L}_{\text{CE}}(y, \hat{y}) = - \sum_{c=1}^{C} w_c \cdot y_c \log(\hat{y}_c), \quad \text{dengan } w_c = \frac{N_{\text{total}}}{C \cdot N_c}$$
@@ -206,7 +261,19 @@ Berdasarkan telaah kritis terhadap literatur audit dataset IDS mutakhir (Rosay e
 Evaluasi sistem dilakukan secara komprehensif mencakup metrik kinerja deteksi kecerdasan buatan, metrik retensi continual learning, dan metrik profil komputasi perangkat.
 
 ### 2.11.1 Metrik Deteksi Pembelajaran Mesin
-Dievaluasi berbasis matriks konfusi (*Confusion Matrix*) yang terdiri atas *True Positive* (TP), *True Negative* (TN), *False Positive* (FP), dan *False Negative* (FN):
+Dievaluasi berbasis matriks konfusi (*Confusion Matrix*) yang terdiri atas *True Positive* (TP), *True Negative* (TN), *False Positive* (FP), dan *False Negative* (FN) sebagaimana diilustrasikan pada Gambar 2.5:
+
+```mermaid
+flowchart TD
+    subgraph Confusion_Matrix [Matriks Konfusi 2x2 Dasar]
+        ACT_P[Aktual Positif] --> TP[True Positive: Prediksi Positif Benar]
+        ACT_P --> FN[False Negative: Prediksi Negatif Salah]
+        ACT_N[Aktual Negatif] --> FP[False Positive: Prediksi Positif Salah]
+        ACT_N --> TN[True Negative: Prediksi Negatif Benar]
+    end
+```
+*Gambar 2.5 Struktur Dasar Confusion Matrix untuk Evaluasi Deteksi Biner dan Multi-kelas.*
+
 - **Accuracy:** Mengukur proporsi prediksi benar terhadap total seluruh sampel:
   $$\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}$$
 - **Precision:** Mengukur ketepatan deteksi positif dari seluruh alarm yang dibunyikan:
