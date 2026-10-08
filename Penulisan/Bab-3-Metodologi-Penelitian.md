@@ -1,6 +1,6 @@
 # BAB 3 METODOLOGI
 
-Bab ini menguraikan metodologi penelitian, alur pelaksanaan, tahapan praproses data, arsitektur model, dan skenario pengujian komparatif untuk mengevaluasi integrasi *Federated Learning* (FL) dan *Continual Learning* (CL) berbasis *Elastic Weight Consolidation* (EWC) pada sistem deteksi intrusi jaringan (*Network Intrusion Detection System* / NIDS). Struktur penyusunan bab ini diselaraskan secara penuh dengan format skripsi Departemen Teknik Elektro, FTEIC, Institut Teknologi Sepuluh Nopember (ITS) mengacu pada rujukan skripsi alumnus Hafizh [14] ([Referensi-Skripsi-Hafizh.pdf](../Proposal/Referensi-Skripsi-Hafizh.pdf)).
+Bab ini menguraikan metodologi penelitian, alur pelaksanaan, tahapan praproses data, arsitektur model, dan skenario pengujian komparatif untuk mengevaluasi integrasi *Federated Learning* (FL) dan *Continual Learning* (CL) berbasis *Elastic Weight Consolidation* (EWC) pada sistem deteksi intrusi jaringan (*Network Intrusion Detection System* / NIDS). Struktur penyusunan bab ini diselaraskan secara penuh dengan format skripsi Departemen Teknik Elektro, FTEIC, Institut Teknologi Sepuluh Nopember (ITS) mengacu pada rujukan skripsi alumnus terdahulu ([Referensi-Skripsi-Hafizh.pdf](../Proposal/Referensi-Skripsi-Hafizh.pdf))[14].
 
 ---
 
@@ -66,7 +66,7 @@ flowchart TD
 *Gambar 3.3 Diagram Alir Urutan Pelaksanaan Penelitian.*
 
 ### 3.2.1 Pemilihan Data Publik
-Dataset yang dipilih adalah **CIC-IDS2017** resmi dari Canadian Institute for Cybersecurity. Pemilihan ini didasarkan pada representasi lalu lintas jaringan nyata yang mencakup aktivitas normal serta serangan eksploitasi multi-tahap. Berkas yang digunakan secara spesifik adalah hari Senin (*Monday*), Selasa (*Tuesday*), dan Rabu (*Wednesday*). Berkas hari Kamis dieksklusi karena menderita desinkronisasi timestamp pelabelan yang parah serta kelangkaan sampel mikro ekstrem (Rosay et al. [6], Dube [7]).
+Dataset yang dipilih adalah **CIC-IDS2017** resmi dari Canadian Institute for Cybersecurity. Pemilihan ini didasarkan pada representasi lalu lintas jaringan nyata yang mencakup aktivitas normal serta serangan eksploitasi multi-tahap. Berkas yang digunakan secara spesifik adalah hari Senin (*Monday*), Selasa (*Tuesday*), dan Rabu (*Wednesday*). Berkas hari Kamis dieksklusi karena menderita desinkronisasi timestamp pelabelan yang parah serta kelangkaan sampel mikro ekstrem[6], [7].
 
 ### 3.2.2 Data Preprocessing
 Tahapan praproses data dirancang secara ketat untuk mentransformasikan data mentah menjadi format masukan yang bersih, representatif, dan bebas bias *shortcut learning*.
@@ -91,7 +91,7 @@ Nama kolom distandarisasi dengan menghapus spasi awal/akhir (*whitespace trimmin
 Dari 79 kolom mentah, dilakukan eliminasi fitur:
 1. **10 Fitur Zero-Variance:** Kolom bernilai konstan 0 (`Bwd PSH Flags`, `Bwd URG Flags`, `Fwd Avg Bytes/Bulk`, `Fwd Avg Packets/Bulk`, `Fwd Avg Bulk Rate`, `Bwd Avg Bytes/Bulk`, `Bwd Avg Packets/Bulk`, `Bwd Avg Bulk Rate`, `CWE Flag Count`, `Fwd URG Flags`) dieliminasi.
 2. **5 Kolom Duplikat via Hash:** Kolom yang 100% identik seperti `Fwd Header Length.1` dibuang guna mengeliminasi multikolinearitas mutlak.
-3. **Eliminasi Destination Port:** Fitur `Destination Port` **secara sengaja dibuang** untuk memitigasi bias *port leakage* dan memaksa model mempelajari karakteristik statistik paket murni (Engelen et al. [9]).  
+3. **Eliminasi Destination Port:** Fitur `Destination Port` **secara sengaja dibuang** untuk memitigasi bias *port leakage* dan memaksa model mempelajari karakteristik statistik paket murni[9].  
 Hasil akhir menghasilkan **63 fitur statistik numerik bersih** ditambah 1 label. Rincian 63 fitur masukan model NIDS disajikan pada Tabel 3.1.
 
 *Tabel 3.1 Ringkasan 63 Fitur Statistik Numerik Aliran Bersih CIC-IDS2017.*
@@ -183,7 +183,7 @@ graph TB
 *Gambar 3.5 Arsitektur Sistem Federated Continual Learning yang Diimplementasikan.*
 
 ### 3.3.2 Rancangan Sistem untuk Penerapan Real-Time
-Mengadopsi kerangka kerja analisis sistem deteksi intrusi waktu nyata pada skripsi alumnus FTEIC ITS Hafizh [14] ([Referensi-Skripsi-Hafizh.pdf](../Proposal/Referensi-Skripsi-Hafizh.pdf) Sub-bab 3.3.2), disusun rancangan konseptual alur penerapan model hasil *Federated Continual Learning* pada infrastruktur gerbang jaringan nyata (*edge gateway deployment*), sebagaimana disajikan pada Gambar 3.6.
+Rancangan konseptual alur penerapan model hasil *Federated Continual Learning* pada infrastruktur gerbang jaringan nyata (*edge gateway deployment*) disusun dengan mengadopsi kerangka kerja analisis sistem deteksi intrusi waktu nyata pada skripsi rujukan alumnus FTEIC ITS ([Referensi-Skripsi-Hafizh.pdf](../Proposal/Referensi-Skripsi-Hafizh.pdf) Sub-bab 3.3.2), sebagaimana disajikan pada Gambar 3.6[14].
 
 Sesuai komitmen batasan masalah, eksperimen fisik dalam tugas akhir ini **tidak melakukan injeksi paket langsung (*live packet injection*) ke kabel fisik**, melainkan memetakan arsitektur pipa pemrosesan sebagai landasan transisi dari model teruji ke penerapan lapangan.
 
