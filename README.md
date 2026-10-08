@@ -6,7 +6,8 @@
 [![Platform](https://img.shields.io/badge/Orchestrator-Flower%20%7C%20PyTorch-orange.svg)](#-arsitektur-sistem)
 
 Repositori ini memuat seluruh naskah riset, dokumentasi bimbingan, catatan literatur terverifikasi, serta desain metodologi untuk Tugas Akhir / Skripsi:
-> **"Investigasi Mitigasi Catastrophic Forgetting pada Deteksi Intrusi Terdistribusi Menggunakan Federated Continual Learning (EWC) di Bawah Kondisi Data Non-IID"**
+> **"Analisis Kinerja Deteksi Network Traffic Intrusion Menggunakan Metode Federated-Continual Learning pada Testbed Private Cloud Server"**  
+> *(Studi Pengaruh Elastic Weight Consolidation dan Federated Averaging pada Distribusi Data Non-IID Dua Client)*
 
 ---
 
