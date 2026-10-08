@@ -27,8 +27,8 @@ Oleh karena itu, penelitian tugas akhir ini berfokus pada **investigasi komprehe
 ## 1.2 Rumusan Masalah
 
 Berdasarkan latar belakang yang telah diuraikan, rumusan masalah dalam penelitian tugas akhir ini adalah:
-1. **Bagaimana efektivitas kinerja deteksi intrusi model yang dilatih secara terdistribusi menggunakan Federated Learning (FedAvg) dibandingkan dengan pelatihan model lokal mandiri di bawah kondisi distribusi data non-IID (*label skew*)?**
-2. **Sejauh mana penerapan metode regularisasi Elastic Weight Consolidation (EWC) pada klien lokal mampu memitigasi fenomena *catastrophic forgetting* (mempertahankan metrik *Backward Transfer* / BWT) saat model mempelajari jenis serangan baru secara sekuensial tanpa menyimpan *buffer* data mentah?**
+1. **Bagaimana kinerja deteksi intrusi model yang dilatih secara terdistribusi (*Federated Averaging* / FedAvg) dibandingkan dengan model yang dilatih secara lokal pada masing-masing klien dengan distribusi data non-IID?**
+2. **Bagaimana pengaruh metode *Elastic Weight Consolidation* (EWC) terhadap mitigasi *catastrophic forgetting* saat model mempelajari kelas serangan baru secara sekuensial, baik pada skenario pelatihan lokal maupun terdistribusi (FedAvg + EWC)?**
 
 ---
 
@@ -56,8 +56,8 @@ Untuk menjaga fokus penelitian, mencegah pelebaran ruang lingkup (*scope creep*)
 ## 1.4 Tujuan Penelitian
 
 Tujuan yang ingin dicapai melalui pelaksanaan penelitian tugas akhir ini adalah:
-1. Merancang, membangun, dan menganalisis arsitektur sistem deteksi intrusi terdistribusi berbasis Federated Learning (FedAvg) pada data lalu lintas non-IID untuk mengevaluasi generalisasi model dibandingkan model pelatihan lokal mandiri.
-2. Mengintegrasikan dan mengevaluasi efektivitas regularisasi Elastic Weight Consolidation (EWC) pada optimasi model klien lokal dalam menekan laju *catastrophic forgetting* terhadap kelas serangan SSH-Patator terdahulu setelah model mempelajari kelas serangan DoS baru.
+1. Menganalisis kinerja deteksi intrusi model yang dilatih secara terdistribusi (*Federated Averaging* / FedAvg) dibandingkan dengan model yang dilatih secara lokal pada masing-masing klien dengan distribusi data non-IID.
+2. Menganalisis pengaruh metode *Elastic Weight Consolidation* (EWC) terhadap mitigasi *catastrophic forgetting* saat model mempelajari kelas serangan baru secara sekuensial, baik pada skenario pelatihan lokal maupun terdistribusi (FedAvg + EWC).
 3. Mengukur efisiensi komputasi sistem usulan mencakup rata-rata waktu inferensi per aliran data ($\mu\text{s}$), konsumsi alokasi memori RAM (*memory footprint*) antara metode penalti parameter EWC versus *replay buffer*, serta *communication overhead* bobot model per putaran federasi.
 
 ---
