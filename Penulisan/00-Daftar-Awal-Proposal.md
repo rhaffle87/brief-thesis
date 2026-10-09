@@ -39,15 +39,15 @@
 3.1 Metode yang Digunakan .......................................................................................................... 23  
 3.2 Bahan dan Peralatan yang Digunakan ....................................................................................... 25  
 3.3 Urutan Pelaksanaan Penelitian ................................................................................................. 26  
-3.3.1 Pemilihan Data Publik CIC-IDS2017 ................................................................................... 26  
-3.3.2 Praproses Data dan Ekstraksi 63 Fitur Numerik .................................................................... 27  
-3.3.3 Arsitektur Sistem Terdistribusi yang Diusulkan ................................................................... 31  
-3.3.4 Rancangan Sistem untuk Penerapan Real-Time ..................................................................... 32  
-3.3.5 Matriks Skenario Pengujian Komparatif E0–E4 .................................................................... 33  
-3.3.6 Mekanisme Evaluasi Multi-Seed dan Profiling Komputasi ................................................... 34  
-3.4 Jadwal Pelaksanaan Penelitian ................................................................................................ 35  
+3.3.1 Praproses Data dan Ekstraksi 63 Fitur Numerik .................................................................... 26  
+3.3.2 Arsitektur Sistem Terdistribusi yang Diusulkan ................................................................... 29  
+3.3.3 Rancangan Sistem untuk Penerapan Real-Time ..................................................................... 30  
+3.3.4 Matriks Skenario Pengujian Komparatif E0–E4 .................................................................... 31  
+3.3.5 Mekanisme Evaluasi Multi-Seed dan Profiling Komputasi ................................................... 32  
+3.3.6 Evaluasi Penyetelan Hiperparameter Bayesian ..................................................................... 33  
+3.4 Jadwal Pelaksanaan Penelitian ................................................................................................ 34  
 
-**DAFTAR PUSTAKA** ................................................................................................................... 36  
+**DAFTAR PUSTAKA** ................................................................................................................... 35  
 
 ---
 
@@ -64,9 +64,9 @@ Gambar 3.1 Arsitektur Penempatan Sensor NIDS Terdistribusi dalam Jaringan Enterp
 Gambar 3.2 Fishbone Diagram Identifikasi Tantangan NIDS Terdistribusi ..................................... 24  
 Gambar 3.3 Diagram Alir Urutan Pelaksanaan Penelitian .............................................................. 26  
 Gambar 3.4 Diagram Alur Global Data Preprocessing ................................................................... 27  
-Gambar 3.5 Arsitektur Sistem Federated Continual Learning yang Diimplementasikan ................. 31  
-Gambar 3.6 Rancangan Sistem Konseptual untuk Penerapan Real-Time pada Edge Gateway ......... 32  
-Gambar 3.7 Diagram Alir Skenario Pengujian Sekuensial Non-IID ................................................. 34  
+Gambar 3.5 Arsitektur Sistem Federated Continual Learning yang Diimplementasikan ................. 30  
+Gambar 3.6 Rancangan Sistem Konseptual untuk Penerapan Real-Time pada Edge Gateway ......... 31  
+Gambar 3.7 Diagram Alir Skenario Pengujian Sekuensial Non-IID ................................................. 32  
 
 ---
 
@@ -75,10 +75,10 @@ Gambar 3.7 Diagram Alir Skenario Pengujian Sekuensial Non-IID ..................
 <br>
 
 Tabel 2.1 Perbandingan Penelitian Terdahulu dalam Domain FL, Continual Learning, dan NIDS ..... 8  
-Tabel 3.1 Ringkasan 63 Fitur Statistik Numerik Aliran Bersih CIC-IDS2017 ................................. 28  
-Tabel 3.2 Spesifikasi Lingkungan Perangkat Keras dan Perangkat Lunak ...................................... 25  
-Tabel 3.3 Matriks Skenario Pengujian Eksperimen E0–E4 .............................................................. 33  
-Tabel 3.4 Jadwal Pelaksanaan Penelitian (Gantt Chart) .................................................................. 35  
+Tabel 3.1 Spesifikasi Lingkungan Perangkat Keras dan Perangkat Lunak ...................................... 25  
+Tabel 3.2 Ringkasan 63 Fitur Statistik Numerik Aliran Bersih CIC-IDS2017 ................................. 28  
+Tabel 3.3 Matriks Skenario Pengujian Eksperimen E0–E4 .............................................................. 31  
+Tabel 3.4 Jadwal Pelaksanaan Penelitian Tugas Akhir ................................................................... 34  
 
 ---
 
