@@ -22,19 +22,19 @@ Tipografi: Trebuchet MS / Times New Roman, Bold, Center
 <br><br>
 
 **RAFLI ALIF IHZA HARTONO**  
-**NRP 5022211233**  
+**NRP 5048231003**  
 *(14 pt Bold)*
 
 <br><br>
 
 **Dosen Pembimbing:**  
 **Dr. Ir. Achmad Affandi, DEA.**  
-**NIP 196408151989031003**  
+**NIP 196510141990021001**  
 *(14 pt Bold)*
 
 <br><br><br>
 
-**Program Studi S-1 Teknik Elektro**  
+**Program Studi S-1 Teknik Telekomunikasi**  
 **Departemen Teknik Elektro**  
 **Fakultas Teknologi Elektro dan Informatika Cerdas**  
 **INSTITUT TEKNOLOGI SEPULUH NOPEMBER**  

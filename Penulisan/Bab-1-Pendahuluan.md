@@ -41,13 +41,13 @@ Dalam pelaksanaan tugas akhir ini, batasan ruang lingkup masalah ditetapkan untu
 3. **Pembersihan Fitur & Pencegahan Shortcut:** Fitur masukan model dibatasi pada **63 fitur numerik unik**. Sebanyak 10 fitur konstan bervariansi nol dan 5 pasangan fitur duplikat identik dieliminasi. Fitur `Destination Port` secara sengaja dibuang guna mencegah bias *shortcut learning* (*port-to-label memorization*).
 4. **Penanganan Ketimpangan Kelas:** Seluruh 1.529.677 aliran data bersih dipertahankan tanpa pemangkasan (*no massive undersampling*) dengan menerapkan *Weighted Cross-Entropy Loss* berbasis invers frekuensi kelas terkalibrasi serta *gradient clipping* (norm $\le 1.0$).
 5. **Arsitektur Model Pembelajaran Mesin:** Model klasifikasi dibatasi pada arsitektur *Multilayer Perceptron* (MLP) kompak tiga lapis (`Input(63) → Linear(64) → ReLU → Linear(32) → ReLU → Linear(3)`).
-6. **Topologi Federated Learning:** Simulasi federasi menggunakan algoritma **Federated Averaging (FedAvg)** dengan topologi 2 node sensor klien non-IID dan 1 server agregator:
-   - **Klien A (Task 1):** Mengakses data Normal dan 100% data serangan SSH-Patator.
-   - **Klien B (Task 2):** Mengakses data Normal dan 100% data serangan DoS.
+6. **Topologi Federated Learning:** Simulasi federasi menggunakan algoritma **Federated Averaging (FedAvg)** dengan topologi 2 node sensor klien non-IID dan 1 server agregator, yang merepresentasikan isolasi fungsional antar-perimeter (*cross-silo federated learning*):
+   - **Klien A (Task 1):** Node sensor perimeter administrasi internal yang memantau aliran Normal dan 100% data serangan *brute-force* autentikasi SSH-Patator.
+   - **Klien B (Task 2):** Node sensor perimeter zona publik (*Demilitarized Zone* / DMZ) yang memantau aliran Normal dan 100% data serangan volumetrik web DoS.
    - Kelas Normal dipartisi secara acak 50% untuk Klien A dan 50% untuk Klien B dari gabungan seluruh hari untuk mencegah bias pola harian (*day-of-week confound*).
 7. **Skenario Continual Learning:** Model diuji dalam skenario **Class-Incremental Learning (Class-IL)** tanpa penyediaan Task-ID saat inferensi. Metode mitigasi lupa dibatasi pada perbandingan antara **Naive Fine-Tuning** dan **Elastic Weight Consolidation (EWC)**.
-8. **Lingkungan Pengujian & Eliminasi Live Traffic:** Pengujian difokuskan murni pada data tolok ukur *offline tabular flow*. Injeksi lalu lintas jaringan aktif (*live traffic injection*) secara resmi ditiadakan dari target evaluasi untuk mengeliminasi variabel gangguan transport/lapisan fisik (sesuai arahan dosen pembimbing).
-9. **Metrik Evaluasi:** Evaluasi diukur menggunakan metrik deteksi ML (Macro-F1, per-class Precision, Recall, Accuracy, dan *Backward Transfer* / BWT), serta metrik profil efisiensi komputasi (latensi inferensi per flow dalam $\mu\text{s}$, alokasi memori RAM *footprint*, dan *communication overhead* payload model dalam KB per round).
+8. **Lingkungan Pengujian & Eliminasi Live Traffic:** Pengujian difokuskan murni pada data tolok ukur *offline tabular flow* CIC-IDS2017. Injeksi lalu lintas jaringan aktif (*live traffic injection*) secara resmi ditiadakan dari target evaluasi guna mengeliminasi variabel gangguan transport/lapisan fisik (sesuai arahan dosen pembimbing). Sebagai jembatan menuju implementasi industri, perancangan arsitektur penempatan dan pipa pemrosesan *edge gateway* waktu nyata disajikan secara konseptual pada Bab 3.
+9. **Metrik Evaluasi:** Evaluasi diukur menggunakan metrik deteksi ML (Macro-F1, per-class Precision, Recall, Accuracy, dan *Backward Transfer* / BWT), serta metrik profil efisiensi komputasi (latensi inferensi per flow dalam $\mu\text{s}$, alokasi memori RAM *footprint*, dan *communication overhead* transmisi parameter melalui protokol gRPC dalam KB per ronde).
 
 ---
 
@@ -55,7 +55,7 @@ Dalam pelaksanaan tugas akhir ini, batasan ruang lingkup masalah ditetapkan untu
 
 Penelitian ini bertujuan untuk:
 1. Menganalisis kinerja deteksi intrusi model yang dilatih secara terdistribusi (*Federated Averaging* / FedAvg) dibandingkan dengan model yang dilatih secara lokal pada masing-masing klien dengan distribusi data non-IID.
-2. Menganalisis pengaruh metode *Elastic Weight Consolidation* (EWC) terhadap mitigasi *catastrophic forgetting* serta mengukur efisiensi komputasi model (latensi inferensi per aliran data, alokasi memori RAM *footprint*, dan *communication overhead*) saat mempelajari kelas serangan baru secara sekuensial, baik pada skenario pelatihan lokal maupun terdistribusi (FedAvg + EWC).
+2. Menganalisis pengaruh metode *Elastic Weight Consolidation* (EWC) terhadap mitigasi *catastrophic forgetting* serta mengukur efisiensi komputasi model (latensi inferensi per aliran data dalam mikrodetik, alokasi memori RAM *footprint*, dan efisiensi *communication overhead* transmisi parameter melalui protokol gRPC) saat mempelajari kelas serangan baru secara sekuensial, baik pada skenario pelatihan lokal maupun terdistribusi (FedAvg + EWC).
 
 ---
 

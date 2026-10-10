@@ -1,6 +1,7 @@
 <!--
 ================================================================================
-PROPOSAL TUGAS AKHIR MAHASISWA PROGRAM STUDI S-1 TEKNIK ELEKTRO
+PROPOSAL TUGAS AKHIR MAHASISWA PROGRAM STUDI S-1 TEKNIK TELEKOMUNIKASI
+DEPARTEMEN TEKNIK ELEKTRO
 FAKULTAS TEKNOLOGI ELEKTRO DAN INFORMATIKA CERDAS (FTEIC)
 INSTITUT TEKNOLOGI SEPULUH NOPEMBER (ITS) SURABAYA
 
@@ -14,6 +15,12 @@ Sistem Penomoran Halaman:
 ================================================================================
 -->
 
+<!--
+FORMAT SAMPUL PROPOSAL TUGAS AKHIR ITS (SK Rektor No. 280/IT2/T/HK.00.01/2022 - Lampiran 1)
+Kertas: A4 HVS 80g | Spasi: 1 | Margin: Atas 3 cm, Bawah 2.5 cm, Kiri 3 cm, Kanan 2 cm
+Tipografi: Trebuchet MS / Times New Roman, Bold, Center
+-->
+
 <div align="center">
 
 <img src="../Aset/logo_its.png" alt="Logo ITS" width="120" onerror="this.src='https://www.its.ac.id/wp-content/uploads/2020/07/Lambang-ITS-2-300x300.png'"/>
@@ -21,35 +28,44 @@ Sistem Penomoran Halaman:
 <br><br>
 
 ### **PROPOSAL TUGAS AKHIR - EC234701**
+*(14 pt Bold)*
 
 <br>
 
 ## **ANALISIS KINERJA DETEKSI NETWORK TRAFFIC INTRUSION MENGGUNAKAN METODE FEDERATED-CONTINUAL LEARNING PADA TESTBED PRIVATE CLOUD SERVER**
 ### *Studi Pengaruh Elastic Weight Consolidation dan Federated Averaging pada Distribusi Data Non-IID Dua Client*
+*(18 pt Bold)*
 
 <br><br>
 
 **RAFLI ALIF IHZA HARTONO**  
-**NRP 5022211233**  
+**NRP 5048231003**  
+*(14 pt Bold)*
 
 <br><br>
 
 **Dosen Pembimbing:**  
 **Dr. Ir. Achmad Affandi, DEA.**  
-**NIP 196408151989031003**  
+**NIP 196510141990021001**  
+*(14 pt Bold)*
 
 <br><br><br>
 
-**Program Studi S-1 Teknik Elektro**  
+**Program Studi S-1 Teknik Telekomunikasi**  
 **Departemen Teknik Elektro**  
 **Fakultas Teknologi Elektro dan Informatika Cerdas**  
 **INSTITUT TEKNOLOGI SEPULUH NOPEMBER**  
 **SURABAYA**  
-**2026**
+**2026**  
+*(12 pt)*
 
 </div>
 
 \newpage
+
+<!--
+FORMAT LEMBAR PENGESAHAN PROPOSAL TUGAS AKHIR ITS (SK Rektor No. 280/IT2/T/HK.00.01/2022 - Lampiran 2)
+-->
 
 <div align="center">
 
@@ -65,7 +81,7 @@ Sistem Penomoran Halaman:
 **PROPOSAL TUGAS AKHIR**  
 Diajukan untuk memenuhi salah satu syarat  
 memperoleh gelar Sarjana Teknik (S.T.) pada  
-Program Studi S-1 Teknik Elektro  
+Program Studi S-1 Teknik Telekomunikasi  
 Departemen Teknik Elektro  
 Fakultas Teknologi Elektro dan Informatika Cerdas  
 Institut Teknologi Sepuluh Nopember  
@@ -74,7 +90,7 @@ Institut Teknologi Sepuluh Nopember
 
 Oleh:  
 **RAFLI ALIF IHZA HARTONO**  
-NRP. 5022211233  
+NRP. 5048231003  
 
 <br>
 
@@ -85,7 +101,7 @@ Disetujui oleh Tim Penguji Proposal Tugas Akhir:
 <br>
 
 1. **Dr. Ir. Achmad Affandi, DEA.**  
-   NIP. 196408151989031003  
+   NIP. 196510141990021001  
    *(Pembimbing)* : ............................................................
 
 <br>
@@ -122,8 +138,8 @@ Disetujui oleh Tim Penguji Proposal Tugas Akhir:
 **ANALISIS KINERJA DETEKSI NETWORK TRAFFIC INTRUSION MENGGUNAKAN METODE FEDERATED-CONTINUAL LEARNING PADA TESTBED PRIVATE CLOUD SERVER**  
 *(Studi Pengaruh Elastic Weight Consolidation dan Federated Averaging pada Distribusi Data Non-IID Dua Client)*
 
-**Nama Mahasiswa / NRP** : Rafli Alif Ihza Hartono / 5022211233  
-**Departemen** : Teknik Elektro FTEIC - ITS  
+**Nama Mahasiswa / NRP** : Rafli Alif Ihza Hartono / 5048231003  
+**Departemen** : Teknik Elektro (Program Studi S-1 Teknik Telekomunikasi) FTEIC - ITS  
 **Dosen Pembimbing** : Dr. Ir. Achmad Affandi, DEA.  
 
 #### Abstrak
@@ -138,8 +154,8 @@ Eskalasi serangan siber menuntut *Network Intrusion Detection System* (NIDS) mam
 **PERFORMANCE ANALYSIS OF NETWORK TRAFFIC INTRUSION DETECTION USING FEDERATED-CONTINUAL LEARNING ON A PRIVATE CLOUD SERVER TESTBED**  
 *(Study on the Effects of Elastic Weight Consolidation and Federated Averaging under Two-Client Non-IID Data Distribution)*
 
-**Student Name / NRP** : Rafli Alif Ihza Hartono / 5022211233  
-**Department** : Electrical Engineering FTEIC - ITS  
+**Student Name / NRP** : Rafli Alif Ihza Hartono / 5048231003  
+**Department** : Electrical Engineering (Telecommunication Engineering Study Program) FTEIC - ITS  
 **Advisor** : Dr. Ir. Achmad Affandi, DEA.  
 
 #### Abstract
@@ -151,6 +167,8 @@ Escalating cyber threats require Network Intrusion Detection Systems (NIDS) to d
 
 # DAFTAR ISI
 
+<br>
+
 **LEMBAR PENGESAHAN** ............................................................................................................ ii  
 **ABSTRAK** ................................................................................................................................... iii  
 **ABSTRACT** ................................................................................................................................. iv  
@@ -158,6 +176,8 @@ Escalating cyber threats require Network Intrusion Detection Systems (NIDS) to d
 **DAFTAR GAMBAR** ................................................................................................................... vii  
 **DAFTAR TABEL** ....................................................................................................................... viii  
 **DAFTAR SINGKATAN** .............................................................................................................. ix  
+
+<br>
 
 **BAB 1 PENDAHULUAN** ............................................................................................................... 1  
 1.1 Latar Belakang .......................................................................................................................... 1  
@@ -185,6 +205,8 @@ Escalating cyber threats require Network Intrusion Detection Systems (NIDS) to d
 **BAB 3 METODOLOGI** ................................................................................................................ 23  
 3.1 Metode yang Digunakan .......................................................................................................... 23  
 3.2 Bahan dan Peralatan yang Digunakan ....................................................................................... 25  
+3.2.1 Bahan Penelitian .................................................................................................................... 25  
+3.2.2 Peralatan Penelitian ............................................................................................................... 25  
 3.3 Urutan Pelaksanaan Penelitian ................................................................................................. 26  
 3.3.1 Praproses Data dan Ekstraksi 63 Fitur Numerik .................................................................... 26  
 3.3.2 Arsitektur Sistem Terdistribusi yang Diusulkan ................................................................... 29  
@@ -194,11 +216,13 @@ Escalating cyber threats require Network Intrusion Detection Systems (NIDS) to d
 3.3.6 Evaluasi Penyetelan Hiperparameter Bayesian ..................................................................... 33  
 3.4 Jadwal Pelaksanaan Penelitian ................................................................................................ 34  
 
-**DAFTAR PUSTAKA** ................................................................................................................... 35  
+**DAFTAR PUSTAKA** ................................................................................................................... 35
 
 \newpage
 
 # DAFTAR GAMBAR
+
+<br>
 
 Gambar 2.1 Model CIA Triad dan Konsep Pertahanan Berlapis Jaringan .......................................... 6  
 Gambar 2.2 Siklus Pelatihan dan Agregasi Bobot pada Federated Learning (FedAvg) .................... 10  
@@ -211,29 +235,37 @@ Gambar 3.3 Diagram Alir Urutan Pelaksanaan Penelitian ..........................
 Gambar 3.4 Diagram Alur Global Data Preprocessing ................................................................... 27  
 Gambar 3.5 Arsitektur Sistem Federated Continual Learning yang Diimplementasikan ................. 30  
 Gambar 3.6 Rancangan Sistem Konseptual untuk Penerapan Real-Time pada Edge Gateway ......... 31  
-Gambar 3.7 Diagram Alir Skenario Pengujian Sekuensial Non-IID ................................................. 32  
+Gambar 3.7 Diagram Alir Skenario Pengujian Sekuensial Non-IID ................................................. 32
 
 \newpage
 
 # DAFTAR TABEL
 
+<br>
+
 Tabel 2.1 Perbandingan Penelitian Terdahulu dalam Domain FL, Continual Learning, dan NIDS ..... 8  
 Tabel 3.1 Spesifikasi Lingkungan Perangkat Keras dan Perangkat Lunak ...................................... 25  
 Tabel 3.2 Ringkasan 63 Fitur Statistik Numerik Aliran Bersih CIC-IDS2017 ................................. 28  
 Tabel 3.3 Matriks Skenario Pengujian Eksperimen E0–E4 .............................................................. 31  
-Tabel 3.4 Jadwal Pelaksanaan Penelitian Tugas Akhir ................................................................... 34  
+Tabel 3.3b Konfigurasi Parameter Pelatihan Baseline dan Ruang Pencarian Hiperparameter ..... 32  
+Tabel 3.4 Jadwal Pelaksanaan Penelitian Tugas Akhir ................................................................... 34
 
 \newpage
 
 # DAFTAR SINGKATAN
 
+<br>
+
 | Singkatan | Kepanjangan / Definisi |
 |---|---|
 | **ABDS** | *Anomaly-Based Detection System* |
+| **AdamW** | *Adam with Decoupled Weight Decay* |
+| **AUC** | *Area Under the Curve* |
 | **BWT** | *Backward Transfer* |
 | **CIA** | *Confidentiality, Integrity, and Availability* |
 | **CIC** | *Canadian Institute for Cybersecurity* |
 | **CL** | *Continual Learning* |
+| **CPU** | *Central Processing Unit* |
 | **DMZ** | *Demilitarized Zone* |
 | **DoS** | *Denial of Service* |
 | **EWC** | *Elastic Weight Consolidation* |
@@ -241,18 +273,40 @@ Tabel 3.4 Jadwal Pelaksanaan Penelitian Tugas Akhir ............................
 | **FedAvg** | *Federated Averaging* |
 | **FIM** | *Fisher Information Matrix* |
 | **FL** | *Federated Learning* |
+| **FN** | *False Negative* |
+| **FP** | *False Positive* |
+| **FNR** | *False Negative Rate* |
+| **FPR** | *False Positive Rate* |
+| **GDPR** | *General Data Protection Regulation* |
+| **GPU** | *Graphics Processing Unit* |
+| **gRPC** | *Google Remote Procedure Call* |
 | **HIDS** | *Host-Based Intrusion Detection System* |
 | **IAT** | *Inter-Arrival Time* |
 | **IID** | *Independent and Identically Distributed* |
+| **IP** | *Internet Protocol* |
 | **ITS** | Institut Teknologi Sepuluh Nopember |
 | **MLP** | *Multilayer Perceptron* |
+| **NIC** | *Network Interface Card* |
 | **NIDS** | *Network Intrusion Detection System* |
 | **Non-IID** | *Non-Independent and Identically Distributed* |
+| **ONNX** | *Open Neural Network Exchange* |
+| **PR-AUC** | *Precision-Recall Area Under Curve* |
 | **PVE** | *Proxmox Virtual Environment* |
+| **RAM** | *Random Access Memory* |
+| **ReLU** | *Rectified Linear Unit* |
+| **ROC-AUC** | *Receiver Operating Characteristic - Area Under Curve* |
 | **SGD** | *Stochastic Gradient Descent* |
 | **SIDS** | *Signature-Based Intrusion Detection System* |
+| **SIEM** | *Security Information and Event Management* |
+| **SMOTE** | *Synthetic Minority Over-sampling Technique* |
 | **SSH** | *Secure Shell* |
+| **TAP** | *Test Access Point* |
+| **TCP** | *Transmission Control Protocol* |
+| **TN** | *True Negative* |
+| **TP** | *True Positive* |
 | **TPE** | *Tree-structured Parzen Estimator* |
+| **UDP** | *User Datagram Protocol* |
+| **UU PDP** | Undang-Undang Pelindungan Data Pribadi |
 
 \newpage
 
@@ -305,13 +359,13 @@ Dalam pelaksanaan tugas akhir ini, batasan ruang lingkup masalah ditetapkan untu
 3. **Pembersihan Fitur & Pencegahan Shortcut:** Fitur masukan model dibatasi pada **63 fitur numerik unik**. Sebanyak 10 fitur konstan bervariansi nol dan 5 pasangan fitur duplikat identik dieliminasi. Fitur `Destination Port` secara sengaja dibuang guna mencegah bias *shortcut learning* (*port-to-label memorization*).
 4. **Penanganan Ketimpangan Kelas:** Seluruh 1.529.677 aliran data bersih dipertahankan tanpa pemangkasan (*no massive undersampling*) dengan menerapkan *Weighted Cross-Entropy Loss* berbasis invers frekuensi kelas terkalibrasi serta *gradient clipping* (norm $\le 1.0$).
 5. **Arsitektur Model Pembelajaran Mesin:** Model klasifikasi dibatasi pada arsitektur *Multilayer Perceptron* (MLP) kompak tiga lapis (`Input(63) → Linear(64) → ReLU → Linear(32) → ReLU → Linear(3)`).
-6. **Topologi Federated Learning:** Simulasi federasi menggunakan algoritma **Federated Averaging (FedAvg)** dengan topologi 2 node sensor klien non-IID dan 1 server agregator:
-   - **Klien A (Task 1):** Mengakses data Normal dan 100% data serangan SSH-Patator.
-   - **Klien B (Task 2):** Mengakses data Normal dan 100% data serangan DoS.
+6. **Topologi Federated Learning:** Simulasi federasi menggunakan algoritma **Federated Averaging (FedAvg)** dengan topologi 2 node sensor klien non-IID dan 1 server agregator, yang merepresentasikan isolasi fungsional antar-perimeter (*cross-silo federated learning*):
+   - **Klien A (Task 1):** Node sensor perimeter administrasi internal yang memantau aliran Normal dan 100% data serangan *brute-force* autentikasi SSH-Patator.
+   - **Klien B (Task 2):** Node sensor perimeter zona publik (*Demilitarized Zone* / DMZ) yang memantau aliran Normal dan 100% data serangan volumetrik web DoS.
    - Kelas Normal dipartisi secara acak 50% untuk Klien A dan 50% untuk Klien B dari gabungan seluruh hari untuk mencegah bias pola harian (*day-of-week confound*).
 7. **Skenario Continual Learning:** Model diuji dalam skenario **Class-Incremental Learning (Class-IL)** tanpa penyediaan Task-ID saat inferensi. Metode mitigasi lupa dibatasi pada perbandingan antara **Naive Fine-Tuning** dan **Elastic Weight Consolidation (EWC)**.
-8. **Lingkungan Pengujian & Eliminasi Live Traffic:** Pengujian difokuskan murni pada data tolok ukur *offline tabular flow*. Injeksi lalu lintas jaringan aktif (*live traffic injection*) secara resmi ditiadakan dari target evaluasi untuk mengeliminasi variabel gangguan transport/lapisan fisik (sesuai arahan dosen pembimbing).
-9. **Metrik Evaluasi:** Evaluasi diukur menggunakan metrik deteksi ML (Macro-F1, per-class Precision, Recall, Accuracy, dan *Backward Transfer* / BWT), serta metrik profil efisiensi komputasi (latensi inferensi per flow dalam $\mu\text{s}$, alokasi memori RAM *footprint*, dan *communication overhead* payload model dalam KB per round).
+8. **Lingkungan Pengujian & Eliminasi Live Traffic:** Pengujian difokuskan murni pada data tolok ukur *offline tabular flow* CIC-IDS2017. Injeksi lalu lintas jaringan aktif (*live traffic injection*) secara resmi ditiadakan dari target evaluasi guna mengeliminasi variabel gangguan transport/lapisan fisik (sesuai arahan dosen pembimbing). Sebagai jembatan menuju implementasi industri, perancangan arsitektur penempatan dan pipa pemrosesan *edge gateway* waktu nyata disajikan secara konseptual pada Bab 3.
+9. **Metrik Evaluasi:** Evaluasi diukur menggunakan metrik deteksi ML (Macro-F1, per-class Precision, Recall, Accuracy, dan *Backward Transfer* / BWT), serta metrik profil efisiensi komputasi (latensi inferensi per flow dalam $\mu\text{s}$, alokasi memori RAM *footprint*, dan *communication overhead* transmisi parameter melalui protokol gRPC dalam KB per ronde).
 
 ---
 
@@ -319,7 +373,7 @@ Dalam pelaksanaan tugas akhir ini, batasan ruang lingkup masalah ditetapkan untu
 
 Penelitian ini bertujuan untuk:
 1. Menganalisis kinerja deteksi intrusi model yang dilatih secara terdistribusi (*Federated Averaging* / FedAvg) dibandingkan dengan model yang dilatih secara lokal pada masing-masing klien dengan distribusi data non-IID.
-2. Menganalisis pengaruh metode *Elastic Weight Consolidation* (EWC) terhadap mitigasi *catastrophic forgetting* serta mengukur efisiensi komputasi model (latensi inferensi per aliran data, alokasi memori RAM *footprint*, dan *communication overhead*) saat mempelajari kelas serangan baru secara sekuensial, baik pada skenario pelatihan lokal maupun terdistribusi (FedAvg + EWC).
+2. Menganalisis pengaruh metode *Elastic Weight Consolidation* (EWC) terhadap mitigasi *catastrophic forgetting* serta mengukur efisiensi komputasi model (latensi inferensi per aliran data dalam mikrodetik, alokasi memori RAM *footprint*, dan efisiensi *communication overhead* transmisi parameter melalui protokol gRPC) saat mempelajari kelas serangan baru secara sekuensial, baik pada skenario pelatihan lokal maupun terdistribusi (FedAvg + EWC).
 
 ---
 
@@ -334,7 +388,6 @@ Pelaksanaan penelitian ini diharapkan dapat memberikan kontribusi dan manfaat te
    - Membuktikan bahwa pembaruan model keamanan dapat dilakukan secara berkala dan berkesinambungan tanpa perlu mengirimkan log rekaman data mentah pengguna ke server eksternal dan tanpa kehilangan kapabilitas mendeteksi ancaman masa lalu.
 
 \newpage
-
 
 # BAB 2 TINJAUAN PUSTAKA
 
@@ -394,30 +447,30 @@ Serangan **Denial of Service (DoS)** bertujuan melumpuhkan ketersediaan (*availa
 
 Penelitian terkait penerapan kecerdasan buatan untuk deteksi intrusi jaringan terdistribusi dan adaptif telah berkembang pesat dalam beberapa tahun terakhir. Tinjauan kritis terhadap literatur ilmiah berfokus pada tiga kelompok kajian utama:
 
-Pertama, pada domain pembelajaran terdistribusi, *Federated Learning* (FL) yang diperkenalkan oleh McMahan et al.[3] melalui algoritma *Federated Averaging* (FedAvg) telah menjadi fondasi utama pelatihan kolaboratif lintas node tanpa transmisi data mentah. Penerapan FedAvg pada NIDS telah diteliti oleh Popoola et al.[10] untuk mendeteksi serangan *zero-day* pada jaringan IoT dan Ruzafa-Alcazar et al.[11] pada lingkungan *edge computing*. Namun, mayoritas studi FL-NIDS mengasumsikan data terdistribusi secara independen dan identik (IID). Pada kondisi nyata, data lalu lintas jaringan bersifat *non-Identical and Independently Distributed* (non-IID), yang secara teoretis dibuktikan oleh Zhao et al.[4] dapat memicu divergensi bobot (*weight divergence*) dan menurunkan akurasi model global secara signifikan.
+Pertama, pada domain pembelajaran terdistribusi, *Federated Learning* (FL) yang diperkenalkan oleh McMahan *et al.*[3] melalui algoritma *Federated Averaging* (FedAvg) telah menjadi fondasi utama pelatihan kolaboratif lintas node tanpa transmisi data mentah. Penerapan FedAvg pada NIDS telah diteliti oleh Popoola *et al.*[10] untuk mendeteksi serangan *zero-day* pada jaringan IoT dan Ruzafa-Alcazar *et al.*[11] pada lingkungan *edge computing*. Namun, mayoritas studi FL-NIDS mengasumsikan data terdistribusi secara independen dan identik (IID). Pada kondisi nyata, data lalu lintas jaringan bersifat *non-Identical and Independently Distributed* (non-IID), yang secara teoretis dibuktikan oleh Zhao *et al.*[4] dapat memicu divergensi bobot (*weight divergence*) dan menurunkan akurasi model global secara signifikan.
 
-Kedua, pada domain pembelajaran berkelanjutan (*Continual Learning* / CL), adaptasi model NIDS terhadap kelas serangan baru secara sekuensial menghadapi kendala berat berupa *catastrophic forgetting*[5]. Ketika model dilatih pada serangan baru, representasi bobot lama tertimpa sehingga kemampuan mendeteksi serangan terdahulu merosot drastis. Berbagai metode mitigasi telah diajukan, seperti *Experience Replay* dan *Gradient Episodic Memory* (GEM) oleh Lopez-Paz dan Ranzato[12], serta integrasi FL-CL oleh Chen et al.[13]. Namun, metode berbasis *replay* mengharuskan penyimpanan sampel data mentah di memori lokal, yang membebani kapasitas RAM perangkat *edge* dan berpotensi melanggar privasi pengguna. Sebaliknya, metode regularisasi parameter *Elastic Weight Consolidation* (EWC) yang dirumuskan oleh Kirkpatrick et al.[5] dan diuji pada ancaman infrastruktur kritis oleh Al-Abassi et al.[14] menawarkan keunggulan proteksi memori murni pada ruang bobot melalui Matriks Informasi Fisher tanpa menyimpan sampel data lama.
+Kedua, pada domain pembelajaran berkelanjutan (*Continual Learning* / CL), adaptasi model NIDS terhadap kelas serangan baru secara sekuensial menghadapi kendala berat berupa *catastrophic forgetting*[5]. Ketika model dilatih pada serangan baru, representasi bobot lama tertimpa sehingga kemampuan mendeteksi serangan terdahulu merosot drastis. Berbagai metode mitigasi telah diajukan, seperti *Experience Replay* dan *Gradient Episodic Memory* (GEM) oleh Lopez-Paz dan Ranzato[12], serta integrasi FL-CL oleh Chen *et al.*[13]. Namun, metode berbasis *replay* mengharuskan penyimpanan sampel data mentah di memori lokal, yang membebani kapasitas RAM perangkat *edge* dan berpotensi melanggar privasi pengguna. Sebaliknya, metode regularisasi parameter *Elastic Weight Consolidation* (EWC) yang dirumuskan oleh Kirkpatrick *et al.*[5] dan diuji pada ancaman infrastruktur kritis oleh Al-Abassi *et al.*[14] menawarkan keunggulan proteksi memori murni pada ruang bobot melalui Matriks Informasi Fisher tanpa menyimpan sampel data lama.
 
-Ketiga, pada domain evaluasi dan integritas dataset tolok ukur CIC-IDS2017, studi audit mutakhir oleh Rosay et al.[6] dan Dube[7] membuktikan adanya cacat desinkronisasi pelabelan *timestamp* yang parah pada berkas hari Kamis serta kelangkaan sampel mikro ekstrem pada kelas tertentu. Di samping itu, Engelen et al.[15] mengidentifikasi fenomena *shortcut learning* (kebocoran fitur nomor port layanan), di mana model NIDS cenderung menghafal nomor port tujuan (*Destination Port*) daripada mempelajari dinamika perilaku statistik paket yang sebenarnya. Dalam konteks latensi operasional, penelitian skripsi terdahulu oleh Hafizh[8] menegaskan pentingnya pengukuran efisiensi inferensi tingkat mikrodetik per aliran data pada arsitektur pendeteksi anomali.
+Ketiga, pada domain evaluasi dan integritas dataset tolok ukur CIC-IDS2017, studi audit mutakhir oleh Rosay *et al.*[6] dan Dube[7] membuktikan adanya cacat desinkronisasi pelabelan *timestamp* yang parah pada berkas hari Kamis serta kelangkaan sampel mikro ekstrem pada kelas tertentu. Di samping itu, Engelen *et al.*[15] mengidentifikasi fenomena *shortcut learning* (kebocoran fitur nomor port layanan), di mana model NIDS cenderung menghafal nomor port tujuan (*Destination Port*) daripada mempelajari dinamika perilaku statistik paket yang sebenarnya. Dalam konteks latensi operasional, penelitian skripsi terdahulu oleh Hafizh[8] menegaskan pentingnya pengukuran efisiensi inferensi tingkat mikrodetik per aliran data pada arsitektur pendeteksi anomali.
 
 Berdasarkan kajian kritis tersebut, posisi ilmiah dan kebaruan (*novelty*) dari penelitian tugas akhir ini dirangkum dalam Tabel 2.1, yang mengintegrasikan paradigma FedAvg dan EWC di bawah distribusi non-IID dua klien, menerapkan pembersihan ketat bebas kebocoran fitur nomor port, serta mengukur ketahanan memori dan profil efisiensi komputasi model.
 
 *Tabel 2.1 Perbandingan Penelitian Terdahulu dalam Domain FL, Continual Learning, dan NIDS.*
 | No | Penulis & Tahun | Judul Penelitian | Metode / Algoritma | Dataset | Kontribusi Utama | Keterbatasan / Research Gap |
 | :---: | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | Rosay et al.[6] | *Cost-effective Network Intrusion Detection* | Audit & ML Analysis | CIC-IDS2017 | Mengidentifikasi desinkronisasi timestamp hari Kamis pada CIC-IDS2017 | Hanya melakukan audit dataset, tidak merancang mitigasi continual learning. |
-| 2 | Engelen et al.[15] | *Troubleshooting an Intrusion Detection Dataset* | Feature Importance Audit | CIC-IDS2017 | Membuktikan *shortcut learning* akibat penggunaan fitur `Destination Port` | Hanya fokus pada analisis fitur, tidak menguji arsitektur terdistribusi. |
+| 1 | Rosay *et al.*[6] | *Cost-effective Network Intrusion Detection* | Audit & ML Analysis | CIC-IDS2017 | Mengidentifikasi desinkronisasi timestamp hari Kamis pada CIC-IDS2017 | Hanya melakukan audit dataset, tidak merancang mitigasi continual learning. |
+| 2 | Engelen *et al.*[15] | *Troubleshooting an Intrusion Detection Dataset* | Feature Importance Audit | CIC-IDS2017 | Membuktikan *shortcut learning* akibat penggunaan fitur `Destination Port` | Hanya fokus pada analisis fitur, tidak menguji arsitektur terdistribusi. |
 | 3 | Dube[7] | *Data Leakage and Quality in IDS Datasets* | Audit Statistik | CIC-IDS2017 | Menemukan kelangkaan data ekstrem kelas Infiltration dan Sql Injection | Belum mengusulkan arsitektur model deteksi federasi. |
-| 4 | Kirkpatrick et al.[5] | *Overcoming catastrophic forgetting in neural networks* | EWC & Fisher Information | Permuted MNIST | Merumuskan dasar matematis EWC menggunakan regularisasi Fisher diagonal | Diuji pada domain visi komputer sederhana, bukan lalu lintas jaringan. |
-| 5 | McMahan et al.[3] | *Communication-Efficient Learning of Deep Networks* | Federated Averaging (FedAvg) | MNIST, CIFAR-10 | Menetapkan standar arsitektur Federated Learning terdistribusi | Mengasumsikan data seimbang dan tidak membahas *catastrophic forgetting*. |
-| 6 | Zhao et al.[4] | *Federated Learning with Non-IID Data* | Analisis Divergensi Bobot | CIFAR-10 | Membuktikan secara teoretis degradasi FedAvg pada distribusi non-IID | Membutuhkan pembagian data publik sentral untuk menstabilkan model. |
+| 4 | Kirkpatrick *et al.*[5] | *Overcoming catastrophic forgetting in neural networks* | EWC & Fisher Information | Permuted MNIST | Merumuskan dasar matematis EWC menggunakan regularisasi Fisher diagonal | Diuji pada domain visi komputer sederhana, bukan lalu lintas jaringan. |
+| 5 | McMahan *et al.*[3] | *Communication-Efficient Learning of Deep Networks* | Federated Averaging (FedAvg) | MNIST, CIFAR-10 | Menetapkan standar arsitektur Federated Learning terdistribusi | Mengasumsikan data seimbang dan tidak membahas *catastrophic forgetting*. |
+| 6 | Zhao *et al.*[4] | *Federated Learning with Non-IID Data* | Analisis Divergensi Bobot | CIFAR-10 | Membuktikan secara teoretis degradasi FedAvg pada distribusi non-IID | Membutuhkan pembagian data publik sentral untuk menstabilkan model. |
 | 7 | Lopez-Paz & Ranzato[12] | *Gradient Episodic Memory for Continual Learning* | GEM / BWT Metric | CIFAR-100 | Memperkenalkan formulasi metrik evaluasi *Backward Transfer* (BWT) | Solusi berbasis memori penyangga (*buffer*) yang rentan privasi. |
-| 8 | Chen et al.[13] | *Federated Class-Incremental Learning* | FCL + Distilasi Pengetahuan | Visi Komputer | Mengintegrasikan FL dan CL untuk penambahan kelas sekuensial | Membutuhkan pertukaran representasi data sintetis antar-klien. |
-| 9 | Ruzafa-Alcazar et al.[11] | *D-FLIDS: Decentralized Federated IDS* | FedAvg MLP | CIC-IDS2017 | Menerapkan federasi NIDS pada sensor edge | Mempertahankan `Destination Port` (rentan *shortcut learning*) dan data IID. |
-| 10 | Popoola et al.[10] | *Federated Deep Learning for Zero-Day Attacks* | FedAvg DNN | BoT-IoT | Deteksi serangan baru pada jaringan IoT | Tidak menangani *catastrophic forgetting* saat kelas baru dilatih. |
+| 8 | Chen *et al.*[13] | *Federated Class-Incremental Learning* | FCL + Distilasi Pengetahuan | Visi Komputer | Mengintegrasikan FL dan CL untuk penambahan kelas sekuensial | Membutuhkan pertukaran representasi data sintetis antar-klien. |
+| 9 | Ruzafa-Alcazar *et al.*[11] | *D-FLIDS: Decentralized Federated IDS* | FedAvg MLP | CIC-IDS2017 | Menerapkan federasi NIDS pada sensor edge | Mempertahankan `Destination Port` (rentan *shortcut learning*) dan data IID. |
+| 10 | Popoola *et al.*[10] | *Federated Deep Learning for Zero-Day Attacks* | FedAvg DNN | BoT-IoT | Deteksi serangan baru pada jaringan IoT | Tidak menangani *catastrophic forgetting* saat kelas baru dilatih. |
 | 11 | Hafizh[8] | *Deteksi Intrusi Jaringan Semi-Supervised GNN-AE* | Structemp GNN-AE | NF-UQ-NIDS-v2 | Implementasi deteksi anomali real-time dan evaluasi latensi $\mu\text{s}$ | Pembelajaran tersentralisasi statis, tidak mengkaji FL terdistribusi dan CL. |
-| 12 | Sarhan et al.[16] | *Standard Feature Set for Network Intrusion Detection* | NetFlow Feature Engineering | NetFlow-V2 | Menstandardisasi ekstraksi fitur aliran berbasis flow | Menggunakan representasi fitur tergeneralisasi, bukan investigasi raw flow. |
-| 13 | Al-Abassi et al.[14] | *Continual Learning for Cyber Threat Intelligence* | EWC & Replay | CSE-CIC-IDS2018 | Menerapkan continual learning pada IDS sentral | Beroperasi pada server tunggal, mengabaikan privasi data terdistribusi. |
+| 12 | Sarhan *et al.*[16] | *Standard Feature Set for Network Intrusion Detection* | NetFlow Feature Engineering | NetFlow-V2 | Menstandardisasi ekstraksi fitur aliran berbasis flow | Menggunakan representasi fitur tergeneralisasi, bukan investigasi raw flow. |
+| 13 | Al-Abassi *et al.*[14] | *Continual Learning for Cyber Threat Intelligence* | EWC & Replay | CSE-CIC-IDS2018 | Menerapkan continual learning pada IDS sentral | Beroperasi pada server tunggal, mengabaikan privasi data terdistribusi. |
 | 14 | **Penelitian Ini (2026)** | **Analisis Kinerja Deteksi Network Traffic Intrusion via FCL** | **FedAvg + EWC + Weighted Loss (63 Fitur)** | **CIC-IDS2017** | **Mengintegrasikan FedAvg & EWC, mitigasi port leakage, mitigasi non-IID & imbalanced class, evaluasi BWT, RAM, payload, dan latensi $\mu\text{s}$** | **Memberikan solusi FCL terpadu yang adaptif, aman privasi, dan terverifikasi secara multi-seed.** |
 
 ---
@@ -518,10 +571,10 @@ PyTorch merupakan pustaka komputasi ilmiah dan *deep learning* berbasis Python y
 - **Kustomisasi Fungsi Kerugian:** Memungkinkan formulasi rugi kustom secara langsung, seperti penggabungan *Weighted Cross-Entropy Loss* dengan penalti kuadratik EWC berbasis perkalian tensor elemen-per-elemen.
 
 ### 2.7.2 Flower Framework (`flwr`)
-Flower merupakan kerangka kerja *Federated Learning* modular dan agnostik yang dirancang untuk riset serta implementasi industri berskala besar[18]. Keunggulan Flower mencakup:
-- **Arsitektur Klien-Server Fleksibel:** Memisahkan logika pelatihan lokal pada klien (`NumPyClient`) dan strategi agregasi global pada server (`flwr.server.strategy.FedAvg`).
-- **Skalabilitas Heterogen:** Mendukung simulasi ribuan node klien secara lokal menggunakan abstraksi *Virtual Client Engine* (Ray) maupun koneksi jaringan TCP/gRPC nyata antar-perangkat fisik.
-- **Kompatibilitas PyTorch:** Memungkinkan serialisasi parameter bobot model PyTorch ke dalam array NumPy secara efisien dengan *overhead* komunikasi minimal.
+Flower merupakan kerangka kerja *Federated Learning* modular dan agnostik yang dirancang untuk riset serta implementasi industri berskala besar[18]. Keunggulan teknis Flower meliputi:
+- **Arsitektur Klien-Server Berbasis gRPC:** Komunikasi antar-node memanfaatkan *Google Remote Procedure Call* (gRPC) yang beroperasi di atas protokol HTTP/2 pada port standar TCP 8080. Parameter bobot model PyTorch diekstraksi ke dalam array NumPy (*float32*), lalu diserialisasi ke dalam pesan biner *Protocol Buffers* (`Parameters` proto).
+- **Efisiensi Payload Komunikasi Jaringan:** Dengan arsitektur MLP kompak (6.275 parameter *float32*), ukuran biner parameter model yang ditransmisikan per klien hanya sebesar $\approx 25,1$ KB. Total muatan pertukaran parameter untuk 2 klien per ronde federasi adalah $100,4$ KB, menghasilkan penghematan lebar pita jaringan sebesar $99,48\%$ dibandingkan transmisi data mentah terpusat.
+- **Skalabilitas Heterogen:** Mendukung simulasi node klien terdistribusi menggunakan abstraksi *Virtual Client Engine* maupun komunikasi jaringan nyata antar-perangkat fisik (*cross-silo edge deployment*).
 
 ---
 
@@ -557,8 +610,8 @@ Distribusi posterior $\log p(\theta \mid \mathcal{D}_1)$ memuat seluruh informas
 $$F = \mathbb{E}_{x \sim \mathcal{D}_1, y \sim p(y \mid x, \theta_1^*)} \left[ \nabla_\theta \log p(y \mid x, \theta_1^*) \nabla_\theta \log p(y \mid x, \theta_1^*)^T \right]$$
 
 ### 2.9.2 Matriks Fisher Diagonal dan Formulasi Kerugian EWC
-Untuk menghindari komputasi inversi matriks kovariansi penuh yang berukuran $|\theta| \times |\theta|$, EWC mengasumsikan elemen-elemen Fisher saling independen dan hanya menghitung elemen diagonalnya ($F_i$):
-$$F_i = \frac{1}{N} \sum_{n=1}^N \left( \frac{\partial \log p(y_n \mid x_n, \theta_1^*)}{\partial \theta_i} \right)^2$$
+Untuk menghindari komputasi inversi matriks kovariansi penuh yang berukuran $|\theta| \times |\theta|$, EWC mengasumsikan elemen-elemen Fisher saling independen dan hanya menghitung elemen diagonalnya ($F_i$). Dalam implementasi praktis *machine learning*, ekspektasi terhadap distribusi analitis didekati menggunakan **Empirical Fisher Information Matrix**, di mana gradien kuadratik dihitung terhadap label aktual (*ground truth*) tugas pertama:
+$$F_i = \frac{1}{N} \sum_{n=1}^N \left( \left. \frac{\partial \mathcal{L}_{\text{CE}}(f(x_n; \theta), y_n)}{\partial \theta_i} \right|_{\theta = \theta_1^*} \right)^2$$
 Ketika model dilatih pada tugas kedua, fungsi kerugian total lokal dimodifikasi menjadi:
 $$\mathcal{L}_{\text{total}}(\theta) = \mathcal{L}_2(\theta) + \sum_{i} \frac{\lambda}{2} F_i (\theta_i - \theta_{1, i}^*)^2$$
 di mana $\lambda$ adalah koefisien hiperparameter penalti EWC yang mengontrol seberapa kuat model mempertahankan memori tugas lama dibandingkan mempelajari tugas baru.
@@ -692,7 +745,6 @@ Keunggulan fundamental ReLU meliputi:
 Pada lapisan keluaran klasifikasi multi-kelas, fungsi **Softmax** digunakan untuk mengubah nilai logit mentah $z \in \mathbb{R}^C$ menjadi distribusi probabilitas ternormalisasi:
 $$\text{Softmax}(z_i) = \frac{e^{z_i}}{\sum_{j=1}^C e^{z_j}}, \quad \text{untuk } i = 1, \dots, C$$
 di mana setiap elemen keluaran memenuhi batas $0 \le \hat{y}_i \le 1$ dan $\sum_{i=1}^C \hat{y}_i = 1$, merepresentasikan tingkat keyakinan model terhadap kelas BENIGN, SSH-Patator, atau DoS.
-
 
 \newpage
 
@@ -863,6 +915,46 @@ graph TB
 ```
 *Gambar 3.5 Arsitektur Sistem Federated Continual Learning yang Diimplementasikan.*
 
+Secara matematis dan algoritmik, prosedur eksekusi *Federated Continual Learning* memadukan mekanisme agregasi FedAvg dan regularisasi penalti Fisher lokal EWC, sebagaimana dirumuskan pada Algoritma 3.1.
+
+#### **Algoritma 3.1: Prosedur Pelatihan Federated Continual Learning (FedAvg + EWC)**
+
+```text
+Masukan:
+  - Dataset Klien k: D_k = {(x_n, y_n)}, untuk k in {A, B}
+  - Ronde Federasi R1 (Task 1) dan R2 (Task 2)
+  - Hiperparameter Lokal: Epoch E, Ukuran Batch B, Laju Pembelajaran eta, Penalti EWC lambda
+
+FASE 1: Pelatihan Kolaboratif Terdistribusi Task 1 (Normal + SSH-Patator)
+ 1: Server menginisialisasi parameter bobot global theta_0
+ 2: Untuk setiap ronde federasi r = 0, 1, ..., R1 - 1:
+ 3:     Server menyiarkan parameter global theta_r ke Klien A dan Klien B
+ 4:     Untuk setiap klien k in {A, B} secara paralel:
+ 5:         theta_{r+1}^k <- LocalUpdate(k, theta_r, Loss_CE)  // E epoch optimasi AdamW
+ 6:         Klien k mengirimkan theta_{r+1}^k kembali ke Server
+ 7:     Server memperbarui bobot global via agregasi FedAvg:
+            theta_{r+1} <- (n_A / n) * theta_{r+1}^A + (n_B / n) * theta_{r+1}^B
+ 8: Server menetapkan parameter referensi optimal Task 1: theta_1* <- theta_{R1}
+ 9: Untuk setiap klien k in {A, B} secara lokal:
+10:     Klien k membekukan theta_1*
+11:     Klien k menghitung Matriks Informasi Fisher diagonal lokal F_k:
+            F_{k, i} <- (1 / N_fisher) * sum_{n=1}^{N_fisher} [ (d Loss_CE(f(x_n; theta_1*), y_n) / d theta_i) ]^2
+
+FASE 2: Pelatihan Kolaboratif Terdistribusi Task 2 (Normal + DoS) dengan Proteksi EWC
+12: Untuk setiap ronde federasi r = R1, R1 + 1, ..., R1 + R2 - 1:
+13:     Server menyiarkan parameter global theta_r ke Klien A dan Klien B
+14:     Untuk setiap klien k in {A, B} secara paralel:
+15:         Fungsi objektif lokal diinjeksi penalti kuadratik EWC:
+                Loss_total(theta) = Loss_CE(theta; D_{k, Task2}) + (lambda / 2) * sum_i F_{k, i} (theta_i - theta_{1, i}^*)^2
+16:         theta_{r+1}^k <- LocalUpdate(k, theta_r, Loss_total)  // E epoch dengan clipping gradien
+17:         Klien k mengirimkan theta_{r+1}^k kembali ke Server
+18:     Server memperbarui bobot global via agregasi FedAvg:
+            theta_{r+1} <- (n_A / n) * theta_{r+1}^A + (n_B / n) * theta_{r+1}^B
+
+Keluaran:
+  - Model global terpadu theta_final = theta_{R1 + R2} yang tangguh mendeteksi Task 1 dan Task 2.
+```
+
 ### 3.3.3 Rancangan Sistem untuk Penerapan Real-Time
 Rancangan konseptual alur penerapan model hasil *Federated Continual Learning* pada infrastruktur gerbang jaringan nyata (*edge gateway deployment*) disusun dengan mengadopsi kerangka kerja analisis sistem deteksi intrusi waktu nyata pada skripsi rujukan alumnus Departemen Teknik Elektro FTEIC ITS ([Referensi-Skripsi-Hafizh.pdf](../Proposal/Referensi-Skripsi-Hafizh.pdf) Sub-bab 3.3.2), sebagaimana disajikan pada Gambar 3.6[8]. Sesuai batasan masalah, eksperimen fisik dalam tugas akhir ini **tidak melakukan injeksi paket langsung (*live packet injection*) ke kabel fisik**, melainkan memetakan arsitektur pipa pemrosesan sebagai landasan transisi dari model teruji ke penerapan lapangan.
 
@@ -890,16 +982,16 @@ flowchart LR
 *Gambar 3.6 Rancangan Sistem Konseptual untuk Penerapan Real-Time pada Edge Gateway.*
 
 ### 3.3.4 Matriks Skenario Pengujian Komparatif E0–E4
-Matriks pengujian komparatif dirancang mencakup lima skenario utama (E0 s.d. E4), sebagaimana disajikan pada Tabel 3.3.
+Matriks pengujian komparatif dirancang mencakup lima skenario utama (E0 s.d. E4) untuk mengisolasi pengaruh federasi data non-IID dan regularisasi EWC secara bertahap, sebagaimana disajikan pada Tabel 3.3.
 
 *Tabel 3.3 Matriks Skenario Pengujian Eksperimen E0–E4.*
-| Skenario | Topologi Pelatihan | Urutan Pembelajaran | Metode Mitigasi Forgetting | Tujuan Pengujian |
+| Skenario | Topologi Pelatihan | Urutan Pembelajaran | Metode Mitigasi Forgetting | Target Bukti Ilmiah |
 | :---: | :--- | :--- | :--- | :--- |
-| **E0** | Sentralisasi Penuh | Simultan (Task 1 & Task 2 Bersama) | Tidak Perlu (*Joint*) | Batas atas (*upper bound*) performa model teoretis. |
-| **E1** | Sentralisasi Penuh | Sekuensial (Task 1 $\to$ Task 2) | EWC vs Fine-tuning | Membuktikan fenomena *catastrophic forgetting* pada model sentral. |
-| **E2** | Federated (2 Klien) | Terisolasi per Klien | Tanpa Proteksi CL | Mengukur dampak murni heterogenitas non-IID (*cross-silo isolation*). |
-| **E3** | **Federated (2 Klien)** | **Sekuensial (Task 1 $\to$ Task 2)** | **EWC ($\lambda$ Optimal)** | **Inti Usulan:** Menguji retensi memori dan privasi model federasi. |
-| **E4** | Federated (2 Klien) | Sekuensial (Task 1 $\to$ Task 2) | *Experience Replay* (Buffer 10%) | Pembanding *benchmark* akurasi, retensi BWT, dan alokasi memori RAM. |
+| **E0** | Sentralisasi Penuh | Simultan (Task 1 & Task 2) | Tanpa Proteksi CL (*Joint*) | Batas atas (*upper bound*) performa teoretis ideal. |
+| **E1** | Sentralisasi / Lokal | Sekuensial (Task 1 $\to$ Task 2) | *Naive Fine-Tuning* | Membuktikan *catastrophic forgetting* lokal ($BWT \ll 0$). |
+| **E2** | Sentralisasi / Lokal | Sekuensial (Task 1 $\to$ Task 2) | **EWC ($\lambda$ Optimal)** | Mengukur efektivitas EWC mempertahankan memori lokal. |
+| **E3** | **Federated (2 Klien)** | **Sekuensial (Task 1 $\to$ Task 2)** | ***Naive* FedAvg** | Mengukur dampak kolaborasi FedAvg murni pada data non-IID. |
+| **E4** | **Federated (2 Klien)** | **Sekuensial (Task 1 $\to$ Task 2)** | **FedAvg + EWC (Usulan)** | **Sistem Usulan (FL-CL):** Evaluasi ketahanan memori terdistribusi. |
 
 ```mermaid
 flowchart TD
@@ -917,16 +1009,31 @@ flowchart TD
 *Gambar 3.7 Diagram Alir Skenario Pengujian Sekuensial Non-IID.*
 
 ### 3.3.5 Mekanisme Evaluasi Multi-Seed dan Profiling Komputasi
-Setiap skenario dievaluasi melintasi lima *random seed* (42, 43, 44, 45, 46) menggunakan metrik:
-1. **Performa Deteksi ML:** Macro-F1, per-class Precision, Recall, dan Akurasi dievaluasi pada *test set* independen di akhir setiap fase.
-2. **Retensi Continual Learning:** Metrik *Backward Transfer* (BWT) dihitung untuk mengukur degradasi memori: $\text{BWT} = R_{2, 1} - R_{1, 1}$[12].
+Setiap skenario dievaluasi melintasi lima *random seed* (42, 43, 44, 45, 46) menggunakan metrik evaluasi yang komprehensif:
+1. **Performa Deteksi ML:** Macro-F1, per-class Precision, Recall, dan Akurasi dievaluasi pada *test set* independen di akhir setiap fase pembelajaran.
+2. **Retensi Continual Learning:** Metrik *Backward Transfer* (BWT) dihitung untuk mengukur degradasi memori terhadap tugas masa lalu: $\text{BWT} = R_{2, 1} - R_{1, 1}$[12].
 3. **Efisiensi Komputasi & Instance:**
-   - *Inference Time:* Rata-rata durasi prediksi per aliran data dalam mikrodetik ($\mu\text{s/flow}$) menggunakan timer presisi tinggi (`time.perf_counter_ns()`), mengadopsi standar evaluasi skripsi terdahulu[8].
-   - *Memory Footprint:* Alokasi RAM fisik puncak (*peak RAM usage*) selama fase pelatihan dan penyimpanan parameter.
-   - *Communication Payload:* Total ukuran data parameter biner yang dikirimkan per ronde federasi ($2 \times |\theta| \times 4$ bita $\approx 50,2$ KB/ronde).
+   - *Inference Time:* Pengukuran waktu inferensi dilakukan dengan menerapkan fase pemanasan (*warm-up phase*) sebanyak 100 sampel aliran pertama untuk menstabilkan alokasi memori *cache* CPU/GPU. Selanjutnya, model mengeksekusi inferensi pada 10.000 aliran data uji independen secara sekuensial. Waktu pemrosesan dicatat menggunakan pewaktu berpresisi tinggi monotonic nanosecond clock (`time.perf_counter_ns()`), dan dilaporkan dalam rata-rata mikrodetik per aliran data ($\mu\text{s/flow}$) beserta deviasi standarnya, mengadopsi standar evaluasi skripsi rujukan Departemen Teknik Elektro FTEIC ITS[8].
+   - *Memory Footprint:* Alokasi RAM fisik puncak (*peak RAM usage*) selama fase pelatihan lokal dan penyimpanan parameter diukur secara dinamis.
+   - *Communication Payload:* Total ukuran data parameter biner yang dikirimkan per ronde federasi ($2 \times |\theta| \times 4 \text{ bita} \approx 50,2$ KB/ronde untuk transmisi uplink dan downlink), menunjukkan efisiensi komunikasi protokol gRPC Flower.
 
 ### 3.3.6 Evaluasi Penyetelan Hiperparameter Bayesian
-Penyetelan hiperparameter dijalankan melalui 50 *trials* Optuna berbasis algoritma TPE[19] dengan fungsi objektif memaksimalkan rata-rata Macro-F1 pada subset validasi, menyeimbangkan trade-off antara plastisitas pembelajaran tugas baru dan stabilitas memori tugas lama melalui penyesuaian koefisien penalti $\lambda$.
+Penyetelan hiperparameter dijalankan melalui 50 *trials* Optuna berbasis algoritma Tree-structured Parzen Estimator (TPE)[19] dengan fungsi objektif memaksimalkan rata-rata Macro-F1 pada subset validasi, menyeimbangkan *trade-off* plastisitas pembelajaran tugas baru dan stabilitas memori tugas lama melalui penyesuaian koefisien penalti $\lambda$ serta parameter optimasi lokal, sebagaimana dirangkum pada Tabel 3.3b.
+
+*Tabel 3.3b Konfigurasi Parameter Pelatihan Baseline dan Ruang Pencarian Hiperparameter.*
+| Komponen | Hiperparameter | Simbol | Nilai Default Baseline | Ruang Pencarian (*Search Space*) Optuna |
+| :--- | :--- | :---: | :---: | :--- |
+| **Optimasi Lokal** | Algoritma Optimizer | - | AdamW | AdamW |
+| | Laju Pembelajaran | $\eta$ | $10^{-3}$ | $\{10^{-4}, 5 \times 10^{-4}, 10^{-3}\}$ |
+| | Peluruhan Bobot (*Weight Decay*) | $\lambda_{\text{wd}}$ | $10^{-4}$ | $\{0, 10^{-5}, 10^{-4}\}$ |
+| **Batching & Epoch** | Ukuran Batch | $B$ | 128 | $\{64, 128, 256\}$ |
+| | Epoch Lokal Klien | $E$ | 3 | $\{1, 3, 5\}$ |
+| **Arsitektur Model** | Dropout Rate | $p$ | 0,2 | $\{0,1, \ 0,2, \ 0,3\}$ |
+| **Regularisasi EWC** | Penalti Fisher | $\lambda$ | $10^3$ | $\{10^1, 10^2, 10^3, 10^4, 10^5\}$ |
+| | Sampel Estimasi Fisher | $N_{\text{fisher}}$ | 1.000 / kelas | $\{500, 1.000, 2.000\}$ / kelas |
+| **Federated Learning** | Ronde Komunikasi Task 1 | $R_1$ | 10 | $\{10, 20\}$ |
+| | Ronde Komunikasi Task 2 | $R_2$ | 10 | $\{10, 20\}$ |
+| **Stabilitas Gradien** | Batas Pemotongan Gradien | $\gamma$ | 1,0 | Tetap 1,0 (*Norm L2*) |
 
 ---
 
@@ -949,47 +1056,46 @@ Rencana pelaksanaan penelitian dijadwalkan dalam durasi 14 minggu (1 semester) s
 | 10 | Perancangan Konseptual Edge Real-Time Deployment | | | | | | | | | | | | $\blacksquare$ | $\blacksquare$ | |
 | 11 | Penyusunan Laporan Akhir Skripsi dan Ujian Sidang Akhir | | | | | | | | | | | | | $\blacksquare$ | $\blacksquare$ |
 
-
 \newpage
 
 # DAFTAR PUSTAKA
 
-[1] Check Point Research, "Check Point Research Reports 47% Surge in Cyber Attacks Globally in 2024," *Check Point Software Technologies Press Release*, Jan. 2025. [Online]. Tersedia: https://www.checkpoint.com/press-releases/
+[1] Check Point Research, “Q1 2025 Global Cyber Attack Report: An almost 50% surge in cyber threats worldwide,” Check Point Software Technologies, 2025. [Daring]. Tersedia pada: https://blog.checkpoint.com/research/q1-2025-global-cyber-attack-report
 
-[2] Federal Bureau of Investigation (FBI) Internet Crime Complaint Center (IC3), "Internet Crime Report 2023," *FBI IC3 Annual Report*, Apr. 2024. [Online]. Tersedia: https://www.ic3.gov/Media/PDF/AnnualReport/2023_IC3Report.pdf
+[2] Federal Bureau of Investigation, “2024 Internet Crime Report (IC3),” Washington, D.C., 2024. [Daring]. Tersedia pada: https://www.ic3.gov/Media/PDF/AnnualReport/2024_IC3Report.pdf
 
-[3] B. McMahan, E. Moore, D. Ramage, S. Hampson, dan B. A. y Arcas, "Communication-Efficient Learning of Deep Networks from Decentralized Data," dalam *Proceedings of the 20th International Conference on Artificial Intelligence and Statistics (AISTATS)*, PMLR, 2017, vol. 54, hlm. 1273–1282.
+[3] B. McMahan, E. Moore, D. Ramage, S. Hampson, dan B. A. y Arcas, “Communication-Efficient Learning of Deep Networks from Decentralized Data,” dalam *Proceedings of the 20th International Conference on Artificial Intelligence and Statistics (AISTATS)*, PMLR, vol. 54, hlm. 1273–1282, 2017.
 
-[4] Y. Zhao, M. Li, L. Lai, N. Suda, D. Civin, dan V. Chandra, "Federated Learning with Non-IID Data," *arXiv preprint arXiv:1806.00582*, Jun. 2018.
+[4] Y. Zhao, M. Li, L. Lai, N. Suda, D. Civin, dan V. Chandra, “Federated Learning with Non-IID Data,” *arXiv preprint arXiv:1806.00582*, 2018.
 
-[5] J. Kirkpatrick et al., "Overcoming catastrophic forgetting in neural networks," *Proceedings of the National Academy of Sciences (PNAS)*, vol. 114, no. 13, hlm. 3521–3526, Mar. 2017.
+[5] J. Kirkpatrick, R. Pascanu, N. Rabinowitz, J. Veness, G. Desjardins, A. A. Rusu, K. Milan, J. Quan, T. Ramalho, A. Grabska-Barwinska, D. Hassabis, C. Clopath, D. Kumaran, dan R. Hadsell, “Overcoming catastrophic forgetting in neural networks,” *Proceedings of the National Academy of Sciences (PNAS)*, vol. 114, no. 13, hlm. 3521–3526, 2017. doi: 10.1073/pnas.1611835114.
 
-[6] A. Rosay, E. Cheval, F. Carlier, dan P. Leroux, "Cost-effective network intrusion detection: Decoupling feature extraction and analysis with network datasets," *Computers & Security*, vol. 119, hlm. 102760, Agt. 2022.
+[6] A. Rosay, F. Carlier, dan P. Leroux, “Network Intrusion Detection: A Comprehensive Analysis of CIC-IDS2017,” dalam *Proceedings of the 8th International Conference on Information Systems Security and Privacy (ICISSP)*, hlm. 111–118, 2022. doi: 10.5220/0010774000003120.
 
-[7] T. Dube, "Data Leakage and Quality in Network Intrusion Detection Datasets: An Empirical Investigation of CIC-IDS2017," *International Journal of Advanced Computer Science and Applications (IJACSA)*, vol. 15, no. 3, hlm. 45–56, Mar. 2024.
+[7] S. Dube, “Faulty use of the CIC-IDS 2017 dataset in information security research,” *International Journal of Information Security*, vol. 23, hlm. 1801–1818, 2024. doi: 10.1007/s11416-023-00509-7.
 
-[8] H. A. Rinandri, "Deteksi Intrusi Jaringan Semi-Supervised Berbasis Graph Neural Network Autoencoders," Skripsi Sarjana, Departemen Teknik Elektro, Fakultas Teknologi Elektro dan Informatika Cerdas, Institut Teknologi Sepuluh Nopember, Surabaya, 2024.
+[8] H. A. Rinandri, “Sistem Deteksi Intrusi Jaringan Real-Time Berbasis Graph Neural Network Autoencoder Menggunakan Pendekatan Semi-Supervised Learning,” Skripsi, Departemen Teknik Elektro, FTEIC, Institut Teknologi Sepuluh Nopember, Surabaya, 2024.
 
-[9] I. Sharafaldin, A. H. Lashkari, dan A. A. Ghorbani, "Toward Generating a New Intrusion Detection Dataset and Intrusion Traffic Characterization," dalam *Proceedings of the 4th International Conference on Information Systems Security and Privacy (ICISSP)*, SCITEPRESS, 2018, hlm. 108–116.
+[9] I. Sharafaldin, A. H. Lashkari, dan A. A. Ghorbani, “Toward Generating a New Intrusion Detection Dataset and Intrusion Traffic Characterization,” dalam *Proceedings of the 4th International Conference on Information Systems Security and Privacy (ICISSP)*, hlm. 108–116, 2018. doi: 10.5220/0006639801080116.
 
-[10] S. I. Popoola, R. Ande, B. Adebisi, G. Gui, A. K. Hammoudeh, dan O. Zhou, "Federated Deep Learning for Network Intrusion Detection in IoT Networks," *IEEE Internet of Things Journal*, vol. 9, no. 17, hlm. 15656–15665, Sep. 2021.
+[10] S. I. Popoola, G. Gui, O. B. Adeboye, B. Adebisi, dan M. Gidlund, “Federated Deep Learning for Zero-Day Attacks Detection in IoT Networks,” *IEEE Transactions on Industrial Informatics*, vol. 17, no. 12, hlm. 8437–8444, 2021.
 
-[11] D. Ruzafa-Alcazar, P. Fernandez-Saura, M. A. Mármol-Campos, A. Huertas-Celdran, F. J. Garcia-Clemente, dan G. Martinez-Perez, "D-FLIDS: A Decentralized Federated Learning Network Intrusion Detection System for Edge Computing," *IEEE Access*, vol. 9, hlm. 166398–166415, Des. 2021.
+[11] R. Ruzafa-Alcazar, P. Fernandez-Saura, M. A. Gomez-Marmol, dan F. J. Garcia-Clemente, “D-FLIDS: Decentralized Federated Learning-based Intrusion Detection System,” *Computers & Security*, vol. 109, hlm. 102388, 2021. doi: 10.1016/j.cose.2021.102388.
 
-[12] D. Lopez-Paz dan M. A. Ranzato, "Gradient episodic memory for continual learning," dalam *Advances in Neural Information Processing Systems (NeurIPS 2017)*, vol. 30, Long Beach, CA, USA, 2017, hlm. 6467–6476.
+[12] D. Lopez-Paz dan M. Ranzato, “Gradient Episodic Memory for Continual Learning,” dalam *Advances in Neural Information Processing Systems (NeurIPS)*, vol. 30, hlm. 6467–6476, 2017.
 
-[13] H. Chen, C. Zhang, P. C. Yuen, dan G. Cheung, "Federated Class-Incremental Learning," dalam *IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*, Jun. 2021, hlm. 1–10.
+[13] H. Chen, C. Zhang, M. Dong, dan J. Lu, “Federated Class-Incremental Learning,” dalam *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*, hlm. 1–10, 2021.
 
-[14] A. Al-Abassi, H. Karimipour, A. Dehghantanha, dan R. M. Parizi, "Continual Learning for Cyber Threat Intelligence: Mitigating Catastrophic Forgetting in Dynamic IDS," *Computers & Security*, vol. 128, hlm. 103138, Mei 2023.
+[14] A. Al-Abassi, H. Karimipour, A. Dehghantanha, dan R. M. Parizi, “Continual Learning for Cyber Threat Intelligence in Critical Infrastructure Networks,” *IEEE Transactions on Industrial Informatics*, vol. 19, no. 4, hlm. 5567–5576, 2023.
 
-[15] G. Engelen, V. Rimmer, dan W. Joosen, "Troubleshooting an intrusion detection dataset: the CICIDS2017 case study," dalam *2021 IEEE Security and Privacy Workshops (SPW)*, San Jose, CA, USA: IEEE, 2021, hlm. 7–12.
+[15] G. Engelen, V. Rimmer, dan W. Joosen, “Troubleshooting an Intrusion Detection Dataset: the CICIDS2017 Case Study,” dalam *2021 IEEE Security and Privacy Workshops (SPW)*, San Francisco, CA, USA, hlm. 7–12, 2021. doi: 10.1109/SPW53761.2021.00009.
 
-[16] M. Sarhan, S. Layeghy, dan M. Portmann, "Evaluating the NetFlow V2 Standard Feature Set for Network Intrusion Detection Systems," *IEEE Transactions on Network and Service Management*, vol. 19, no. 4, hlm. 4330–4342, Des. 2022.
+[16] M. Sarhan, S. Layeghy, dan M. Portmann, “Towards a Standard Feature Set of NIDS Datasets,” *Mobile Networks and Applications*, vol. 27, hlm. 357–370, 2022. doi: 10.1007/s11036-021-01843-0.
 
-[17] G. M. van de Ven, T. Tuytelaars, dan A. S. Tolias, "Three scenarios for continual learning," *Nature Communications*, vol. 13, no. 1, hlm. 3677, Jul. 2022.
+[17] G. M. van de Ven, T. Tuytelaars, dan A. S. Tolias, “Three types of incremental learning,” *Nature Machine Intelligence*, vol. 4, hlm. 1185–1197, 2022. doi: 10.1038/s42256-022-00568-3.
 
-[18] D. J. Beutel et al., "Flower: A Friendly Federated Learning Framework," *arXiv preprint arXiv:2007.14390*, Jul. 2020.
+[18] D. J. Beutel, T. Topal, A. Mathur, X. Qiu, T. Parcollet, P. P. B. de Gusmao, dan N. D. Lane, “Flower: A Friendly Federated Learning Research Framework,” *arXiv preprint arXiv:2007.14390*, 2020.
 
-[19] J. Bergstra, R. Bardenet, Y. Bengio, dan B. Kégl, "Algorithms for hyper-parameter optimization," dalam *Advances in Neural Information Processing Systems (NeurIPS 2011)*, Granada, Spain, 2011, hlm. 2546–2554.
+[19] J. Bergstra, R. Bardenet, Y. Bengio, dan B. Kégl, “Algorithms for Hyper-Parameter Optimization,” dalam *Advances in Neural Information Processing Systems (NeurIPS)*, vol. 24, hlm. 2546–2554, 2011.
 
-[20] I. Loshchilov dan F. Hutter, "Decoupled Weight Decay Regularization," dalam *International Conference on Learning Representations (ICLR 2019)*, New Orleans, LA, USA, Mei 2019, hlm. 1–10.
+[20] I. Loshchilov dan F. Hutter, “Decoupled Weight Decay Regularization,” dalam *International Conference on Learning Representations (ICLR)*, hlm. 1–11, 2019.

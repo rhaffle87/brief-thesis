@@ -16,7 +16,7 @@ FORMAT LEMBAR PENGESAHAN PROPOSAL TUGAS AKHIR ITS (SK Rektor No. 280/IT2/T/HK.00
 **PROPOSAL TUGAS AKHIR**  
 Diajukan untuk memenuhi salah satu syarat  
 memperoleh gelar Sarjana Teknik (S.T.) pada  
-Program Studi S-1 Teknik Elektro  
+Program Studi S-1 Teknik Telekomunikasi  
 Departemen Teknik Elektro  
 Fakultas Teknologi Elektro dan Informatika Cerdas  
 Institut Teknologi Sepuluh Nopember  
@@ -25,7 +25,7 @@ Institut Teknologi Sepuluh Nopember
 
 Oleh:  
 **RAFLI ALIF IHZA HARTONO**  
-NRP. 5022211233  
+NRP. 5048231003  
 
 <br>
 
@@ -36,7 +36,7 @@ Disetujui oleh Tim Penguji Proposal Tugas Akhir:
 <br>
 
 1. **Dr. Ir. Achmad Affandi, DEA.**  
-   NIP. 196408151989031003  
+   NIP. 196510141990021001  
    *(Pembimbing)* : ............................................................
 
 <br>

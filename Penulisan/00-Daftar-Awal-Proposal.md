@@ -38,6 +38,8 @@
 **BAB 3 METODOLOGI** ................................................................................................................ 23  
 3.1 Metode yang Digunakan .......................................................................................................... 23  
 3.2 Bahan dan Peralatan yang Digunakan ....................................................................................... 25  
+3.2.1 Bahan Penelitian .................................................................................................................... 25  
+3.2.2 Peralatan Penelitian ............................................................................................................... 25  
 3.3 Urutan Pelaksanaan Penelitian ................................................................................................. 26  
 3.3.1 Praproses Data dan Ekstraksi 63 Fitur Numerik .................................................................... 26  
 3.3.2 Arsitektur Sistem Terdistribusi yang Diusulkan ................................................................... 29  
@@ -78,6 +80,7 @@ Tabel 2.1 Perbandingan Penelitian Terdahulu dalam Domain FL, Continual Learning,
 Tabel 3.1 Spesifikasi Lingkungan Perangkat Keras dan Perangkat Lunak ...................................... 25  
 Tabel 3.2 Ringkasan 63 Fitur Statistik Numerik Aliran Bersih CIC-IDS2017 ................................. 28  
 Tabel 3.3 Matriks Skenario Pengujian Eksperimen E0–E4 .............................................................. 31  
+Tabel 3.3b Konfigurasi Parameter Pelatihan Baseline dan Ruang Pencarian Hiperparameter ..... 32  
 Tabel 3.4 Jadwal Pelaksanaan Penelitian Tugas Akhir ................................................................... 34  
 
 ---
@@ -89,10 +92,13 @@ Tabel 3.4 Jadwal Pelaksanaan Penelitian Tugas Akhir ............................
 | Singkatan | Kepanjangan / Definisi |
 |---|---|
 | **ABDS** | *Anomaly-Based Detection System* |
+| **AdamW** | *Adam with Decoupled Weight Decay* |
+| **AUC** | *Area Under the Curve* |
 | **BWT** | *Backward Transfer* |
 | **CIA** | *Confidentiality, Integrity, and Availability* |
 | **CIC** | *Canadian Institute for Cybersecurity* |
 | **CL** | *Continual Learning* |
+| **CPU** | *Central Processing Unit* |
 | **DMZ** | *Demilitarized Zone* |
 | **DoS** | *Denial of Service* |
 | **EWC** | *Elastic Weight Consolidation* |
@@ -100,15 +106,37 @@ Tabel 3.4 Jadwal Pelaksanaan Penelitian Tugas Akhir ............................
 | **FedAvg** | *Federated Averaging* |
 | **FIM** | *Fisher Information Matrix* |
 | **FL** | *Federated Learning* |
+| **FN** | *False Negative* |
+| **FP** | *False Positive* |
+| **FNR** | *False Negative Rate* |
+| **FPR** | *False Positive Rate* |
+| **GDPR** | *General Data Protection Regulation* |
+| **GPU** | *Graphics Processing Unit* |
+| **gRPC** | *Google Remote Procedure Call* |
 | **HIDS** | *Host-Based Intrusion Detection System* |
 | **IAT** | *Inter-Arrival Time* |
 | **IID** | *Independent and Identically Distributed* |
+| **IP** | *Internet Protocol* |
 | **ITS** | Institut Teknologi Sepuluh Nopember |
 | **MLP** | *Multilayer Perceptron* |
+| **NIC** | *Network Interface Card* |
 | **NIDS** | *Network Intrusion Detection System* |
 | **Non-IID** | *Non-Independent and Identically Distributed* |
+| **ONNX** | *Open Neural Network Exchange* |
+| **PR-AUC** | *Precision-Recall Area Under Curve* |
 | **PVE** | *Proxmox Virtual Environment* |
+| **RAM** | *Random Access Memory* |
+| **ReLU** | *Rectified Linear Unit* |
+| **ROC-AUC** | *Receiver Operating Characteristic - Area Under Curve* |
 | **SGD** | *Stochastic Gradient Descent* |
 | **SIDS** | *Signature-Based Intrusion Detection System* |
+| **SIEM** | *Security Information and Event Management* |
+| **SMOTE** | *Synthetic Minority Over-sampling Technique* |
 | **SSH** | *Secure Shell* |
+| **TAP** | *Test Access Point* |
+| **TCP** | *Transmission Control Protocol* |
+| **TN** | *True Negative* |
+| **TP** | *True Positive* |
 | **TPE** | *Tree-structured Parzen Estimator* |
+| **UDP** | *User Datagram Protocol* |
+| **UU PDP** | Undang-Undang Pelindungan Data Pribadi |

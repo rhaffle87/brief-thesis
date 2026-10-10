@@ -3,8 +3,8 @@
 **ANALISIS KINERJA DETEKSI NETWORK TRAFFIC INTRUSION MENGGUNAKAN METODE FEDERATED-CONTINUAL LEARNING PADA TESTBED PRIVATE CLOUD SERVER**  
 *(Studi Pengaruh Elastic Weight Consolidation dan Federated Averaging pada Distribusi Data Non-IID Dua Client)*
 
-**Nama Mahasiswa / NRP** : Rafli Alif Ihza Hartono / 5022211233  
-**Departemen** : Teknik Elektro FTEIC - ITS  
+**Nama Mahasiswa / NRP** : Rafli Alif Ihza Hartono / 5048231003  
+**Departemen** : Teknik Elektro (Program Studi S-1 Teknik Telekomunikasi) FTEIC - ITS  
 **Dosen Pembimbing** : Dr. Ir. Achmad Affandi, DEA.  
 
 #### Abstrak
@@ -19,8 +19,8 @@ Eskalasi serangan siber menuntut *Network Intrusion Detection System* (NIDS) mam
 **PERFORMANCE ANALYSIS OF NETWORK TRAFFIC INTRUSION DETECTION USING FEDERATED-CONTINUAL LEARNING ON A PRIVATE CLOUD SERVER TESTBED**  
 *(Study on the Effects of Elastic Weight Consolidation and Federated Averaging under Two-Client Non-IID Data Distribution)*
 
-**Student Name / NRP** : Rafli Alif Ihza Hartono / 5022211233  
-**Department** : Electrical Engineering FTEIC - ITS  
+**Student Name / NRP** : Rafli Alif Ihza Hartono / 5048231003  
+**Department** : Electrical Engineering (Telecommunication Engineering Study Program) FTEIC - ITS  
 **Advisor** : Dr. Ir. Achmad Affandi, DEA.  
 
 #### Abstract
