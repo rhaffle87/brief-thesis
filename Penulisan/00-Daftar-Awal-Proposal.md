@@ -58,9 +58,8 @@
 Gambar 2.1 Model CIA Triad dan Konsep Pertahanan Berlapis Jaringan .......................................... 6  
 Gambar 2.2 Siklus Pelatihan dan Agregasi Bobot pada Federated Learning (FedAvg) .................... 10  
 Gambar 2.3 Taksonomi Pendekatan Mitigasi Catastrophic Forgetting ............................................. 12  
-Gambar 2.4 Diagram Arsitektur Multilayer Perceptron (MLP) Kompak Tiga Lapis ......................... 15  
-Gambar 2.5 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis ............................. 16  
-Gambar 2.6 Struktur Dasar Confusion Matrix untuk Evaluasi Deteksi Biner dan Multi-kelas .......... 19  
+Gambar 2.4 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis ............................. 16  
+Gambar 2.5 Struktur Dasar Confusion Matrix untuk Evaluasi Deteksi Biner dan Multi-kelas .......... 19  
 Gambar 3.1 Arsitektur Penempatan Sensor NIDS Terdistribusi dalam Jaringan Enterprise ............. 23  
 Gambar 3.2 Fishbone Diagram Identifikasi Tantangan NIDS Terdistribusi ..................................... 24  
 Gambar 3.3 Diagram Alir Urutan Pelaksanaan Penelitian .............................................................. 26  
