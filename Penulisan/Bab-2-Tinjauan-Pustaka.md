@@ -204,7 +204,33 @@ di mana $f_1$ dan $f_2$ adalah fungsi aktivasi non-linear ReLU.
 ### 2.8.2 Alasan Pemilihan Arsitektur Kompak
 Model dengan 63 fitur masukan, 64 neuron pada lapisan tersembunyi pertama, 32 neuron pada lapisan tersembunyi kedua, dan 3 neuron keluaran memiliki total parameter:
 $$|\theta| = (63 \times 64 + 64) + (64 \times 32 + 32) + (32 \times 3 + 3) = 4.096 + 2.080 + 99 = 6.275 \text{ parameter}$$
-Dengan presisi angka mengambang 32-bit (*float32* / 4 bita), ukuran biner parameter model hanya sekitar **25,1 KB**. Ukuran yang sangat ringkas ini memungkinkan proses transfer bobot pada setiap ronde federasi selesai dalam hitungan milidetik dan memungkinkan inferensi lokal dieksekusi dalam skala waktu mikrodetik per aliran data.
+Dengan presisi angka mengambang 32-bit (*float32* / 4 bita), ukuran biner parameter model hanya sekitar **25,1 KB**. Ukuran yang sangat ringkas ini memungkinkan proses transfer bobot pada setiap ronde federasi selesai dalam hitungan milidetik dan memungkinkan inferensi lokal dieksekusi dalam skala waktu mikrodetik per aliran data. Rincian struktur lapisan dan komposisi parameter bobot disajikan pada Gambar 2.4 (dan terdokumentasi pada berkas rancangan aset [arsitektur_model_mlp.svg](../Aset/arsitektur_model_mlp.svg)).
+
+```mermaid
+flowchart LR
+    subgraph INP [Lapisan Masukan]
+        X["<b>Vektor Masukan x ∈ ℝ⁶³</b><br/>63 Fitur Statistik Aliran<br/>(Standardisasi Z-Score Lokal)"]
+    end
+    subgraph H1 [Lapisan Tersembunyi 1]
+        FC1["<b>Linear 1: W₁ · x + b₁</b><br/>Bobot: 63 × 64 = 4.032<br/>Bias: 64 parameter<br/><b>Subtotal: 4.096 Param</b>"]
+        ACT1["<b>Aktivasi ReLU 1</b><br/>h₁ = max(0, z₁)<br/>Dimensi: 64"]
+    end
+    subgraph H2 [Lapisan Tersembunyi 2]
+        FC2["<b>Linear 2: W₂ · h₁ + b₂</b><br/>Bobot: 64 × 32 = 2.048<br/>Bias: 32 parameter<br/><b>Subtotal: 2.080 Param</b>"]
+        ACT2["<b>Aktivasi ReLU 2</b><br/>h₂ = max(0, z₂)<br/>Dimensi: 32"]
+    end
+    subgraph OUT [Lapisan Keluaran]
+        FC3["<b>Linear 3: W₃ · h₂ + b₃</b><br/>Bobot: 32 × 3 = 96<br/>Bias: 3 parameter<br/><b>Subtotal: 99 Param</b>"]
+        LOGITS["<b>Logits Keluaran z ∈ ℝ³</b><br/>• Kelas 0: BENIGN (Normal)<br/>• Kelas 1: SSH-Patator<br/>• Kelas 2: DoS"]
+    end
+    X --> FC1
+    FC1 --> ACT1
+    ACT1 --> FC2
+    FC2 --> ACT2
+    ACT2 --> FC3
+    FC3 --> LOGITS
+```
+*Gambar 2.4 Diagram Arsitektur Multilayer Perceptron (MLP) Kompak Tiga Lapis.*
 
 ---
 
@@ -233,7 +259,7 @@ flowchart TD
         T2 --> RES[Solusi Optimal: Keseimbangan Tugas 1 & Tugas 2]
     end
 ```
-*Gambar 2.4 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis.*
+*Gambar 2.5 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis.*
 
 ### 2.9.3 Weighted Cross-Entropy dan Gradient Clipping
 Untuk mengatasi ketimpangan kelas yang parah, fungsi kerugian dasar $\mathcal{L}_2(\theta)$ menggunakan pembobotan invers frekuensi kelas:
@@ -269,7 +295,7 @@ Berdasarkan telaah kritis terhadap literatur audit dataset IDS mutakhir, penelit
 Evaluasi sistem dilakukan secara komprehensif mencakup metrik kinerja deteksi kecerdasan buatan, metrik retensi continual learning, dan metrik profil komputasi perangkat.
 
 ### 2.11.1 Metrik Deteksi Pembelajaran Mesin
-Dievaluasi berbasis matriks konfusi (*Confusion Matrix*) yang terdiri atas *True Positive* (TP), *True Negative* (TN), *False Positive* (FP), dan *False Negative* (FN) sebagaimana diilustrasikan pada Gambar 2.5:
+Dievaluasi berbasis matriks konfusi (*Confusion Matrix*) yang terdiri atas *True Positive* (TP), *True Negative* (TN), *False Positive* (FP), dan *False Negative* (FN) sebagaimana diilustrasikan pada Gambar 2.6:
 
 ```mermaid
 flowchart TD
@@ -280,7 +306,7 @@ flowchart TD
         ACT_N --> TN[True Negative: Prediksi Negatif Benar]
     end
 ```
-*Gambar 2.5 Struktur Dasar Confusion Matrix untuk Evaluasi Deteksi Biner dan Multi-kelas.*
+*Gambar 2.6 Struktur Dasar Confusion Matrix untuk Evaluasi Deteksi Biner dan Multi-kelas.*
 
 - **Accuracy:** Mengukur proporsi prediksi benar terhadap total seluruh sampel:
   $$\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}$$

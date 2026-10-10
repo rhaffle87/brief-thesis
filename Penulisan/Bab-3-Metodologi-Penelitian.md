@@ -130,7 +130,7 @@ flowchart TD
 | **Total Fitur Input** | **63** | *Seluruhnya bertipe numerik kontinu / diskret* |
 
 ### 3.3.2 Arsitektur Sistem Terdistribusi yang Diusulkan
-Model klasifikasi dirancang menggunakan **Multilayer Perceptron (MLP)** kompak tiga lapis terhubung penuh (`Input(63) → Linear(64) → ReLU → Linear(32) → ReLU → Linear(3)`). Model ini hanya memiliki 6.275 parameter bobot ($\approx 25,1$ KB) sehingga sangat ringan untuk pertukaran parameter jaringan pada perangkat *edge*.
+Model klasifikasi dirancang menggunakan **Multilayer Perceptron (MLP)** kompak tiga lapis terhubung penuh dengan alur komputasi lapisan masukan 63 fitur, lapisan tersembunyi pertama 64 neuron (ReLU), lapisan tersembunyi kedua 32 neuron (ReLU), dan lapisan keluaran 3 logits kelas (sebagaimana diilustrasikan pada Gambar 2.4 serta berkas rancangan model [arsitektur_model_mlp.svg](../Aset/arsitektur_model_mlp.svg)). Model ini memiliki total 6.275 parameter bobot dan bias ($\approx 25,1$ KB) sehingga sangat ringan untuk pertukaran parameter jaringan pada perangkat *edge*.
 
 Mekanisme mitigasi *catastrophic forgetting* diimplementasikan dengan menambahkan modul kalkulasi **Matriks Informasi Fisher (FIM) diagonal** pada klien lokal setelah menyelesaikan pelatihan Task 1[5]. Saat mempelajari Task 2, klien menambahkan penalti kuadratik EWC ke fungsi kerugian lokal sebelum bobot diagregasi oleh server pusat menggunakan algoritma *Federated Averaging* (FedAvg)[3], sebagaimana diilustrasikan pada Gambar 3.5.
 

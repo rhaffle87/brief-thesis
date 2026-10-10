@@ -1,0 +1,82 @@
+<mxfile host="app.diagrams.net" modified="2026-10-10T00:50:00.000Z" agent="Antigravity" version="24.7.5">
+  <diagram id="mlp-arch" name="Arsitektur Model MLP Kompak">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="&lt;b&gt;ARSITEKTUR MULTILAYER PERCEPTRON (MLP) KOMPAK UNTUK NIDS TERDISTRIBUSI&lt;/b&gt;&lt;br&gt;Total Parameter: 6.275 Bobot &amp;amp; Bias (~25,1 KB) | Masukan: 63 Fitur Numerik Bersih | Keluaran: 3 Logits Kelas" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fillColor=#f8f9fa;strokeColor=#d6d8db;fontSize=14;fontColor=#212529;" vertex="1" parent="1">
+          <mxGeometry x="60" y="30" width="1040" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Container Input Layer -->
+        <mxCell id="c_inp" value="&lt;b&gt;1. Lapisan Masukan (Input Layer)&lt;/b&gt;" style="swimlane;startSize=26;fillColor=#e1f5fe;strokeColor=#0288d1;fontColor=#01579b;fontSize=12;rounded=1;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="110" width="190" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="n_inp" value="&lt;b&gt;Vektor Aliran Bersih&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#0277bd&quot;&gt;&lt;b&gt;Input Dimension: 63&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;br&gt;Fitur statistik CIC-IDS2017:&lt;br&gt;• 5 Waktu &amp;amp; Durasi&lt;br&gt;• 10 Inter-Arrival Time&lt;br&gt;• 8 Paket Maju (Fwd)&lt;br&gt;• 7 Paket Balik (Bwd)&lt;br&gt;• 4 Kecepatan Aliran&lt;br&gt;• 7 Ukuran Paket&lt;br&gt;• 7 Bendera TCP&lt;br&gt;• 7 Segmen &amp;amp; Jendela&lt;br&gt;• 8 Aktivitas Temporal&lt;br&gt;&lt;i&gt;Bebas Destination Port&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#81d4fa;fontSize=10;align=left;spacingLeft=8;" vertex="1" parent="c_inp">
+          <mxGeometry x="15" y="38" width="160" height="185" as="geometry" />
+        </mxCell>
+
+        <!-- Container Hidden Layer 1 -->
+        <mxCell id="c_h1" value="&lt;b&gt;2. Lapisan Tersembunyi 1 (Hidden 1)&lt;/b&gt;" style="swimlane;startSize=26;fillColor=#e8f5e9;strokeColor=#388e3c;fontColor=#1b5e20;fontSize=12;rounded=1;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="110" width="220" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="n_fc1" value="&lt;b&gt;Fully-Connected (Linear 1)&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#2e7d32&quot;&gt;&lt;b&gt;In: 63 ➔ Out: 64&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;br&gt;• Matriks Bobot ($W_1$):&lt;br&gt;  63 × 64 = 4.032 parameter&lt;br&gt;• Vektor Bias ($b_1$):&lt;br&gt;  64 parameter&lt;br&gt;&lt;b&gt;Subtotal: 4.096 param&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a5d6a7;fontSize=10;align=left;spacingLeft=8;" vertex="1" parent="c_h1">
+          <mxGeometry x="15" y="38" width="190" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="n_relu1" value="&lt;b&gt;Aktivasi ReLU 1&lt;/b&gt;&lt;br&gt;$f(z) = \max(0, z)$&lt;br&gt;Dimensi: 64 fitur laten" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#66bb6a;fontSize=10;align=center;" vertex="1" parent="c_h1">
+          <mxGeometry x="15" y="160" width="190" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Container Hidden Layer 2 -->
+        <mxCell id="c_h2" value="&lt;b&gt;3. Lapisan Tersembunyi 2 (Hidden 2)&lt;/b&gt;" style="swimlane;startSize=26;fillColor=#fff8e1;strokeColor=#ffa000;fontColor=#e65100;fontSize=12;rounded=1;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="110" width="220" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="n_fc2" value="&lt;b&gt;Fully-Connected (Linear 2)&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#ef6c00&quot;&gt;&lt;b&gt;In: 64 ➔ Out: 32&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;br&gt;• Matriks Bobot ($W_2$):&lt;br&gt;  64 × 32 = 2.048 parameter&lt;br&gt;• Vektor Bias ($b_2$):&lt;br&gt;  32 parameter&lt;br&gt;&lt;b&gt;Subtotal: 2.080 param&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ffe082;fontSize=10;align=left;spacingLeft=8;" vertex="1" parent="c_h2">
+          <mxGeometry x="15" y="38" width="190" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="n_relu2" value="&lt;b&gt;Aktivasi ReLU 2&lt;/b&gt;&lt;br&gt;$f(z) = \max(0, z)$&lt;br&gt;Dimensi: 32 fitur laten" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffecb3;strokeColor=#ffb74d;fontSize=10;align=center;" vertex="1" parent="c_h2">
+          <mxGeometry x="15" y="160" width="190" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Container Output Layer -->
+        <mxCell id="c_out" value="&lt;b&gt;4. Lapisan Keluaran (Output)&lt;/b&gt;" style="swimlane;startSize=26;fillColor=#ede7f6;strokeColor=#7e57c2;fontColor=#311b92;fontSize=12;rounded=1;html=1;" vertex="1" parent="1">
+          <mxGeometry x="870" y="110" width="230" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="n_fc3" value="&lt;b&gt;Fully-Connected (Linear 3)&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#5e35b1&quot;&gt;&lt;b&gt;In: 32 ➔ Out: 3&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;br&gt;• Matriks Bobot ($W_3$):&lt;br&gt;  32 × 3 = 96 parameter&lt;br&gt;• Vektor Bias ($b_3$):&lt;br&gt;  3 parameter&lt;br&gt;&lt;b&gt;Subtotal: 99 param&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d1c4e9;fontSize=10;align=left;spacingLeft=8;" vertex="1" parent="c_out">
+          <mxGeometry x="15" y="38" width="200" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="n_logits" value="&lt;b&gt;3 Logits Kelas Output&lt;/b&gt;&lt;br&gt;• Kelas 0: BENIGN (Normal)&lt;br&gt;• Kelas 1: SSH-Patator&lt;br&gt;• Kelas 2: DoS (Denial of Service)&lt;br&gt;&lt;font color=&quot;#4527a0&quot;&gt;&lt;i&gt;➔ Weighted Cross-Entropy Loss&lt;/i&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d1c4e9;strokeColor=#9575cd;fontSize=10;align=left;spacingLeft=8;" vertex="1" parent="c_out">
+          <mxGeometry x="15" y="160" width="200" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- Edges -->
+        <mxCell id="e_inp_fc1" edge="1" parent="1" source="c_inp" target="c_h1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#0288d1;strokeWidth=2;endArrow=classic;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_fc1_relu1" edge="1" parent="c_h1" source="n_fc1" target="n_relu1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#388e3c;strokeWidth=2;endArrow=classic;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_h1_h2" edge="1" parent="1" source="c_h1" target="c_h2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#388e3c;strokeWidth=2;endArrow=classic;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_fc2_relu2" edge="1" parent="c_h2" source="n_fc2" target="n_relu2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#ffa000;strokeWidth=2;endArrow=classic;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_h2_out" edge="1" parent="1" source="c_h2" target="c_out" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#ffa000;strokeWidth=2;endArrow=classic;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_fc3_logits" edge="1" parent="c_out" source="n_fc3" target="n_logits" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#7e57c2;strokeWidth=2;endArrow=classic;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Parameter Summary Card -->
+        <mxCell id="summary" value="&lt;b&gt;REKAPITULASI KOMPUTASI MODEL MLP NIDS:&lt;/b&gt;&lt;br&gt;• Dimensi Masukan ($x$): 63 Fitur Aliran Statistik Bersih (Standardisasi Z-score lokal)&lt;br&gt;• Komposisi Parameter: Linear 1 (4.096) + Linear 2 (2.080) + Linear 3 (99) = &lt;b&gt;6.275 Parameter Bobot &amp;amp; Bias&lt;/b&gt;&lt;br&gt;• Ukuran Biner Memori: $6.275 \times 4\text{ bita (float32)} \approx 25,1\text{ KB}$ (Sangat ringan untuk sinkronisasi FL Flower &amp;amp; komputasi perangkat edge)&lt;br&gt;• Mekanisme Pelatihan: Optimasi SGD / AdamW lokal + Penalti Regularisasi EWC ($\lambda \cdot F_i (\theta_i - \theta_{1, i}^*)^2$) + Agregasi FedAvg Global" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontColor=#424242;fontSize=11;align=left;spacingLeft=14;" vertex="1" parent="1">
+          <mxGeometry x="60" y="380" width="1040" height="90" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -203,8 +203,9 @@ Escalating cyber threats require Network Intrusion Detection Systems (NIDS) to d
 Gambar 2.1 Model CIA Triad dan Konsep Pertahanan Berlapis Jaringan .......................................... 6  
 Gambar 2.2 Siklus Pelatihan dan Agregasi Bobot pada Federated Learning (FedAvg) .................... 10  
 Gambar 2.3 Taksonomi Pendekatan Mitigasi Catastrophic Forgetting ............................................. 12  
-Gambar 2.4 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis ............................. 16  
-Gambar 2.5 Struktur Dasar Confusion Matrix untuk Evaluasi Deteksi Biner dan Multi-kelas .......... 19  
+Gambar 2.4 Diagram Arsitektur Multilayer Perceptron (MLP) Kompak Tiga Lapis ......................... 15  
+Gambar 2.5 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis ............................. 16  
+Gambar 2.6 Struktur Dasar Confusion Matrix untuk Evaluasi Deteksi Biner dan Multi-kelas .......... 19  
 Gambar 3.1 Arsitektur Penempatan Sensor NIDS Terdistribusi dalam Jaringan Enterprise ............. 23  
 Gambar 3.2 Fishbone Diagram Identifikasi Tantangan NIDS Terdistribusi ..................................... 24  
 Gambar 3.3 Diagram Alir Urutan Pelaksanaan Penelitian .............................................................. 26  
@@ -304,7 +305,7 @@ Dalam pelaksanaan tugas akhir ini, batasan ruang lingkup masalah ditetapkan untu
    - **DoS (Denial of Service):** Serangan volumetrik penolakan layanan pada Task 2, mencakup empat subvarian alami: Hulk, GoldenEye, slowloris, dan Slowhttptest (193.748 aliran bersih).
 3. **Pembersihan Fitur & Pencegahan Shortcut:** Fitur masukan model dibatasi pada **63 fitur numerik unik**. Sebanyak 10 fitur konstan bervariansi nol dan 5 pasangan fitur duplikat identik dieliminasi. Fitur `Destination Port` secara sengaja dibuang guna mencegah bias *shortcut learning* (*port-to-label memorization*).
 4. **Penanganan Ketimpangan Kelas:** Seluruh 1.529.677 aliran data bersih dipertahankan tanpa pemangkasan (*no massive undersampling*) dengan menerapkan *Weighted Cross-Entropy Loss* berbasis invers frekuensi kelas terkalibrasi serta *gradient clipping* (norm $\le 1.0$).
-5. **Arsitektur Model Pembelajaran Mesin:** Model klasifikasi dibatasi pada arsitektur *Multilayer Perceptron* (MLP) kompak tiga lapis (`Input(63) → Linear(64) → ReLU → Linear(32) → ReLU → Linear(3)`).
+5. **Arsitektur Model Pembelajaran Mesin:** Model klasifikasi dibatasi pada arsitektur *Multilayer Perceptron* (MLP) kompak tiga lapis terhubung penuh berkapasitas 6.275 parameter bobot dan bias (lapisan masukan 63 fitur numerik bersih, dua lapisan tersembunyi berdimensi 64 dan 32 neuron dengan fungsi aktivasi ReLU, serta lapisan keluaran 3 logits kelas), sebagaimana dirancang pada diagram arsitektur model ([arsitektur_model_mlp.svg](../Aset/arsitektur_model_mlp.svg)).
 6. **Topologi Federated Learning:** Simulasi federasi menggunakan algoritma **Federated Averaging (FedAvg)** dengan topologi 2 node sensor klien non-IID dan 1 server agregator:
    - **Klien A (Task 1):** Mengakses data Normal dan 100% data serangan SSH-Patator.
    - **Klien B (Task 2):** Mengakses data Normal dan 100% data serangan DoS.
@@ -542,7 +543,33 @@ di mana $f_1$ dan $f_2$ adalah fungsi aktivasi non-linear ReLU.
 ### 2.8.2 Alasan Pemilihan Arsitektur Kompak
 Model dengan 63 fitur masukan, 64 neuron pada lapisan tersembunyi pertama, 32 neuron pada lapisan tersembunyi kedua, dan 3 neuron keluaran memiliki total parameter:
 $$|\theta| = (63 \times 64 + 64) + (64 \times 32 + 32) + (32 \times 3 + 3) = 4.096 + 2.080 + 99 = 6.275 \text{ parameter}$$
-Dengan presisi angka mengambang 32-bit (*float32* / 4 bita), ukuran biner parameter model hanya sekitar **25,1 KB**. Ukuran yang sangat ringkas ini memungkinkan proses transfer bobot pada setiap ronde federasi selesai dalam hitungan milidetik dan memungkinkan inferensi lokal dieksekusi dalam skala waktu mikrodetik per aliran data.
+Dengan presisi angka mengambang 32-bit (*float32* / 4 bita), ukuran biner parameter model hanya sekitar **25,1 KB**. Ukuran yang sangat ringkas ini memungkinkan proses transfer bobot pada setiap ronde federasi selesai dalam hitungan milidetik dan memungkinkan inferensi lokal dieksekusi dalam skala waktu mikrodetik per aliran data. Rincian struktur lapisan dan komposisi parameter bobot disajikan pada Gambar 2.4 (dan terdokumentasi pada berkas rancangan aset [arsitektur_model_mlp.svg](../Aset/arsitektur_model_mlp.svg)).
+
+```mermaid
+flowchart LR
+    subgraph INP [Lapisan Masukan]
+        X["<b>Vektor Masukan x ∈ ℝ⁶³</b><br/>63 Fitur Statistik Aliran<br/>(Standardisasi Z-Score Lokal)"]
+    end
+    subgraph H1 [Lapisan Tersembunyi 1]
+        FC1["<b>Linear 1: W₁ · x + b₁</b><br/>Bobot: 63 × 64 = 4.032<br/>Bias: 64 parameter<br/><b>Subtotal: 4.096 Param</b>"]
+        ACT1["<b>Aktivasi ReLU 1</b><br/>h₁ = max(0, z₁)<br/>Dimensi: 64"]
+    end
+    subgraph H2 [Lapisan Tersembunyi 2]
+        FC2["<b>Linear 2: W₂ · h₁ + b₂</b><br/>Bobot: 64 × 32 = 2.048<br/>Bias: 32 parameter<br/><b>Subtotal: 2.080 Param</b>"]
+        ACT2["<b>Aktivasi ReLU 2</b><br/>h₂ = max(0, z₂)<br/>Dimensi: 32"]
+    end
+    subgraph OUT [Lapisan Keluaran]
+        FC3["<b>Linear 3: W₃ · h₂ + b₃</b><br/>Bobot: 32 × 3 = 96<br/>Bias: 3 parameter<br/><b>Subtotal: 99 Param</b>"]
+        LOGITS["<b>Logits Keluaran z ∈ ℝ³</b><br/>• Kelas 0: BENIGN (Normal)<br/>• Kelas 1: SSH-Patator<br/>• Kelas 2: DoS"]
+    end
+    X --> FC1
+    FC1 --> ACT1
+    ACT1 --> FC2
+    FC2 --> ACT2
+    ACT2 --> FC3
+    FC3 --> LOGITS
+```
+*Gambar 2.4 Diagram Arsitektur Multilayer Perceptron (MLP) Kompak Tiga Lapis.*
 
 ---
 
@@ -571,7 +598,7 @@ flowchart TD
         T2 --> RES[Solusi Optimal: Keseimbangan Tugas 1 & Tugas 2]
     end
 ```
-*Gambar 2.4 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis.*
+*Gambar 2.5 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis.*
 
 ### 2.9.3 Weighted Cross-Entropy dan Gradient Clipping
 Untuk mengatasi ketimpangan kelas yang parah, fungsi kerugian dasar $\mathcal{L}_2(\theta)$ menggunakan pembobotan invers frekuensi kelas:
@@ -607,7 +634,7 @@ Berdasarkan telaah kritis terhadap literatur audit dataset IDS mutakhir, penelit
 Evaluasi sistem dilakukan secara komprehensif mencakup metrik kinerja deteksi kecerdasan buatan, metrik retensi continual learning, dan metrik profil komputasi perangkat.
 
 ### 2.11.1 Metrik Deteksi Pembelajaran Mesin
-Dievaluasi berbasis matriks konfusi (*Confusion Matrix*) yang terdiri atas *True Positive* (TP), *True Negative* (TN), *False Positive* (FP), dan *False Negative* (FN) sebagaimana diilustrasikan pada Gambar 2.5:
+Dievaluasi berbasis matriks konfusi (*Confusion Matrix*) yang terdiri atas *True Positive* (TP), *True Negative* (TN), *False Positive* (FP), dan *False Negative* (FN) sebagaimana diilustrasikan pada Gambar 2.6:
 
 ```mermaid
 flowchart TD
@@ -618,7 +645,7 @@ flowchart TD
         ACT_N --> TN[True Negative: Prediksi Negatif Benar]
     end
 ```
-*Gambar 2.5 Struktur Dasar Confusion Matrix untuk Evaluasi Deteksi Biner dan Multi-kelas.*
+*Gambar 2.6 Struktur Dasar Confusion Matrix untuk Evaluasi Deteksi Biner dan Multi-kelas.*
 
 - **Accuracy:** Mengukur proporsi prediksi benar terhadap total seluruh sampel:
   $$\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}$$
@@ -828,7 +855,7 @@ flowchart TD
 | **Total Fitur Input** | **63** | *Seluruhnya bertipe numerik kontinu / diskret* |
 
 ### 3.3.2 Arsitektur Sistem Terdistribusi yang Diusulkan
-Model klasifikasi dirancang menggunakan **Multilayer Perceptron (MLP)** kompak tiga lapis terhubung penuh (`Input(63) → Linear(64) → ReLU → Linear(32) → ReLU → Linear(3)`). Model ini hanya memiliki 6.275 parameter bobot ($\approx 25,1$ KB) sehingga sangat ringan untuk pertukaran parameter jaringan pada perangkat *edge*.
+Model klasifikasi dirancang menggunakan **Multilayer Perceptron (MLP)** kompak tiga lapis terhubung penuh dengan alur komputasi lapisan masukan 63 fitur, lapisan tersembunyi pertama 64 neuron (ReLU), lapisan tersembunyi kedua 32 neuron (ReLU), dan lapisan keluaran 3 logits kelas (sebagaimana diilustrasikan pada Gambar 2.4 serta berkas rancangan model [arsitektur_model_mlp.svg](../Aset/arsitektur_model_mlp.svg)). Model ini memiliki total 6.275 parameter bobot dan bias ($\approx 25,1$ KB) sehingga sangat ringan untuk pertukaran parameter jaringan pada perangkat *edge*.
 
 Mekanisme mitigasi *catastrophic forgetting* diimplementasikan dengan menambahkan modul kalkulasi **Matriks Informasi Fisher (FIM) diagonal** pada klien lokal setelah menyelesaikan pelatihan Task 1[5]. Saat mempelajari Task 2, klien menambahkan penalti kuadratik EWC ke fungsi kerugian lokal sebelum bobot diagregasi oleh server pusat menggunakan algoritma *Federated Averaging* (FedAvg)[3], sebagaimana diilustrasikan pada Gambar 3.5.
 

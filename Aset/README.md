@@ -52,6 +52,8 @@ Dengan demikian, direktori `Aset/` saat ini murni memuat aset visual dan biner m
 ### D. Arsitektur Model Multilayer Perceptron (MLP) & Artefak Netron
 | Nama Berkas | Format & Ukuran | Resolusi / Ukuran | Deskripsi & Konten | Sumber / Rujukan |
 |---|---|---|---|---|
+| `arsitektur_model_mlp.drawio` | XML / Draw.io | Diagram XML Interaktif | Diagram arsitektur MLP kompak 3 lapis (63 masukan, Linear 64, ReLU, Linear 32, ReLU, Linear 3 keluaran) berkapasitas 6.275 parameter. Dibuat via Draw.io MCP. | Rancangan Terkini Model TA |
+| `arsitektur_model_mlp.svg` | SVG | Vektor Asli Skalabel | Ilustrasi vektor resolusi tinggi rancangan arsitektur layer-by-layer MLP 6.275 parameter dengan rincian parameter, memori ~25,1 KB, dan spesifikasi komputasi. | Aset Vektor Resmi TA |
 | `mlp_architecture_diagram_web.png` | PNG (104,0 KB) | 986 × 1186 | Diagram detail layer-by-layer MLP IDS: Input 63 fitur -> Dense 128 (ReLU + Dropout 0.2) -> Dense 64 -> Dense 32 -> Output 3 kelas (Softmax/Logits). | Rancangan Model Task TA |
 | `mlp_architecture_diagram_web.svg` | SVG (205,9 KB) | Vektor Asli | Berkas master format vektor skalabel untuk diagram layer-by-layer MLP IDS. | Vektor rancangan model TA |
 | `netron_mlp_architecture.png` | PNG (21,4 KB) | 344 × 585 | Screenshot komputasi grafis resmi yang dirender langsung melalui Netron.app dari berkas `mlp_intrusion_model.onnx`. | Netron Visualizer |
