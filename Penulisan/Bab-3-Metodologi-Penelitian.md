@@ -144,14 +144,14 @@ graph TB
 
     subgraph Client_A [Node Sensor Edge A: Cluster SSH]
         DA[(Data Lokal A: Normal + SSH)]
-        LA[Loss: Weighted-CE + lambda/2 * F_A * Delta_W^2]
+        LA["Loss: Weighted-CE + Penalti Kuadratik EWC"]
         MA[MLP Model A: Input 63 - 64 - 32 - 3]
         FA[FIM Calculator Task 1]
     end
 
     subgraph Client_B [Node Sensor Edge B: Cluster DoS]
         DB[(Data Lokal B: Normal + DoS)]
-        LB[Loss: Weighted-CE + lambda/2 * F_B * Delta_W^2]
+        LB["Loss: Weighted-CE + Penalti Kuadratik EWC"]
         MB[MLP Model B: Input 63 - 64 - 32 - 3]
         FB[FIM Calculator Task 1]
     end
@@ -223,7 +223,7 @@ flowchart LR
     end
 
     subgraph Egress [Bidang Respon & Aksi]
-        INF -->|Latensi < 100 us| DEC{Probabilitas Serangan >= 0.5}
+        INF -->|"Latensi < 100 us"| DEC{"Probabilitas Serangan >= 0.5"}
         DEC -- Ya --> ACT[Mitigasi Dinamis: Drop IPTables / OpenFlow FlowMod]
         DEC -- Tidak --> FWD[Teruskan Aliran Normal]
         ACT --> LOG[Security SIEM Logging & Audit Trail]

@@ -491,20 +491,24 @@ sequenceDiagram
     actor ClientA as Klien A (Subnet SSH)
     actor ClientB as Klien B (DMZ DoS)
     
-    Server->>ClientA: Broadcast Bobot Global w_t
-    Server->>ClientB: Broadcast Bobot Global w_t
+    Server->>ClientA: Broadcast Parameter Global W(t)
+    Server->>ClientB: Broadcast Parameter Global W(t)
     Note over ClientA: Latih Model Lokal E Epoch (Data A)
     Note over ClientB: Latih Model Lokal E Epoch (Data B)
-    ClientA->>Server: Kirim Parameter Lokal w_{t+1}^A
-    ClientB->>Server: Kirim Parameter Lokal w_{t+1}^B
+    ClientA->>Server: Kirim Pembaruan Bobot W_A(t+1)
+    ClientB->>Server: Kirim Pembaruan Bobot W_B(t+1)
     Note over Server: Agregasi Bobot: FedAvg
-    Server-->>Server: Update w_{t+1} = n_A/n*w_A + n_B/n*w_B
+    Server-->>Server: Hitung Agregasi Bobot Global W(t+1)
 ```
 *Gambar 2.2 Siklus Pelatihan dan Agregasi Bobot pada Federated Learning (FedAvg).*
 
 ### 2.4.2 Algoritma Federated Averaging (FedAvg)
 Algoritma standar paling populer dalam FL adalah *Federated Averaging* (FedAvg). Pada setiap ronde komunikasi $t \in \{1, 2, \dots, T\}$[3]:
-$$w_{t+1} = \sum_{k=1}^{K} \frac{n_k}{n} w_{t+1}^k$$
+
+$$
+w_{t+1} = \sum_{k=1}^{K} \frac{n_k}{n} w_{t+1}^k
+$$
+
 di mana $n_k = |\mathcal{D}_k|$ adalah jumlah sampel lokal pada klien $k$, dan $n = \sum_{k=1}^K n_k$ adalah total seluruh sampel di seluruh klien.
 
 ### 2.4.3 Tantangan Heterogenitas Data Non-IID
@@ -584,17 +588,25 @@ Untuk memenuhi batasan komputasi perangkat gerbang jaringan (*edge gateway*) dan
 
 ### 2.8.1 Struktur Matematika MLP
 Model menerima vektor fitur masukan $x \in \mathbb{R}^{63}$ yang merepresentasikan statistik aliran paket:
-$$\begin{aligned}
+
+$$
+\begin{aligned}
 h_1 &= f_1(W_1 x + b_1), \quad W_1 \in \mathbb{R}^{64 \times 63}, \ b_1 \in \mathbb{R}^{64} \\
 h_2 &= f_2(W_2 h_1 + b_2), \quad W_2 \in \mathbb{R}^{32 \times 64}, \ b_2 \in \mathbb{R}^{32} \\
 z &= W_3 h_2 + b_3, \quad W_3 \in \mathbb{R}^{3 \times 32}, \ b_3 \in \mathbb{R}^{3} \\
 \hat{y} &= \text{Softmax}(z)
-\end{aligned}$$
+\end{aligned}
+$$
+
 di mana $f_1$ dan $f_2$ adalah fungsi aktivasi non-linear ReLU.
 
 ### 2.8.2 Alasan Pemilihan Arsitektur Kompak
 Model dengan 63 fitur masukan, 64 neuron pada lapisan tersembunyi pertama, 32 neuron pada lapisan tersembunyi kedua, dan 3 neuron keluaran memiliki total parameter:
-$$|\theta| = (63 \times 64 + 64) + (64 \times 32 + 32) + (32 \times 3 + 3) = 4.096 + 2.080 + 99 = 6.275 \text{ parameter}$$
+
+$$
+|\theta| = (63 \times 64 + 64) + (64 \times 32 + 32) + (32 \times 3 + 3) = 4.096 + 2.080 + 99 = 6.275 \text{ parameter}
+$$
+
 Dengan presisi angka mengambang 32-bit (*float32* / 4 bita), ukuran biner parameter model hanya sekitar **25,1 KB**. Ukuran yang sangat ringkas ini memungkinkan proses transfer bobot pada setiap ronde federasi selesai dalam hitungan milidetik dan memungkinkan inferensi lokal dieksekusi dalam skala waktu mikrodetik per aliran data.
 
 ---
@@ -605,15 +617,30 @@ Dengan presisi angka mengambang 32-bit (*float32* / 4 bita), ukuran biner parame
 
 ### 2.9.1 Landasan Teoretis Bayes dan Matriks Fisher
 Dari perspektif inferensi Bayesian, mempelajari tugas kedua $\mathcal{D}_2$ setelah menyelesaikan tugas pertama $\mathcal{D}_1$ dirumuskan melalui probabilitas posterior parameter $\theta$:
-$$\log p(\theta \mid \mathcal{D}_1, \mathcal{D}_2) = \log p(\mathcal{D}_2 \mid \theta) + \log p(\theta \mid \mathcal{D}_1) - \log p(\mathcal{D}_2)$$
+
+$$
+\log p(\theta \mid \mathcal{D}_1, \mathcal{D}_2) = \log p(\mathcal{D}_2 \mid \theta) + \log p(\theta \mid \mathcal{D}_1) - \log p(\mathcal{D}_2)
+$$
+
 Distribusi posterior $\log p(\theta \mid \mathcal{D}_1)$ memuat seluruh informasi mengenai tugas pertama. Melalui aproksimasi deret Taylor orde kedua di sekitar parameter optimal tugas pertama $\theta_1^*$, fungsi ini dapat didekati sebagai distribusi Gaussian dengan presisi yang ditentukan oleh **Matriks Informasi Fisher (Fisher Information Matrix / FIM)**:
-$$F = \mathbb{E}_{x \sim \mathcal{D}_1, y \sim p(y \mid x, \theta_1^*)} \left[ \nabla_\theta \log p(y \mid x, \theta_1^*) \nabla_\theta \log p(y \mid x, \theta_1^*)^T \right]$$
+
+$$
+F = \mathbb{E}_{x \sim \mathcal{D}_1, y \sim p(y \mid x, \theta_1^*)} \left[ \nabla_\theta \log p(y \mid x, \theta_1^*) \nabla_\theta \log p(y \mid x, \theta_1^*)^T \right]
+$$
 
 ### 2.9.2 Matriks Fisher Diagonal dan Formulasi Kerugian EWC
 Untuk menghindari komputasi inversi matriks kovariansi penuh yang berukuran $|\theta| \times |\theta|$, EWC mengasumsikan elemen-elemen Fisher saling independen dan hanya menghitung elemen diagonalnya ($F_i$). Dalam implementasi praktis *machine learning*, ekspektasi terhadap distribusi analitis didekati menggunakan **Empirical Fisher Information Matrix**, di mana gradien kuadratik dihitung terhadap label aktual (*ground truth*) tugas pertama:
-$$F_i = \frac{1}{N} \sum_{n=1}^N \left( \left. \frac{\partial \mathcal{L}_{\text{CE}}(f(x_n; \theta), y_n)}{\partial \theta_i} \right|_{\theta = \theta_1^*} \right)^2$$
+
+$$
+F_i = \frac{1}{N} \sum_{n=1}^N \left( \left. \frac{\partial \mathcal{L}_{\text{CE}}(f(x_n; \theta), y_n)}{\partial \theta_i} \right|_{\theta = \theta_1^*} \right)^2
+$$
+
 Ketika model dilatih pada tugas kedua, fungsi kerugian total lokal dimodifikasi menjadi:
-$$\mathcal{L}_{\text{total}}(\theta) = \mathcal{L}_2(\theta) + \sum_{i} \frac{\lambda}{2} F_i (\theta_i - \theta_{1, i}^*)^2$$
+
+$$
+\mathcal{L}_{\text{total}}(\theta) = \mathcal{L}_2(\theta) + \sum_{i} \frac{\lambda}{2} F_i (\theta_i - \theta_{1, i}^*)^2
+$$
+
 di mana $\lambda$ adalah koefisien hiperparameter penalti EWC yang mengontrol seberapa kuat model mempertahankan memori tugas lama dibandingkan mempelajari tugas baru.
 
 ```mermaid
@@ -628,9 +655,16 @@ flowchart TD
 
 ### 2.9.3 Weighted Cross-Entropy dan Gradient Clipping
 Untuk mengatasi ketimpangan kelas yang parah, fungsi kerugian dasar $\mathcal{L}_2(\theta)$ menggunakan pembobotan invers frekuensi kelas:
-$$\mathcal{L}_{\text{CE}}(y, \hat{y}) = - \sum_{c=1}^{C} w_c \cdot y_c \log(\hat{y}_c), \quad \text{dengan } w_c = \frac{N_{\text{total}}}{C \cdot N_c}$$
+
+$$
+\mathcal{L}_{\text{CE}}(y, \hat{y}) = - \sum_{c=1}^{C} w_c \cdot y_c \log(\hat{y}_c), \quad \text{dengan } w_c = \frac{N_{\text{total}}}{C \cdot N_c}
+$$
+
 Untuk mencegah lonjakan gradien akibat perkalian dengan bobot kelas minoritas yang besar dan penalti EWC, diterapkan pemotongan gradien (*Gradient Clipping*):
-$$\text{jika } \|\mathbf{g}\|_2 > \gamma, \quad \text{maka } \mathbf{g} \leftarrow \frac{\gamma}{\|\mathbf{g}\|_2} \mathbf{g}, \quad \text{dengan } \gamma = 1.0$$
+
+$$
+\text{jika } \|\mathbf{g}\|_2 > \gamma, \quad \text{maka } \mathbf{g} \leftarrow \frac{\gamma}{\|\mathbf{g}\|_2} \mathbf{g}, \quad \text{dengan } \gamma = 1.0
+$$
 
 ---
 
@@ -674,27 +708,60 @@ flowchart TD
 *Gambar 2.5 Struktur Dasar Confusion Matrix untuk Evaluasi Deteksi Biner dan Multi-kelas.*
 
 - **Accuracy:** Mengukur proporsi prediksi benar terhadap total seluruh sampel:
-  $$\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}$$
+  
+
+$$
+\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
+$$
+
 - **Precision:** Mengukur ketepatan deteksi positif dari seluruh alarm yang dibunyikan:
-  $$\text{Precision} = \frac{TP}{TP + FP}$$
+  
+
+$$
+\text{Precision} = \frac{TP}{TP + FP}
+$$
+
 - **Recall (Sensitivity):** Mengukur kemampuan sistem dalam menangkap seluruh kejadian serangan yang sebenarnya:
-  $$\text{Recall} = \frac{TP}{TP + FN}$$
+  
+
+$$
+\text{Recall} = \frac{TP}{TP + FN}
+$$
+
 - **Macro-Averaged F1 (Macro-F1):** Rata-rata harmonik antara Precision dan Recall yang dihitung independen per kelas lalu dirata-rata secara unweighted:
-  $$\text{Macro-F1} = \frac{1}{C} \sum_{c=1}^C \frac{2 \cdot \text{Precision}_c \cdot \text{Recall}_c}{\text{Precision}_c + \text{Recall}_c}$$
+  
+
+$$
+\text{Macro-F1} = \frac{1}{C} \sum_{c=1}^C \frac{2 \cdot \text{Precision}_c \cdot \text{Recall}_c}{\text{Precision}_c + \text{Recall}_c}
+$$
+
   Metrik Macro-F1 menjadi metrik objektif utama karena tidak terdistorsi oleh dominasi kelas mayoritas normal.
 
 ### 2.11.2 Metrik Continual Learning: Backward Transfer (BWT)
 Metrik **Backward Transfer (BWT)** mengukur pengaruh pembelajaran tugas baru ($\mathcal{T}_2$) terhadap performa tugas lama ($\mathcal{T}_1$)[12]:
-$$\text{BWT} = R_{2, 1} - R_{1, 1}$$
+
+$$
+\text{BWT} = R_{2, 1} - R_{1, 1}
+$$
+
 di mana $R_{1, 1}$ adalah skor Macro-F1 pada tugas pertama sesaat setelah fase 1 selesai, dan $R_{2, 1}$ adalah skor Macro-F1 pada tugas pertama setelah model selesai dilatih pada fase 2. Nilai $\text{BWT} < 0$ menunjukkan terjadinya *catastrophic forgetting*, sedangkan $\text{BWT} \ge 0$ menandakan retensi memori sempurna.
 
 ### 2.11.3 Metrik Profiling Komputasi dan Instance
 Pengukuran efisiensi komputasi mengadopsi standar evaluasi performa NIDS waktu nyata yang dirumuskan pada literatur rujukan skripsi teknik elektro terdahulu[8]:
 1. **Waktu Inferensi per Flow ($\mu\text{s}$):** Rata-rata waktu eksekusi komputasi yang dibutuhkan model untuk memproses dan mengklasifikasikan satu sampel aliran data masukan:
-   $$\text{Inference Time} = \frac{T_{\text{total}}}{N_{\text{flows}}} \quad (\mu\text{s/flow})$$
+   
+
+$$
+\text{Inference Time} = \frac{T_{\text{total}}}{N_{\text{flows}}} \quad (\mu\text{s/flow})
+$$
+
 2. **Memory Footprint (Alokasi RAM):** Konsumsi memori fisik lokal antara metode EWC (vektor diagonal Fisher $\approx 25$ KB) terhadap *Experience Replay* (buffer sampel data mentah $\approx$ puluhan MB).
 3. **Communication Overhead (KB/round):** Total volume transmisi parameter bobot model yang dipertukarkan antara klien dan server agregator per putaran federasi:
-   $$\text{Payload} = 2 \times |\theta| \times \text{sizeof}(\text{float32}) \quad (\text{KB})$$
+   
+
+$$
+\text{Payload} = 2 \times |\theta| \times \text{sizeof}(\text{float32}) \quad (\text{KB})
+$$
 
 ---
 
@@ -704,7 +771,11 @@ Penyetelan hiperparameter (*hyperparameter tuning*) merupakan tahapan kritis unt
 
 ### 2.12.1 Algoritma Tree-structured Parzen Estimator (TPE)
 Optuna mengimplementasikan algoritma *Tree-structured Parzen Estimator* (TPE)[19]. TPE memodelkan probabilitas kondisional $p(x \mid y)$ dari konfigurasi hiperparameter $x$ terhadap hasil evaluasi $y$ dengan membagi riwayat percobaan sebelumnya ke dalam dua distribusi terpisah:
-$$p(x \mid y) = \begin{cases} \ell(x), & \text{jika } y < y^* \\ g(x), & \text{jika } y \ge y^* \end{cases}$$
+
+$$
+p(x \mid y) = \begin{cases} \ell(x), & \text{jika } y < y^* \\ g(x), & \text{jika } y \ge y^* \end{cases}
+$$
+
 di mana $y^*$ adalah nilai ambang kuantil performa terbaik. Nilai *Expected Improvement* (EI) dimaksimalkan dengan memilih hiperparameter yang memaksimumkan rasio $\frac{\ell(x)}{g(x)}$.
 
 ---
@@ -715,17 +786,25 @@ Algoritma pengoptimalan (*optimizer*) bertugas memperbarui bobot parameter jarin
 
 ### 2.13.1 Stochastic Gradient Descent (SGD)
 Algoritma SGD memperbarui parameter $\theta$ ke arah yang berlawanan dengan gradien fungsi kerugian:
-$$\theta_{t+1} = \theta_t - \eta \nabla_\theta \mathcal{L}(\theta_t)$$
+
+$$
+\theta_{t+1} = \theta_t - \eta \nabla_\theta \mathcal{L}(\theta_t)
+$$
+
 di mana $\eta$ adalah laju pembelajaran (*learning rate*). Meskipun sederhana dan memiliki generalisasi akhir yang baik, SGD rentan terjebak pada dataran datar (*saddle points*) dan memiliki laju konvergensi yang lambat pada permukaan kerugian yang memiliki kelengkungan tidak seragam.
 
 ### 2.13.2 AdamW (Decoupled Weight Decay)
 Untuk mengatasi kelemahan SGD dan kekurangan algoritma Adam standar, penelitian ini menggunakan algoritma optimasi **AdamW**[20]. AdamW menghitung momen pertama ($m_t$) dan momen kedua ($v_t$) dari gradien untuk menyesuaikan laju pembaruan parameter secara adaptif, seraya memisahkan (*decoupling*) penalti *weight decay* ($\lambda_{\text{wd}}$) dari pembaruan gradien adaptif:
-$$\begin{aligned}
+
+$$
+\begin{aligned}
 m_t &= \beta_1 m_{t-1} + (1 - \beta_1) g_t \\
 v_t &= \beta_2 v_{t-1} + (1 - \beta_2) g_t^2 \\
 \hat{m}_t &= \frac{m_t}{1 - \beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1 - \beta_2^t} \\
 \theta_t &= \theta_{t-1} - \eta \left( \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon} + \lambda_{\text{wd}} \theta_{t-1} \right)
-\end{aligned}$$
+\end{aligned}
+$$
+
 Pemisahan penalti bobot ini mencegah distorsi regulasi L2 pada arah gradien adaptif, menghasilkan kestabilan pelatihan yang superior pada arsitektur MLP.
 
 ---
@@ -736,14 +815,22 @@ Fungsi aktivasi merupakan komponen esensial pada machine learning dan deep learn
 
 ### 2.14.1 Rectified Linear Unit (ReLU)
 Fungsi aktivasi utama yang digunakan pada lapisan tersembunyi model MLP adalah **ReLU**:
-$$f(x) = \max(0, x)$$
+
+$$
+f(x) = \max(0, x)
+$$
+
 Keunggulan fundamental ReLU meliputi:
 - **Efisiensi Komputasi:** Hanya memerlukan operasi perbandingan ambang batas sederhana tanpa melibatkan operasi eksponensial yang mahal.
 - **Mitigasi Vanishing Gradient:** Menghasilkan turunan konstan bernilai $1$ untuk seluruh nilai masukan positif ($x > 0$), memungkinkan perambatan gradien yang stabil melintasi lapisan-lapisan jaringan.
 
 ### 2.14.2 Softmax
 Pada lapisan keluaran klasifikasi multi-kelas, fungsi **Softmax** digunakan untuk mengubah nilai logit mentah $z \in \mathbb{R}^C$ menjadi distribusi probabilitas ternormalisasi:
-$$\text{Softmax}(z_i) = \frac{e^{z_i}}{\sum_{j=1}^C e^{z_j}}, \quad \text{untuk } i = 1, \dots, C$$
+
+$$
+\text{Softmax}(z_i) = \frac{e^{z_i}}{\sum_{j=1}^C e^{z_j}}, \quad \text{untuk } i = 1, \dots, C
+$$
+
 di mana setiap elemen keluaran memenuhi batas $0 \le \hat{y}_i \le 1$ dan $\sum_{i=1}^C \hat{y}_i = 1$, merepresentasikan tingkat keyakinan model terhadap kelas BENIGN, SSH-Patator, atau DoS.
 
 \newpage
@@ -894,14 +981,14 @@ graph TB
 
     subgraph Client_A [Node Sensor Edge A: Cluster SSH]
         DA[(Data Lokal A: Normal + SSH)]
-        LA[Loss: Weighted-CE + lambda/2 * F_A * Delta_W^2]
+        LA["Loss: Weighted-CE + Penalti Kuadratik EWC"]
         MA[MLP Model A: Input 63 - 64 - 32 - 3]
         FA[FIM Calculator Task 1]
     end
 
     subgraph Client_B [Node Sensor Edge B: Cluster DoS]
         DB[(Data Lokal B: Normal + DoS)]
-        LB[Loss: Weighted-CE + lambda/2 * F_B * Delta_W^2]
+        LB["Loss: Weighted-CE + Penalti Kuadratik EWC"]
         MB[MLP Model B: Input 63 - 64 - 32 - 3]
         FB[FIM Calculator Task 1]
     end
@@ -973,7 +1060,7 @@ flowchart LR
     end
 
     subgraph Egress [Bidang Respon & Aksi]
-        INF -->|Latensi < 100 us| DEC{Probabilitas Serangan >= 0.5}
+        INF -->|"Latensi < 100 us"| DEC{"Probabilitas Serangan >= 0.5"}
         DEC -- Ya --> ACT[Mitigasi Dinamis: Drop IPTables / OpenFlow FlowMod]
         DEC -- Tidak --> FWD[Teruskan Aliran Normal]
         ACT --> LOG[Security SIEM Logging & Audit Trail]
