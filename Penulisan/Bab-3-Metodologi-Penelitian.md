@@ -63,7 +63,7 @@ Pengujian dijalankan pada lingkungan komputasi terstandarisasi untuk menjamin re
 *Tabel 3.1 Spesifikasi Lingkungan Perangkat Keras dan Perangkat Lunak.*
 | Kategori | Komponen | Spesifikasi Teknis |
 | :--- | :--- | :--- |
-| **Perangkat Keras** | Prosessor (CPU) | AMD Ryzen / Intel Core Multi-core ($\ge 8$ core) |
+| **Perangkat Keras** | Prosesor (CPU) | AMD Ryzen / Intel Core Multi-core ($\ge 8$ core) |
 | | Memori Utama (RAM) | 16 GB DDR4/DDR5 |
 | | Kartu Grafis (GPU) | NVIDIA GPU (VRAM $\ge 8$ GB dengan dukungan CUDA Cores) |
 | | Media Penyimpanan | Solid State Drive (NVMe SSD) $\ge 512$ GB |
@@ -104,7 +104,7 @@ flowchart TD
 ```
 *Gambar 3.4 Diagram Alur Global Data Preprocessing.*
 
-1. **Pembersihan Data (*Data Cleaning*):** Nama kolom distandarisasi (*whitespace trimming*). Nilai `+Infinity`, `-Infinity`, dan nilai kosong dikonversi ke `NaN` lalu dieliminasi. Sebanyak 132.909 baris data duplikat identik dieliminasi secara penuh sehingga tersisa **1.529.677 baris aliran unik bersih**.
+1. **Pembersihan Data (*Data Cleaning*):** Nama kolom distandardisasi (*whitespace trimming*). Nilai `+Infinity`, `-Infinity`, dan nilai kosong dikonversi ke `NaN` lalu dieliminasi. Sebanyak 132.909 baris data duplikat identik dieliminasi secara penuh sehingga tersisa **1.529.677 baris aliran unik bersih**.
 2. **Rekayasa Fitur (*Feature Engineering*):**
    - 10 fitur bernilai konstan 0 dieliminasi (`Bwd PSH Flags`, `Bwd URG Flags`, `Fwd Avg Bytes/Bulk`, `Fwd Avg Packets/Bulk`, `Fwd Avg Bulk Rate`, `Bwd Avg Bytes/Bulk`, `Bwd Avg Packets/Bulk`, `Bwd Avg Bulk Rate`, `CWE Flag Count`, `Fwd URG Flags`).
    - 5 kolom duplikat identik via hash dibuang (seperti `Fwd Header Length.1`, `Subflow Fwd Bytes`, `Subflow Fwd Packets`, `Subflow Bwd Packets`, `SYN Flag Count`).
@@ -130,7 +130,7 @@ flowchart TD
 | **Total Fitur Input** | **63** | *Seluruhnya bertipe numerik kontinu / diskret* |
 
 ### 3.3.2 Arsitektur Sistem Terdistribusi yang Diusulkan
-Model klasifikasi dirancang menggunakan **Multilayer Perceptron (MLP)** kompak tiga lapis terhubung penuh dengan alur komputasi lapisan masukan 63 fitur, lapisan tersembunyi pertama 64 neuron (ReLU), lapisan tersembunyi kedua 32 neuron (ReLU), dan lapisan keluaran 3 logits kelas (sebagaimana diilustrasikan pada Gambar 2.4 serta berkas rancangan model [arsitektur_model_mlp.svg](../Aset/arsitektur_model_mlp.svg)). Model ini memiliki total 6.275 parameter bobot dan bias ($\approx 25,1$ KB) sehingga sangat ringan untuk pertukaran parameter jaringan pada perangkat *edge*.
+Model klasifikasi dirancang menggunakan **Multilayer Perceptron (MLP)** kompak tiga lapis terhubung penuh (`Input(63) → Linear(64) → ReLU → Linear(32) → ReLU → Linear(3)`). Model ini hanya memiliki 6.275 parameter bobot ($\approx 25,1$ KB) sehingga sangat ringan untuk pertukaran parameter jaringan pada perangkat *edge*.
 
 Mekanisme mitigasi *catastrophic forgetting* diimplementasikan dengan menambahkan modul kalkulasi **Matriks Informasi Fisher (FIM) diagonal** pada klien lokal setelah menyelesaikan pelatihan Task 1[5]. Saat mempelajari Task 2, klien menambahkan penalti kuadratik EWC ke fungsi kerugian lokal sebelum bobot diagregasi oleh server pusat menggunakan algoritma *Federated Averaging* (FedAvg)[3], sebagaimana diilustrasikan pada Gambar 3.5.
 
