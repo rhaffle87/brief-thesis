@@ -58,20 +58,35 @@ Bahan utama yang digunakan dalam penelitian ini adalah dataset tolok ukur resmi 
 Berkas hari Kamis dan Jumat dieksklusi karena menderita desinkronisasi timestamp pelabelan yang parah serta kelangkaan sampel mikro ekstrem[6], [7].
 
 ### 3.2.2 Peralatan Penelitian (Perangkat Keras dan Perangkat Lunak)
-Pengujian dijalankan pada lingkungan komputasi terstandarisasi untuk menjamin reproduktibilitas hasil eksperimen, dengan rincian spesifikasi perangkat keras dan perangkat lunak sebagaimana disajikan pada Tabel 3.1.
+Pengujian dan evaluasi performa sistem dalam penelitian ini dirancang melalui strategi evaluasi dua tahap progresif (*two-stage progressive evaluation strategy*):
+1. **Tahap 1: Pengujian dan Validasi Simulasi Lokal (*Local Simulation and Algorithm Verification*):** Dilaksanakan langsung pada mesin laptop pengembang untuk memvalidasi fungsionalitas algoritma, prapengolahan 63 fitur numerik bersih, simulasi multi-klien secara *in-memory* menggunakan Flower *Virtual Client Engine*, penalaan hiperparameter Bayesian EWC ($\lambda$) via Optuna TPE, serta memastikan stabilitas gradien dan konvergensi model sebelum diimplementasikan pada klaster server fisik.
+2. **Tahap 2: Pengujian Implementasi Testbed Terdistribusi (*Distributed Private Cloud Server Testbed*):** Dilaksanakan pada klaster *private cloud* Proxmox Virtual Environment (PVE) 3-node *bare-metal* yang mengadopsi rancang bangun sistem terdistribusi dari repositori FCL (`E:/projects/fcl`). Pengujian tahap ini mengevaluasi kinerja sistem NIDS terdistribusi dalam kondisi jaringan riil, mencakup *overhead* komunikasi gRPC over TLS, isolasi lalu lintas antar-organisasi pada bridge L2 datar (*flat* L2 `10.10.0.0/16`), efisiensi ekstraksi fitur waktu nyata oleh NFStream dengan penyangga *in-memory* RAMDisk (`tmpfs`), serta keandalan pertukaran bobot parameter global pada node fisik independen.
+
+Rincian spesifikasi perangkat keras dan perangkat lunak untuk kedua lingkungan pengujian tersebut disajikan pada Tabel 3.1.
 
 *Tabel 3.1 Spesifikasi Lingkungan Perangkat Keras dan Perangkat Lunak.*
-| Kategori | Komponen | Spesifikasi Teknis |
-| :--- | :--- | :--- |
-| **Perangkat Keras** | Prosesor (CPU) | AMD Ryzen / Intel Core Multi-core ($\ge 8$ core) |
-| | Memori Utama (RAM) | 16 GB DDR4/DDR5 |
-| | Kartu Grafis (GPU) | NVIDIA GPU (VRAM $\ge 8$ GB dengan dukungan CUDA Cores) |
-| | Media Penyimpanan | Solid State Drive (NVMe SSD) $\ge 512$ GB |
-| **Perangkat Lunak** | Sistem Operasi | Linux Ubuntu 22.04 LTS / Windows 11 64-bit |
-| | Lingkungan Eksekusi | Python 3.10+, PyTorch 2.2+, CUDA Toolkit 12.x |
-| | Kerangka Kerja FL | Flower Framework (`flwr` $\ge 1.7.0$)[18] |
-| | Penyetelan Bayesian | Optuna Framework ($\ge 3.5.0$)[19] |
-| | Pustaka Analisis Data | Pandas, NumPy, Scikit-learn, PyArrow |
+| Lingkungan / Node | Komponen | Spesifikasi Teknis | Peran dan Fungsi Utama |
+| :--- | :--- | :--- | :--- |
+| **A. Lingkungan Pengujian Lokal (Laptop Pengembang)** | Unit Perangkat | Laptop Fisik Pengembang | *Development*, validasi unit, dan simulasi algoritma awal |
+| | Prosesor (CPU) | Intel® Core™ i5-8350U @ 1.70 GHz (4 Cores, 8 Threads, Turbo 3.60 GHz, 6 MB Cache) | Komputasi pelatihan lokal dan kalkulasi FIM berbasis CPU (AVX2) |
+| | Memori Utama (RAM) | 16 GB DDR4 (15.84 GB usable, 2400 MHz) | Penyimpanan data latih in-memory dan eksekusi virtual client FL |
+| | Kartu Grafis (GPU) | Intel® UHD Graphics 620 (Shared memory) | Rendering visualisasi metrik dan evaluasi grafik analitik |
+| | Media Penyimpanan | 512 GB NVMe M.2 SSD | Penyimpanan lokal repositori kode, cache CSV, dan checkpoint |
+| | Sistem Operasi | Microsoft Windows 11 Pro 64-bit (Build 26100) | Sistem operasi host pengembangan |
+| | Lingkungan & Runtime | Python 3.10+ / 3.13 dalam Virtual Environment (`venv`) | Eksekusi skrip praproses, pemodelan PyTorch, dan optimasi |
+| | Kerangka Kerja DL & FL | PyTorch 2.2+ (CPU engine), Flower (`flwr` $\ge 1.7.0$)[18] | Pembangun arsitektur MLP dan simulasi federasi in-process |
+| | Penyetelan Bayesian | Optuna Framework ($\ge 3.5.0$)[19] | Optimasi hiperparameter $\lambda$ EWC dan laju pembelajaran |
+| | Pustaka Analisis Data | Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn | Pembersihan data, scaling Z-score, dan kalkulasi metrik evaluasi |
+| **B. Lingkungan Testbed Private Cloud Server (Proxmox VE Cluster)** | Infrastruktur Fisik Klaster (*Bare-Metal*) | 3 Node Server Fisik: 2x Dell PowerEdge R630 (node `its` & `node2`) dan 1x Dell PowerEdge R760xs (node `pve`) | Penyedia komputasi tervirtualisasi multi-node terdistribusi |
+| | Pengendali Penyimpanan | Dell PERC H755 Adp / H730 RAID Controller, LVM-Thin pools (`local-lvm`) 1.20 TB NVMe/SSD | Provisi disk dinamis dan mekanisme snapshot/rollback VM |
+| | Infrastruktur Jaringan | Dual LACP Bond (`bond0`), Bridge internal L2 datar `vmbr1` (subnet `10.10.0.0/16`), Bridge manajemen `vmbr0` (`192.168.30.0/24`) | Komunikasi gRPC berlatensi rendah dan isolasi data jaringan |
+| | Mekanisme Port Mirroring | Linux Traffic Control (`tc`) pada antarmuka TAP hypervisor dengan hookscripts promiscuous permanen | Duplikasi lalu lintas host target ke antarmuka penangkap sensor |
+| | **Server Agregator Global (LXC 300 - `fl-aggregator`)** | Ubuntu Server 24.04 LTS (LXC Container pada host `pve`), 4 vCPU, 8 GB RAM, 2 GB Swap, 50 GB Disk, IP `10.10.130.10/16` | Menjalankan Flower Server (FedAvg), orkestrasi gRPC over TLS (port 8080), MLflow tracking (port 5000), dan model checkpoint |
+| | **Sensor NIDS Klien A (VM 310 - `defender-a`)** | Ubuntu Server 24.04 LTS (KVM VM pada host `its`), 8 vCPU, 16 GB RAM (ballooning 8 GB), 100 GB SCSI Disk, RAMDisk 2.0 GB (`tmpfs` pada `/mnt/ramdisk/flows/`), IP `10.10.130.11/16` | Menjalankan Flower Client, PyTorch model, kalkulasi FIM & penalti EWC lokal, ekstraksi aliran paket riil via NFStream |
+| | **Sensor NIDS Klien B (VM 320 - `defender-b`)** | Ubuntu Server 24.04 LTS (KVM VM pada host `node2`), 8 vCPU, 16 GB RAM (ballooning 8 GB), 100 GB SCSI Disk, RAMDisk 2.0 GB (`tmpfs`), IP `10.10.130.12/16` | Menjalankan Flower Client Organisasi B, pelatihan lokal Task 2, kalkulasi regularisasi EWC, dan ekstraksi aliran paket NFStream |
+| | **Host Target Korban (VM 311 `target-a1` & VM 321 `target-b1`)** | Alpine Linux 3.20 (KVM VM minimal), masing-masing 1 vCPU, 1 GB RAM, 10 GB Disk, IP `10.10.110.15/16` (its) dan `10.10.120.15/16` (node2) | Menerima lalu lintas normal dan injeksi serangan simulasi sebagai sumber duplikasi data port mirroring ke Defender |
+| | **Pembangkit Lalu Lintas (VM 400 - `traffic-gen`)** | Kali Linux 2024.4 (KVM VM pada host `node2`), 4 vCPU, 4 GB RAM, 50 GB Disk, IP `10.10.140.10/16` | Menjalankan mesin injeksi serangan (Hydra SSH brute-force, SlowHTTPTest DoS) dan replay PCAP dataset via `tcpreplay` |
+| | Pustaka Ekstraksi & ML | NFStream 6.x, PyTorch 2.x, Avalanche 0.5+, Scikit-learn, MLflow 3.x | Pipeline penangkapan aliran dan inferensi deteksi waktu nyata |
 
 ---
 
