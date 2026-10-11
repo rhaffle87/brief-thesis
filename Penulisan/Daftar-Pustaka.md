@@ -14,7 +14,7 @@
 
 [7] S. Dube, “Faulty use of the CIC-IDS 2017 dataset in information security research,” *International Journal of Information Security*, vol. 23, hlm. 1801–1818, 2024. doi: 10.1007/s11416-023-00509-7.
 
-[8] H. A. Rinandri, “Sistem Deteksi Intrusi Jaringan Real-Time Berbasis Graph Neural Network Autoencoder Menggunakan Pendekatan Semi-Supervised Learning,” Skripsi, Departemen Teknik Elektro, FTEIC, Institut Teknologi Sepuluh Nopember, Surabaya, 2024.
+[8] H. A. Rinandri, “Pendekatan Semi-Supervised Learning untuk Sistem Deteksi Intrusi Jaringan Real-Time Berbasis GNN-AE pada Arsitektur Structemp,” Tugas Akhir, Program Studi Sarjana Teknik Elektro, Departemen Teknik Elektro, Fakultas Teknologi Elektro dan Informatika Cerdas, Institut Teknologi Sepuluh Nopember, Surabaya, 2025.
 
 [9] I. Sharafaldin, A. H. Lashkari, dan A. A. Ghorbani, “Toward Generating a New Intrusion Detection Dataset and Intrusion Traffic Characterization,” dalam *Proceedings of the 4th International Conference on Information Systems Security and Privacy (ICISSP)*, hlm. 108–116, 2018. doi: 10.5220/0006639801080116.
 
