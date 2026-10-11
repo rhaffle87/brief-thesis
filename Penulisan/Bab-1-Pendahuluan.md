@@ -48,6 +48,23 @@ Dalam pelaksanaan tugas akhir ini, batasan ruang lingkup masalah ditetapkan untu
 7. **Skenario Continual Learning:** Model diuji dalam skenario **Class-Incremental Learning (Class-IL)** tanpa penyediaan Task-ID saat inferensi. Metode mitigasi lupa dibatasi pada perbandingan antara **Naive Fine-Tuning** dan **Elastic Weight Consolidation (EWC)**.
 8. **Lingkungan Pengujian & Data Offline Tabular:** Pengujian difokuskan secara eksklusif pada data tolok ukur *offline tabular flow* CIC-IDS2017. Injeksi lalu lintas jaringan aktif (*live traffic injection*), penangkapan paket langsung (*live packet capture/sniffing*), dan *port mirroring* ditiadakan sepenuhnya dari target evaluasi guna mengeliminasi variabel gangguan transport dan lapisan fisik (*packet loss*, *buffer overrun*, dan *timing jitter*) sesuai arahan dosen pembimbing, sehingga evaluasi berfokus secara murni pada kinerja algoritma *Federated Continual Learning*.
 9. **Metrik Evaluasi:** Evaluasi diukur menggunakan metrik deteksi ML (Macro-F1, per-class Precision, Recall, Accuracy, dan *Backward Transfer* / BWT), serta metrik profil efisiensi komputasi (latensi inferensi per flow dalam $\mu\text{s}$, alokasi memori RAM *footprint*, dan *communication overhead* transmisi parameter melalui protokol gRPC dalam KB per ronde).
+10. **Variabel dan Parameter Penelitian:** Sesuai dengan pedoman metodologi perancangan tugas akhir, variabel dan parameter yang terlibat dalam penelitian diklasifikasikan sebagai berikut:
+    - **Variabel Bebas (*Independent Variables*):**
+      1. Topologi pelatihan model: Pelatihan Terisolasi Lokal (*Isolated Local Training*) dan Pelatihan Terdistribusi Federasi (*Federated Averaging* / FedAvg).
+      2. Skema mitigasi pembelajaran berkelanjutan (*Continual Learning*): Pembelajaran Naif (*Naive Fine-Tuning*) tanpa regulasi memori dan regularisasi *Elastic Weight Consolidation* (EWC) dengan variasi koefisien penalti kuadratik kelengkungan Fisher ($\lambda$).
+      3. Urutan sekuensial pembelajaran kelas serangan baru (*Incremental Task Sequence*): Tahap Task 1 (SSH-Patator) dilanjutkan ke Tahap Task 2 (DoS).
+    - **Variabel Terikat (*Dependent Variables*):**
+      1. Kinerja deteksi dan klasifikasi intrusi: *Macro-averaged F1-Score*, *Precision*, *Recall*, dan *Accuracy* pada seluruh kelas operasional.
+      2. Retensi representasi memori tugas lampau: Nilai metrik perpindahan ke belakang (*Backward Transfer* / BWT) untuk mengukur derajat mitigasi *catastrophic forgetting*.
+      3. Efisiensi sumber daya komputasi dan komunikasi: Latensi inferensi per aliran data (dalam $\mu\text{s}$), alokasi memori RAM *footprint* (dalam MB), dan *communication overhead* transmisi parameter melalui protokol gRPC (dalam KB per ronde).
+    - **Variabel Kontrol dan Parameter Konstan (*Controlled / Constant Parameters*):**
+      1. Arsitektur jaringan saraf tiruan: *Multilayer Perceptron* (MLP) tiga lapis kompak dengan dimensi tetap `Input(63) → Linear(64) → ReLU → Linear(32) → ReLU → Linear(3)`.
+      2. Konfigurasi hiperparameter optimasi: Algoritma AdamW dengan laju pembelajaran $\eta = 10^{-3}$, pembobotan penurunan bobot (*weight decay*) $10^{-4}$, ukuran *batch* mini 128, dan jumlah *epoch* lokal $E = 3$.
+      3. Penstabil pelatihan: Fungsi *Weighted Cross-Entropy Loss* berbasis bobot invers frekuensi kelas terkalibrasi dan pembatasan norma gradien (*gradient clipping*) dengan batas ambang $\le 1.0$.
+      4. Validitas statistik: Pengujian seragam melintasi 5 *random seed* independen (42, 43, 44, 45, dan 46) untuk memastikan keterulangan (*reproducibility*).
+    - **Parameter yang Diabaikan (*Ignored Parameters*):**
+      1. Fitur lalu lintas berisiko kebocoran: Atribut nomor port layanan (`Destination Port`) dan seluruh fitur bervariansi nol diabaikan guna mencegah *shortcut learning*.
+      2. Dinamika transmisi lapisan fisik dan transport: Injeksi paket langsung (*live traffic injection*), kehilangan paket (*packet loss*), *buffer overrun*, dan *timing jitter* diabaikan untuk menjamin determinisme evaluasi murni algoritma *Federated Continual Learning*.
 
 ---
 
