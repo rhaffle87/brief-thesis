@@ -24,9 +24,9 @@
 2.2 Klasifikasi Serangan Siber ....................................................................................................... 7  
 2.3 Hasil Penelitian Terdahulu ....................................................................................................... 8  
 2.4 Federated Learning (FL) ......................................................................................................... 10  
-2.5 Continual Learning dan Catastrophic Forgetting ..................................................................... 12  
+2.5 Continual Learning .................................................................................................................... 12  
 2.6 Network Intrusion Detection System (NIDS) ............................................................................ 13  
-2.7 PyTorch dan Framework Flower ............................................................................................... 14  
+2.7 Kerangka Kerja Pengembangan Komputasi dan Federasi ......................................................... 14  
 2.8 Multilayer Perceptron (MLP) ................................................................................................... 15  
 2.9 Elastic Weight Consolidation (EWC) ........................................................................................ 16  
 2.10 Karakteristik Dataset Tolok Ukur CIC-IDS2017 ..................................................................... 17  
@@ -57,11 +57,13 @@
 
 <br>
 
-Gambar 2.1 Model CIA Triad dan Konsep Pertahanan Berlapis Jaringan .......................................... 6  
+Gambar 2.1 Model CIA Triad Keamanan Informasi ............................................................................ 6  
 Gambar 2.2 Siklus Pelatihan dan Agregasi Bobot pada Federated Learning (FedAvg) .................... 10  
-Gambar 2.3 Taksonomi Pendekatan Mitigasi Catastrophic Forgetting ............................................. 12  
-Gambar 2.4 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis ............................. 16  
-Gambar 2.5 Struktur Dasar Confusion Matrix untuk Evaluasi Deteksi Biner dan Multi-kelas .......... 19  
+Gambar 2.3 Taksonomi Pendekatan Mitigasi Catastrophic Forgetting pada Continual Learning ...... 12  
+Gambar 2.4 Struktur Arsitektur Jaringan Multilayer Perceptron (MLP) ............................................ 15  
+Gambar 2.5 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis pada Kontur Kerugian 16  
+Gambar 2.6 Struktur Dasar Confusion Matrix untuk Evaluasi Deteksi Biner dan Multi-kelas .......... 19  
+Gambar 2.7 Pemodelan Distribusi Ketidakpastian pada Optimasi Bayesian ..................................... 20  
 Gambar 3.1 Arsitektur Penempatan Sensor NIDS Terdistribusi dalam Jaringan Enterprise ............. 23  
 Gambar 3.2 Fishbone Diagram Identifikasi Tantangan NIDS Terdistribusi ..................................... 24  
 Gambar 3.3 Diagram Alir Urutan Pelaksanaan Penelitian .............................................................. 26  

@@ -191,9 +191,9 @@ Escalating cyber threats require Network Intrusion Detection Systems (NIDS) to d
 2.2 Klasifikasi Serangan Siber ....................................................................................................... 7  
 2.3 Hasil Penelitian Terdahulu ....................................................................................................... 8  
 2.4 Federated Learning (FL) ......................................................................................................... 10  
-2.5 Continual Learning dan Catastrophic Forgetting ..................................................................... 12  
+2.5 Continual Learning .................................................................................................................... 12  
 2.6 Network Intrusion Detection System (NIDS) ............................................................................ 13  
-2.7 PyTorch dan Framework Flower ............................................................................................... 14  
+2.7 Kerangka Kerja Pengembangan Komputasi dan Federasi ......................................................... 14  
 2.8 Multilayer Perceptron (MLP) ................................................................................................... 15  
 2.9 Elastic Weight Consolidation (EWC) ........................................................................................ 16  
 2.10 Karakteristik Dataset Tolok Ukur CIC-IDS2017 ..................................................................... 17  
@@ -224,11 +224,13 @@ Escalating cyber threats require Network Intrusion Detection Systems (NIDS) to d
 
 <br>
 
-Gambar 2.1 Model CIA Triad dan Konsep Pertahanan Berlapis Jaringan .......................................... 6  
+Gambar 2.1 Model CIA Triad Keamanan Informasi ............................................................................ 6  
 Gambar 2.2 Siklus Pelatihan dan Agregasi Bobot pada Federated Learning (FedAvg) .................... 10  
-Gambar 2.3 Taksonomi Pendekatan Mitigasi Catastrophic Forgetting ............................................. 12  
-Gambar 2.4 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis ............................. 16  
-Gambar 2.5 Struktur Dasar Confusion Matrix untuk Evaluasi Deteksi Biner dan Multi-kelas .......... 19  
+Gambar 2.3 Taksonomi Pendekatan Mitigasi Catastrophic Forgetting pada Continual Learning ...... 12  
+Gambar 2.4 Struktur Arsitektur Jaringan Multilayer Perceptron (MLP) ............................................ 15  
+Gambar 2.5 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis pada Kontur Kerugian 16  
+Gambar 2.6 Struktur Dasar Confusion Matrix untuk Evaluasi Deteksi Biner dan Multi-kelas .......... 19  
+Gambar 2.7 Pemodelan Distribusi Ketidakpastian pada Optimasi Bayesian ..................................... 20  
 Gambar 3.1 Arsitektur Penempatan Sensor NIDS Terdistribusi dalam Jaringan Enterprise ............. 23  
 Gambar 3.2 Fishbone Diagram Identifikasi Tantangan NIDS Terdistribusi ..................................... 24  
 Gambar 3.3 Diagram Alir Urutan Pelaksanaan Penelitian .............................................................. 26  
@@ -418,21 +420,8 @@ Prinsip dasar keamanan informasi berakar pada model triad **Confidentiality, Int
 
 Untuk menegakkan prinsip CIA Triad, infrastruktur jaringan enterprise mengadopsi model pertahanan berlapis (*Defense-in-Depth*). Dalam kerangka ini, sistem pertahanan tidak hanya mengandalkan perimeter luar (*firewall*), melainkan menyematkan kontrol keamanan pada setiap lapisan jaringan, mulai dari penyaringan paket, segmentasi jaringan (*Virtual LAN* / VLAN), hingga inspeksi aktif terhadap aliran lalu lintas data oleh sistem sensor deteksi intrusi[8].
 
-```mermaid
-flowchart TD
-    subgraph CIA_Triad [Model Triad CIA Keamanan Informasi]
-        C[Confidentiality / Kerahasiaan]
-        I[Integrity / Integritas]
-        A[Availability / Ketersediaan]
-        C --- I --- A --- C
-    end
-    subgraph Defense_in_Depth [Lapisan Pertahanan Berlapis Enterprise]
-        FW[Firewall Perimeter & Akses Kontrol] --> NIDS[Sensor Inspeksi Aliran: NIDS]
-        NIDS --> HOST[Host Keamanan & Endpoint Protection]
-    end
-    CIA_Triad -.-> Defense_in_Depth
-```
-*Gambar 2.1 Model CIA Triad dan Konsep Pertahanan Berlapis Jaringan.*
+![Gambar 2.1 Model CIA Triad Keamanan Informasi](../Aset/cia_triad_stationx.png)  
+*Gambar 2.1 Model CIA Triad Keamanan Informasi.*
 
 ---
 
@@ -500,23 +489,8 @@ Secara umum, arsitektur FL terdiri atas dua entitas utama:
 1. **Server Agregator:** Menginisialisasi parameter bobot global $w_0$, menyiarkan parameter model ke klien yang berpartisipasi pada setiap ronde komunikasi, mengumpulkan pembaruan bobot lokal, serta menghitung parameter model global baru melalui fungsi agregasi.
 2. **Klien Federasi ($K$ Klien):** Setiap klien menyimpan dataset lokal $\mathcal{D}_k$ secara privat. Pada setiap ronde komunikasi $t$, klien mengunduh bobot global $w_t$, melakukan optimasi lokal berbasis *Stochastic Gradient Descent* (SGD) atau AdamW selama $E$ epoch menggunakan data lokalnya, lalu mengirimkan bobot terlatih $w_{t+1}^k$ kembali ke server.
 
-```mermaid
-sequenceDiagram
-    autonumber
-    actor Server as Server Agregator
-    actor ClientA as Klien A (Subnet SSH)
-    actor ClientB as Klien B (DMZ DoS)
-    
-    Server->>ClientA: Broadcast Parameter Global W(t)
-    Server->>ClientB: Broadcast Parameter Global W(t)
-    Note over ClientA: Latih Model Lokal E Epoch (Data A)
-    Note over ClientB: Latih Model Lokal E Epoch (Data B)
-    ClientA->>Server: Kirim Pembaruan Bobot W_A(t+1)
-    ClientB->>Server: Kirim Pembaruan Bobot W_B(t+1)
-    Note over Server: Agregasi Bobot: FedAvg
-    Server-->>Server: Hitung Agregasi Bobot Global W(t+1)
-```
-*Gambar 2.2 Siklus Pelatihan dan Agregasi Bobot pada Federated Learning (FedAvg).*
+![Gambar 2.2 Siklus Pelatihan dan Agregasi Bobot pada Federated Learning (FedAvg)](../Aset/fedavg_flowchart_researchgate.png)  
+*Gambar 2.2 Siklus Pelatihan dan Agregasi Bobot pada Federated Learning (FedAvg)[3].*
 
 ### 2.4.2 Algoritma Federated Averaging (FedAvg)
 Algoritma standar paling populer dalam FL adalah *Federated Averaging* (FedAvg). Pada setiap ronde komunikasi $t \in \{1, 2, \dots, T\}$[3]:
@@ -538,12 +512,12 @@ Pada lingkungan jaringan komputer nyata, asumsi bahwa data terdistribusi secara 
 
 ---
 
-## 2.5 Continual Learning dan Catastrophic Forgetting
+## 2.5 Continual Learning
 
 *Continual Learning* (CL) atau *Lifelong Learning* adalah cabang pembelajaran mesin yang berfokus pada kemampuan model kecerdasan buatan untuk mempelajari aliran tugas atau kelas data baru secara sekuensial dari waktu ke waktu tanpa melupakan representasi pengetahuan yang telah dipelajari dari tugas masa lalu.
 
-### 2.5.1 Catastrophic Forgetting
-Jaringan saraf tiruan (*Deep Neural Networks*) modern memiliki kecenderungan bawaan yang parah terhadap fenomena **catastrophic forgetting** saat mempelajari aliran tugas baru secara berurutan[5]. Ketika model dilatih pada tugas pertama $\mathcal{T}_1$, bobot sinaptik $\theta$ dioptimasi untuk meminimalkan fungsi kerugian $\mathcal{L}_1$. Ketika tugas baru $\mathcal{T}_2$ diberikan, proses *backpropagation* akan memperbarui bobot $\theta$ demi meminimalkan $\mathcal{L}_2$. Pembaruan bobot ini menimpa (*overwrite*) konfigurasi parameter yang bertanggung jawab atas pengenalan $\mathcal{T}_1$, menyebabkan akurasi model terhadap $\mathcal{T}_1$ runtuh seketika mendekati nol.
+### 2.5.1 Dilema Stabilitas-Plastisitas dan Catastrophic Forgetting
+Dalam sistem pembelajaran adaptif, model dihadapkan pada dilema stabilitas-plastisitas (*stability-plasticity dilemma*), yaitu tuntutan untuk mempertahankan fleksibilitas dalam mengintegrasikan pengetahuan baru (*plasticity*) seraya mempertahankan kestabilan representasi yang telah terbentuk sebelumnya (*stability*). Jaringan saraf tiruan (*Deep Neural Networks*) modern memiliki kecenderungan bawaan yang parah terhadap fenomena **catastrophic forgetting** saat mempelajari aliran tugas baru secara berurutan[5]. Ketika model dilatih pada tugas pertama $\mathcal{T}_1$, bobot sinaptik $\theta$ dioptimasi untuk meminimalkan fungsi kerugian $\mathcal{L}_1$. Ketika tugas baru $\mathcal{T}_2$ diberikan, proses *backpropagation* akan memperbarui bobot $\theta$ demi meminimalkan $\mathcal{L}_2$. Pembaruan bobot ini menimpa (*overwrite*) konfigurasi parameter yang bertanggung jawab atas pengenalan $\mathcal{T}_1$, menyebabkan akurasi model terhadap $\mathcal{T}_1$ runtuh seketika mendekati nol.
 
 ### 2.5.2 Taksonomi Skenario Continual Learning
 Berdasarkan ketersediaan identitas tugas (*Task-ID*) saat inferensi, Continual Learning diklasifikasikan ke dalam tiga skenario operasional[17]:
@@ -551,22 +525,18 @@ Berdasarkan ketersediaan identitas tugas (*Task-ID*) saat inferensi, Continual L
 2. **Domain-Incremental Learning (Domain-IL):** Struktur kelas keluaran tetap sama, namun distribusi fitur masukan berubah seiring waktu.
 3. **Class-Incremental Learning (Class-IL):** Model harus mengenali seluruh kelas dari semua tugas tanpa pernah diberikan Task-ID saat inferensi. Skenario ini adalah yang paling menantang dan paling realistis untuk sistem deteksi intrusi jaringan operasional.
 
-### 2.5.3 Strategi Mitigasi Forgetting
-Secara umum, terdapat tiga kelompok strategi mitigasi lupa dalam literatur continual learning:
-- **Replay-based:** Menyimpan sebagian data mentah masa lalu dalam *replay buffer* (misal: *Experience Replay*). Kelemahan: membebani kapasitas RAM dan melanggar prinsip privasi data pada FL.
-- **Architecture-based:** Menambah kapasitas neuron atau modul khusus untuk setiap tugas baru. Kelemahan: parameter model terus membengkak seiring bertambahnya tugas.
-- **Regularization-based:** Menambahkan suku penalti pada fungsi kerugian untuk membatasi pergeseran bobot penting masa lalu tanpa memerlukan penyimpanan sampel data mentah.
+### 2.5.3 Taksonomi Pendekatan Mitigasi Forgetting
+Secara komprehensif, literatur saintifik membagi pendekatan mitigasi *catastrophic forgetting* ke dalam beberapa paradigma utama sebagaimana diilustrasikan pada Gambar 2.3:
+- **Regularization-Based Approach:** Menambahkan suku penalti pada fungsi kerugian untuk membatasi pergeseran bobot-bobot kritis masa lalu tanpa menyimpan data mentah, seperti *Elastic Weight Consolidation* (EWC), *Synaptic Intelligence* (SI), dan *Online Laplace Approximation*.
+- **Knowledge-Distillation-Based Approach:** Mentransfer representasi luaran model lama ke model baru menggunakan *soft labels*, seperti *Learning Without Forgetting* (LwF).
+- **Bayesian-Based Approach:** Menggunakan formulasi probabilitas posterior dan *Variational Continual Learning* (VCL).
+- **Gradient-Based Approach:** Memproyeksikan arah gradien agar ortogonal terhadap ruang gradien tugas lampau, seperti *Gradient Episodic Memory* (GEM) dan OGD.
+- **Architecture-Based Approach:** Mengalokasikan sub-jaringan atau neuron baru khusus per tugas, seperti *Progressive Neural Networks* (PNNs) dan *Hard Attention to the Task* (HAT).
+- **Replay-Based Approach:** Menyimpan atau membangkitkan kembali sampel data mentah lampau (*Experience Replay* dan *Generative Replay*).
+- **Hybrid Methods:** Penggabungan representasi bertahap seperti *iCaRL* dan *Progress & Compress*.
 
-```mermaid
-flowchart LR
-    subgraph Continual_Learning_Approaches [Taksonomi Pendekatan Mitigasi Forgetting]
-        R[Replay-based: Simpan Buffer Raw Data]
-        A[Architecture-based: Tambah Neuron / Modul Dinamis]
-        REG[Regularization-based: Penalti Bobot / EWC]
-    end
-    REG -->|Privasi Aman & Parameter Ringan| FCL[Solusi Optimal Federated Continual Learning]
-```
-*Gambar 2.3 Taksonomi Pendekatan Mitigasi Catastrophic Forgetting.*
+![Gambar 2.3 Taksonomi Pendekatan Mitigasi Catastrophic Forgetting pada Continual Learning](../Aset/continual_learning_taxonomy_taxonomy_fig2.png)  
+*Gambar 2.3 Taksonomi Pendekatan Mitigasi Catastrophic Forgetting pada Continual Learning.*
 
 ---
 
@@ -586,7 +556,7 @@ Secara metodologis, NIDS terbagi menjadi:
 
 ---
 
-## 2.7 PyTorch dan Framework Flower
+## 2.7 Kerangka Kerja Pengembangan Komputasi dan Federasi
 
 Pengembangan sistem NIDS adaptif terdistribusi dalam penelitian ini memanfaatkan integrasi dua kerangka kerja komputasi terbuka standar industri:
 
@@ -631,6 +601,9 @@ $$
 
 Dengan presisi angka mengambang 32-bit (*float32* / 4 bita), ukuran biner parameter model hanya sekitar **25,1 KB**. Ukuran yang sangat ringkas ini memungkinkan proses transfer bobot pada setiap ronde federasi selesai dalam hitungan milidetik dan memungkinkan inferensi lokal dieksekusi dalam skala waktu mikrodetik per aliran data.
 
+![Gambar 2.4 Struktur Arsitektur Jaringan Multilayer Perceptron (MLP)](../Aset/mlp_nn_hidden_layer_researchgate.png)  
+*Gambar 2.4 Struktur Arsitektur Jaringan Multilayer Perceptron (MLP) dengan Lapisan Tersembunyi.*
+
 ---
 
 ## 2.9 Elastic Weight Consolidation (EWC)
@@ -665,15 +638,8 @@ $$
 
 di mana $\lambda$ adalah koefisien hiperparameter penalti EWC yang mengontrol seberapa kuat model mempertahankan memori tugas lama dibandingkan mempelajari tugas baru.
 
-```mermaid
-flowchart TD
-    subgraph EWC_Mechanism [Konsep Penalti Kuadratik Elastic Weight Consolidation]
-        T1[Parameter Optimal Tugas 1: Theta_1*] --> CALC[Hitung FIM Diagonal: F_i]
-        CALC --> T2[Pelatihan Tugas 2: Loss_Total = Loss_2 + lambda/2 * F_i * Delta_Theta^2]
-        T2 --> RES[Solusi Optimal: Keseimbangan Tugas 1 & Tugas 2]
-    end
-```
-*Gambar 2.4 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis.*
+![Gambar 2.5 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis pada Kontur Kerugian](../Aset/ewc_parameter_space_kirkpatrick2017.png)  
+*Gambar 2.5 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis pada Kontur Kerugian[5].*
 
 ### 2.9.3 Weighted Cross-Entropy dan Gradient Clipping
 Untuk mengatasi ketimpangan kelas yang parah, fungsi kerugian dasar $\mathcal{L}_2(\theta)$ menggunakan pembobotan invers frekuensi kelas:
@@ -716,18 +682,10 @@ Berdasarkan telaah kritis terhadap literatur audit dataset IDS mutakhir, penelit
 Evaluasi sistem dilakukan secara komprehensif mencakup metrik kinerja deteksi kecerdasan buatan, metrik retensi continual learning, dan metrik profil komputasi perangkat.
 
 ### 2.11.1 Metrik Deteksi Pembelajaran Mesin
-Dievaluasi berbasis matriks konfusi (*Confusion Matrix*) yang terdiri atas *True Positive* (TP), *True Negative* (TN), *False Positive* (FP), dan *False Negative* (FN) sebagaimana diilustrasikan pada Gambar 2.5:
+Dievaluasi berbasis matriks konfusi (*Confusion Matrix*) yang terdiri atas *True Positive* (TP), *True Negative* (TN), *False Positive* (FP), dan *False Negative* (FN) sebagaimana diilustrasikan pada Gambar 2.6:
 
-```mermaid
-flowchart TD
-    subgraph Confusion_Matrix [Matriks Konfusi 2x2 Dasar]
-        ACT_P[Aktual Positif] --> TP[True Positive: Prediksi Positif Benar]
-        ACT_P --> FN[False Negative: Prediksi Negatif Salah]
-        ACT_N[Aktual Negatif] --> FP[False Positive: Prediksi Positif Salah]
-        ACT_N --> TN[True Negative: Prediksi Negatif Benar]
-    end
-```
-*Gambar 2.5 Struktur Dasar Confusion Matrix untuk Evaluasi Deteksi Biner dan Multi-kelas.*
+![Gambar 2.6 Struktur Dasar Confusion Matrix untuk Evaluasi Deteksi Biner dan Multi-kelas](../Aset/confusion_matrix_accessibleai.png)  
+*Gambar 2.6 Struktur Dasar Confusion Matrix untuk Evaluasi Deteksi Biner dan Multi-kelas.*
 
 - **Accuracy:** Mengukur proporsi prediksi benar terhadap total seluruh sampel:
   
@@ -804,6 +762,9 @@ $$
 
 di mana $y^*$ adalah nilai ambang kuantil performa terbaik. Nilai *Expected Improvement* (EI) dimaksimalkan dengan memilih hiperparameter yang memaksimumkan rasio $\frac{\ell(x)}{g(x)}$.
 
+![Gambar 2.7 Pemodelan Distribusi Ketidakpastian pada Optimasi Bayesian Berbasis Estimator Parzen (TPE)](../Aset/bayesian_optimization_gp_optuna.png)  
+*Gambar 2.7 Pemodelan Distribusi Ketidakpastian pada Optimasi Bayesian Berbasis Estimator Parzen (TPE)[19].*
+
 ---
 
 ## 2.13 Optimizer
@@ -858,8 +819,6 @@ $$
 $$
 
 di mana setiap elemen keluaran memenuhi batas probabilitas $0 \le \hat{y}_i \le 1$ serta $\sum_{i=1}^C \hat{y}_i = 1$, merepresentasikan tingkat keyakinan model terhadap kelas BENIGN, SSH-Patator, atau DoS.
-
-\newpage
 
 # BAB 3 METODOLOGI
 
