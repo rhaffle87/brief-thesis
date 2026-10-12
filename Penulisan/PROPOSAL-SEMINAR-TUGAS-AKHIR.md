@@ -351,39 +351,15 @@ Berdasarkan latar belakang yang telah diuraikan, maka rumusan masalah dalam pene
 
 ## 1.3 Batasan Masalah
 
-Dalam pelaksanaan tugas akhir ini, batasan ruang lingkup masalah ditetapkan untuk memberikan arah penelitian yang terfokus. Batasan-batasan masalah tersebut meliputi:
-1. **Dataset Penelitian:** Penelitian menggunakan secara eksklusif data lalu lintas jaringan dari dataset tolok ukur resmi Canadian Institute for Cybersecurity, yaitu **CIC-IDS2017** berkas hari Senin (*Monday*), Selasa (*Tuesday*), dan Rabu (*Wednesday*). Berkas hari Kamis dan Jumat dieksklusi karena menderita kelangkaan sampel mikro ekstrem (21–36 baris) serta desinkronisasi pelabelan pcap parah berdasarkan literatur audit saintifik[6], [7].
-2. **Cakupan Kelas Klasifikasi:** Klasifikasi dibatasi pada tiga kelas operasional representatif:
-   - **BENIGN (Normal):** Aliran data operasional rutin (1.332.710 aliran bersih).
-   - **SSH-Patator:** Serangan *brute-force* autentikasi pada Task 1 (3.219 aliran bersih).
-   - **DoS (Denial of Service):** Serangan volumetrik penolakan layanan pada Task 2, mencakup empat subvarian alami: Hulk, GoldenEye, slowloris, dan Slowhttptest (193.748 aliran bersih).
-3. **Pembersihan Fitur & Pencegahan Shortcut:** Fitur masukan model dibatasi pada **63 fitur numerik unik**. Sebanyak 10 fitur konstan bervariansi nol dan 5 pasangan fitur duplikat identik dieliminasi. Fitur `Destination Port` secara sengaja dibuang guna mencegah bias *shortcut learning* (*port-to-label memorization*).
-4. **Penanganan Ketimpangan Kelas:** Seluruh 1.529.677 aliran data bersih dipertahankan tanpa pemangkasan (*no massive undersampling*) dengan menerapkan *Weighted Cross-Entropy Loss* berbasis invers frekuensi kelas terkalibrasi serta *gradient clipping* (norm $\le 1.0$).
-5. **Arsitektur Model Pembelajaran Mesin:** Model klasifikasi dibatasi pada arsitektur *Multilayer Perceptron* (MLP) kompak tiga lapis (`Input(63) → Linear(64) → ReLU → Linear(32) → ReLU → Linear(3)`).
-6. **Topologi Federated Learning:** Simulasi federasi menggunakan algoritma **Federated Averaging (FedAvg)** dengan topologi 2 node sensor klien non-IID dan 1 server agregator, yang merepresentasikan isolasi fungsional antar-perimeter (*cross-silo federated learning*):
-   - **Klien A (Task 1):** Node sensor perimeter administrasi internal yang memantau aliran Normal dan 100% data serangan *brute-force* autentikasi SSH-Patator.
-   - **Klien B (Task 2):** Node sensor perimeter zona publik (*Demilitarized Zone* / DMZ) yang memantau aliran Normal dan 100% data serangan volumetrik web DoS.
-   - Kelas Normal dipartisi secara acak 50% untuk Klien A dan 50% untuk Klien B dari gabungan seluruh hari untuk mencegah bias pola harian (*day-of-week confound*).
-7. **Skenario Continual Learning:** Model diuji dalam skenario **Class-Incremental Learning (Class-IL)** tanpa penyediaan Task-ID saat inferensi. Metode mitigasi lupa dibatasi pada perbandingan antara **Naive Fine-Tuning** dan **Elastic Weight Consolidation (EWC)**.
-8. **Lingkungan Pengujian & Data Offline Tabular:** Pengujian difokuskan secara eksklusif pada data tolok ukur *offline tabular flow* CIC-IDS2017. Injeksi lalu lintas jaringan aktif (*live traffic injection*), penangkapan paket langsung (*live packet capture/sniffing*), dan *port mirroring* ditiadakan sepenuhnya dari target evaluasi guna mengeliminasi variabel gangguan transport dan lapisan fisik (*packet loss*, *buffer overrun*, dan *timing jitter*) sesuai arahan dosen pembimbing, sehingga evaluasi berfokus secara murni pada kinerja algoritma *Federated Continual Learning*.
-9. **Metrik Evaluasi:** Evaluasi diukur menggunakan metrik deteksi ML (Macro-F1, per-class Precision, Recall, Accuracy, dan *Backward Transfer* / BWT), serta metrik profil efisiensi komputasi (latensi inferensi per flow dalam $\mu\text{s}$, alokasi memori RAM *footprint*, dan *communication overhead* transmisi parameter melalui protokol gRPC dalam KB per ronde).
-10. **Variabel dan Parameter Penelitian:** Sesuai dengan pedoman metodologi perancangan tugas akhir, variabel dan parameter yang terlibat dalam penelitian diklasifikasikan sebagai berikut:
-    - **Variabel Bebas (*Independent Variables*):**
-      1. Topologi pelatihan model: Pelatihan Terisolasi Lokal (*Isolated Local Training*) dan Pelatihan Terdistribusi Federasi (*Federated Averaging* / FedAvg).
-      2. Skema mitigasi pembelajaran berkelanjutan (*Continual Learning*): Pembelajaran Naif (*Naive Fine-Tuning*) tanpa regulasi memori dan regularisasi *Elastic Weight Consolidation* (EWC) dengan variasi koefisien penalti kuadratik kelengkungan Fisher ($\lambda$).
-      3. Urutan sekuensial pembelajaran kelas serangan baru (*Incremental Task Sequence*): Tahap Task 1 (SSH-Patator) dilanjutkan ke Tahap Task 2 (DoS).
-    - **Variabel Terikat (*Dependent Variables*):**
-      1. Kinerja deteksi dan klasifikasi intrusi: *Macro-averaged F1-Score*, *Precision*, *Recall*, dan *Accuracy* pada seluruh kelas operasional.
-      2. Retensi representasi memori tugas lampau: Nilai metrik perpindahan ke belakang (*Backward Transfer* / BWT) untuk mengukur derajat mitigasi *catastrophic forgetting*.
-      3. Efisiensi sumber daya komputasi dan komunikasi: Latensi inferensi per aliran data (dalam $\mu\text{s}$), alokasi memori RAM *footprint* (dalam MB), dan *communication overhead* transmisi parameter melalui protokol gRPC (dalam KB per ronde).
-    - **Variabel Kontrol dan Parameter Konstan (*Controlled / Constant Parameters*):**
-      1. Arsitektur jaringan saraf tiruan: *Multilayer Perceptron* (MLP) tiga lapis kompak dengan dimensi tetap `Input(63) → Linear(64) → ReLU → Linear(32) → ReLU → Linear(3)`.
-      2. Konfigurasi hiperparameter optimasi: Algoritma AdamW dengan laju pembelajaran $\eta = 10^{-3}$, pembobotan penurunan bobot (*weight decay*) $10^{-4}$, ukuran *batch* mini 128, dan jumlah *epoch* lokal $E = 3$.
-      3. Penstabil pelatihan: Fungsi *Weighted Cross-Entropy Loss* berbasis bobot invers frekuensi kelas terkalibrasi dan pembatasan norma gradien (*gradient clipping*) dengan batas ambang $\le 1.0$.
-      4. Validitas statistik: Pengujian seragam melintasi 5 *random seed* independen (42, 43, 44, 45, dan 46) untuk memastikan keterulangan (*reproducibility*).
-    - **Parameter yang Diabaikan (*Ignored Parameters*):**
-      1. Fitur lalu lintas berisiko kebocoran: Atribut nomor port layanan (`Destination Port`) dan seluruh fitur bervariansi nol diabaikan guna mencegah *shortcut learning*.
-      2. Dinamika transmisi lapisan fisik dan transport: Injeksi paket langsung (*live traffic injection*), kehilangan paket (*packet loss*), *buffer overrun*, dan *timing jitter* diabaikan untuk menjamin determinisme evaluasi murni algoritma *Federated Continual Learning*.
+Dalam merampungkan tugas akhir ini, penulis mengonsep batasan ruang lingkup masalah untuk memberikan arah yang lebih terfokus. Berikut merupakan batasan-batasan masalah yang diberikan:
+
+1. Metrik evaluasi yang digunakan meliputi *Macro-averaged F1-Score*, *Precision*, *Recall*, *Accuracy*, *Backward Transfer* (BWT), waktu inferensi per aliran data, alokasi memori RAM *footprint*, dan *communication payload*.
+2. Model deteksi intrusi yang dikembangkan berbasis arsitektur *Multilayer Perceptron* (MLP) kompak tiga lapis dengan masukan 63 fitur statistik numerik bersih.
+3. Penelitian hanya menggunakan dataset publik *offline tabular flow* CIC-IDS2017 (hari Senin, Selasa, dan Rabu), dengan mengeliminasi atribut `Destination Port` dan fitur bervariansi nol untuk mencegah bias *shortcut learning*.
+4. Pendekatan pembelajaran berkelanjutan (*Continual Learning*) dibatasi pada skenario *Class-Incremental Learning* (Class-IL) tanpa penyediaan Task-ID saat inferensi, dengan metode mitigasi lupa berbasis *Elastic Weight Consolidation* (EWC).
+5. Topologi pembelajaran terdistribusi menggunakan algoritma *Federated Averaging* (FedAvg) dengan kerangka kerja Flower, yang memodelkan 2 *node* klien terisolasi non-IID (Klien A: SSH-Patator dan Klien B: DoS) serta 1 server agregator global.
+6. Implementasi dan evaluasi eksperimen dilakukan pada lingkungan komputasi prosesor (CPU) dengan validitas statistik melintasi 5 *random seed* independen (42, 43, 44, 45, dan 46).
+7. Penelitian ini tidak mencakup penangkapan paket langsung (*live packet capture*), injeksi lalu lintas aktif, maupun pengujian langsung di jaringan produksi.
 
 ---
 
