@@ -456,48 +456,70 @@ Berdasarkan kajian kritis tersebut, posisi ilmiah dan kebaruan (*novelty*) dari 
 
 ## 2.4 Federated Learning
 
-*Federated Learning* (FL) merupakan paradigma pembelajaran mesin terdistribusi yang memungkinkan sejumlah besar node klien (misalnya sensor jaringan, perangkat edge, atau server perimeter) untuk melatih model secara kolaboratif di bawah koordinasi server agregator terpusat tanpa harus memusatkan data pelatihan lokal ke server tersebut[3].
-
-### 2.4.1 Arsitektur Federasi
-Arsitektur *Federated Learning* secara fundamental dibangun atas interaksi terkoordinasi antara dua entitas utama, yaitu **Server Agregator** dan sekumpulan **Klien Federasi** ($K$ *node*)[3]. Server agregator bertindak sebagai koordinator orkestrasi global yang menginisialisasi parameter bobot model global awal, menyiarkan konfigurasi parameter model ke klien yang berpartisipasi pada setiap ronde komunikasi, mengumpulkan pembaruan bobot lokal, serta menghitung parameter model global baru melalui fungsi agregasi FedAvg. Di sisi lain, setiap sensor atau node klien federasi bertugas mengelola partisi data lalu lintas jaringan lokalnya secara privat dan terisolasi. Pada setiap putaran komunikasi federasi, klien mengunduh parameter model global terbaru dari server agregator, mengeksekusi proses optimasi lokal berbasis algoritma *Stochastic Gradient Descent* (SGD) atau AdamW selama sejumlah *epoch* lokal menggunakan data lokalnya, lalu mengirimkan kembali parameter bobot hasil pelatihan ke server agregator tanpa pernah mentransmisikan rekaman data mentah pengguna[3].
+*Federated Learning* (FL) merupakan paradigma pembelajaran mesin terdistribusi yang memungkinkan sejumlah besar node klien (seperti sensor jaringan, perangkat gerbang *edge*, atau server perimeter) untuk melatih model secara kolaboratif di bawah koordinasi server agregator terpusat tanpa harus memusatkan data pelatihan lokal ke server tersebut[3]. Arsitektur federasi dibangun atas interaksi terkoordinasi antara Server Agregator sebagai koordinator global dan $K$ node Klien Federasi yang mengelola partisi data lalu lintas lokal secara privat. Pada setiap siklus komunikasi, klien mengunduh parameter model global terbaru, mengeksekusi pelatihan lokal menggunakan data privatnya, lalu mentransmisikan kembali parameter bobot terbarui ke server agregator tanpa pernah mengirimkan paket data mentah, sebagaimana diilustrasikan pada Gambar 2.2.
 
 ![Gambar 2.2 Siklus Pelatihan dan Agregasi Bobot pada Federated Learning (FedAvg)](../Aset/fedavg_flowchart_researchgate.png)  
 *Gambar 2.2 Siklus Pelatihan dan Agregasi Bobot pada Federated Learning (FedAvg)[3].*
 
-### 2.4.2 Algoritma FedAvg
-Algoritma standar paling populer dalam FL adalah *Federated Averaging* (FedAvg). Pada setiap ronde komunikasi $t \in \{1, 2, \dots, T\}$[3]:
+Secara matematis, tujuan dari optimasi federasi (*Federated Optimization*) adalah menyelesaikan permasalahan minimisasi risiko empiris terdistribusi (*distributed empirical risk minimization*)[3]:
 
 $$
-w_{t+1} = \sum_{k=1}^{K} \frac{n_k}{n} w_{t+1}^k
+\min_{w \in \mathbb{R}^d} f(w) = \sum_{k=1}^K \frac{n_k}{n} F_k(w)
 $$
 
-dengan:
+dengan fungsi kerugian lokal $F_k(w)$ pada klien $k$ dirumuskan sebagai:
 
 $$
-n_k = |\mathcal{D}_k|, \quad n = \sum_{k=1}^K n_k
+F_k(w) = \frac{1}{n_k} \sum_{i \in \mathcal{D}_k} \ell(f(x_i; w), y_i)
 $$
 
-di mana $n_k$ menyatakan jumlah sampel data lokal pada klien $k$, dan $n$ adalah total seluruh sampel data di seluruh klien.
+di mana $n_k = |\mathcal{D}_k|$ menyatakan volume sampel lokal pada klien $k$, dan $n = \sum_{k=1}^K n_k$ merepresentasikan total seluruh sampel data di jaringan. Pada setiap ronde komunikasi $t \in \{1, 2, \dots, T\}$, server menyiarkan parameter global $w_t$ ke klien terpilih. Klien mengeksekusi optimasi lokal berbasis *gradient descent* sebanyak $E$ *epoch* lokal untuk menghasilkan bobot lokal terbarui $w_{t+1}^k \leftarrow w_t - \eta \nabla F_k(w_t)$. Server agregator kemudian menghitung model global baru melalui agregasi rata-rata berbobot *Federated Averaging* (FedAvg)[3]:
 
-### 2.4.3 Data Non-IID
-Pada lingkungan jaringan komputer nyata, asumsi bahwa data terdistribusi secara independen dan identik (*Independent and Identically Distributed* / IID) hampir selalu dilanggar. Fenomena ini disebut **Non-IID Data**. Bentuk non-IID paling dominan pada NIDS adalah ketimpangan distribusi label (*label distribution skew*), di mana Klien A di subnet internal dominan menangani serangan autentikasi SSH, sedangkan Klien B di zona publik dominan menangani serangan DoS. Heterogenitas non-IID terbukti secara teoretis menyebabkan pembaruan gradien lokal mengarah pada titik minimum lokal yang saling bertolak belakang (*weight divergence*), yang memperlambat konvergensi dan menurunkan akurasi model global[4].
+$$
+w_{t+1} = \sum_{k=1}^K \frac{n_k}{n} w_{t+1}^k
+$$
+
+Meskipun FedAvg terbukti efisien pada data yang homogen, penerapannya pada infrastruktur jaringan riil dihadapkan pada pelanggaran asumsi independen dan berdistribusi identik (*Independent and Identically Distributed* / IID). Fenomena **Non-IID Data**, khususnya ketimpangan distribusi label (*label distribution skew*) di mana probabilitas kemunculan kelas serangan antarklien berbeda secara tajam ($\mathcal{P}_k(y) \ne \mathcal{P}_j(y)$), menyebabkan gradien lokal klien mengarah ke titik optimum lokal yang saling bertolak belakang. Kondisi ini memicu divergensi bobot (*client drift*)[4]:
+
+$$
+\| w_{t+1}^k - w^* \| \gg 0
+$$
+
+yang memperlambat konvergensi dan menurunkan akurasi model global secara signifikan dalam mendeteksi variasi serangan baru.
 
 ---
 
 ## 2.5 Continual Learning
 
-*Continual Learning* (CL) atau *Lifelong Learning* adalah cabang pembelajaran mesin yang berfokus pada kemampuan model kecerdasan buatan untuk mempelajari aliran tugas atau kelas data baru secara sekuensial dari waktu ke waktu tanpa melupakan representasi pengetahuan yang telah dipelajari dari tugas masa lalu.
+*Continual Learning* (CL) atau *Lifelong Learning* merupakan cabang pembelajaran mesin adaptif yang berfokus pada kemampuan model kecerdasan buatan untuk mempelajari aliran tugas atau kelas data baru $\mathcal{T} = \{\mathcal{T}_1, \mathcal{T}_2, \dots, \mathcal{T}_T\}$ secara sekuensial tanpa mengalami degradasi performa pada pengetahuan yang telah diakuisisi sebelumnya. Dalam proses pembelajaran berkelanjutan ini, model dihadapkan pada dilema stabilitas-plastisitas (*stability-plasticity dilemma*), yaitu tuntutan mempertahankan plastisitas untuk mengintegrasikan pola ancaman baru seraya menjaga stabilitas representasi serangan lampau[5]. Jaringan saraf tiruan modern memiliki kerentanan parah terhadap fenomena **catastrophic forgetting**. Ketika model dilatih pada tugas pertama $\mathcal{T}_1$ dengan data $\mathcal{D}_1$, parameter optimal $\theta_1^*$ diperoleh melalui minimisasi fungsi kerugian $\mathcal{L}_1$:
 
-### 2.5.1 Catastrophic Forgetting
-Dalam sistem pembelajaran adaptif, model dihadapkan pada dilema stabilitas-plastisitas (*stability-plasticity dilemma*), yaitu tuntutan untuk mempertahankan fleksibilitas dalam mengintegrasikan pengetahuan baru (*plasticity*) seraya mempertahankan kestabilan representasi yang telah terbentuk sebelumnya (*stability*). Jaringan saraf tiruan (*Deep Neural Networks*) modern memiliki kecenderungan bawaan yang parah terhadap fenomena **catastrophic forgetting** saat mempelajari aliran tugas baru secara berurutan[5]. Ketika model dilatih pada tugas pertama $\mathcal{T}_1$, bobot sinaptik $\theta$ dioptimasi untuk meminimalkan fungsi kerugian $\mathcal{L}_1$. Ketika tugas baru $\mathcal{T}_2$ diberikan, proses *backpropagation* akan memperbarui bobot $\theta$ demi meminimalkan $\mathcal{L}_2$. Pembaruan bobot ini menimpa (*overwrite*) konfigurasi parameter yang bertanggung jawab atas pengenalan $\mathcal{T}_1$, menyebabkan akurasi model terhadap $\mathcal{T}_1$ runtuh seketika mendekati nol.
+$$
+\theta_1^* = \arg\min_\theta \mathcal{L}_1(\theta; \mathcal{D}_1)
+$$
 
-### 2.5.2 Skenario Pembelajaran
-Berdasarkan ketersediaan identitas tugas (*Task-ID*) saat fase inferensi operasional, literatur Continual Learning mengklasifikasikan proses pembelajaran inkremental ke dalam tiga skenario utama[17]. Skenario pertama adalah **Task-Incremental Learning (Task-IL)**, di mana model selalu diberikan informasi identitas tugas (*Task-ID*) baik selama fase pelatihan maupun saat evaluasi inferensi, sehingga model hanya perlu memilih kelas luaran yang relevan dengan tugas tersebut. Skenario kedua adalah **Domain-Incremental Learning (Domain-IL)**, di mana struktur dan jumlah kelas keluaran tetap konstan, namun distribusi fitur masukan mengalami pergeseran domain seiring berjalannya waktu. Skenario ketiga dan yang paling kompleks adalah **Class-Incremental Learning (Class-IL)**, di mana model dituntut untuk mengidentifikasi dan membedakan seluruh kelas dari seluruh tugas yang pernah dipelajari tanpa pernah diberikan informasi *Task-ID* saat proses inferensi. Skenario Class-IL ini merupakan representasi paling realistis sekaligus paling menantang bagi implementasi sistem deteksi intrusi jaringan di dunia nyata, karena sensor keamanan operasional harus mampu mengklasifikasikan apakah suatu aliran data bersifat normal, serangan SSH, atau serangan DoS secara mandiri tanpa mengetahui konteks fase pelatihan model[17].
+Saat tugas baru $\mathcal{T}_2$ dengan data $\mathcal{D}_2$ masuk, proses *backpropagation* memperbarui bobot parameter menuju $\theta_2^* = \arg\min_\theta \mathcal{L}_2(\theta; \mathcal{D}_2)$. Pembaruan parameter ini menimpa (*overwrite*) bobot-bobot sinaptik yang merepresentasikan $\mathcal{T}_1$, menyebabkan lonjakan kerugian pada tugas pertama:
 
-### 2.5.3 Mitigasi Forgetting
-Secara komprehensif, literatur saintifik membagi pendekatan mitigasi *catastrophic forgetting* ke dalam beberapa paradigma metodologis utama sebagaimana diilustrasikan pada Gambar 2.3[18]. Paradigma pertama adalah **Regularization-Based Approach**, yang menambahkan suku penalti regularisasi ke dalam fungsi kerugian guna membatasi pergeseran bobot-bobot sinaptik yang dinilai krusial bagi tugas masa lalu tanpa memerlukan penyimpanan sampel data mentah, seperti pada algoritma *Elastic Weight Consolidation* (EWC), *Synaptic Intelligence* (SI), dan *Online Laplace Approximation*. Paradigma kedua adalah **Knowledge-Distillation-Based Approach**, yang mentransfer representasi pengetahuan luaran model lama ke arsitektur model baru menggunakan luaran probabilitas lunak (*soft targets*), seperti pada metode *Learning Without Forgetting* (LwF).
+$$
+\mathcal{L}_1(\theta_2^*; \mathcal{D}_1) \gg \mathcal{L}_1(\theta_1^*; \mathcal{D}_1)
+$$
 
-Di samping kedua paradigma tersebut, pendekatan mitigasi lainnya mencakup **Bayesian-Based Approach** yang merumuskan pembelajaran sekuensial melalui pembaharuan distribusi probabilitas posterior parameter, serta **Gradient-Based Approach** (seperti *Gradient Episodic Memory* / GEM) yang memproyeksikan vektor gradien tugas baru agar selalu ortogonal terhadap ruang gradien tugas lampau[12]. Pendekatan lain melibatkan **Architecture-Based Approach** yang mengalokasikan kapasitas sub-jaringan atau neuron baru khusus per tugas (seperti *Progressive Neural Networks*), serta **Replay-Based Approach** yang menyimpan kembali cuplikan data historis (*Experience Replay*) atau membangkitkan data sintetis (*Generative Replay*). Namun, untuk lingkungan sensor jaringan terdistribusi yang sensitif terhadap privasi dan memiliki keterbatasan memori fisik, pendekatan berbasis regularisasi parameter seperti EWC menawarkan keunggulan paling menonjol karena tidak menuntut penyimpanan rekaman data mentah pengguna di memori lokal[5], [18].
+sehingga akurasi deteksi terhadap jenis serangan lama runtuh seketika mendekati nol[5].
+
+Ditinjau dari ketersediaan informasi identitas tugas (*Task-ID*) saat inferensi, literatur Continual Learning mengklasifikasikan skenario pembelajaran inkremental ke dalam tiga domain utama, yaitu *Task-Incremental Learning* (Task-IL), *Domain-Incremental Learning* (Domain-IL), dan *Class-Incremental Learning* (Class-IL)[17]. Pada Task-IL, model diberikan identitas tugas $t$ sehingga prediksi terbatas pada sub-ruang kelas $\mathcal{Y}_t$. Sebaliknya, penelitian ini mengadopsi skenario **Class-Incremental Learning (Class-IL)** yang merepresentasikan kondisi operasional NIDS paling realistis sekaligus paling menantang. Pada skenario Class-IL, model tidak pernah diberikan informasi *Task-ID* saat inferensi dan dituntut memprediksi label dari seluruh ruang kelas gabungan secara otonom[17]:
+
+$$
+\hat{y} = \arg\max_{c \in \bigcup_{t=1}^T \mathcal{Y}_t} f_c(x; \theta)
+$$
+
+Tuntutan mendiskriminasi seluruh kelas secara simultan tanpa *task oracle* ini memperparah ambiguitas antar-tugas (*inter-task interference*) dan mempercepat laju kelupaan model.
+
+Guna mengatasi tantangan *catastrophic forgetting* pada skenario Class-IL, literatur mengklasifikasikan strategi pertahanan ke dalam beberapa paradigma metodologis sebagaimana diilustrasikan pada Gambar 2.3[18]. Paradigma *Replay-Based* menyimpan rekaman lalu lintas lama ke dalam *buffer* fisik (*Experience Replay*) atau merekonstruksi data masa lalu secara generatif (*Generative Replay*), namun paradigma ini melanggar privasi transmisi dan menuntut kapasitas memori besar[12]. Paradigma *Architecture-Based* mengalokasikan parameter modular baru per tugas, namun menyebabkan ukuran model membengkak. Sebaliknya, paradigma **Regularization-Based** melindungi memori lama secara murni pada ruang bobot dengan menambahkan suku penalti regularisasi ke dalam fungsi kerugian:
+
+$$
+\mathcal{L}_{\text{total}}(\theta) = \mathcal{L}_t(\theta) + \sum_{j < t} \Omega_j (\theta - \theta_j^*)^2
+$$
+
+di mana $\Omega_j$ menyatakan matriks kepentingan parameter terhadap tugas-tugas masa lalu. Pendekatan regularisasi seperti *Elastic Weight Consolidation* (EWC) menjadi pilihan paling optimal untuk sistem deteksi intrusi jaringan terdistribusi karena mampu mempertahankan privasi data secara penuh dan menjaga efisiensi jejak memori pada perangkat sensor *edge*[5], [18].
 
 ![Gambar 2.3 Taksonomi Pendekatan Mitigasi Catastrophic Forgetting pada Continual Learning](../Aset/continual_learning_taxonomy_taxonomy_fig2.png)  
 *Gambar 2.3 Taksonomi Pendekatan Mitigasi Catastrophic Forgetting pada Continual Learning[18].*
