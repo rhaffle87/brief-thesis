@@ -1,13 +1,13 @@
 # Inventaris Berkas PDF Literatur
 
 **Lokasi Repositori:** `E:/Projects/thesis/Literatur/PDFs/`  
-**Terakhir Diperbarui:** 2026-10-06  
-**Total Berkas Fisik:** 25 PDF (13 Paper Inti + 12 Paper Pendukung di `Opsional/`)  
+**Terakhir Diperbarui:** 2026-10-13  
+**Total Berkas Fisik:** 26 PDF (14 Paper Inti + 12 Paper Pendukung di `Opsional/`)  
 **Status Unduhan & Akses:** ✅ 100% Tersedia Lokal di Disk  
 
 ---
 
-## 📂 1. Paper Inti (13 Berkas di `Literatur/PDFs/`)
+## 📂 1. Paper Inti (14 Berkas di `Literatur/PDFs/`)
 
 | No | Berkas PDF | Ukuran | Referensi & Catatan | Status |
 |---|---|---|---|---|
@@ -24,6 +24,7 @@
 | 11 | `Gholizade-2026-FCL-Survey.pdf` | 1,6 MB | [Gholizade-2026-FCL-Survey](../Gholizade-2026-FCL-Survey.md) (Survei Taksonomi FCL) | ✔ Verified |
 | 12 | `Beutel-2020-Flower.pdf` | 539 KB | [Beutel-2020-Flower](../Beutel-2020-Flower.md) (Framework Flower FL) | ✔ Verified |
 | 13 | `LopezPaz-2017-GEM.pdf` | 522 KB | [Lopez-Paz-2017-GEM](../Lopez-Paz-2017-GEM.md) (Formulasi Metrik Backward Transfer / BWT) | ✔ Verified |
+| 14 | `Ghallab-2025-Continual-Learning-Gradient-Survey.pdf` | 1,16 MB | [Ghallab-2025](../Ghallab-2025-Continual-Learning-Gradient-Survey.md) (Taksonomi Mitigasi Catastrophic Forgetting Continual Learning) | ✔ Verified |
 
 ---
 

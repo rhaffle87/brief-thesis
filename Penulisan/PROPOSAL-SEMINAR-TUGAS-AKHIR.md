@@ -495,12 +495,12 @@ Dalam sistem pembelajaran adaptif, model dihadapkan pada dilema stabilitas-plast
 Berdasarkan ketersediaan identitas tugas (*Task-ID*) saat fase inferensi operasional, literatur Continual Learning mengklasifikasikan proses pembelajaran inkremental ke dalam tiga skenario utama[17]. Skenario pertama adalah **Task-Incremental Learning (Task-IL)**, di mana model selalu diberikan informasi identitas tugas (*Task-ID*) baik selama fase pelatihan maupun saat evaluasi inferensi, sehingga model hanya perlu memilih kelas luaran yang relevan dengan tugas tersebut. Skenario kedua adalah **Domain-Incremental Learning (Domain-IL)**, di mana struktur dan jumlah kelas keluaran tetap konstan, namun distribusi fitur masukan mengalami pergeseran domain seiring berjalannya waktu. Skenario ketiga dan yang paling kompleks adalah **Class-Incremental Learning (Class-IL)**, di mana model dituntut untuk mengidentifikasi dan membedakan seluruh kelas dari seluruh tugas yang pernah dipelajari tanpa pernah diberikan informasi *Task-ID* saat proses inferensi. Skenario Class-IL ini merupakan representasi paling realistis sekaligus paling menantang bagi implementasi sistem deteksi intrusi jaringan di dunia nyata, karena sensor keamanan operasional harus mampu mengklasifikasikan apakah suatu aliran data bersifat normal, serangan SSH, atau serangan DoS secara mandiri tanpa mengetahui konteks fase pelatihan model[17].
 
 ### 2.5.3 Mitigasi Forgetting
-Secara komprehensif, literatur saintifik membagi pendekatan mitigasi *catastrophic forgetting* ke dalam beberapa paradigma metodologis utama sebagaimana diilustrasikan pada Gambar 2.3[17]. Paradigma pertama adalah **Regularization-Based Approach**, yang menambahkan suku penalti regularisasi ke dalam fungsi kerugian guna membatasi pergeseran bobot-bobot sinaptik yang dinilai krusial bagi tugas masa lalu tanpa memerlukan penyimpanan sampel data mentah, seperti pada algoritma *Elastic Weight Consolidation* (EWC), *Synaptic Intelligence* (SI), dan *Online Laplace Approximation*. Paradigma kedua adalah **Knowledge-Distillation-Based Approach**, yang mentransfer representasi pengetahuan luaran model lama ke arsitektur model baru menggunakan luaran probabilitas lunak (*soft targets*), seperti pada metode *Learning Without Forgetting* (LwF).
+Secara komprehensif, literatur saintifik membagi pendekatan mitigasi *catastrophic forgetting* ke dalam beberapa paradigma metodologis utama sebagaimana diilustrasikan pada Gambar 2.3[18]. Paradigma pertama adalah **Regularization-Based Approach**, yang menambahkan suku penalti regularisasi ke dalam fungsi kerugian guna membatasi pergeseran bobot-bobot sinaptik yang dinilai krusial bagi tugas masa lalu tanpa memerlukan penyimpanan sampel data mentah, seperti pada algoritma *Elastic Weight Consolidation* (EWC), *Synaptic Intelligence* (SI), dan *Online Laplace Approximation*. Paradigma kedua adalah **Knowledge-Distillation-Based Approach**, yang mentransfer representasi pengetahuan luaran model lama ke arsitektur model baru menggunakan luaran probabilitas lunak (*soft targets*), seperti pada metode *Learning Without Forgetting* (LwF).
 
-Di samping kedua paradigma tersebut, pendekatan mitigasi lainnya mencakup **Bayesian-Based Approach** yang merumuskan pembelajaran sekuensial melalui pembaharuan distribusi probabilitas posterior parameter, serta **Gradient-Based Approach** (seperti *Gradient Episodic Memory* / GEM) yang memproyeksikan vektor gradien tugas baru agar selalu ortogonal terhadap ruang gradien tugas lampau[12]. Pendekatan lain melibatkan **Architecture-Based Approach** yang mengalokasikan kapasitas sub-jaringan atau neuron baru khusus per tugas (seperti *Progressive Neural Networks*), serta **Replay-Based Approach** yang menyimpan kembali cuplikan data historis (*Experience Replay*) atau membangkitkan data sintetis (*Generative Replay*). Namun, untuk lingkungan sensor jaringan terdistribusi yang sensitif terhadap privasi dan memiliki keterbatasan memori fisik, pendekatan berbasis regularisasi parameter seperti EWC menawarkan keunggulan paling menonjol karena tidak menuntut penyimpanan rekaman data mentah pengguna di memori lokal[5], [17].
+Di samping kedua paradigma tersebut, pendekatan mitigasi lainnya mencakup **Bayesian-Based Approach** yang merumuskan pembelajaran sekuensial melalui pembaharuan distribusi probabilitas posterior parameter, serta **Gradient-Based Approach** (seperti *Gradient Episodic Memory* / GEM) yang memproyeksikan vektor gradien tugas baru agar selalu ortogonal terhadap ruang gradien tugas lampau[12]. Pendekatan lain melibatkan **Architecture-Based Approach** yang mengalokasikan kapasitas sub-jaringan atau neuron baru khusus per tugas (seperti *Progressive Neural Networks*), serta **Replay-Based Approach** yang menyimpan kembali cuplikan data historis (*Experience Replay*) atau membangkitkan data sintetis (*Generative Replay*). Namun, untuk lingkungan sensor jaringan terdistribusi yang sensitif terhadap privasi dan memiliki keterbatasan memori fisik, pendekatan berbasis regularisasi parameter seperti EWC menawarkan keunggulan paling menonjol karena tidak menuntut penyimpanan rekaman data mentah pengguna di memori lokal[5], [18].
 
 ![Gambar 2.3 Taksonomi Pendekatan Mitigasi Catastrophic Forgetting pada Continual Learning](../Aset/continual_learning_taxonomy_taxonomy_fig2.png)  
-*Gambar 2.3 Taksonomi Pendekatan Mitigasi Catastrophic Forgetting pada Continual Learning.*
+*Gambar 2.3 Taksonomi Pendekatan Mitigasi Catastrophic Forgetting pada Continual Learning[18].*
 
 ---
 
@@ -522,7 +522,7 @@ PyTorch merupakan pustaka komputasi ilmiah dan *deep learning* sumber terbuka be
 ---
 
 ## 2.8 Flower
-Dalam mengimplementasikan paradigma pembelajaran terdistribusi, penelitian ini memanfaatkan Flower (`flwr`), yaitu kerangka kerja *Federated Learning* yang modular, terukur, dan agnostik terhadap pustaka *deep learning*[18]. Arsitektur komunikasi Flower dibangun di atas protokol *Google Remote Procedure Call* (gRPC) yang beroperasi melalui HTTP/2 pada port standar TCP 8080, menjamin latensi transmisi yang rendah dan throughput yang andal. Dalam siklus federasi, parameter bobot model PyTorch diekstraksi ke dalam array NumPy (*float32*) dan diserialisasi ke dalam format biner *Protocol Buffers* (`Parameters` proto) sebelum dikirimkan melintasi jaringan. Penggunaan arsitektur model MLP yang kompak (memuat 6.275 parameter *float32*) menghasilkan ukuran muatan biner parameter hanya sebesar $\approx 25,1$ KB per transmisi klien. Dengan total pertukaran parameter untuk dua klien sebesar $100,4$ KB per ronde federasi, Flower menghasilkan penghematan lebar pita jaringan sebesar $99,48\%$ dibandingkan skenario sentralisasi yang mentransmisikan data mentah bervolume gigabita. Keunggulan ini dipadukan dengan skalabilitas Flower yang mendukung emulasi klien virtual maupun penerapan riil pada perangkat komputasi fisik terdistribusi (*cross-silo edge deployment*)[18].
+Dalam mengimplementasikan paradigma pembelajaran terdistribusi, penelitian ini memanfaatkan Flower (`flwr`), yaitu kerangka kerja *Federated Learning* yang modular, terukur, dan agnostik terhadap pustaka *deep learning*[19]. Arsitektur komunikasi Flower dibangun di atas protokol *Google Remote Procedure Call* (gRPC) yang beroperasi melalui HTTP/2 pada port standar TCP 8080, menjamin latensi transmisi yang rendah dan throughput yang andal. Dalam siklus federasi, parameter bobot model PyTorch diekstraksi ke dalam array NumPy (*float32*) dan diserialisasi ke dalam format biner *Protocol Buffers* (`Parameters` proto) sebelum dikirimkan melintasi jaringan. Penggunaan arsitektur model MLP yang kompak (memuat 6.275 parameter *float32*) menghasilkan ukuran muatan biner parameter hanya sebesar $\approx 25,1$ KB per transmisi klien. Dengan total pertukaran parameter untuk dua klien sebesar $100,4$ KB per ronde federasi, Flower menghasilkan penghematan lebar pita jaringan sebesar $99,48\%$ dibandingkan skenario sentralisasi yang mentransmisikan data mentah bervolume gigabita. Keunggulan ini dipadukan dengan skalabilitas Flower yang mendukung emulasi klien virtual maupun penerapan riil pada perangkat komputasi fisik terdistribusi (*cross-silo edge deployment*)[19].
 
 ---
 
@@ -680,13 +680,13 @@ $$
 \text{Payload} = 2 \times |\theta| \times \text{sizeof}(\text{float32}) \quad (\text{KB})
 $$
 
-Parameter ini menunjukkan efisiensi protokol gRPC Flower dalam meminimalkan overhead lebar pita jaringan selama kolaborasi terdistribusi berlangsung[8], [18].
+Parameter ini menunjukkan efisiensi protokol gRPC Flower dalam meminimalkan overhead lebar pita jaringan selama kolaborasi terdistribusi berlangsung[8], [19].
 
 ---
 
 ## 2.13 Hyperparameter Tuning
 
-Penyetelan hiperparameter (*hyperparameter tuning*) merupakan tahapan kritis untuk menemukan kombinasi parameter optimal yang memaksimalkan kinerja model. Dibandingkan metode *Grid Search* yang tidak efisien atau *Random Search* yang acak, penelitian ini mengadopsi metode **Bayesian Optimization** menggunakan kerangka kerja **Optuna**. Kerangka kerja Optuna mengimplementasikan algoritma *Tree-structured Parzen Estimator* (TPE)[19]. TPE memodelkan probabilitas kondisional $p(x \mid y)$ dari konfigurasi hiperparameter $x$ terhadap hasil evaluasi $y$ dengan membagi riwayat percobaan sebelumnya ke dalam dua distribusi terpisah:
+Penyetelan hiperparameter (*hyperparameter tuning*) merupakan tahapan kritis untuk menemukan kombinasi parameter optimal yang memaksimalkan kinerja model. Dibandingkan metode *Grid Search* yang tidak efisien atau *Random Search* yang acak, penelitian ini mengadopsi metode **Bayesian Optimization** menggunakan kerangka kerja **Optuna**. Kerangka kerja Optuna mengimplementasikan algoritma *Tree-structured Parzen Estimator* (TPE)[20]. TPE memodelkan probabilitas kondisional $p(x \mid y)$ dari konfigurasi hiperparameter $x$ terhadap hasil evaluasi $y$ dengan membagi riwayat percobaan sebelumnya ke dalam dua distribusi terpisah:
 
 $$
 p(x \mid y) = \begin{cases} \ell(x), & \text{jika } y < y^* \\ g(x), & \text{jika } y \ge y^* \end{cases}
@@ -695,7 +695,7 @@ $$
 di mana $y^*$ adalah nilai ambang kuantil performa terbaik. Nilai *Expected Improvement* (EI) dimaksimalkan dengan memilih hiperparameter yang memaksimumkan rasio $\frac{\ell(x)}{g(x)}$.
 
 ![Gambar 2.7 Pemodelan Distribusi Ketidakpastian pada Optimasi Bayesian Berbasis Estimator Parzen (TPE)](../Aset/bayesian_optimization_gp_optuna.png)  
-*Gambar 2.7 Pemodelan Distribusi Ketidakpastian pada Optimasi Bayesian Berbasis Estimator Parzen (TPE)[19].*
+*Gambar 2.7 Pemodelan Distribusi Ketidakpastian pada Optimasi Bayesian Berbasis Estimator Parzen (TPE)[20].*
 
 ---
 
@@ -713,7 +713,7 @@ $$
 di mana $\eta$ adalah laju pembelajaran (*learning rate*). Meskipun sederhana dan memiliki generalisasi akhir yang baik, SGD rentan terjebak pada dataran datar (*saddle points*) dan memiliki laju konvergensi yang lambat pada permukaan kerugian yang memiliki kelengkungan tidak seragam.
 
 ### 2.14.2 Algoritma AdamW
-Untuk mengatasi kelemahan SGD dan kekurangan algoritma Adam standar, penelitian ini menggunakan algoritma optimasi **AdamW**[20]. AdamW menghitung momen pertama $m_t$ dan momen kedua $v_t$ dari gradien untuk menyesuaikan laju pembaruan parameter secara adaptif, seraya memisahkan (*decoupling*) penalti *weight decay* $\lambda_{\text{wd}}$ dari pembaruan gradien adaptif:
+Untuk mengatasi kelemahan SGD dan kekurangan algoritma Adam standar, penelitian ini menggunakan algoritma optimasi **AdamW**[21]. AdamW menghitung momen pertama $m_t$ dan momen kedua $v_t$ dari gradien untuk menyesuaikan laju pembaruan parameter secara adaptif, seraya memisahkan (*decoupling*) penalti *weight decay* $\lambda_{\text{wd}}$ dari pembaruan gradien adaptif:
 
 $$
 \begin{aligned}
@@ -827,8 +827,8 @@ Rincian spesifikasi perangkat keras dan perangkat lunak untuk kedua lingkungan p
 | | Media Penyimpanan | 512 GB NVMe M.2 SSD | Penyimpanan lokal repositori kode, cache CSV, dan checkpoint |
 | | Sistem Operasi | Microsoft Windows 11 Pro 64-bit (Build 26100) | Sistem operasi host pengembangan |
 | | Lingkungan & Runtime | Python 3.10+ / 3.13 dalam Virtual Environment (`venv`) | Eksekusi skrip praproses, pemodelan PyTorch, dan optimasi |
-| | Kerangka Kerja DL & FL | PyTorch 2.2+ (CPU engine), Flower (`flwr` $\ge 1.7.0$)[18] | Pembangun arsitektur MLP dan simulasi federasi in-process |
-| | Penyetelan Bayesian | Optuna Framework ($\ge 3.5.0$)[19] | Optimasi hiperparameter $\lambda$ EWC dan laju pembelajaran |
+| | Kerangka Kerja DL & FL | PyTorch 2.2+ (CPU engine), Flower (`flwr` $\ge 1.7.0$)[19] | Pembangun arsitektur MLP dan simulasi federasi in-process |
+| | Penyetelan Bayesian | Optuna Framework ($\ge 3.5.0$)[20] | Optimasi hiperparameter $\lambda$ EWC dan laju pembelajaran |
 | | Pustaka Analisis Data | Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn | Pembersihan data, scaling Z-score, dan kalkulasi metrik evaluasi |
 | **B. Lingkungan Testbed Private Cloud Server (Proxmox VE Cluster)** | Infrastruktur Fisik Klaster (*Bare-Metal*) | 3 Node Server Fisik: 2x Dell PowerEdge R630 (node `its` & `node2`) dan 1x Dell PowerEdge R760xs (node `pve`) | Penyedia komputasi tervirtualisasi multi-node terdistribusi |
 | | Pengendali Penyimpanan | Dell PERC H755 Adp / H730 RAID Controller, LVM-Thin pools (`local-lvm`) 1.20 TB NVMe/SSD | Provisi disk dinamis dan mekanisme snapshot/rollback VM |
@@ -837,7 +837,7 @@ Rincian spesifikasi perangkat keras dan perangkat lunak untuk kedua lingkungan p
 | | **Sensor NIDS Klien A (VM 310 - `defender-a`)** | Ubuntu Server 24.04 LTS (KVM VM pada host `its`), 8 vCPU, 16 GB RAM (ballooning 8 GB), 100 GB SCSI Disk, IP `10.10.130.11/16` | Menjalankan Flower Client Klien A, PyTorch MLP, pelatihan lokal Task 1 (Normal + SSH-Patator), kalkulasi FIM & penalti EWC |
 | | **Sensor NIDS Klien B (VM 320 - `defender-b`)** | Ubuntu Server 24.04 LTS (KVM VM pada host `node2`), 8 vCPU, 16 GB RAM (ballooning 8 GB), 100 GB SCSI Disk, IP `10.10.130.12/16` | Menjalankan Flower Client Klien B, PyTorch MLP, pelatihan lokal Task 2 (Normal + DoS), dan kalkulasi regularisasi EWC |
 | | Penyimpanan Data Klien | Partisi data offline tabular CIC-IDS2017 pada disk lokal masing-masing VM (~670K sampel Klien A, ~860K sampel Klien B) | Meniadakan risiko dropped-packet dan memastikan replikasi data identik bebas interferensi jaringan eksternal |
-| | Pustaka Eksekusi & ML | Python 3.11+, PyTorch 2.x (CPU engine), Flower (`flwr` $\ge 1.7.0$)[18], Scikit-learn, Pandas | Runtime eksekusi pelatihan lokal dan pertukaran parameter gRPC |
+| | Pustaka Eksekusi & ML | Python 3.11+, PyTorch 2.x (CPU engine), Flower (`flwr` $\ge 1.7.0$)[19], Scikit-learn, Pandas | Runtime eksekusi pelatihan lokal dan pertukaran parameter gRPC |
 | *Catatan Batasan Sistem:* | *Eksklusi Komponen Tambahan* | *VM 400 (traffic-gen), VM 311 & 321 (target), serta live packet capture ditiadakan* | *Fokus murni pada optimasi algoritma FL-CL berbasis dataset benchmark terkalibrasi* |
 
 ---
@@ -975,7 +975,7 @@ Keluaran:
 ```
 
 ### 3.3.4 Penyetelan Hiperparameter Bayesian (Optuna TPE)
-Penyetelan hiperparameter dijalankan melalui 50 *trials* Optuna berbasis algoritma Tree-structured Parzen Estimator (TPE)[19] dengan fungsi objektif memaksimalkan rata-rata Macro-F1 pada subset validasi, menyeimbangkan *trade-off* plastisitas pembelajaran tugas baru dan stabilitas memori tugas lama melalui penyesuaian koefisien penalti $\lambda$ serta parameter optimasi lokal, sebagaimana dirangkum pada Tabel 3.3.
+Penyetelan hiperparameter dijalankan melalui 50 *trials* Optuna berbasis algoritma Tree-structured Parzen Estimator (TPE)[20] dengan fungsi objektif memaksimalkan rata-rata Macro-F1 pada subset validasi, menyeimbangkan *trade-off* plastisitas pembelajaran tugas baru dan stabilitas memori tugas lama melalui penyesuaian koefisien penalti $\lambda$ serta parameter optimasi lokal, sebagaimana dirangkum pada Tabel 3.3.
 
 *Tabel 3.3 Konfigurasi Parameter Pelatihan Baseline dan Ruang Pencarian Hiperparameter.*
 
@@ -1023,11 +1023,12 @@ flowchart TD
 
 ### 3.3.6 Mekanisme Evaluasi Multi-Seed dan Profiling Komputasi
 Setiap skenario dievaluasi melintasi lima *random seed* (42, 43, 44, 45, 46) menggunakan metrik evaluasi yang komprehensif:
+
 1. **Performa Deteksi ML:** Macro-F1, per-class Precision, Recall, dan Akurasi dievaluasi pada *test set* independen di akhir setiap fase pembelajaran.
 2. **Retensi Continual Learning:** Metrik *Backward Transfer* (BWT) dihitung untuk mengukur degradasi memori terhadap tugas masa lalu[12]:
 
 $$
-   \text{BWT} = R_{2, 1} - R_{1, 1}
+\text{BWT} = R_{2, 1} - R_{1, 1}
 $$
 
 3. **Efisiensi Komputasi & Instance:**
@@ -1056,8 +1057,6 @@ Rencana pelaksanaan penelitian dijadwalkan dalam durasi 14 minggu (1 semester) s
 | 9 | Evaluasi Metrik BWT, Latensi Inferensi, RAM, & Payload | | | | | | | | | | | ■ | ■ | | |
 | 10 | Pengujian pada Testbed Server Terdistribusi Proxmox VE | | | | | | | | | | | | ■ | ■ | |
 | 11 | Penyusunan Laporan Akhir Skripsi dan Ujian Sidang Akhir | | | | | | | | | | | | | ■ | ■ |
-
-\newpage
 
 # DAFTAR PUSTAKA
 
@@ -1095,8 +1094,10 @@ Rencana pelaksanaan penelitian dijadwalkan dalam durasi 14 minggu (1 semester) s
 
 [17] G. M. van de Ven, T. Tuytelaars, dan A. S. Tolias, “Three types of incremental learning,” *Nature Machine Intelligence*, vol. 4, hlm. 1185–1197, 2022. doi: 10.1038/s42256-022-00568-3.
 
-[18] D. J. Beutel, T. Topal, A. Mathur, X. Qiu, T. Parcollet, P. P. B. de Gusmao, dan N. D. Lane, “Flower: A Friendly Federated Learning Research Framework,” *arXiv preprint arXiv:2007.14390*, 2020.
+[18] H. Ghallab, M. Nasr, dan H. Fahmy, “Mitigating Catastrophic Forgetting in Continual Learning Using the Gradient-Based Approach: A Literature Review,” *International Journal of Advanced Computer Science and Applications (IJACSA)*, vol. 16, no. 4, hlm. 120–130, 2025. doi: 10.14569/IJACSA.2025.0160414.
 
-[19] J. Bergstra, R. Bardenet, Y. Bengio, dan B. Kégl, “Algorithms for Hyper-Parameter Optimization,” dalam *Advances in Neural Information Processing Systems (NeurIPS)*, vol. 24, hlm. 2546–2554, 2011.
+[19] D. J. Beutel, T. Topal, A. Mathur, X. Qiu, T. Parcollet, P. P. B. de Gusmao, dan N. D. Lane, “Flower: A Friendly Federated Learning Research Framework,” *arXiv preprint arXiv:2007.14390*, 2020.
 
-[20] I. Loshchilov dan F. Hutter, “Decoupled Weight Decay Regularization,” dalam *International Conference on Learning Representations (ICLR)*, hlm. 1–11, 2019.
+[20] J. Bergstra, R. Bardenet, Y. Bengio, dan B. Kégl, “Algorithms for Hyper-Parameter Optimization,” dalam *Advances in Neural Information Processing Systems (NeurIPS)*, vol. 24, hlm. 2546–2554, 2011.
+
+[21] I. Loshchilov dan F. Hutter, “Decoupled Weight Decay Regularization,” dalam *International Conference on Learning Representations (ICLR)*, hlm. 1–11, 2019.
