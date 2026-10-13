@@ -2,7 +2,7 @@
 
 **Lokasi Repositori:** `E:/Projects/thesis/Literatur/PDFs/`  
 **Terakhir Diperbarui:** 2026-10-13  
-**Total Berkas Fisik:** 26 PDF (14 Paper Inti + 12 Paper Pendukung di `Opsional/`)  
+**Total Berkas Fisik:** 31 PDF (19 Paper Inti + 12 Paper Pendukung di `Opsional/`)  
 **Status Unduhan & Akses:** ✅ 100% Tersedia Lokal di Disk  
 
 ---
