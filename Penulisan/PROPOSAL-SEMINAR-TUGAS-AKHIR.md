@@ -447,10 +447,10 @@ Berdasarkan kajian kritis tersebut, posisi ilmiah dan kebaruan (*novelty*) dari 
 | 8 | Chen *et al.*[13] | *Federated Class-Incremental Learning* | FCL + Distilasi Pengetahuan | Visi Komputer | Mengintegrasikan FL dan CL untuk penambahan kelas sekuensial | Membutuhkan pertukaran representasi data sintetis antar-klien. |
 | 9 | Ruzafa-Alcazar *et al.*[11] | *D-FLIDS: Decentralized Federated IDS* | FedAvg MLP | CIC-IDS2017 | Menerapkan federasi NIDS pada sensor edge | Mempertahankan `Destination Port` (rentan *shortcut learning*) dan data IID. |
 | 10 | Popoola *et al.*[10] | *Federated Deep Learning for Zero-Day Attacks* | FedAvg DNN | BoT-IoT | Deteksi serangan baru pada jaringan IoT | Tidak menangani *catastrophic forgetting* saat kelas baru dilatih. |
-| 11 | Rinandri (2025)[8] | *Semi-Supervised Learning GNN-AE pada Structemp* | Structemp GNN-AE | NF-UQ-NIDS-v2 | Implementasi deteksi anomali real-time dan evaluasi latensi $\mu	ext{s}$ | Pembelajaran tersentralisasi statis, tidak mengkaji FL terdistribusi dan CL. |
+| 11 | Rinandri (2025)[8] | *Semi-Supervised Learning GNN-AE pada Structemp* | Structemp GNN-AE | NF-UQ-NIDS-v2 | Implementasi deteksi anomali real-time dan evaluasi latensi $\mu\text{s}$ | Pembelajaran tersentralisasi statis, tidak mengkaji FL terdistribusi dan CL. |
 | 12 | Sarhan *et al.*[16] | *Standard Feature Set for Network Intrusion Detection* | NetFlow Feature Engineering | NetFlow-V2 | Menstandardisasi ekstraksi fitur aliran berbasis flow | Menggunakan representasi fitur tergeneralisasi, bukan investigasi raw flow. |
 | 13 | Al-Abassi *et al.*[14] | *Continual Learning for Cyber Threat Intelligence* | EWC & Replay | CSE-CIC-IDS2018 | Menerapkan continual learning pada IDS sentral | Beroperasi pada server tunggal, mengabaikan privasi data terdistribusi. |
-| 14 | **Penelitian Ini (2026)** | **Analisis Kinerja Deteksi Network Traffic Intrusion via FCL** | **FedAvg + EWC + Weighted Loss (63 Fitur)** | **CIC-IDS2017** | **Mengintegrasikan FedAvg & EWC, mitigasi port leakage, mitigasi non-IID & imbalanced class, evaluasi BWT, RAM, payload, dan latensi $\mu	ext{s}$** | **Memberikan solusi FCL terpadu yang adaptif, aman privasi, dan terverifikasi secara multi-seed.** |
+| 14 | **Penelitian Ini (2026)** | **Analisis Kinerja Deteksi Network Traffic Intrusion via FCL** | **FedAvg + EWC + Weighted Loss (63 Fitur)** | **CIC-IDS2017** | **Mengintegrasikan FedAvg & EWC, mitigasi port leakage, mitigasi non-IID & imbalanced class, evaluasi BWT, RAM, payload, dan latensi $\mu\text{s}$** | **Memberikan solusi FCL terpadu yang adaptif, aman privasi, dan terverifikasi secara multi-seed.** |
 
 ---
 
@@ -468,7 +468,7 @@ Arsitektur *Federated Learning* secara fundamental dibangun atas interaksi terko
 Algoritma standar paling populer dalam FL adalah *Federated Averaging* (FedAvg). Pada setiap ronde komunikasi $t \in \{1, 2, \dots, T\}$[3]:
 
 $$
-w_{t+1} = \sum_{k=1}^{K} rac{n_k}{n} w_{t+1}^k
+w_{t+1} = \sum_{k=1}^{K} \frac{n_k}{n} w_{t+1}^k
 $$
 
 dengan:
@@ -489,7 +489,7 @@ Pada lingkungan jaringan komputer nyata, asumsi bahwa data terdistribusi secara 
 *Continual Learning* (CL) atau *Lifelong Learning* adalah cabang pembelajaran mesin yang berfokus pada kemampuan model kecerdasan buatan untuk mempelajari aliran tugas atau kelas data baru secara sekuensial dari waktu ke waktu tanpa melupakan representasi pengetahuan yang telah dipelajari dari tugas masa lalu.
 
 ### 2.5.1 Dilema Stabilitas-Plastisitas dan Catastrophic Forgetting
-Dalam sistem pembelajaran adaptif, model dihadapkan pada dilema stabilitas-plastisitas (*stability-plasticity dilemma*), yaitu tuntutan untuk mempertahankan fleksibilitas dalam mengintegrasikan pengetahuan baru (*plasticity*) seraya mempertahankan kestabilan representasi yang telah terbentuk sebelumnya (*stability*). Jaringan saraf tiruan (*Deep Neural Networks*) modern memiliki kecenderungan bawaan yang parah terhadap fenomena **catastrophic forgetting** saat mempelajari aliran tugas baru secara berurutan[5]. Ketika model dilatih pada tugas pertama $\mathcal{T}_1$, bobot sinaptik $	heta$ dioptimasi untuk meminimalkan fungsi kerugian $\mathcal{L}_1$. Ketika tugas baru $\mathcal{T}_2$ diberikan, proses *backpropagation* akan memperbarui bobot $	heta$ demi meminimalkan $\mathcal{L}_2$. Pembaruan bobot ini menimpa (*overwrite*) konfigurasi parameter yang bertanggung jawab atas pengenalan $\mathcal{T}_1$, menyebabkan akurasi model terhadap $\mathcal{T}_1$ runtuh seketika mendekati nol.
+Dalam sistem pembelajaran adaptif, model dihadapkan pada dilema stabilitas-plastisitas (*stability-plasticity dilemma*), yaitu tuntutan untuk mempertahankan fleksibilitas dalam mengintegrasikan pengetahuan baru (*plasticity*) seraya mempertahankan kestabilan representasi yang telah terbentuk sebelumnya (*stability*). Jaringan saraf tiruan (*Deep Neural Networks*) modern memiliki kecenderungan bawaan yang parah terhadap fenomena **catastrophic forgetting** saat mempelajari aliran tugas baru secara berurutan[5]. Ketika model dilatih pada tugas pertama $\mathcal{T}_1$, bobot sinaptik $\theta$ dioptimasi untuk meminimalkan fungsi kerugian $\mathcal{L}_1$. Ketika tugas baru $\mathcal{T}_2$ diberikan, proses *backpropagation* akan memperbarui bobot $\theta$ demi meminimalkan $\mathcal{L}_2$. Pembaruan bobot ini menimpa (*overwrite*) konfigurasi parameter yang bertanggung jawab atas pengenalan $\mathcal{T}_1$, menyebabkan akurasi model terhadap $\mathcal{T}_1$ runtuh seketika mendekati nol.
 
 ### 2.5.2 Taksonomi Skenario Continual Learning
 Berdasarkan ketersediaan identitas tugas (*Task-ID*) saat fase inferensi operasional, literatur Continual Learning mengklasifikasikan proses pembelajaran inkremental ke dalam tiga skenario utama[17]. Skenario pertama adalah **Task-Incremental Learning (Task-IL)**, di mana model selalu diberikan informasi identitas tugas (*Task-ID*) baik selama fase pelatihan maupun saat evaluasi inferensi, sehingga model hanya perlu memilih kelas luaran yang relevan dengan tugas tersebut. Skenario kedua adalah **Domain-Incremental Learning (Domain-IL)**, di mana struktur dan jumlah kelas keluaran tetap konstan, namun distribusi fitur masukan mengalami pergeseran domain seiring berjalannya waktu. Skenario ketiga dan yang paling kompleks adalah **Class-Incremental Learning (Class-IL)**, di mana model dituntut untuk mengidentifikasi dan membedakan seluruh kelas dari seluruh tugas yang pernah dipelajari tanpa pernah diberikan informasi *Task-ID* saat proses inferensi. Skenario Class-IL ini merupakan representasi paling realistis sekaligus paling menantang bagi implementasi sistem deteksi intrusi jaringan di dunia nyata, karena sensor keamanan operasional harus mampu mengklasifikasikan apakah suatu aliran data bersifat normal, serangan SSH, atau serangan DoS secara mandiri tanpa mengetahui konteks fase pelatihan model[17].
@@ -524,7 +524,7 @@ Pengembangan sistem NIDS adaptif terdistribusi dalam penelitian ini memanfaatkan
 PyTorch merupakan pustaka komputasi ilmiah dan *deep learning* sumber terbuka berbasis Python yang dikembangkan oleh Meta AI, yang telah menjadi standar *de facto* dalam riset pembelajaran mesin modern. Keunggulan fundamental PyTorch bersumber dari mekanisme graf komputasi dinamis (*Dynamic Computational Graph* via modul Autograd), yang memungkinkan modifikasi struktur jaringan saraf tiruan secara fleksibel selama waktu eksekusi (*runtime*) tanpa perlu mendefinisikan graf statis terlebih dahulu. Di samping itu, PyTorch menyediakan integrasi terakselerasi dengan perangkat keras GPU melalui pustaka *NVIDIA CUDA* dan *cuDNN*, yang mempercepat operasi aljabar linear tensor berskala masif. Fleksibilitas ini mempermudah formulasi fungsi kerugian kustom (*custom loss function*), seperti penggabungan fungsi *Weighted Cross-Entropy Loss* dengan penalti kuadratik EWC berbasis perkalian tensor elemen-per-elemen secara langsung pada tingkat gradien[5], [8].
 
 ### 2.7.2 Flower Framework (`flwr`)
-Dalam mengimplementasikan paradigma pembelajaran terdistribusi, penelitian ini memanfaatkan Flower (`flwr`), yaitu kerangka kerja *Federated Learning* yang modular, terukur, dan agnostik terhadap pustaka *deep learning*[18]. Arsitektur komunikasi Flower dibangun di atas protokol *Google Remote Procedure Call* (gRPC) yang beroperasi melalui HTTP/2 pada port standar TCP 8080, menjamin latensi transmisi yang rendah dan throughput yang andal. Dalam siklus federasi, parameter bobot model PyTorch diekstraksi ke dalam array NumPy (*float32*) dan diserialisasi ke dalam format biner *Protocol Buffers* (`Parameters` proto) sebelum dikirimkan melintasi jaringan. Penggunaan arsitektur model MLP yang kompak (memuat 6.275 parameter *float32*) menghasilkan ukuran muatan biner parameter hanya sebesar $pprox 25,1$ KB per transmisi klien. Dengan total pertukaran parameter untuk dua klien sebesar $100,4$ KB per ronde federasi, Flower menghasilkan penghematan lebar pita jaringan sebesar $99,48\%$ dibandingkan skenario sentralisasi yang mentransmisikan data mentah bervolume gigabita. Keunggulan ini dipadukan dengan skalabilitas Flower yang mendukung emulasi klien virtual maupun penerapan riil pada perangkat komputasi fisik terdistribusi (*cross-silo edge deployment*)[18].
+Dalam mengimplementasikan paradigma pembelajaran terdistribusi, penelitian ini memanfaatkan Flower (`flwr`), yaitu kerangka kerja *Federated Learning* yang modular, terukur, dan agnostik terhadap pustaka *deep learning*[18]. Arsitektur komunikasi Flower dibangun di atas protokol *Google Remote Procedure Call* (gRPC) yang beroperasi melalui HTTP/2 pada port standar TCP 8080, menjamin latensi transmisi yang rendah dan throughput yang andal. Dalam siklus federasi, parameter bobot model PyTorch diekstraksi ke dalam array NumPy (*float32*) dan diserialisasi ke dalam format biner *Protocol Buffers* (`Parameters` proto) sebelum dikirimkan melintasi jaringan. Penggunaan arsitektur model MLP yang kompak (memuat 6.275 parameter *float32*) menghasilkan ukuran muatan biner parameter hanya sebesar $\approx 25,1$ KB per transmisi klien. Dengan total pertukaran parameter untuk dua klien sebesar $100,4$ KB per ronde federasi, Flower menghasilkan penghematan lebar pita jaringan sebesar $99,48\%$ dibandingkan skenario sentralisasi yang mentransmisikan data mentah bervolume gigabita. Keunggulan ini dipadukan dengan skalabilitas Flower yang mendukung emulasi klien virtual maupun penerapan riil pada perangkat komputasi fisik terdistribusi (*cross-silo edge deployment*)[18].
 
 ---
 
@@ -536,11 +536,11 @@ Untuk memenuhi batasan komputasi perangkat gerbang jaringan (*edge gateway*) dan
 Model menerima vektor fitur masukan $x \in \mathbb{R}^{63}$ yang merepresentasikan statistik aliran paket:
 
 $$
-egin{aligned}
-h_1 &= f_1(W_1 x + b_1), \quad W_1 \in \mathbb{R}^{64 	imes 63}, \ b_1 \in \mathbb{R}^{64} \
-h_2 &= f_2(W_2 h_1 + b_2), \quad W_2 \in \mathbb{R}^{32 	imes 64}, \ b_2 \in \mathbb{R}^{32} \
-z &= W_3 h_2 + b_3, \quad W_3 \in \mathbb{R}^{3 	imes 32}, \ b_3 \in \mathbb{R}^{3} \
-\hat{y} &= 	ext{Softmax}(z)
+\begin{aligned}
+h_1 &= f_1(W_1 x + b_1), \quad W_1 \in \mathbb{R}^{64 \times 63}, \ b_1 \in \mathbb{R}^{64} \\
+h_2 &= f_2(W_2 h_1 + b_2), \quad W_2 \in \mathbb{R}^{32 \times 64}, \ b_2 \in \mathbb{R}^{32} \\
+z &= W_3 h_2 + b_3, \quad W_3 \in \mathbb{R}^{3 \times 32}, \ b_3 \in \mathbb{R}^{3} \\
+\hat{y} &= \text{Softmax}(z)
 \end{aligned}
 $$
 
@@ -550,10 +550,10 @@ di mana $f_1, f_2$ merupakan fungsi aktivasi non-linear ReLU.
 Pemilihan arsitektur MLP kompak didasari oleh pertimbangan kritis terhadap keterbatasan sumber daya komputasi perangkat sensor jaringan (*edge gateways*) dan kebutuhan latensi inspeksi paket waktu nyata[8]. Model yang dirancang memiliki 63 fitur masukan, 64 neuron pada lapisan tersembunyi pertama, 32 neuron pada lapisan tersembunyi kedua, dan 3 neuron keluaran, yang secara keseluruhan menghasilkan total parameter komputasi sebesar:
 
 $$
-|	heta| = (63 	imes 64 + 64) + (64 	imes 32 + 32) + (32 	imes 3 + 3) = 4.096 + 2.080 + 99 = 6.275 	ext{ parameter}
+|\theta| = (63 \times 64 + 64) + (64 \times 32 + 32) + (32 \times 3 + 3) = 4.096 + 2.080 + 99 = 6.275 \text{ parameter}
 $$
 
-Dengan representasi angka mengambang 32-bit (*single precision float32* berukuran 4 bita), ukuran biner parameter model hanya mencapai sekitar **25,1 KB**. Jejak memori (*memory footprint*) yang sangat kecil ini memberikan dua keuntungan operasional yang krusial. Pertama, proses serialisasi dan transmisi bobot melalui protokol gRPC Flower pada setiap ronde federasi dapat diselesaikan dalam orde milidetik tanpa membebani kapasitas lebar pita jaringan. Kedua, model mampu mengeksekusi inferensi klasifikasi aliran data secara lokal dalam skala mikrodetik per sampel aliran ($\mu	ext{s/flow}$), memastikan sistem mampu mengimbangi laju paket pada tautan jaringan berkecepatan tinggi tanpa menimbulkan antrean *buffer* yang berisiko memicu hilangnya paket (*packet drop*)[8].
+Dengan representasi angka mengambang 32-bit (*single precision float32* berukuran 4 bita), ukuran biner parameter model hanya mencapai sekitar **25,1 KB**. Jejak memori (*memory footprint*) yang sangat kecil ini memberikan dua keuntungan operasional yang krusial. Pertama, proses serialisasi dan transmisi bobot melalui protokol gRPC Flower pada setiap ronde federasi dapat diselesaikan dalam orde milidetik tanpa membebani kapasitas lebar pita jaringan. Kedua, model mampu mengeksekusi inferensi klasifikasi aliran data secara lokal dalam skala mikrodetik per sampel aliran ($\mu\text{s/flow}$), memastikan sistem mampu mengimbangi laju paket pada tautan jaringan berkecepatan tinggi tanpa menimbulkan antrean *buffer* yang berisiko memicu hilangnya paket (*packet drop*)[8].
 
 ![Gambar 2.4 Struktur Arsitektur Jaringan Multilayer Perceptron (MLP)](../Aset/mlp_nn_hidden_layer_researchgate.png)  
 *Gambar 2.4 Struktur Arsitektur Jaringan Multilayer Perceptron (MLP) dengan Lapisan Tersembunyi.*
@@ -565,34 +565,29 @@ Dengan representasi angka mengambang 32-bit (*single precision float32* berukura
 *Elastic Weight Consolidation* (EWC) merupakan metode mitigasi *catastrophic forgetting* berbasis regularisasi parameter yang terinspirasi oleh fenomena konsolidasi memori sinaptik pada otak biologis[5].
 
 ### 2.9.1 Landasan Teoretis Bayes dan Matriks Fisher
-Dari perspektif inferensi Bayesian, mempelajari tugas kedua $\mathcal{D}_2$ setelah menyelesaikan tugas pertama $\mathcal{D}_1$ dirumuskan melalui probabilitas posterior parameter $	heta$:
+Dari perspektif inferensi Bayesian, mempelajari tugas kedua $\mathcal{D}_2$ setelah menyelesaikan tugas pertama $\mathcal{D}_1$ dirumuskan melalui probabilitas posterior parameter $\theta$:
 
 $$
-\log p(	heta \mid \mathcal{D}_1, \mathcal{D}_2) = \log p(\mathcal{D}_2 \mid 	heta) + \log p(	heta \mid \mathcal{D}_1) - \log p(\mathcal{D}_2)
+\log p(\theta \mid \mathcal{D}_1, \mathcal{D}_2) = \log p(\mathcal{D}_2 \mid \theta) + \log p(\theta \mid \mathcal{D}_1) - \log p(\mathcal{D}_2)
 $$
 
-Distribusi posterior $\log p(	heta \mid \mathcal{D}_1)$ memuat seluruh informasi mengenai tugas pertama. Melalui aproksimasi deret Taylor orde kedua di sekitar parameter optimal tugas pertama $	heta_1^*$, fungsi ini dapat didekati sebagai distribusi Gaussian dengan presisi yang ditentukan oleh **Matriks Informasi Fisher (Fisher Information Matrix / FIM)**:
+Distribusi posterior $\log p(\theta \mid \mathcal{D}_1)$ memuat seluruh informasi mengenai tugas pertama. Melalui aproksimasi deret Taylor orde kedua di sekitar parameter optimal tugas pertama $\theta_1^*$, fungsi ini dapat didekati sebagai distribusi Gaussian dengan presisi yang ditentukan oleh **Matriks Informasi Fisher (Fisher Information Matrix / FIM)**:
 
 $$
-F = \mathbb{E}_{x \sim \mathcal{D}_1, y \sim p(y \mid x, 	heta_1^*)} \left[ 
-abla_	heta \log p(y \mid x, 	heta_1^*) 
-abla_	heta \log p(y \mid x, 	heta_1^*)^T 
-ight]
+F = \mathbb{E}_{x \sim \mathcal{D}_1, y \sim p(y \mid x, \theta_1^*)} \left[ \nabla_\theta \log p(y \mid x, \theta_1^*) \nabla_\theta \log p(y \mid x, \theta_1^*)^T \right]
 $$
 
 ### 2.9.2 Matriks Fisher Diagonal dan Formulasi Kerugian EWC
-Untuk menghindari komputasi inversi matriks kovariansi penuh yang berukuran $|	heta| 	imes |	heta|$, EWC mengasumsikan elemen-elemen Fisher saling independen dan hanya menghitung elemen diagonalnya ($F_i$). Dalam implementasi praktis *machine learning*, ekspektasi terhadap distribusi analitis didekati menggunakan **Empirical Fisher Information Matrix**, di mana gradien kuadratik dihitung terhadap label aktual (*ground truth*) tugas pertama:
+Untuk menghindari komputasi inversi matriks kovariansi penuh yang berukuran $|\theta| \times |\theta|$, EWC mengasumsikan elemen-elemen Fisher saling independen dan hanya menghitung elemen diagonalnya ($F_i$). Dalam implementasi praktis *machine learning*, ekspektasi terhadap distribusi analitis didekati menggunakan **Empirical Fisher Information Matrix**, di mana gradien kuadratik dihitung terhadap label aktual (*ground truth*) tugas pertama:
 
 $$
-F_i = rac{1}{N} \sum_{n=1}^N \left( \left. rac{\partial \mathcal{L}_{	ext{CE}}(f(x_n; 	heta), y_n)}{\partial 	heta_i} 
-ight|_{	heta = 	heta_1^*} 
-ight)^2
+F_i = \frac{1}{N} \sum_{n=1}^N \left( \left. \frac{\partial \mathcal{L}_{\text{CE}}(f(x_n; \theta), y_n)}{\partial \theta_i} \right|_{\theta = \theta_1^*} \right)^2
 $$
 
 Ketika model dilatih pada tugas kedua, fungsi kerugian total lokal dimodifikasi menjadi:
 
 $$
-\mathcal{L}_{	ext{total}}(	heta) = \mathcal{L}_2(	heta) + \sum_{i} rac{\lambda}{2} F_i (	heta_i - 	heta_{1, i}^*)^2
+\mathcal{L}_{\text{total}}(\theta) = \mathcal{L}_2(\theta) + \sum_{i} \frac{\lambda}{2} F_i (\theta_i - \theta_{1, i}^*)^2
 $$
 
 di mana $\lambda$ adalah koefisien hiperparameter penalti EWC yang mengontrol seberapa kuat model mempertahankan memori tugas lama dibandingkan mempelajari tugas baru.
@@ -601,16 +596,16 @@ di mana $\lambda$ adalah koefisien hiperparameter penalti EWC yang mengontrol se
 *Gambar 2.5 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis pada Kontur Kerugian[5].*
 
 ### 2.9.3 Weighted Cross-Entropy dan Gradient Clipping
-Untuk mengatasi ketimpangan kelas yang parah, fungsi kerugian dasar $\mathcal{L}_2(	heta)$ menggunakan pembobotan invers frekuensi kelas:
+Untuk mengatasi ketimpangan kelas yang parah, fungsi kerugian dasar $\mathcal{L}_2(\theta)$ menggunakan pembobotan invers frekuensi kelas:
 
 $$
-\mathcal{L}_{	ext{CE}}(y, \hat{y}) = - \sum_{c=1}^{C} w_c \cdot y_c \log(\hat{y}_c), \quad 	ext{dengan } w_c = rac{N_{	ext{total}}}{C \cdot N_c}
+\mathcal{L}_{\text{CE}}(y, \hat{y}) = - \sum_{c=1}^{C} w_c \cdot y_c \log(\hat{y}_c), \quad \text{dengan } w_c = \frac{N_{\text{total}}}{C \cdot N_c}
 $$
 
 Untuk mencegah lonjakan gradien akibat perkalian dengan bobot kelas minoritas yang besar dan penalti EWC, diterapkan pemotongan gradien (*Gradient Clipping*):
 
 $$
-	ext{jika } \|\mathbf{g}\|_2 > \gamma, \quad 	ext{maka } \mathbf{g} \leftarrow rac{\gamma}{\|\mathbf{g}\|_2} \mathbf{g}, \quad 	ext{dengan } \gamma = 1.0
+\text{jika } \|\mathbf{g}\|_2 > \gamma, \quad \text{maka } \mathbf{g} \leftarrow \frac{\gamma}{\|\mathbf{g}\|_2} \mathbf{g}, \quad \text{dengan } \gamma = 1.0
 $$
 
 ---
@@ -642,25 +637,25 @@ Kinerja deteksi model dievaluasi secara menyeluruh menggunakan matriks konfusi (
 Metrik pertama adalah **Akurasi (*Accuracy*)**, yang mengukur proporsi keseluruhan prediksi yang benar terhadap total sampel data yang dievaluasi:
 
 $$
-	ext{Accuracy} = rac{TP + TN}{TP + TN + FP + FN}
+\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
 $$
 
 Meskipun akurasi memberikan gambaran umum efektivitas model, metrik ini rentan menghasilkan interpretasi yang menyesatkan pada dataset deteksi intrusi yang memiliki ketimpangan kelas ekstrem di mana kelas normal mendominasi secara absolut. Oleh karena itu, metrik **Presisi (*Precision*)** digunakan untuk mengukur ketepatan deteksi positif dari seluruh peringatan yang dibunyikan oleh model, yang dirumuskan sebagai:
 
 $$
-	ext{Precision} = rac{TP}{TP + FP}
+\text{Precision} = \frac{TP}{TP + FP}
 $$
 
 Presisi yang tinggi menjamin bahwa sistem meminimalkan frekuensi alarm palsu (*false alarm rate*), sehingga tidak membebani operator keamanan jaringan dengan peringatan keliru. Selanjutnya, metrik **Recall (*Sensitivity*)** mengevaluasi kemampuan sistem dalam menjaring seluruh insiden serangan yang sebenarnya terjadi di dalam jaringan:
 
 $$
-	ext{Recall} = rac{TP}{TP + FN}
+\text{Recall} = \frac{TP}{TP + FN}
 $$
 
 Nilai *Recall* yang tinggi memastikan sistem memiliki tingkat deteksi lolos (*false negative*) yang rendah, sehingga serangan berbahaya tidak menyusup tanpa terdeteksi. Sebagai penyeimbang trade-off antara Presisi dan Recall, evaluasi utama dalam penelitian ini mengadopsi metrik **Macro-Averaged F1 (Macro-F1)**, yang menghitung rata-rata harmonik F1-score secara mandiri pada setiap kelas tanpa dipengaruhi oleh bobot proporsi jumlah sampel:
 
 $$
-	ext{Macro-F1} = rac{1}{C} \sum_{c=1}^C rac{2 \cdot 	ext{Precision}_c \cdot 	ext{Recall}_c}{	ext{Precision}_c + 	ext{Recall}_c}
+\text{Macro-F1} = \frac{1}{C} \sum_{c=1}^C \frac{2 \cdot \text{Precision}_c \cdot \text{Recall}_c}{\text{Precision}_c + \text{Recall}_c}
 $$
 
 Dengan menghitung rata-rata secara unweighted antar-kelas, Macro-F1 memberikan bobot evaluasi yang setara pada kelas minoritas (seperti SSH-Patator) maupun kelas mayoritas (BENIGN), menjadikannya metrik objektif paling andal untuk mengukur performa NIDS pada kondisi distribusi data yang timpang[8].
@@ -669,22 +664,22 @@ Dengan menghitung rata-rata secara unweighted antar-kelas, Macro-F1 memberikan b
 Dalam skenario pembelajaran berkelanjutan (*Continual Learning*), retensi pengetahuan model terhadap tugas lampau setelah mempelajari tugas baru diukur secara matematis menggunakan metrik **Backward Transfer (BWT)**[12]:
 
 $$
-	ext{BWT} = R_{2, 1} - R_{1, 1}
+\text{BWT} = R_{2, 1} - R_{1, 1}
 $$
 
-di mana $R_{1, 1}$ menyatakan skor Macro-F1 pada tugas pertama sesaat setelah fase pelatihan pertama selesai, sedangkan $R_{2, 1}$ merepresentasikan skor Macro-F1 pada tugas pertama setelah model menyelesaikan pelatihan pada tugas kedua. Nilai $	ext{BWT} < 0$ mengindikasikan terjadinya degradasi representasi memori atau *catastrophic forgetting*, di mana semakin negatif nilai BWT maka semakin parah derajat kepunahan memori model terhadap ancaman lampau. Sebaliknya, nilai $	ext{BWT} \ge 0$ membuktikan bahwa model mampu mempertahankan representasi tugas lama secara stabil atau bahkan mengalami transfer pengetahuan positif (*positive backward transfer*)[12].
+di mana $R_{1, 1}$ menyatakan skor Macro-F1 pada tugas pertama sesaat setelah fase pelatihan pertama selesai, sedangkan $R_{2, 1}$ merepresentasikan skor Macro-F1 pada tugas pertama setelah model menyelesaikan pelatihan pada tugas kedua. Nilai $\text{BWT} < 0$ mengindikasikan terjadinya degradasi representasi memori atau *catastrophic forgetting*, di mana semakin negatif nilai BWT maka semakin parah derajat kepunahan memori model terhadap ancaman lampau. Sebaliknya, nilai $\text{BWT} \ge 0$ membuktikan bahwa model mampu mempertahankan representasi tugas lama secara stabil atau bahkan mengalami transfer pengetahuan positif (*positive backward transfer*)[12].
 
 ### 2.11.3 Metrik Profiling Komputasi dan Instance
 Di samping evaluasi kinerja klasifikasi, pengukuran efisiensi komputasi menjadi parameter penentu kelayakan sistem NIDS saat dioperasikan secara nyata pada perangkat jaringan, mengadopsi standar profiling yang dirumuskan pada penelitian teknik elektro terdahulu[8]. Profiling ini mencakup tiga parameter utama. Parameter pertama adalah **Waktu Inferensi per Aliran (*Inference Time*)**, yang mengukur rata-rata durasi eksekusi algoritma dalam memproses dan mengklasifikasikan satu sampel aliran data jaringan:
 
 $$
-	ext{Inference Time} = rac{T_{	ext{total}}}{N_{	ext{flows}}} \quad (\mu	ext{s/flow})
+\text{Inference Time} = \frac{T_{\text{total}}}{N_{\text{flows}}} \quad (\mu\text{s/flow})
 $$
 
-Pengukuran waktu inferensi dilakukan dengan menerapkan fase pemanasan (*warm-up phase*) untuk menstabilkan alokasi memori *cache*, kemudian waktu diukur secara presisi menggunakan pewaktu resolusi nanodetik (`time.perf_counter_ns()`) melintasi 10.000 aliran data uji independen. Parameter kedua adalah **Konsumsi Memori RAM (*Memory Footprint*)**, yang mengukur alokasi memori fisik puncak selama fase pelatihan lokal dan penyimpanan bobot, membuktikan efisiensi memori EWC (hanya menyimpan vektor diagonal Fisher $pprox 25$ KB) dibandingkan metode *Experience Replay* yang membutuhkan *buffer* data mentah puluhan megabita. Parameter ketiga adalah **Beban Komunikasi Jaringan (*Communication Overhead*)**, yang menghitung total volume biner parameter model yang ditransmisikan antara node klien dan server agregator per putaran federasi:
+Pengukuran waktu inferensi dilakukan dengan menerapkan fase pemanasan (*warm-up phase*) untuk menstabilkan alokasi memori *cache*, kemudian waktu diukur secara presisi menggunakan pewaktu resolusi nanodetik (`time.perf_counter_ns()`) melintasi 10.000 aliran data uji independen. Parameter kedua adalah **Konsumsi Memori RAM (*Memory Footprint*)**, yang mengukur alokasi memori fisik puncak selama fase pelatihan lokal dan penyimpanan bobot, membuktikan efisiensi memori EWC (hanya menyimpan vektor diagonal Fisher $\approx 25$ KB) dibandingkan metode *Experience Replay* yang membutuhkan *buffer* data mentah puluhan megabita. Parameter ketiga adalah **Beban Komunikasi Jaringan (*Communication Overhead*)**, yang menghitung total volume biner parameter model yang ditransmisikan antara node klien dan server agregator per putaran federasi:
 
 $$
-	ext{Payload} = 2 	imes |	heta| 	imes 	ext{sizeof}(	ext{float32}) \quad (	ext{KB})
+\text{Payload} = 2 \times |\theta| \times \text{sizeof}(\text{float32}) \quad (\text{KB})
 $$
 
 Parameter ini menunjukkan efisiensi protokol gRPC Flower dalam meminimalkan overhead lebar pita jaringan selama kolaborasi terdistribusi berlangsung[8], [18].
@@ -699,10 +694,10 @@ Penyetelan hiperparameter (*hyperparameter tuning*) merupakan tahapan kritis unt
 Optuna mengimplementasikan algoritma *Tree-structured Parzen Estimator* (TPE)[19]. TPE memodelkan probabilitas kondisional $p(x \mid y)$ dari konfigurasi hiperparameter $x$ terhadap hasil evaluasi $y$ dengan membagi riwayat percobaan sebelumnya ke dalam dua distribusi terpisah:
 
 $$
-p(x \mid y) = egin{cases} \ell(x), & 	ext{jika } y < y^* \ g(x), & 	ext{jika } y \ge y^* \end{cases}
+p(x \mid y) = \begin{cases} \ell(x), & \text{jika } y < y^* \\ g(x), & \text{jika } y \ge y^* \end{cases}
 $$
 
-di mana $y^*$ adalah nilai ambang kuantil performa terbaik. Nilai *Expected Improvement* (EI) dimaksimalkan dengan memilih hiperparameter yang memaksimumkan rasio $rac{\ell(x)}{g(x)}$.
+di mana $y^*$ adalah nilai ambang kuantil performa terbaik. Nilai *Expected Improvement* (EI) dimaksimalkan dengan memilih hiperparameter yang memaksimumkan rasio $\frac{\ell(x)}{g(x)}$.
 
 ![Gambar 2.7 Pemodelan Distribusi Ketidakpastian pada Optimasi Bayesian Berbasis Estimator Parzen (TPE)](../Aset/bayesian_optimization_gp_optuna.png)  
 *Gambar 2.7 Pemodelan Distribusi Ketidakpastian pada Optimasi Bayesian Berbasis Estimator Parzen (TPE)[19].*
@@ -714,25 +709,23 @@ di mana $y^*$ adalah nilai ambang kuantil performa terbaik. Nilai *Expected Impr
 Algoritma pengoptimalan (*optimizer*) bertugas memperbarui bobot parameter jaringan saraf tiruan guna meminimalkan fungsi kerugian selama proses pelatihan *backpropagation*.
 
 ### 2.13.1 Stochastic Gradient Descent (SGD)
-Algoritma SGD memperbarui parameter $	heta$ ke arah yang berlawanan dengan gradien fungsi kerugian:
+Algoritma SGD memperbarui parameter $\theta$ ke arah yang berlawanan dengan gradien fungsi kerugian:
 
 $$
-	heta_{t+1} = 	heta_t - \eta 
-abla_	heta \mathcal{L}(	heta_t)
+\theta_{t+1} = \theta_t - \eta \nabla_\theta \mathcal{L}(\theta_t)
 $$
 
 di mana $\eta$ adalah laju pembelajaran (*learning rate*). Meskipun sederhana dan memiliki generalisasi akhir yang baik, SGD rentan terjebak pada dataran datar (*saddle points*) dan memiliki laju konvergensi yang lambat pada permukaan kerugian yang memiliki kelengkungan tidak seragam.
 
 ### 2.13.2 AdamW (Decoupled Weight Decay)
-Untuk mengatasi kelemahan SGD dan kekurangan algoritma Adam standar, penelitian ini menggunakan algoritma optimasi **AdamW**[20]. AdamW menghitung momen pertama $m_t$ dan momen kedua $v_t$ dari gradien untuk menyesuaikan laju pembaruan parameter secara adaptif, seraya memisahkan (*decoupling*) penalti *weight decay* $\lambda_{	ext{wd}}$ dari pembaruan gradien adaptif:
+Untuk mengatasi kelemahan SGD dan kekurangan algoritma Adam standar, penelitian ini menggunakan algoritma optimasi **AdamW**[20]. AdamW menghitung momen pertama $m_t$ dan momen kedua $v_t$ dari gradien untuk menyesuaikan laju pembaruan parameter secara adaptif, seraya memisahkan (*decoupling*) penalti *weight decay* $\lambda_{\text{wd}}$ dari pembaruan gradien adaptif:
 
 $$
-egin{aligned}
-m_t &= eta_1 m_{t-1} + (1 - eta_1) g_t \
-v_t &= eta_2 v_{t-1} + (1 - eta_2) g_t^2 \
-\hat{m}_t &= rac{m_t}{1 - eta_1^t}, \quad \hat{v}_t = rac{v_t}{1 - eta_2^t} \
-	heta_t &= 	heta_{t-1} - \eta \left( rac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon} + \lambda_{	ext{wd}} 	heta_{t-1} 
-ight)
+\begin{aligned}
+m_t &= \beta_1 m_{t-1} + (1 - \beta_1) g_t \\
+v_t &= \beta_2 v_{t-1} + (1 - \beta_2) g_t^2 \\
+\hat{m}_t &= \frac{m_t}{1 - \beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1 - \beta_2^t} \\
+\theta_t &= \theta_{t-1} - \eta \left( \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon} + \lambda_{\text{wd}} \theta_{t-1} \right)
 \end{aligned}
 $$
 
@@ -757,11 +750,10 @@ Keunggulan fundamental dari ReLU terletak pada efisiensi komputasinya yang sanga
 Pada lapisan keluaran klasifikasi multi-kelas, fungsi **Softmax** digunakan untuk mengubah nilai logit mentah $z \in \mathbb{R}^C$ menjadi distribusi probabilitas ternormalisasi:
 
 $$
-	ext{Softmax}(z_i) = rac{e^{z_i}}{\sum_{j=1}^C e^{z_j}}, \quad 	ext{dengan } 0 \le \hat{y}_i \le 1 \quad 	ext{dan} \quad \sum_{j=1}^C \hat{y}_j = 1
+\text{Softmax}(z_i) = \frac{e^{z_i}}{\sum_{j=1}^C e^{z_j}}, \quad \text{dengan } 0 \le \hat{y}_i \le 1 \quad \text{dan} \quad \sum_{j=1}^C \hat{y}_j = 1
 $$
 
 di mana setiap elemen keluaran merepresentasikan tingkat keyakinan model terhadap kelas BENIGN, SSH-Patator, atau DoS.
-
 
 # BAB 3 METODOLOGI
 
