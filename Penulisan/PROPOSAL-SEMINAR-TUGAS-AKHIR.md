@@ -482,7 +482,7 @@ $$
 Meskipun FedAvg terbukti efisien pada data yang homogen, penerapannya pada infrastruktur jaringan riil dihadapkan pada pelanggaran asumsi independen dan berdistribusi identik (*Independent and Identically Distributed* / IID). Fenomena **Non-IID Data**, khususnya ketimpangan distribusi label (*label distribution skew*) di mana probabilitas kemunculan kelas serangan antarklien berbeda secara tajam ($\mathcal{P}_k(y) \ne \mathcal{P}_j(y)$), menyebabkan gradien lokal klien mengarah ke titik optimum lokal yang saling bertolak belakang. Kondisi ini memicu divergensi bobot (*client drift*)[4]:
 
 $$
-\| w_{t+1}^k - w^* \| \gg 0
+\| w_{t+1}^k - w^{\ast} \| \gg 0
 $$
 
 yang memperlambat konvergensi dan menurunkan akurasi model global secara signifikan dalam mendeteksi variasi serangan baru.
@@ -491,16 +491,16 @@ yang memperlambat konvergensi dan menurunkan akurasi model global secara signifi
 
 ## 2.5 Continual Learning
 
-*Continual Learning* (CL) atau *Lifelong Learning* merupakan cabang pembelajaran mesin adaptif yang berfokus pada kemampuan model kecerdasan buatan untuk mempelajari aliran tugas atau kelas data baru $\mathcal{T} = \{\mathcal{T}_1, \mathcal{T}_2, \dots, \mathcal{T}_T\}$ secara sekuensial tanpa mengalami degradasi performa pada pengetahuan yang telah diakuisisi sebelumnya. Dalam proses pembelajaran berkelanjutan ini, model dihadapkan pada dilema stabilitas-plastisitas (*stability-plasticity dilemma*), yaitu tuntutan mempertahankan plastisitas untuk mengintegrasikan pola ancaman baru seraya menjaga stabilitas representasi serangan lampau[5]. Jaringan saraf tiruan modern memiliki kerentanan parah terhadap fenomena **catastrophic forgetting**. Ketika model dilatih pada tugas pertama $\mathcal{T}_1$ dengan data $\mathcal{D}_1$, parameter optimal $\theta_1^*$ diperoleh melalui minimisasi fungsi kerugian $\mathcal{L}_1$:
+*Continual Learning* (CL) atau *Lifelong Learning* merupakan cabang pembelajaran mesin adaptif yang berfokus pada kemampuan model kecerdasan buatan untuk mempelajari aliran tugas atau kelas data baru $\mathcal{T} = \{\mathcal{T}_1, \mathcal{T}_2, \dots, \mathcal{T}_T\}$ secara sekuensial tanpa mengalami degradasi performa pada pengetahuan yang telah diakuisisi sebelumnya. Dalam proses pembelajaran berkelanjutan ini, model dihadapkan pada dilema stabilitas-plastisitas (*stability-plasticity dilemma*), yaitu tuntutan mempertahankan plastisitas untuk mengintegrasikan pola ancaman baru seraya menjaga stabilitas representasi serangan lampau[5]. Jaringan saraf tiruan modern memiliki kerentanan parah terhadap fenomena **catastrophic forgetting**. Ketika model dilatih pada tugas pertama $\mathcal{T}_1$ dengan data $\mathcal{D}_1$, parameter optimal $\theta_1^{\ast}$ diperoleh melalui minimisasi fungsi kerugian $\mathcal{L}_1$:
 
 $$
-\theta_1^* = \arg\min_\theta \mathcal{L}_1(\theta; \mathcal{D}_1)
+\theta_1^{\ast} = \arg\min_\theta \mathcal{L}_1(\theta; \mathcal{D}_1)
 $$
 
-Saat tugas baru $\mathcal{T}_2$ dengan data $\mathcal{D}_2$ masuk, proses *backpropagation* memperbarui bobot parameter menuju $\theta_2^* = \arg\min_\theta \mathcal{L}_2(\theta; \mathcal{D}_2)$. Pembaruan parameter ini menimpa (*overwrite*) bobot-bobot sinaptik yang merepresentasikan $\mathcal{T}_1$, menyebabkan lonjakan kerugian pada tugas pertama:
+Saat tugas baru $\mathcal{T}_2$ dengan data $\mathcal{D}_2$ masuk, proses _backpropagation_ memperbarui bobot parameter menuju $\theta_2^{\ast} = \arg\min_\theta \mathcal{L}_2(\theta; \mathcal{D}_2)$. Pembaruan parameter ini menimpa (_overwrite_) bobot-bobot sinaptik yang merepresentasikan $\mathcal{T}_1$, menyebabkan lonjakan kerugian pada tugas pertama:
 
 $$
-\mathcal{L}_1(\theta_2^*; \mathcal{D}_1) \gg \mathcal{L}_1(\theta_1^*; \mathcal{D}_1)
+\mathcal{L}_1(\theta_2^{\ast}; \mathcal{D}_1) \gg \mathcal{L}_1(\theta_1^{\ast}; \mathcal{D}_1)
 $$
 
 sehingga akurasi deteksi terhadap jenis serangan lama runtuh seketika mendekati nol[5].
@@ -516,7 +516,7 @@ Tuntutan mendiskriminasi seluruh kelas secara simultan tanpa *task oracle* ini m
 Guna mengatasi tantangan *catastrophic forgetting* pada skenario Class-IL, literatur mengklasifikasikan strategi pertahanan ke dalam beberapa paradigma metodologis sebagaimana diilustrasikan pada Gambar 2.3[18]. Paradigma *Replay-Based* menyimpan rekaman lalu lintas lama ke dalam *buffer* fisik (*Experience Replay*) atau merekonstruksi data masa lalu secara generatif (*Generative Replay*), namun paradigma ini melanggar privasi transmisi dan menuntut kapasitas memori besar[12]. Paradigma *Architecture-Based* mengalokasikan parameter modular baru per tugas, namun menyebabkan ukuran model membengkak. Sebaliknya, paradigma **Regularization-Based** melindungi memori lama secara murni pada ruang bobot dengan menambahkan suku penalti regularisasi ke dalam fungsi kerugian:
 
 $$
-\mathcal{L}_{\text{total}}(\theta) = \mathcal{L}_t(\theta) + \sum_{j < t} \Omega_j (\theta - \theta_j^*)^2
+\mathcal{L}_{\text{total}}(\theta) = \mathcal{L}_t(\theta) + \sum_{j < t} \Omega_j (\theta - \theta_j^{\ast})^2
 $$
 
 di mana $\Omega_j$ menyatakan matriks kepentingan parameter terhadap tugas-tugas masa lalu. Pendekatan regularisasi seperti *Elastic Weight Consolidation* (EWC) menjadi pilihan paling optimal untuk sistem deteksi intrusi jaringan terdistribusi karena mampu mempertahankan privasi data secara penuh dan menjaga efisiensi jejak memori pada perangkat sensor *edge*[5], [18].
@@ -591,23 +591,23 @@ $$
 \log p(\theta \mid \mathcal{D}_1, \mathcal{D}_2) = \log p(\mathcal{D}_2 \mid \theta) + \log p(\theta \mid \mathcal{D}_1) - \log p(\mathcal{D}_2)
 $$
 
-Distribusi posterior $\log p(\theta \mid \mathcal{D}_1)$ memuat seluruh informasi mengenai tugas pertama. Melalui aproksimasi deret Taylor orde kedua di sekitar parameter optimal tugas pertama $\theta_1^*$, fungsi ini dapat didekati sebagai distribusi Gaussian dengan presisi yang ditentukan oleh **Matriks Informasi Fisher (Fisher Information Matrix / FIM)**:
+Distribusi posterior $\log p(\theta \mid \mathcal{D}_1)$ memuat seluruh informasi mengenai tugas pertama. Melalui aproksimasi deret Taylor orde kedua di sekitar parameter optimal tugas pertama $\theta_1^{\ast}$, fungsi ini dapat didekati sebagai distribusi Gaussian dengan presisi yang ditentukan oleh **Matriks Informasi Fisher (Fisher Information Matrix / FIM)**:
 
 $$
-F = \mathbb{E}_{x \sim \mathcal{D}_1, y \sim p(y \mid x, \theta_1^*)} \left[ \nabla_\theta \log p(y \mid x, \theta_1^*) \nabla_\theta \log p(y \mid x, \theta_1^*)^T \right]
+F = \mathbb{E}_{x \sim \mathcal{D}_1, y \sim p(y \mid x, \theta_1^{\ast})} \left[ \nabla_\theta \log p(y \mid x, \theta_1^{\ast}) \nabla_\theta \log p(y \mid x, \theta_1^{\ast})^T \right]
 $$
 
 ### 2.10.2 Formulasi EWC
 Untuk menghindari komputasi inversi matriks kovariansi penuh yang berukuran $|\theta| \times |\theta|$, EWC mengasumsikan elemen-elemen Fisher saling independen dan hanya menghitung elemen diagonalnya ($F_i$). Dalam implementasi praktis *machine learning*, ekspektasi terhadap distribusi analitis didekati menggunakan **Empirical Fisher Information Matrix**, di mana gradien kuadratik dihitung terhadap label aktual (*ground truth*) tugas pertama:
 
 $$
-F_i = \frac{1}{N} \sum_{n=1}^N \left( \left. \frac{\partial \mathcal{L}_{\text{CE}}(f(x_n; \theta), y_n)}{\partial \theta_i} \right|_{\theta = \theta_1^*} \right)^2
+F_i = \frac{1}{N} \sum_{n=1}^N \left( \left. \frac{\partial \mathcal{L}_{\text{CE}}(f(x_n; \theta), y_n)}{\partial \theta_i} \right|_{\theta = \theta_1^{\ast}} \right)^2
 $$
 
 Ketika model dilatih pada tugas kedua, fungsi kerugian total lokal dimodifikasi menjadi:
 
 $$
-\mathcal{L}_{\text{total}}(\theta) = \mathcal{L}_2(\theta) + \sum_{i} \frac{\lambda}{2} F_i (\theta_i - \theta_{1, i}^*)^2
+\mathcal{L}_{\text{total}}(\theta) = \mathcal{L}_2(\theta) + \sum_{i} \frac{\lambda}{2} F_i (\theta_i - \theta_{1, i}^{\ast})^2
 $$
 
 di mana $\lambda$ adalah koefisien hiperparameter penalti EWC yang mengontrol seberapa kuat model mempertahankan memori tugas lama dibandingkan mempelajari tugas baru.
@@ -711,10 +711,10 @@ Parameter ini menunjukkan efisiensi protokol gRPC Flower dalam meminimalkan over
 Penyetelan hiperparameter (*hyperparameter tuning*) merupakan tahapan kritis untuk menemukan kombinasi parameter optimal yang memaksimalkan kinerja model. Dibandingkan metode *Grid Search* yang tidak efisien atau *Random Search* yang acak, penelitian ini mengadopsi metode **Bayesian Optimization** menggunakan kerangka kerja **Optuna**. Kerangka kerja Optuna mengimplementasikan algoritma *Tree-structured Parzen Estimator* (TPE)[20]. TPE memodelkan probabilitas kondisional $p(x \mid y)$ dari konfigurasi hiperparameter $x$ terhadap hasil evaluasi $y$ dengan membagi riwayat percobaan sebelumnya ke dalam dua distribusi terpisah:
 
 $$
-p(x \mid y) = \begin{cases} \ell(x), & \text{jika } y < y^* \\ g(x), & \text{jika } y \ge y^* \end{cases}
+p(x \mid y) = \begin{cases} \ell(x), & \text{jika } y < y^{\ast} \\ g(x), & \text{jika } y \ge y^{\ast} \end{cases}
 $$
 
-di mana $y^*$ adalah nilai ambang kuantil performa terbaik. Nilai *Expected Improvement* (EI) dimaksimalkan dengan memilih hiperparameter yang memaksimumkan rasio $\frac{\ell(x)}{g(x)}$.
+di mana $y^{\ast}$ adalah nilai ambang kuantil performa terbaik. Nilai *Expected Improvement* (EI) dimaksimalkan dengan memilih hiperparameter yang memaksimumkan rasio $\frac{\ell(x)}{g(x)}$.
 
 ![Gambar 2.7 Pemodelan Distribusi Ketidakpastian pada Optimasi Bayesian Berbasis Estimator Parzen (TPE)](../Aset/bayesian_optimization_gp_optuna.png)  
 *Gambar 2.7 Pemodelan Distribusi Ketidakpastian pada Optimasi Bayesian Berbasis Estimator Parzen (TPE)[20].*
@@ -723,7 +723,7 @@ di mana $y^*$ adalah nilai ambang kuantil performa terbaik. Nilai *Expected Impr
 
 ## 2.14 Optimizer
 
-Algoritma pengoptimalan (*optimizer*) bertugas memperbarui bobot parameter jaringan saraf tiruan guna meminimalkan fungsi kerugian selama proses pelatihan *backpropagation*.
+Algoritma pengoptimalan (*optimizer*) bertugas memperbarui bobot parameter jaringan saraf tiruan guna meminimalkan fungsi kerugian selama proses pelatihan _backpropagation_.
 
 ### 2.14.1 Algoritma SGD
 Algoritma SGD memperbarui parameter $\theta$ ke arah yang berlawanan dengan gradien fungsi kerugian:
@@ -761,7 +761,7 @@ $$
 f(x) = \max(0, x)
 $$
 
-Keunggulan fundamental dari ReLU terletak pada efisiensi komputasinya yang sangat tinggi, karena hanya mengeksekusi operasi perbandingan ambang batas matematis sederhana tanpa melibatkan kalkulasi eksponensial yang membutuhkan daya pemrosesan intensif. Selain itu, ReLU secara efektif memitigasi fenomena *vanishing gradient* pada nilai masukan positif ($x > 0$) dengan mempertahankan nilai gradien turunan konstan bernilai $1$, memungkinkan sinyal pembaruan bobot merambat secara stabil melintasi lapisan-lapisan jaringan selama fase *backpropagation*. Sifat aktivasi ReLU yang mengubah nilai masukan negatif menjadi nol juga menghasilkan representasi bobot yang renggang (*sparse activation*), yang mendorong efisiensi pemrosesan dan mempercepat konvergensi model selama pelatihan[8].
+Keunggulan fundamental dari ReLU terletak pada efisiensi komputasinya yang sangat tinggi, karena hanya mengeksekusi operasi perbandingan ambang batas matematis sederhana tanpa melibatkan kalkulasi eksponensial yang membutuhkan daya pemrosesan intensif. Selain itu, ReLU secara efektif memitigasi fenomena *vanishing gradient* pada nilai masukan positif ($x > 0$) dengan mempertahankan nilai gradien turunan konstan bernilai $1$, memungkinkan sinyal pembaruan bobot merambat secara stabil melintasi lapisan-lapisan jaringan selama fase _backpropagation_. Sifat aktivasi ReLU yang mengubah nilai masukan negatif menjadi nol juga menghasilkan representasi bobot yang renggang (*sparse activation*), yang mendorong efisiensi pemrosesan dan mempercepat konvergensi model selama pelatihan[8].
 
 ### 2.15.2 Fungsi Softmax
 Pada lapisan keluaran klasifikasi multi-kelas, fungsi **Softmax** digunakan untuk mengubah nilai logit mentah $z \in \mathbb{R}^C$ menjadi distribusi probabilitas ternormalisasi:
@@ -986,7 +986,7 @@ FASE 2: Pelatihan Kolaboratif Terdistribusi Task 2 (Normal + DoS) dengan Proteks
 13:     Server menyiarkan parameter global theta_r ke Klien A dan Klien B
 14:     Untuk setiap klien k in {A, B} secara paralel:
 15:         Fungsi objektif lokal diinjeksi penalti kuadratik EWC:
-                Loss_total(theta) = Loss_CE(theta; D_{k, Task2}) + (lambda / 2) * sum_i F_{k, i} (theta_i - theta_{1, i}^*)^2
+                Loss_total(theta) = Loss_CE(theta; D_{k, Task2}) + (lambda / 2) * sum_i F_{k, i} (theta_i - theta_{1, i}^{\ast})^2
 16:         theta_{r+1}^k <- LocalUpdate(k, theta_r, Loss_total)  // E epoch dengan clipping gradien
 17:         Klien k mengirimkan theta_{r+1}^k kembali ke Server
 18:     Server memperbarui bobot global via agregasi FedAvg:

@@ -212,7 +212,7 @@ FASE 2: Pelatihan Kolaboratif Terdistribusi Task 2 (Normal + DoS) dengan Proteks
 13:     Server menyiarkan parameter global theta_r ke Klien A dan Klien B
 14:     Untuk setiap klien k in {A, B} secara paralel:
 15:         Fungsi objektif lokal diinjeksi penalti kuadratik EWC:
-                Loss_total(theta) = Loss_CE(theta; D_{k, Task2}) + (lambda / 2) * sum_i F_{k, i} (theta_i - theta_{1, i}^*)^2
+                Loss_total(theta) = Loss_CE(theta; D_{k, Task2}) + (lambda / 2) * sum_i F_{k, i} (theta_i - theta_{1, i}^{\ast})^2
 16:         theta_{r+1}^k <- LocalUpdate(k, theta_r, Loss_total)  // E epoch dengan clipping gradien
 17:         Klien k mengirimkan theta_{r+1}^k kembali ke Server
 18:     Server memperbarui bobot global via agregasi FedAvg:
