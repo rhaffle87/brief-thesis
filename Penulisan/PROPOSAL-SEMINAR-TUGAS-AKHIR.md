@@ -404,15 +404,15 @@ Ketiga elemen dalam CIA Triad saling terikat secara sinergis dan tidak dapat dip
 
 Serangan siber terhadap jaringan komputer memiliki taksonomi yang luas berdasarkan tujuan penyerang, protokol yang dieksploitasi, dan mekanisme gangguan yang ditimbulkan. Dalam penelitian ini, analisis difokuskan pada tiga kategori utama perilaku lalu lintas data yang bersumber dari dataset tolok ukur CIC-IDS2017[9]:
 
-### Trafik Normal
+### 2.2.1 Trafik Normal
 Trafik normal merepresentasikan seluruh aliran komunikasi data sah yang dihasilkan oleh pengguna dan aplikasi resmi di dalam jaringan[9]. Aliran ini mencakup protokol web (HTTP/HTTPS), kueri *Domain Name System* (DNS), pertukaran surat elektronik (SMTP, IMAP), sinkronisasi waktu jaringan (NTP), serta lalu lintas manajemen internal. Karakteristik statistik dari trafik normal ditandai oleh distribusi panjang paket (*packet length*) yang heterogen, interval waktu kedatangan antar-paket (*inter-arrival time* / IAT) yang bervariasi sesuai interaksi manusia, serta rasio dua arah (*forward/backward packets*) yang proporsional sesuai standar protokol TCP/IP.
 
-### SSH-Patator
+### 2.2.2 SSH-Patator
 Protokol *Secure Shell* (SSH) yang beroperasi pada port standar 22 merupakan protokol *de facto* untuk administrasi jarak jauh pada server Linux dan perangkat jaringan enterprise. Dalam lanskap ancaman siber, serangan **SSH-Patator** merupakan bentuk serangan audit penetrasi otomatis multi-utas (*multi-threaded brute force tool*) yang mengeksekusi ribuan kombinasi *username* dan *password* dari basis data kamus (*dictionary attack*) secara masif guna membobol akun administrator sistem[9].
 
 Dari sudut pandang analisis statistik aliran lalu lintas (*flow statistics*), serangan SSH-Patator meninggalkan karakteristik pola yang sangat distingtif dibandingkan dengan sesi interaktif normal. Serangan ini ditandai oleh lonjakan frekuensi inisiasi koneksi TCP menuju nomor port layanan autentikasi dalam jendela waktu yang sangat sempit. Sebagian besar aliran memiliki durasi yang sangat singkat (*short flow duration*), mengingat server target segera memutus sesi koneksi melalui transmisi *flag* TCP RST atau FIN sesaat setelah pertukaran *handshake* kredensial dinyatakan gagal. Di samping itu, ukuran paket data arah maju (*forward*) dan arah mundur (*backward*) menunjukkan konsistensi volume muatan yang seragam pada fase negosiasi kunci kriptografi awal sebelum pemutusan sesi berlangsung, membedakannya secara tajam dari dinamika aliran sesi interaktif pengguna yang sah[9].
 
-### Serangan DoS
+### 2.2.3 Serangan DoS
 Serangan **Denial of Service (DoS)** bertujuan melumpuhkan pilar ketersediaan (*availability*) sistem target dengan membanjiri sumber daya komputasi seperti CPU, memori, *bandwidth*, atau batas antrean soket koneksi server web, sehingga server target gagal melayani permintaan pengguna yang sah[9]. Dalam penelitian ini, analisis difokuskan pada empat subvarian serangan DoS lapisan aplikasi (*application-layer DoS*) yang merepresentasikan spektrum ancaman volumetrik agresif dan ancaman berkecepatan lambat (*low-and-slow attacks*).
 
 Pada kelompok serangan volumetrik agresif, subvarian pertama adalah **DoS Hulk**, yang melancarkan pembanjiran permintaan HTTP GET bervolume masif dengan memanipulasi *header User-Agent* serta menyisipkan parameter unik acak pada URL guna menggagalkan sistem *caching* server web, memaksa server mengalokasikan siklus komputasi CPU dan memori secara berulang. Subvarian kedua adalah **DoS GoldenEye**, yang mengeksploitasi mekanisme koneksi persisten HTTP (*keep-alive*) dan perintah *Cache-Control: no-cache* secara simultan dalam jumlah besar untuk menahan *worker process* server web tetap terkunci hingga kapasitas *thread pool* server habis terpakai.
@@ -458,13 +458,13 @@ Berdasarkan kajian kritis tersebut, posisi ilmiah dan kebaruan (*novelty*) dari 
 
 *Federated Learning* (FL) merupakan paradigma pembelajaran mesin terdistribusi yang memungkinkan sejumlah besar node klien (misalnya sensor jaringan, perangkat edge, atau server perimeter) untuk melatih model secara kolaboratif di bawah koordinasi server agregator terpusat tanpa harus memusatkan data pelatihan lokal ke server tersebut[3].
 
-### Arsitektur Federasi
+### 2.4.1 Arsitektur Federasi
 Arsitektur *Federated Learning* secara fundamental dibangun atas interaksi terkoordinasi antara dua entitas utama, yaitu **Server Agregator** dan sekumpulan **Klien Federasi** ($K$ *node*)[3]. Server agregator bertindak sebagai koordinator orkestrasi global yang menginisialisasi parameter bobot model global awal, menyiarkan konfigurasi parameter model ke klien yang berpartisipasi pada setiap ronde komunikasi, mengumpulkan pembaruan bobot lokal, serta menghitung parameter model global baru melalui fungsi agregasi FedAvg. Di sisi lain, setiap sensor atau node klien federasi bertugas mengelola partisi data lalu lintas jaringan lokalnya secara privat dan terisolasi. Pada setiap putaran komunikasi federasi, klien mengunduh parameter model global terbaru dari server agregator, mengeksekusi proses optimasi lokal berbasis algoritma *Stochastic Gradient Descent* (SGD) atau AdamW selama sejumlah *epoch* lokal menggunakan data lokalnya, lalu mengirimkan kembali parameter bobot hasil pelatihan ke server agregator tanpa pernah mentransmisikan rekaman data mentah pengguna[3].
 
 ![Gambar 2.2 Siklus Pelatihan dan Agregasi Bobot pada Federated Learning (FedAvg)](../Aset/fedavg_flowchart_researchgate.png)  
 *Gambar 2.2 Siklus Pelatihan dan Agregasi Bobot pada Federated Learning (FedAvg)[3].*
 
-### Algoritma FedAvg
+### 2.4.2 Algoritma FedAvg
 Algoritma standar paling populer dalam FL adalah *Federated Averaging* (FedAvg). Pada setiap ronde komunikasi $t \in \{1, 2, \dots, T\}$[3]:
 
 $$
@@ -479,7 +479,7 @@ $$
 
 di mana $n_k$ menyatakan jumlah sampel data lokal pada klien $k$, dan $n$ adalah total seluruh sampel data di seluruh klien.
 
-### Data Non-IID
+### 2.4.3 Data Non-IID
 Pada lingkungan jaringan komputer nyata, asumsi bahwa data terdistribusi secara independen dan identik (*Independent and Identically Distributed* / IID) hampir selalu dilanggar. Fenomena ini disebut **Non-IID Data**. Bentuk non-IID paling dominan pada NIDS adalah ketimpangan distribusi label (*label distribution skew*), di mana Klien A di subnet internal dominan menangani serangan autentikasi SSH, sedangkan Klien B di zona publik dominan menangani serangan DoS. Heterogenitas non-IID terbukti secara teoretis menyebabkan pembaruan gradien lokal mengarah pada titik minimum lokal yang saling bertolak belakang (*weight divergence*), yang memperlambat konvergensi dan menurunkan akurasi model global[4].
 
 ---
@@ -488,13 +488,13 @@ Pada lingkungan jaringan komputer nyata, asumsi bahwa data terdistribusi secara 
 
 *Continual Learning* (CL) atau *Lifelong Learning* adalah cabang pembelajaran mesin yang berfokus pada kemampuan model kecerdasan buatan untuk mempelajari aliran tugas atau kelas data baru secara sekuensial dari waktu ke waktu tanpa melupakan representasi pengetahuan yang telah dipelajari dari tugas masa lalu.
 
-### Catastrophic Forgetting
+### 2.5.1 Catastrophic Forgetting
 Dalam sistem pembelajaran adaptif, model dihadapkan pada dilema stabilitas-plastisitas (*stability-plasticity dilemma*), yaitu tuntutan untuk mempertahankan fleksibilitas dalam mengintegrasikan pengetahuan baru (*plasticity*) seraya mempertahankan kestabilan representasi yang telah terbentuk sebelumnya (*stability*). Jaringan saraf tiruan (*Deep Neural Networks*) modern memiliki kecenderungan bawaan yang parah terhadap fenomena **catastrophic forgetting** saat mempelajari aliran tugas baru secara berurutan[5]. Ketika model dilatih pada tugas pertama $\mathcal{T}_1$, bobot sinaptik $\theta$ dioptimasi untuk meminimalkan fungsi kerugian $\mathcal{L}_1$. Ketika tugas baru $\mathcal{T}_2$ diberikan, proses *backpropagation* akan memperbarui bobot $\theta$ demi meminimalkan $\mathcal{L}_2$. Pembaruan bobot ini menimpa (*overwrite*) konfigurasi parameter yang bertanggung jawab atas pengenalan $\mathcal{T}_1$, menyebabkan akurasi model terhadap $\mathcal{T}_1$ runtuh seketika mendekati nol.
 
-### Skenario Pembelajaran
+### 2.5.2 Skenario Pembelajaran
 Berdasarkan ketersediaan identitas tugas (*Task-ID*) saat fase inferensi operasional, literatur Continual Learning mengklasifikasikan proses pembelajaran inkremental ke dalam tiga skenario utama[17]. Skenario pertama adalah **Task-Incremental Learning (Task-IL)**, di mana model selalu diberikan informasi identitas tugas (*Task-ID*) baik selama fase pelatihan maupun saat evaluasi inferensi, sehingga model hanya perlu memilih kelas luaran yang relevan dengan tugas tersebut. Skenario kedua adalah **Domain-Incremental Learning (Domain-IL)**, di mana struktur dan jumlah kelas keluaran tetap konstan, namun distribusi fitur masukan mengalami pergeseran domain seiring berjalannya waktu. Skenario ketiga dan yang paling kompleks adalah **Class-Incremental Learning (Class-IL)**, di mana model dituntut untuk mengidentifikasi dan membedakan seluruh kelas dari seluruh tugas yang pernah dipelajari tanpa pernah diberikan informasi *Task-ID* saat proses inferensi. Skenario Class-IL ini merupakan representasi paling realistis sekaligus paling menantang bagi implementasi sistem deteksi intrusi jaringan di dunia nyata, karena sensor keamanan operasional harus mampu mengklasifikasikan apakah suatu aliran data bersifat normal, serangan SSH, atau serangan DoS secara mandiri tanpa mengetahui konteks fase pelatihan model[17].
 
-### Mitigasi Forgetting
+### 2.5.3 Mitigasi Forgetting
 Secara komprehensif, literatur saintifik membagi pendekatan mitigasi *catastrophic forgetting* ke dalam beberapa paradigma metodologis utama sebagaimana diilustrasikan pada Gambar 2.3[17]. Paradigma pertama adalah **Regularization-Based Approach**, yang menambahkan suku penalti regularisasi ke dalam fungsi kerugian guna membatasi pergeseran bobot-bobot sinaptik yang dinilai krusial bagi tugas masa lalu tanpa memerlukan penyimpanan sampel data mentah, seperti pada algoritma *Elastic Weight Consolidation* (EWC), *Synaptic Intelligence* (SI), dan *Online Laplace Approximation*. Paradigma kedua adalah **Knowledge-Distillation-Based Approach**, yang mentransfer representasi pengetahuan luaran model lama ke arsitektur model baru menggunakan luaran probabilitas lunak (*soft targets*), seperti pada metode *Learning Without Forgetting* (LwF).
 
 Di samping kedua paradigma tersebut, pendekatan mitigasi lainnya mencakup **Bayesian-Based Approach** yang merumuskan pembelajaran sekuensial melalui pembaharuan distribusi probabilitas posterior parameter, serta **Gradient-Based Approach** (seperti *Gradient Episodic Memory* / GEM) yang memproyeksikan vektor gradien tugas baru agar selalu ortogonal terhadap ruang gradien tugas lampau[12]. Pendekatan lain melibatkan **Architecture-Based Approach** yang mengalokasikan kapasitas sub-jaringan atau neuron baru khusus per tugas (seperti *Progressive Neural Networks*), serta **Replay-Based Approach** yang menyimpan kembali cuplikan data historis (*Experience Replay*) atau membangkitkan data sintetis (*Generative Replay*). Namun, untuk lingkungan sensor jaringan terdistribusi yang sensitif terhadap privasi dan memiliki keterbatasan memori fisik, pendekatan berbasis regularisasi parameter seperti EWC menawarkan keunggulan paling menonjol karena tidak menuntut penyimpanan rekaman data mentah pengguna di memori lokal[5], [17].
@@ -508,10 +508,10 @@ Di samping kedua paradigma tersebut, pendekatan mitigasi lainnya mencakup **Baye
 
 *Network Intrusion Detection System* (NIDS) merupakan mekanisme pertahanan siber yang ditempatkan pada infrastruktur jaringan untuk menginspeksi lalu lintas data dan mendeteksi aktivitas mencurigakan yang mengindikasikan adanya intrusi, eksploitasi kerentanan, atau pelanggaran kebijakan keamanan[8].
 
-### Arsitektur Penempatan
+### 2.6.1 Arsitektur Penempatan
 Berdasarkan arsitektur penempatan dan cakupan monitoringnya, sistem deteksi intrusi secara mendasar terbagi menjadi dua kategori utama, yaitu *Host-Based IDS* (HIDS) dan *Network-Based IDS* (NIDS)[8], [13]. HIDS beroperasi secara langsung pada tingkat sistem operasi dari perangkat *endpoint* atau server individual untuk mengawasi integritas berkas sistem (*file integrity*), log autentikasi, serta pemanggilan instruksi sistem (*system calls*). Karakteristik HIDS sangat efektif untuk mengidentifikasi ancaman internal atau eksploitasi hak akses di tingkat lokal, namun memerlukan instalasi agen pada setiap mesin dan mengonsumsi sumber daya komputasi dari server aplikasi target. Sebaliknya, NIDS ditempatkan secara strategis pada tautan jaringan (*network links*), seperti *switch*, *gateway*, atau port agregasi, guna memantau seluruh paket dan aliran data yang melintasi segmen jaringan secara non-invasif. Keunggulan utama NIDS terletak pada kemampuannya mengawasi puluhan hingga ratusan perangkat sekaligus secara simultan tanpa membebani performa komputasi server aplikasi serta mampu mendeteksi pola serangan yang bergerak lintas subnet jaringan[8].
 
-### Metode Deteksi
+### 2.6.2 Metode Deteksi
 Ditinjau dari metodologi deteksi yang diimplementasikan, NIDS terbagi menjadi pendekatan berbasis tanda tangan (*Signature-Based IDS* / SIDS) dan pendekatan berbasis anomali (*Anomaly-Based IDS* / ABDS)[8], [10]. SIDS beroperasi dengan mencocokkan setiap muatan paket atau pola lalu lintas terhadap basis data tanda tangan serangan (*attack signatures*) yang telah didefinisikan sebelumnya oleh analis keamanan. Pendekatan SIDS memiliki keunggulan dalam kecepatan komputasi dan menghasilkan tingkat alarm palsu (*false positive*) yang sangat rendah untuk ancaman lama yang telah terdaftar, namun mengalami kegagalan mutlak ketika berhadapan dengan serangan baru (*zero-day attacks*) atau varian serangan yang telah dimodifikasi polanya. Sebaliknya, ABDS memodelkan perilaku lalu lintas normal sebagai profil tolok ukur (*baseline*), sehingga setiap penyimpangan statistik yang signifikan akan ditandai sebagai indikasi anomali intrusi. ABDS modern mengandalkan model pembelajaran mesin dan jaringan saraf tiruan untuk mengevaluasi fitur statistik aliran dua arah (*bidirectional flow features*), memberikan kemampuan generalisasi yang tangguh dalam mengidentifikasi pola ancaman baru yang belum pernah terpetakan sebelumnya[8], [10].
 
 ---
@@ -530,7 +530,7 @@ Dalam mengimplementasikan paradigma pembelajaran terdistribusi, penelitian ini m
 
 Untuk memenuhi batasan komputasi perangkat gerbang jaringan (*edge gateway*) dan menghindari latensi komputasi yang tinggi, arsitektur model klasifikasi dirancang menggunakan **Multilayer Perceptron (MLP)** kompak tiga lapis terhubung penuh (*Fully Connected Layers*).
 
-### Struktur Matematika
+### 2.9.1 Struktur Matematika
 Model menerima vektor fitur masukan $x \in \mathbb{R}^{63}$ yang merepresentasikan statistik aliran paket:
 
 $$
@@ -544,7 +544,7 @@ $$
 
 di mana $f_1, f_2$ merupakan fungsi aktivasi non-linear ReLU.
 
-### Kompleksitas Komputasi
+### 2.9.2 Kompleksitas Komputasi
 Pemilihan arsitektur MLP kompak didasari oleh pertimbangan kritis terhadap keterbatasan sumber daya komputasi perangkat sensor jaringan (*edge gateways*) dan kebutuhan latensi inspeksi paket waktu nyata[8]. Model yang dirancang memiliki 63 fitur masukan, 64 neuron pada lapisan tersembunyi pertama, 32 neuron pada lapisan tersembunyi kedua, dan 3 neuron keluaran, yang secara keseluruhan menghasilkan total parameter komputasi sebesar:
 
 $$
@@ -562,7 +562,7 @@ Dengan representasi angka mengambang 32-bit (*single precision float32* berukura
 
 *Elastic Weight Consolidation* (EWC) merupakan metode mitigasi *catastrophic forgetting* berbasis regularisasi parameter yang terinspirasi oleh fenomena konsolidasi memori sinaptik pada otak biologis[5].
 
-### Landasan Teoretis
+### 2.10.1 Landasan Teoretis
 Dari perspektif inferensi Bayesian, mempelajari tugas kedua $\mathcal{D}_2$ setelah menyelesaikan tugas pertama $\mathcal{D}_1$ dirumuskan melalui probabilitas posterior parameter $\theta$:
 
 $$
@@ -575,7 +575,7 @@ $$
 F = \mathbb{E}_{x \sim \mathcal{D}_1, y \sim p(y \mid x, \theta_1^*)} \left[ \nabla_\theta \log p(y \mid x, \theta_1^*) \nabla_\theta \log p(y \mid x, \theta_1^*)^T \right]
 $$
 
-### Formulasi EWC
+### 2.10.2 Formulasi EWC
 Untuk menghindari komputasi inversi matriks kovariansi penuh yang berukuran $|\theta| \times |\theta|$, EWC mengasumsikan elemen-elemen Fisher saling independen dan hanya menghitung elemen diagonalnya ($F_i$). Dalam implementasi praktis *machine learning*, ekspektasi terhadap distribusi analitis didekati menggunakan **Empirical Fisher Information Matrix**, di mana gradien kuadratik dihitung terhadap label aktual (*ground truth*) tugas pertama:
 
 $$
@@ -593,7 +593,7 @@ di mana $\lambda$ adalah koefisien hiperparameter penalti EWC yang mengontrol se
 ![Gambar 2.5 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis pada Kontur Kerugian](../Aset/ewc_parameter_space_kirkpatrick2017.png)  
 *Gambar 2.5 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis pada Kontur Kerugian[5].*
 
-### Penstabil Pelatihan
+### 2.10.3 Penstabil Pelatihan
 Untuk mengatasi ketimpangan kelas yang parah, fungsi kerugian dasar $\mathcal{L}_2(\theta)$ menggunakan pembobotan invers frekuensi kelas:
 
 $$
@@ -612,10 +612,10 @@ $$
 
 Dataset tolok ukur yang digunakan dalam penelitian ini adalah **CIC-IDS2017** (*Canadian Institute for Cybersecurity Intrusion Detection System 2017*). Dataset ini dibangun menggunakan topologi jaringan korban (*Victim Network*) dan jaringan penyerang (*Attack Network*) yang merekam lalu lintas paket nyata selama lima hari kerja (Senin s.d. Jumat)[9].
 
-### Karakteristik Aliran
+### 2.11.1 Karakteristik Aliran
 Seluruh lalu lintas jaringan mentah dalam format *packet capture* (pcap) diekstraksi menggunakan perangkat lunak *CICFlowMeter* menjadi rekaman statistik aliran dua arah (*bidirectional flow features*). Berkas lalu lintas yang dianalisis dalam penelitian ini mencakup berkas hari Senin (*Monday*) yang merepresentasikan lalu lintas operasional normal (BENIGN) secara eksklusif, berkas hari Selasa (*Tuesday*) yang memuat aktivitas normal dan serangan penetrasi autentikasi SSH (*SSH-Patator*), serta berkas hari Rabu (*Wednesday*) yang memuat lalu lintas normal dan varian serangan *Denial of Service* (DoS Slowloris, Slowhttptest, Hulk, dan GoldenEye)[9].
 
-### Kurasi Fitur
+### 2.11.2 Kurasi Fitur
 Meskipun CIC-IDS2017 merupakan tolok ukur standar dalam riset NIDS, sejumlah studi audit saintifik mutakhir mengidentifikasi kelemahan mendasar dalam dataset mentah yang berpotensi menghasilkan evaluasi model yang bias[6], [7], [15]. Audit oleh Rosay *et al.*[6] dan Dube[7] membuktikan bahwa berkas hari Kamis menderita desinkronisasi penanda waktu (*timestamp labeling error*) yang parah antara file rekaman pcap dan file CSV, serta memiliki kelangkaan sampel kelas ekstrem (seperti serangan Infiltration yang hanya terdiri dari 36 baris dan Sql Injection sebanyak 21 baris). Kondisi ini menyebabkan berkas hari Kamis dan Jumat dieksklusi secara sengaja dari penelitian ini guna menjamin validitas dan reliabilitas eksperimen.
 
 Lebih lanjut, studi audit oleh Engelen *et al.*[15] membuktikan adanya fenomena *shortcut learning* atau kebocoran fitur (*feature leakage*) akibat keberadaan atribut nomor port tujuan (`Destination Port`). Ketika fitur nomor port diikutsertakan, algoritma pembelajaran mesin cenderung mengambil jalan pintas dengan menghafal nomor port layanan standar (misalnya port 22 untuk SSH dan port 80 untuk DoS), sehingga menghasilkan akurasi klasifikasi yang tinggi semu tanpa pernah mempelajari pola statistik lalu lintas paket yang sebenarnya. Menjawab tantangan tersebut, penelitian ini menerapkan protokol kurasi yang ketat dengan membuang fitur `Destination Port` secara definitif, mengeliminasi 132.909 baris data duplikat identik, membuang 10 fitur konstan bervariansi nol, serta mengeliminasi 5 pasangan fitur duplikat mutlak. Melalui prosedur praproses ini, diperoleh tepat **63 fitur statistik numerik bersih** yang memastikan model dievaluasi secara otentik atas dinamika perilaku aliran jaringan[15].
@@ -626,7 +626,7 @@ Lebih lanjut, studi audit oleh Engelen *et al.*[15] membuktikan adanya fenomena 
 
 Evaluasi sistem dilakukan secara komprehensif mencakup metrik kinerja deteksi kecerdasan buatan, metrik retensi continual learning, dan metrik profil komputasi perangkat.
 
-### Kinerja Klasifikasi
+### 2.12.1 Kinerja Klasifikasi
 Kinerja deteksi model dievaluasi secara menyeluruh menggunakan matriks konfusi (*Confusion Matrix*) yang mengelompokkan prediksi model ke dalam empat kuadran hasil: *True Positive* (TP), *True Negative* (TN), *False Positive* (FP), dan *False Negative* (FN) sebagaimana diilustrasikan pada Gambar 2.6[8].
 
 ![Gambar 2.6 Struktur Dasar Confusion Matrix untuk Evaluasi Deteksi Biner dan Multi-kelas](../Aset/confusion_matrix_accessibleai.png)  
@@ -658,7 +658,7 @@ $$
 
 Dengan menghitung rata-rata secara unweighted antar-kelas, Macro-F1 memberikan bobot evaluasi yang setara pada kelas minoritas (seperti SSH-Patator) maupun kelas mayoritas (BENIGN), menjadikannya metrik objektif paling andal untuk mengukur performa NIDS pada kondisi distribusi data yang timpang[8].
 
-### Retensi Memori
+### 2.12.2 Retensi Memori
 Dalam skenario pembelajaran berkelanjutan (*Continual Learning*), retensi pengetahuan model terhadap tugas lampau setelah mempelajari tugas baru diukur secara matematis menggunakan metrik **Backward Transfer (BWT)**[12]:
 
 $$
@@ -667,7 +667,7 @@ $$
 
 di mana $R_{1, 1}$ menyatakan skor Macro-F1 pada tugas pertama sesaat setelah fase pelatihan pertama selesai, sedangkan $R_{2, 1}$ merepresentasikan skor Macro-F1 pada tugas pertama setelah model menyelesaikan pelatihan pada tugas kedua. Nilai $\text{BWT} < 0$ mengindikasikan terjadinya degradasi representasi memori atau *catastrophic forgetting*, di mana semakin negatif nilai BWT maka semakin parah derajat kepunahan memori model terhadap ancaman lampau. Sebaliknya, nilai $\text{BWT} \ge 0$ membuktikan bahwa model mampu mempertahankan representasi tugas lama secara stabil atau bahkan mengalami transfer pengetahuan positif (*positive backward transfer*)[12].
 
-### Efisiensi Sumberdaya
+### 2.12.3 Efisiensi Sumberdaya
 Di samping evaluasi kinerja klasifikasi, pengukuran efisiensi komputasi menjadi parameter penentu kelayakan sistem NIDS saat dioperasikan secara nyata pada perangkat jaringan, mengadopsi standar profiling yang dirumuskan pada penelitian teknik elektro terdahulu[8]. Profiling ini mencakup tiga parameter utama. Parameter pertama adalah **Waktu Inferensi per Aliran (*Inference Time*)**, yang mengukur rata-rata durasi eksekusi algoritma dalam memproses dan mengklasifikasikan satu sampel aliran data jaringan:
 
 $$
@@ -686,10 +686,7 @@ Parameter ini menunjukkan efisiensi protokol gRPC Flower dalam meminimalkan over
 
 ## 2.13 Hyperparameter Tuning
 
-Penyetelan hiperparameter (*hyperparameter tuning*) merupakan tahapan kritis untuk menemukan kombinasi parameter optimal yang memaksimalkan kinerja model. Dibandingkan metode *Grid Search* yang tidak efisien atau *Random Search* yang acak, penelitian ini mengadopsi metode **Bayesian Optimization** menggunakan kerangka kerja **Optuna**.
-
-### Algoritma TPE
-Optuna mengimplementasikan algoritma *Tree-structured Parzen Estimator* (TPE)[19]. TPE memodelkan probabilitas kondisional $p(x \mid y)$ dari konfigurasi hiperparameter $x$ terhadap hasil evaluasi $y$ dengan membagi riwayat percobaan sebelumnya ke dalam dua distribusi terpisah:
+Penyetelan hiperparameter (*hyperparameter tuning*) merupakan tahapan kritis untuk menemukan kombinasi parameter optimal yang memaksimalkan kinerja model. Dibandingkan metode *Grid Search* yang tidak efisien atau *Random Search* yang acak, penelitian ini mengadopsi metode **Bayesian Optimization** menggunakan kerangka kerja **Optuna**. Kerangka kerja Optuna mengimplementasikan algoritma *Tree-structured Parzen Estimator* (TPE)[19]. TPE memodelkan probabilitas kondisional $p(x \mid y)$ dari konfigurasi hiperparameter $x$ terhadap hasil evaluasi $y$ dengan membagi riwayat percobaan sebelumnya ke dalam dua distribusi terpisah:
 
 $$
 p(x \mid y) = \begin{cases} \ell(x), & \text{jika } y < y^* \\ g(x), & \text{jika } y \ge y^* \end{cases}
@@ -706,7 +703,7 @@ di mana $y^*$ adalah nilai ambang kuantil performa terbaik. Nilai *Expected Impr
 
 Algoritma pengoptimalan (*optimizer*) bertugas memperbarui bobot parameter jaringan saraf tiruan guna meminimalkan fungsi kerugian selama proses pelatihan *backpropagation*.
 
-### Algoritma SGD
+### 2.14.1 Algoritma SGD
 Algoritma SGD memperbarui parameter $\theta$ ke arah yang berlawanan dengan gradien fungsi kerugian:
 
 $$
@@ -715,7 +712,7 @@ $$
 
 di mana $\eta$ adalah laju pembelajaran (*learning rate*). Meskipun sederhana dan memiliki generalisasi akhir yang baik, SGD rentan terjebak pada dataran datar (*saddle points*) dan memiliki laju konvergensi yang lambat pada permukaan kerugian yang memiliki kelengkungan tidak seragam.
 
-### Algoritma AdamW
+### 2.14.2 Algoritma AdamW
 Untuk mengatasi kelemahan SGD dan kekurangan algoritma Adam standar, penelitian ini menggunakan algoritma optimasi **AdamW**[20]. AdamW menghitung momen pertama $m_t$ dan momen kedua $v_t$ dari gradien untuk menyesuaikan laju pembaruan parameter secara adaptif, seraya memisahkan (*decoupling*) penalti *weight decay* $\lambda_{\text{wd}}$ dari pembaruan gradien adaptif:
 
 $$
@@ -735,7 +732,7 @@ Pemisahan penalti bobot ini mencegah distorsi regulasi L2 pada arah gradien adap
 
 Fungsi aktivasi merupakan komponen esensial pada machine learning dan deep learning. Fungsinya adalah memperkenalkan sifat non-linearitas ke dalam sistem, yang memungkinkan model untuk mempelajari dan mengekspresikan hubungan kompleks antar-fitur dalam ruang aliran lalu lintas jaringan.
 
-### Fungsi ReLU
+### 2.15.1 Fungsi ReLU
 Fungsi aktivasi utama yang digunakan pada lapisan tersembunyi model MLP adalah **ReLU**[8]:
 
 $$
@@ -744,7 +741,7 @@ $$
 
 Keunggulan fundamental dari ReLU terletak pada efisiensi komputasinya yang sangat tinggi, karena hanya mengeksekusi operasi perbandingan ambang batas matematis sederhana tanpa melibatkan kalkulasi eksponensial yang membutuhkan daya pemrosesan intensif. Selain itu, ReLU secara efektif memitigasi fenomena *vanishing gradient* pada nilai masukan positif ($x > 0$) dengan mempertahankan nilai gradien turunan konstan bernilai $1$, memungkinkan sinyal pembaruan bobot merambat secara stabil melintasi lapisan-lapisan jaringan selama fase *backpropagation*. Sifat aktivasi ReLU yang mengubah nilai masukan negatif menjadi nol juga menghasilkan representasi bobot yang renggang (*sparse activation*), yang mendorong efisiensi pemrosesan dan mempercepat konvergensi model selama pelatihan[8].
 
-### Fungsi Softmax
+### 2.15.2 Fungsi Softmax
 Pada lapisan keluaran klasifikasi multi-kelas, fungsi **Softmax** digunakan untuk mengubah nilai logit mentah $z \in \mathbb{R}^C$ menjadi distribusi probabilitas ternormalisasi:
 
 $$
