@@ -88,13 +88,31 @@ $$
 F_k(w) = \frac{1}{n_k} \sum_{i \in \mathcal{D}_k} \ell(f(x_i; w), y_i)
 $$
 
-di mana $n_k = |\mathcal{D}_k|$ menyatakan volume sampel lokal pada klien $k$, dan $n = \sum_{k=1}^K n_k$ merepresentasikan total seluruh sampel data di jaringan. Pada setiap ronde komunikasi $t \in \{1, 2, \dots, T\}$, server menyiarkan parameter global $w_t$ ke klien terpilih. Klien mengeksekusi optimasi lokal berbasis *gradient descent* sebanyak $E$ *epoch* lokal untuk menghasilkan bobot lokal terbarui $w_{t+1}^k \leftarrow w_t - \eta \nabla F_k(w_t)$. Server agregator kemudian menghitung model global baru melalui agregasi rata-rata berbobot *Federated Averaging* (FedAvg)[3]:
+di mana parameter ukuran sampel lokal pada masing-masing klien dan keseluruhan jaringan dinyatakan sebagai:
+
+$$
+n_k = |\mathcal{D}_k|, \quad n = \sum_{k=1}^K n_k
+$$
+
+dengan $n_k$ menyatakan volume sampel lokal pada klien $k$, dan $n$ merepresentasikan total seluruh sampel data di jaringan. Pada setiap ronde komunikasi $t \in \{1, 2, \dots, T\}$, server menyiarkan parameter global $w_t$ ke klien terpilih. Klien mengeksekusi optimasi lokal berbasis *gradient descent* sebanyak $E$ *epoch* lokal untuk menghasilkan bobot lokal terbarui:
+
+$$
+w_{t+1}^k \leftarrow w_t - \eta \nabla F_k(w_t)
+$$
+
+Server agregator kemudian menghitung model global baru melalui agregasi rata-rata berbobot *Federated Averaging* (FedAvg)[3]:
 
 $$
 w_{t+1} = \sum_{k=1}^K \frac{n_k}{n} w_{t+1}^k
 $$
 
-Meskipun FedAvg terbukti efisien pada data yang homogen, penerapannya pada infrastruktur jaringan riil dihadapkan pada pelanggaran asumsi independen dan berdistribusi identik (*Independent and Identically Distributed* / IID). Fenomena **Non-IID Data**, khususnya ketimpangan distribusi label (*label distribution skew*) di mana probabilitas kemunculan kelas serangan antarklien berbeda secara tajam ($\mathcal{P}_k(y) \ne \mathcal{P}_j(y)$), menyebabkan gradien lokal klien mengarah ke titik optimum lokal yang saling bertolak belakang. Kondisi ini memicu divergensi bobot (*client drift*)[4]:
+Meskipun FedAvg terbukti efisien pada data yang homogen, penerapannya pada infrastruktur jaringan riil dihadapkan pada pelanggaran asumsi independen dan berdistribusi identik (*Independent and Identically Distributed* / IID). Fenomena **Non-IID Data**, khususnya ketimpangan distribusi label (*label distribution skew*) di mana probabilitas kemunculan kelas serangan antarklien berbeda secara tajam:
+
+$$
+\mathcal{P}_k(y) \neq \mathcal{P}_j(y), \quad \text{untuk } k \ne j
+$$
+
+menyebabkan gradien lokal klien mengarah ke titik optimum lokal yang saling bertolak belakang. Kondisi ini memicu divergensi bobot (*client drift*)[4]:
 
 $$
 \| w_{t+1}^k - w^{\ast} \| \gg 0
@@ -112,7 +130,13 @@ $$
 \theta_1^{\ast} = \arg\min_\theta \mathcal{L}_1(\theta; \mathcal{D}_1)
 $$
 
-Saat tugas baru $\mathcal{T}_2$ dengan data $\mathcal{D}_2$ masuk, proses _backpropagation_ memperbarui bobot parameter menuju $\theta_2^{\ast} = \arg\min_\theta \mathcal{L}_2(\theta; \mathcal{D}_2)$. Pembaruan parameter ini menimpa (_overwrite_) bobot-bobot sinaptik yang merepresentasikan $\mathcal{T}_1$, menyebabkan lonjakan kerugian pada tugas pertama:
+Saat tugas baru $\mathcal{T}_2$ dengan data $\mathcal{D}_2$ masuk, proses *backpropagation* memperbarui bobot parameter menuju nilai optimal tugas kedua:
+
+$$
+\theta_2^{\ast} = \arg\min_\theta \mathcal{L}_2(\theta; \mathcal{D}_2)
+$$
+
+Pembaruan parameter ini menimpa (*overwrite*) bobot-bobot sinaptik yang merepresentasikan $\mathcal{T}_1$, menyebabkan lonjakan kerugian pada tugas pertama:
 
 $$
 \mathcal{L}_1(\theta_2^{\ast}; \mathcal{D}_1) \gg \mathcal{L}_1(\theta_1^{\ast}; \mathcal{D}_1)
@@ -201,7 +225,7 @@ Dengan representasi bilangan mengambang 32-bit (*single precision float32* beruk
 
 ## 2.10 Regularisasi EWC
 
-*Elastic Weight Consolidation* (EWC) merupakan metode mitigasi *catastrophic forgetting* berbasis regularisasi parameter yang diperkenalkan oleh Kirkpatrick *et al.*[5], yang terinspirasi oleh fenomena konsolidasi memori sinaptik pada otak biologis mamalia di mana plastisitas sinapsis ditekan secara selektif untuk mempertahankan keterampilan yang telah dipelajari sebelumnya. Dari perspektif inferensi Bayesian, proses pembelajaran tugas kedua $\mathcal{D}_2$ setelah menyelesaikan pelatihan tugas pertama $\mathcal{D}_1$ dirumuskan melalui distribusi probabilitas posterior parameter $\theta$[5]:
+*Elastic Weight Consolidation* (EWC) merupakan metode mitigasi *catastrophic forgetting* berbasis regularisasi parameter yang diperkenalkan oleh Kirkpatrick *et al.*[5], yang terinspirasi oleh fenomena konsolidasi memori sinaptik pada otak biologis mamalia di mana plastisitas sinapsis ditekan secara selektif untuk mempertahankan keterampilan yang telah dipelajari sebelumnya. Dari perspektif inferensi Bayesian, proses pembelajaran tugas kedua $\mathcal{D}_2$ setelah menyelesaikan pelatihan tugas pertama $\mathcal{D}_1$ dirumuskan melalui distribusi probabilitas posterior parameter $\theta$ [5]:
 
 $$
 \log p(\theta \mid \mathcal{D}_1, \mathcal{D}_2) = \log p(\mathcal{D}_2 \mid \theta) + \log p(\theta \mid \mathcal{D}_1) - \log p(\mathcal{D}_2)
@@ -222,10 +246,10 @@ $$
 Saat model melanjutkan pembelajaran pada alur data tugas kedua, fungsi kerugian total lokal diintegrasikan dengan penalti kuadratik terbobot Fisher terhadap deviasi parameter optimal lama[5]:
 
 $$
-\mathcal{L}_{\text{total}}(\theta) = \mathcal{L}_2(\theta) + \sum_{i} \frac{\lambda}{2} F_i (\theta_i - \theta_{1, i}^{\ast})^2
+\mathcal{L}_{\text{total}}(\theta) = \mathcal{L}_2(\theta) + \sum_{i} \frac{\lambda}{2} F_i (\theta_i - {\theta_{1, i}}^*)^2
 $$
 
-di mana $\lambda$ merupakan koefisien hiperparameter penalti EWC yang mengontrol keseimbangan (*trade-off*) antara plastisitas terhadap tugas baru dan stabilitas retensi memori terhadap tugas lama, $\theta_{1, i}^{\ast}$ adalah nilai parameter optimal tugas pertama yang dibekukan, dan $F_i$ mengukur seberapa sensitif kinerja tugas pertama terhadap pergeseran parameter ke-$i$[5]. Parameter dengan nilai $F_i$ besar dilindungi dari pembaruan gradien besar, sedangkan parameter dengan $F_i$ mendekati nol leluasa dimodifikasi oleh data baru, sebagaimana diilustrasikan pada Gambar 2.5.
+di mana $\lambda$ merupakan koefisien hiperparameter penalti EWC yang mengontrol keseimbangan (*trade-off*) antara plastisitas terhadap tugas baru dan stabilitas retensi memori terhadap tugas lama, ${\theta_{1, i}}^*$ adalah nilai parameter optimal tugas pertama yang dibekukan, dan $F_i$ mengukur seberapa sensitif kinerja tugas pertama terhadap pergeseran parameter ke-$i$ [5]. Parameter dengan nilai $F_i$ besar dilindungi dari pembaruan gradien besar, sedangkan parameter dengan $F_i$ mendekati nol leluasa dimodifikasi oleh data baru, sebagaimana diilustrasikan pada Gambar 2.5.
 
 ![Gambar 2.5 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis pada Kontur Kerugian](../Aset/ewc_parameter_space_kirkpatrick2017.png)  
 *Gambar 2.5 Mekanisme Regularisasi EWC Membatasi Pergeseran Bobot Kritis pada Kontur Kerugian[5].*
