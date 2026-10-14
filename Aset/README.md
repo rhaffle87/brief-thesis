@@ -1,7 +1,7 @@
 # Dokumentasi Inventaris Aset Visual & Model (`Aset/`)
 
 **Lokasi Repositori:** `E:/Projects/thesis/Aset/`  
-**Terakhir Diperbarui:** 2026-10-06  
+**Terakhir Diperbarui:** 2026-10-14  
 **Status Audit:** ✅ Terorganisasi, Tervalidasi, & Bebas Redundansi  
 
 ---
@@ -20,11 +20,12 @@ Dengan demikian, direktori `Aset/` saat ini murni memuat aset visual dan biner m
 
 ---
 
-## 📂 2. Katalog Lengkap Aset (16 Berkas)
+## 📂 2. Katalog Lengkap Aset (17 Berkas)
 
 ### A. Diagram Arsitektur & Topologi Testbed
 | Nama Berkas | Format & Ukuran | Resolusi | Deskripsi & Konten | Sumber / Rujukan |
 |---|---|---|---|---|
+| `nids_vs_hids_architecture.png` | PNG (327,7 KB) | 1024 × 768 | Diagram perbandingan topologi penempatan Network-Based IDS (NIDS) pada switch/gateway jaringan vs Host-Based IDS (HIDS) pada endpoint/server lokal. | Stephen (2023), [Medium](https://medium.com/@cybersecuritystephen/hids-vs-nids-whats-the-difference-and-why-should-i-care-64b37f7a1f0e) |
 | `arsitektur_testbed_fl_cl.png` | PNG (247,1 KB) | 2720 × 1920 | Arsitektur lengkap testbed FL-CL terdistribusi: PVE FL Server (FedAvg Aggregator), Client A (Node PVE-01, Task 1: Normal+SSH), Client B (Node PVE-02, Task 2: Normal+DoS), metrik evaluasi F1/BWT, dan Avalanche EWC. | Dibuat khusus untuk arsitektur tugas akhir ITS |
 | `cicids2017_testbed_architecture_sharafaldin2018.png` | PNG (698,4 KB) | 2063 × 842 | Diagram topologi jaringan capture dataset CIC-IDS2017: Victim Network (Web, Management, Server) dan Attack Network terpisah. | Sharafaldin et al. (2018) [Sharafaldin-2018-CIC-IDS2017](../Literatur/Sharafaldin-2018-CIC-IDS2017.md) |
 | `centralized_vs_fl_hernandezramos2025.png` | PNG (121,8 KB) | 1605 × 834 | Ilustrasi perbandingan komparatif model terpusat (Centralized) vs Federated Learning berbasis pertukaran bobot gradien tanpa memindahkan raw traffic. | Hernandez-Ramos et al. (2025, ACM CSUR) [Hernandez-Ramos-2025-FL-IDS-Survey](../Literatur/Hernandez-Ramos-2025-FL-IDS-Survey.md) |
