@@ -1,6 +1,6 @@
 # Keputusan Pembekuan Algoritma Federated Learning
 
-**Status:** **RESMI DISETUJUI PEMBIMBING — TERKUNCI (READY FOR PREPROCESSING)**  
+**Status:** **RESMI DISETUJUI PEMBIMBING - TERKUNCI (READY FOR PREPROCESSING)**  
 **Tanggal:** 2026-10-06  
 
 ## Ketetapan Scope

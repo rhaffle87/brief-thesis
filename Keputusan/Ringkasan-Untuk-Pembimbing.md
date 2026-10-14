@@ -6,7 +6,7 @@ Analisis Kinerja Deteksi Network Traffic Intrusion Menggunakan Metode Federated-
 **Mahasiswa:** Rafli Alif Ihza Hartono (NRP 5022211233)  
 **Departemen:** Teknik Elektro, FTEIC, Institut Teknologi Sepuluh Nopember (ITS)  
 **Tanggal Briefing:** 2026-10-06  
-**Status Dokumen:** **TELAH DISETUJUI PEMBIMBING — KEPUTUSAN TERKUNCI (READY FOR PREPROCESSING)**  
+**Status Dokumen:** **TELAH DISETUJUI PEMBIMBING - KEPUTUSAN TERKUNCI (READY FOR PREPROCESSING)**  
 
 ---
 
@@ -30,7 +30,7 @@ Berdasarkan hasil tatap muka bimbingan bersama dosen pembimbing, seluruh poin kr
 - **Status:** **DISETUJUI (Systematic Search)**
 - **Justifikasi Pembimbing:** Melakukan pencarian parameter optimal secara sistematis untuk learning rate, batch size, penalti $\lambda$ EWC, communication rounds, dan local epochs dengan evaluasi rata-rata performa pada validation set 5 random seeds.
 
-### 5. Dataset Solely CIC-IDS2017 Bersih (63 Fitur Unik)
+### 5. Dataset Solely CIC-IDS2017 Bersih (62 Fitur Unik)
 - **Status:** **DISETUJUI (Pilihan A)**
 - **Justifikasi Pembimbing:** Menggunakan secara eksklusif berkas resmi UNB CIC-IDS2017 (**Senin, Selasa, Rabu**):
   - **Senin:** Normal murni baseline (529K flow).
@@ -38,7 +38,7 @@ Berdasarkan hasil tatap muka bimbingan bersama dosen pembimbing, seluruh poin kr
   - **Rabu:** DoS 4 subvarian (193.748 flow bersih) untuk Task 2 / Client B.
   - **Kamis Dieliminasi:** Web Attacks & Infiltration memiliki sampel terlalu sedikit (Sql Injection 21, Infiltration 36; tidak layak statistik) serta cacat pelabelan pcap parah (*Rosay et al., 2022*).
   - **Jumat Dieliminasi:** PortScan adalah reconnaissance pasif, Botnet menderita bug fragmentasi flow, dan DDoS LOIC memicu bias confounding dengan DoS Rabu.
-  - Dibuang 10 kolom konstan, 5 kolom duplikat identik, dan `Destination Port` (mencegah shortcut learning). Total fitur bersih: **63 fitur numerik unik + 1 Label**.
+  - Dibuang 10 kolom konstan, 5 kolom duplikat identik, dan `Destination Port` (mencegah shortcut learning). Total fitur bersih: **62 fitur numerik unik + 1 Label**.
 
 ### 6. Partisi Data Normal: Random Split 50/50 All Days
 - **Status:** **DISETUJUI (Pilihan A)**

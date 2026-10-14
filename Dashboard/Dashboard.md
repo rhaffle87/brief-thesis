@@ -26,7 +26,7 @@ updated: 2026-10-06
 
 | Komponen | Keputusan Final | Dibekukan Minggu |
 |----------|-----------------|------------------|
-| **Dataset** | CIC-IDS2017 (3 kelas: Normal, SSH-Patator, DoS; **63 fitur unik + 1 Label**; Weighted Loss - Keep All Clean Data) | Minggu 4 (TERKUNCI) |
+| **Dataset** | CIC-IDS2017 (3 kelas: Normal, SSH-Patator, DoS; **62 fitur unik + 1 Label**; Weighted Loss - Keep All Clean Data) | Minggu 4 (TERKUNCI) |
 | **Model** | MLP only (Input: 63 → 64 → 32 → Output: 3) + Hyperparameter Tuning | Minggu 6 |
 | **FL Algorithm** | FedAvg only (2 client + 1 server, Local First → Proxmox Simulation) | Minggu 10 |
 | **CL Algorithm** | EWC only vs naive fine-tuning (Balanced Weighting λ) | Minggu 8 |
@@ -68,7 +68,7 @@ updated: 2026-10-06
 | Minggu | Target | Status | Catatan |
 |--------|--------|--------|---------|
 | **1-2** | Finalisasi desain, studi literatur, audit EDA, bimbingan dosen | ✅ DONE | **Keputusan Resmi Disetujui Pembimbing** |
-| **3-4** | Preprocessing CIC-IDS2017, partisi client/task | 🟢 READY TO RUN | **Dataset freeze** (63 fitur, Weighted Loss, All Days 50/50) |
+| **3-4** | Preprocessing CIC-IDS2017, partisi client/task | 🟢 READY TO RUN | **Dataset freeze** (62 fitur, Weighted Loss, All Days 50/50) |
 | **5-6** | Baseline MLP training & tuning (E0) | ⬜ TODO | Baseline valid |
 | **7-8** | Naive vs EWC lokal (E1, E2) | ⬜ TODO | Forgetting selesai |
 | **9-10** | FL Flower + FedAvg lokal & Proxmox (E3) | ⬜ TODO | FL berjalan |

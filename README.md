@@ -57,7 +57,7 @@ Penelitian ini menggunakan **solely dataset CIC-IDS2017 Original** (file Senin, 
 |---|---|---|
 | **Sumber Data** | CIC-IDS2017 (Senin, Selasa, Rabu) | Menghindari label drift & inkonsistensi pcap Kamis/Jumat. |
 | **Total Sampel Bersih** | **1.529.677 flows** (Normal: 1.332.710; DoS: 193.748; SSH: 3.219) | Deduplikasi flow penuh, membuang baris identik non-informatif. |
-| **Fitur Final** | **63 Fitur Numerik Unik + 1 Label** | 10 kolom konstan (varian nol) & 5 duplikat identik dibuang. |
+| **Fitur Final** | **62 Fitur Numerik Unik + 1 Label** | 10 kolom konstan (varian nol) & 5 duplikat identik dibuang. |
 | **Pencegahan Shortcut** | **`Destination Port` DIBUANG** | Mencegah shortcut learning buatan (*port-to-label bias*, Engelen et al., 2021). |
 | **Partisi Normal** | **Opsi A: Random 50/50 All Days** | Mencegah bias confounder hari (*day-of-week traffic pattern*). |
 | **Penanganan Imbalance** | **Opsi C: Weighted Cross-Entropy Loss** | Mempertahankan seluruh 1,53 juta sampel tanpa distorsi undersampling. |

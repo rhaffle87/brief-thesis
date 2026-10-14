@@ -6,7 +6,7 @@
 - [x] Audit komprehensif dataset CIC-IDS2017 (EDA, duplikat, port leakage, kolom konstan/identik)
 - [x] Restrukturisasi vault nama sederhana (14 folder) dan perbaikan tautan
 - [x] Bimbingan konfirmasi pembimbing (8 Poin Keputusan Metodologis Resmi Disetujui)
-- [ ] 🟡 **READY TO START:** Implementasi praproses dataset CIC-IDS2017 (63 fitur unik, Weighted Loss, Parquet chunks)
+- [ ] 🟡 **READY TO START:** Implementasi praproses dataset CIC-IDS2017 (62 fitur unik, Weighted Loss, Parquet chunks)
 - [ ] Eksperimen E0: Centralized Baseline (MLP, 5 seeds, Hyperparameter Tuning)
 - [ ] Eksperimen E1: Local Continual Naive (Catastrophic Forgetting baseline)
 - [ ] Eksperimen E2: Local Continual EWC (Balanced Weighting λ)

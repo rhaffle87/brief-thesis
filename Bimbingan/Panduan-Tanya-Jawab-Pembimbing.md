@@ -28,7 +28,7 @@
      - Di masa depan, penyerang dapat menjalankan SSH di port non-standar (misal port 2222) atau DoS di port acak, dan model berbasis port akan langsung lumpuh.
   2. **Solusi Kompromi (Dual-Tabel):**
      - Skenario pengujian utama dijalankan pada **62 fitur (tanpa port)** untuk membuktikan model benar-benar mempelajari pola flow statistik intrusi.
-     - Kami menyediakan **satu kolom pembanding (dengan port, 63 fitur)** di tabel skripsi untuk memperlihatkan kepada penguji secara transparan seberapa besar efek *shortcut* yang dihasilkan port.
+     - Kami menyediakan **satu kolom pembanding (dengan port, 62 fitur)** di tabel skripsi untuk memperlihatkan kepada penguji secara transparan seberapa besar efek *shortcut* yang dihasilkan port.
 
 ---
 

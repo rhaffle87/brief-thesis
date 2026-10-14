@@ -44,11 +44,11 @@ Berdasarkan pemindaian menyeluruh 1,53 juta baris data mentah:
    - Total baris awal: 1.668.530 baris.
    - Duplikat identik: 132.909 baris (7,97%).
    - Baris 3-kelas bersih setelah dedup: **1.529.677 baris** (BENIGN 1.332.710; DoS 193.748; SSH-Patator 3.219).
-2. **Standar Fitur Baku (63 Fitur Unik + 1 Label):**
+2. **Standar Fitur Baku (62 Fitur Unik + 1 Label):**
    - Dari 78 fitur asli:
      - Dibuang **10 kolom konstan bervariansi 0** (misal: `Bwd PSH Flags`, `Fwd URG Flags`, dll.).
      - Dibuang **5 kolom duplikat 100% identik** (`Fwd Header Length.1`, `Subflow Fwd Bytes`, `Subflow Fwd Packets`, `Subflow Bwd Packets`, `SYN Flag Count`).
-   - Sisa: **63 fitur unik numerik**.
+   - Sisa: **62 fitur unik numerik**.
 3. **Uji Kebocoran Fitur Port (Port Leakage Test, 5 Seeds):**
    - Fitur `Destination Port` saja menghasilkan **Macro-F1 96,44%** (model hanya menghafal nomor port 22/80).
    - Tanpa port, Macro-F1 tetap mencapai **98,02%**, dan satu fitur `Bwd Packet Length Std` secara mandiri mencapai **Macro-F1 90,93%**.
@@ -66,7 +66,7 @@ Berdasarkan pemindaian menyeluruh 1,53 juta baris data mentah:
 
 | No | Poin Keputusan | Bukti / Dasar Pertimbangan | Keputusan Pembimbing | Status Konfirmasi |
 |---|---|---|---|---|
-| **1** | **Dataset & 63 Fitur** | Anomali 10 konstan & 5 duplikat terbukti via array hashing | Pakai solely CIC-IDS2017 resmi dengan 63 fitur unik | ✅ **DISETUJUI** |
+| **1** | **Dataset & 62 Fitur** | Anomali 10 konstan & 5 duplikat terbukti via array hashing | Pakai solely CIC-IDS2017 resmi dengan 62 fitur unik | ✅ **DISETUJUI** |
 | **2** | **Partisi Data Normal** | Klasifikasi Normal Selasa vs Rabu akurasi 62,44% (ada pola hari) | Random split 50/50 data Normal all-days (hindari bias hari) | ✅ **DISETUJUI (Opsi A)** |
 | **3** | **Komposisi Kelas DoS** | Total DoS 193.748 baris; DoS Hulk mendominasi 89,2% | Pertahankan distribusi alami (volumetrik realistis) | ✅ **DISETUJUI (Opsi A)** |
 | **4** | **Handling Imbalance** | Menghindari data loss 99% akibat subsampling ekstrem | Weighted Loss (Keep All Clean Data ~1.53M baris) | ✅ **DISETUJUI (Opsi C)** |
@@ -149,7 +149,7 @@ Serta didukung **3 buku teks akademik terkini**:
 ## 🗓️ Bagian 8: Rencana Kerja & Milestone Berikutnya
 
 - **Minggu 1–2 (Saat Ini):** Konfirmasi 7 poin ruang lingkup dan persetujuan dosen pembimbing.
-- **Minggu 3–4:** Ekstraksi data 63 fitur, stratified split seimbang, pembekuan dataset (*Freeze Point 1*).
+- **Minggu 3–4:** Ekstraksi data 62 fitur, stratified split seimbang, pembekuan dataset (*Freeze Point 1*).
 - **Minggu 5–6:** Eksekusi baseline terpusat E0 (5 seed) dan penentuan ambang batas referensi.
 - **Minggu 7–12:** Implementasi eksperimen inti (E1, E2, E3, E4).
 - **Minggu 13–16:** Multi-seed aggregation, penulisan buku skripsi, dan persiapan sidang.

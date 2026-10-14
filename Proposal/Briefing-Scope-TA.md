@@ -7,7 +7,7 @@ Analisis Kinerja Deteksi Network Traffic Intrusion Menggunakan Metode Federated-
 *Studi Pengaruh Elastic Weight Consolidation dan Federated Averaging pada Distribusi Data Non-IID Dua Client*  
 
 **Penyusun:**  
-Rafli Alif Ihza Hartono (NRP 5022211233)  
+Rafli Alif Ihza Hartono (NRP 5048231003)  
 Departemen Teknik Elektro, Fakultas Teknologi Elektro dan Informatika Cerdas (FTEIC)  
 Institut Teknologi Sepuluh Nopember (ITS), Surabaya  
 
@@ -90,7 +90,7 @@ Senin, Selasa, dan Rabu memuat **100% kelas yang menjadi fokus penelitian** (Nor
 
 ---
 
-## 🔍 4. Audit & Spesifikasi Fitur: Dari 79 Kolom Mentah Menjadi 63 Fitur Unik
+## 🔍 4. Audit & Spesifikasi Fitur: Dari 79 Kolom Mentah Menjadi 62 Fitur Unik
 
 Berdasarkan audit empiris pada 3 berkas CSV CIC-IDS2017 (Senin, Selasa, Rabu), dataset mentah memiliki 79 kolom (78 fitur numerik + 1 kolom Label). Dilakukan proses pembersihan berbasis data riil:
 
@@ -113,11 +113,11 @@ Fitur nomor port tujuan (`Destination Port`) dieksklusi secara sengaja dari inpu
 * **Bukti Empiris:** Pengujian baseline Decision Tree (5 seed) menunjukkan:
   * **Port Saja (1 Fitur):** Menghasilkan Macro-F1 **96,44% ± 0,16%**.
   * **Tanpa Port (62 Fitur):** Menghasilkan Macro-F1 **98,02% ± 0,34%**.
-  * **Semua Fitur (63 Fitur):** Menghasilkan Macro-F1 **99,35% ± 0,17%**.
+  * **Semua Fitur (62 Fitur):** Menghasilkan Macro-F1 **99,35% ± 0,17%**.
 * **Justifikasi Ilmiah:** Nomor port menyebabkan model melakukan **shortcut learning** (menghafal bahwa Port 22 pasti SSH-Patator dan Port 80 pasti DoS/HTTP). Di dunia nyata, penyerang dapat mengubah port layanan (misal SSH pada port non-standar 2222). Model dipaksa mengidentifikasi anomali murni berdasarkan dinamika statistik aliran paket (panjang paket, inter-arrival time, window size, flags), bukan menghafal nomor port.
 
-### 4.4 Rincian 63 Fitur Bersih Tersisa
-63 fitur numerik mencakup parameter statistik bidirectional flow:
+### 4.4 Rincian 62 Fitur Bersih Tersisa
+62 fitur numerik mencakup parameter statistik bidirectional flow:
 * **Durasi & Volume:** `Flow Duration`, `Total Fwd Packets`, `Total Backward Packets`, `Total Length of Fwd Packets`, `Total Length of Bwd Packets`.
 * **Statistik Panjang Paket:** Mean, Std, Max, Min panjang paket fwd dan bwd.
 * **Inter-Arrival Time (IAT):** `Flow IAT Mean/Std/Max/Min`, `Fwd IAT Mean/Std/Max/Min`, `Bwd IAT Mean/Std/Max/Min`.
@@ -130,7 +130,7 @@ Fitur nomor port tujuan (`Destination Port`) dieksklusi secara sengaja dari inpu
 ## ⚖️ 5. Keputusan Penanganan Imbalance & Retensi Data: Weighted Loss (Keep All Clean Data)
 
 ### 5.1 Realitas Data Mentah Pasca-Deduplikasi
-Setelah seluruh baris duplikat mentah dibersihkan dari CSV hari Senin, Selasa, dan Rabu (menggunakan 63 fitur unik):
+Setelah seluruh baris duplikat mentah dibersihkan dari CSV hari Senin, Selasa, dan Rabu (menggunakan 62 fitur unik):
 * **Normal (BENIGN):** 1.332.710 flow (87,1%)
 * **DoS (Hulk, GoldenEye, slowloris, slowhttptest):** 193.748 flow (12,7%)
 * **SSH-Patator (Brute Force):** **Hanya 3.219 flow unik** (0,2%)
@@ -169,7 +169,7 @@ Perbandingan komprehensif pemilihan arsitektur model deteksi intrusi:
 $$\text{Input}(63) \longrightarrow \text{Linear}(64) + \text{ReLU} + \text{Dropout}(0.2) \longrightarrow \text{Linear}(32) + \text{ReLU} \longrightarrow \text{Linear}(3) + \text{Softmax}$$
 
 ![Arsitektur Multi-Layer Perceptron (MLP) Feedforward](../Aset/mlp_architecture_diagram_web.png)  
-*Gambar 4a: Topologi Jaringan Syaraf Tiruan Feedforward (Multi-Layer Perceptron) dengan Input Layer (63 fitur), Hidden Layers (64 dan 32 neuron teraktivasi ReLU), dan Output Layer (3 neuron klasifikasi softmax). Sumber: Glosser.ca (2013), "Colored neural network", Wikimedia Commons, lisensi CC BY-SA 3.0.*
+*Gambar 4a: Topologi Jaringan Syaraf Tiruan Feedforward (Multi-Layer Perceptron) dengan Input Layer (62 fitur), Hidden Layers (64 dan 32 neuron teraktivasi ReLU), dan Output Layer (3 neuron klasifikasi softmax). Sumber: Glosser.ca (2013), "Colored neural network", Wikimedia Commons, lisensi CC BY-SA 3.0.*
 
 ![Visualisasi Graph Komputasi MLP pada Netron](../Aset/netron_mlp_architecture.png)  
 *Gambar 4b: Graph komputasi arsitektur MLP skripsi (Input: `flow_features_63` $\to$ Gemm/Linear: 64 $\to$ Relu $\to$ Dropout: 0.2 $\to$ Gemm/Linear: 32 $\to$ Relu $\to$ Gemm/Linear: 3 $\to$ `class_logits_3`) yang diekspor dari PyTorch ke format ONNX ([Aset/mlp_intrusion_model.onnx](../Aset/mlp_intrusion_model.onnx)) dan divisualisasikan melalui [Netron](https://netron.app).*
@@ -306,7 +306,7 @@ $$\text{Accuracy} = \frac{\sum_{c=1}^{|C|} TP_c}{\sum_{c=1}^{|C|} (TP_c + FP_c +
 Kemampuan model menghindari salah deteksi (*False Alarm / False Positive*):
 $$\text{Precision}_c = \frac{TP_c}{TP_c + FP_c}$$
 
-### 3. Recall / Sensitivitas (Recall per-class $c$) — *Metrik Kunci Retensi*
+### 3. Recall / Sensitivitas (Recall per-class $c$) - *Metrik Kunci Retensi*
 Kemampuan model menjaring seluruh serangan yang ada (*Missed Detection Prevention*):
 $$\text{Recall}_c = \frac{TP_c}{TP_c + FN_c}$$
 *Signifikansi Khusus:* **$Recall_{\text{SSH-Patator}}$ adalah indikator paling sensitif terhadap catastrophic forgetting.** Ketika model lupa ingatan, $Recall_{\text{SSH-Patator}}$ akan runtuh mendekati 0%.
@@ -317,7 +317,7 @@ $$F1_c = 2 \times \frac{\text{Precision}_c \times \text{Recall}_c}{\text{Precisi
 $$Macro-F1 = \frac{1}{|C|} \sum_{c=1}^{|C|} F1_c$$
 *Signifikansi Khusus:* Memastikan kelas minoritas diperlakukan setara dengan kelas mayoritas tanpa bias volume.
 
-### 5. Backward Transfer (BWT) — *Metrik Inti Continual Learning*
+### 5. Backward Transfer (BWT) - *Metrik Inti Continual Learning*
 Mengukur secara presisi seberapa besar degradasi retensi memori tugas lama setelah mempelajari tugas baru:
 $$BWT = R_{2,1} - R_{1,1}$$
 *Interpretasi Ilmiah:*

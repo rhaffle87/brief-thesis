@@ -131,7 +131,13 @@ flowchart TD
    - Server agregator menghitung rata-rata global $\mu_{\text{global}} = \frac{S_{1, A} + S_{1, B}}{n_A + n_B}$ dan variansi global $\sigma_{\text{global}}^2 = \frac{S_{2, A} + S_{2, B}}{n_A + n_B} - \mu_{\text{global}}^2$.
    - Vektor parameter $\mu_{\text{global}}$ dan $\sigma_{\text{global}}$ disiarkan kembali ke seluruh klien untuk mentransformasikan data latih lokal serta disimpan pada server untuk menskalakan *test set* evaluasi global. Seluruh node mengevaluasi model pada ruang representasi fitur yang identik secara seragam tanpa pernah membocorkan data lalu lintas mentah.
 4. **Partisi Non-IID dan Alokasi Fase Pembelajaran:** Seluruh aliran `BENIGN` digabungkan lalu dibagi acak tepat **50% untuk Klien A** (666.355 aliran) dan **50% untuk Klien B** (666.355 aliran) guna mencegah bias hari perekaman. Klien A bertindak sebagai sensor perimeter subnet internal yang memegang seluruh data serangan **SSH-Patator** (3.219 aliran). Klien B bertindak sebagai sensor perimeter DMZ yang memegang seluruh data serangan **DoS** (193.748 aliran). Pembagian data per fase pembelajaran sekuensial dirangkum pada Tabel 3.3.
-5. **Penanganan Ketimpangan Kelas:** Perbandingan kelas Normal terhadap SSH-Patator mencapai $\approx 414 : 1$. Mengatasi hal ini, diterapkan **Weighted Cross-Entropy Loss** berbasis invers frekuensi kelas terkalibrasi dan pemotongan gradien (*Gradient Clipping* norm $\le 1.0$).
+5. **Penanganan Ketimpangan Kelas:** Rasio perbandingan kelas Normal terhadap SSH-Patator mencapai $\approx 414 : 1$. Guna mencegah model terbias terhadap kelas mayoritas, diterapkan **Weighted Cross-Entropy Loss** yang dipadukan dengan pemotongan gradien (*Gradient Clipping* norm $\le 1.0$). Bobot penalti kelas $w_c$ **dihitung secara global** dari agregasi total jumlah alur tiap kelas lintas seluruh klien ($N_c = \sum_k n_{k,c}$):
+
+$$
+w_c = \frac{N_{\text{total}}}{C \cdot N_c}
+$$
+
+di mana $N_{\text{total}} = \sum_{c=0}^{C-1} N_c$ dan $C=3$. Penghitungan bobot secara global ini mutlak diperlukan karena pada partisi non-IID ekstrem, klien tertentu (seperti Klien B pada Fase 1 yang hanya memegang alur Normal) tidak memiliki sampel kelas serangan SSH-Patator, sehingga penghitungan bobot secara lokal akan menghasilkan nilai bobot yang tidak seimbang atau terdefinisi tunggal (inversi frekuensi lokal Normal bernilai 1,0, mengabaikan kelas lainnya).
 
 *Tabel 3.2 Ringkasan 62 Fitur Statistik Numerik Aliran Bersih CIC-IDS2017.*
 
@@ -244,7 +250,7 @@ Keluaran:
 ```
 
 ### 3.3.4 Penyetelan Hiperparameter Bayesian (Optuna TPE)
-Penyetelan hiperparameter dijalankan melalui 50 *trials* Optuna berbasis algoritma Tree-structured Parzen Estimator (TPE)[25] dengan fungsi objektif memaksimalkan rata-rata Macro-F1 pada subset validasi, menyeimbangkan *trade-off* plastisitas pembelajaran tugas baru dan stabilitas memori tugas lama melalui penyesuaian koefisien penalti $\lambda$ serta parameter optimasi lokal, sebagaimana dirangkum pada Tabel 3.4.
+Penyetelan hiperparameter dijalankan menggunakan kerangka kerja Optuna berbasis algoritma *Tree-structured Parzen Estimator* (TPE)[25] dengan fungsi objektif memaksimalkan Macro-F1 pada subset validasi. Anggaran komputasi (*computational budget*) dialokasikan secara seragam, yaitu tepat **30 trials** untuk masing-masing skenario pengujian (skenario baseline E0, E1, E2, E3 serta skenario EWC E2b dan E4) guna menjamin komparasi yang adil (*fair comparison*). Penyetelan hiperparameter Bayesian ini dijalankan pada satu *random seed* representatif (seed 42) pada subset data validasi *held-out* lokal (20% dari partisi latih). Konfigurasi hiperparameter optimal terbaik yang diperoleh kemudian **dikunci dan diterapkan secara konsisten melintasi seluruh lima *random seed* pengujian independen (42, 43, 44, 45, dan 46)**. Hal ini menjamin bahwa variabilitas skor performa yang diamati pada evaluasi akhir murni mencerminkan stabilitas intrinsik algoritma terhadap perbedaan inisialisasi bobot dan partisi data acak, bukan akibat dari penyesuaian parameter per-seed.
 
 *Tabel 3.4 Konfigurasi Parameter Pelatihan Baseline dan Ruang Pencarian Hiperparameter.*
 
@@ -265,15 +271,19 @@ Penyetelan hiperparameter dijalankan melalui 50 *trials* Optuna berbasis algorit
 ### 3.3.5 Matriks Skenario Pengujian Komparatif E0–E4
 Matriks pengujian komparatif dirancang secara sistematis mencakup lima skenario utama (E0 s.d. E4) untuk menjawab secara langsung Rumusan Masalah 1 (RM1) dan Rumusan Masalah 2 (RM2), sebagaimana disajikan pada Tabel 3.5.
 
-*Tabel 3.5 Matriks Skenario Pengujian Eksperimen E0–E4.*
+*Tabel 3.5 Matriks Skenario Pengujian Eksperimen E0-E4.*
 
 | Skenario | Topologi Pelatihan | Urutan Data & Tugas | Metode Mitigasi Forgetting | Target Pembuktian Ilmiah & Relevansi Rumusan Masalah |
 | :---: | :--- | :--- | :--- | :--- |
 | **E0** | Sentralisasi Penuh (1 Node Sentral) | Simultan (Normal, SSH, DoS digabung bersamaan) | Tanpa Proteksi CL (*Joint Training*) | **Batas Atas Teoretis (*Upper Bound*):** Mengukur performa klasifikasi ideal jika seluruh data disatukan tanpa batasan privasi dan tanpa penahapan sekuensial. |
-| **E1** | **Lokal Mandiri (Isolated Single-Client)** | Data lokal per klien tanpa komunikasi jaringan | Pelatihan lokal murni | **Menjawab RM1 (Baseline Data Silo):**<br>- **E1a (Klien A Mandiri):** Melatih Normal + SSH-Patator (buta terhadap DoS, Recall DoS = 0%).<br>- **E1b (Klien B Mandiri):** Melatih Normal + DoS (buta terhadap SSH, Recall SSH = 0%).<br>Membuktikan kelemahan fundamental ketiadaan kolaborasi lintas klien. |
-| **E2** | Sentralisasi Sekuensial (1 Node Sentral) | Sekuensial:<br>Fase 1 (Normal + SSH) $\to$<br>Fase 2 (Normal + DoS) | **E2a:** *Naive Fine-Tuning*<br>**E2b:** Regularisasi EWC ($\lambda$ optimal) | **Isolasi Efek EWC Sentral (Relevansi RM2):** Mengukur degradasi kelupaan katastropik murni (*naive*) dan efektivitas EWC mempertahankan memori lama pada lingkungan terpusat tanpa gangguan heterogenitas jaringan federasi. |
-| **E3** | **Federated (2 Klien Non-IID)** | Sekuensial:<br>Fase 1 $\to$ Fase 2 | ***Naive* FedAvg** (tanpa mitigasi EWC) | **Menjawab RM1 & Baseline RM2:**<br>- Membuktikan keunggulan kolaborasi FedAvg dibanding lokal mandiri E1 (kedua serangan berhasil dikenali).<br>- Membuktikan terjadinya *catastrophic forgetting* terdistribusi ($BWT \ll 0$) saat Fase 2 menimpa memori SSH-Patator. |
+| **E1** | **Lokal Mandiri (Isolated Single-Client)** | Data lokal per klien tanpa komunikasi jaringan | Pelatihan lokal murni | **Menjawab RM1 (Baseline Data Silo):**<br>- **E1a (Klien A Mandiri):** Melatih Normal + SSH-Patator (Fase 1: Normal+SSH, Fase 2: Normal murni).<br>- **E1b (Klien B Mandiri):** Melatih Normal + DoS (Fase 1: Normal murni, Fase 2: Normal+DoS).<br>Membuktikan kelemahan fundamental isolasi data lokal mandiri terhadap kelas ancaman di node lain. |
+| **E2** | Sentralisasi Sekuensial (1 Node Sentral) | Sekuensial:<br>Fase 1 (Normal + SSH) $\to$<br>Fase 2 (Normal + DoS) | **E2a:** *Naive Fine-Tuning*<br>**E2b:** Regularisasi EWC ($\lambda$ optimal) | **Isolasi Efek EWC Sentral (Relevansi RM2):** Mengukur degradasi kelupaan katastropik murni (*naive*) dan efektivitas penalti EWC mempertahankan memori lama pada lingkungan terpusat tanpa gangguan heterogenitas jaringan federasi. |
+| **E3** | **Federated (2 Klien Non-IID)** | Sekuensial:<br>Fase 1 $\to$ Fase 2 | ***Naive* FedAvg** (tanpa mitigasi EWC) | **Menjawab RM1 & Baseline RM2:**<br>- Membuktikan keunggulan kolaborasi FedAvg dibanding model lokal E1 (kedua serangan berhasil dikenali oleh model global).<br>- Membuktikan terjadinya *catastrophic forgetting* terdistribusi ($BWT \ll 0$) saat Fase 2 menimpa memori SSH-Patator. |
 | **E4** | **Federated (2 Klien Non-IID)** | Sekuensial:<br>Fase 1 $\to$ Fase 2 | **FedAvg + EWC (Sistem Usulan TA)** | **Menjawab RM2 (Metode Usulan FCL):** Mengevaluasi efektivitas regularisasi penalti Fisher EWC dalam mempertahankan memori kelas serangan lama (SSH-Patator) di bawah agregasi FedAvg non-IID ($BWT \approx 0$). |
+
+Untuk mencegah bias evaluasi yang meremehkan model lokal E1 (di mana pada pengujian global, model E1a pasti memiliki Recall DoS bernilai 0% karena tidak pernah melihat kelas tersebut), evaluasi performa model dilakukan pada **dua set pengujian terpisah (*Dual-Domain Evaluation*)**:
+1. **Global Held-Out Benchmark Test Set (20% gabungan data uji independen):** Mengukur kemampuan generalisasi komprehensif model terpadu dalam mendeteksi seluruh kelas (Normal, SSH-Patator, dan DoS) secara simultan.
+2. **Local Client Test Set (20% held-out lokal masing-masing klien):** Mengukur apakah kolaborasi federasi global (E3 dan E4) mampu mempertahankan performa deteksi pada domain spesialis lokal (akurasi Klien A pada trafik lokal Normal+SSH, dan akurasi Klien B pada trafik lokal Normal+DoS) dibandingkan performa model lokal mandiri (E1a dan E1b).
 
 ```mermaid
 flowchart TD
@@ -297,23 +307,32 @@ flowchart TD
 *Gambar 3.6 Diagram Alir Skenario Pengujian Sekuensial Non-IID.*
 
 ### 3.3.6 Mekanisme Evaluasi Multi-Seed dan Profiling Komputasi
-Setiap skenario dievaluasi melintasi lima *random seed* (42, 43, 44, 45, 46) menggunakan metrik evaluasi yang komprehensif:
+Setiap skenario dievaluasi melintasi lima *random seed* independen (42, 43, 44, 45, 46) menggunakan metrik evaluasi yang komprehensif:
 
-1. **Performa Deteksi ML:** Macro-F1, per-class Precision, Recall, dan Akurasi dievaluasi pada *test set* independen di akhir setiap fase pembelajaran. Indikator $Recall_{\text{SSH-Patator}}$ ditetapkan sebagai metrik evaluasi utama untuk mendeteksi tingkat keparahan *catastrophic forgetting*.
-2. **Retensi Continual Learning:** Metrik *Backward Transfer* (BWT) dihitung untuk mengukur degradasi memori terhadap tugas masa lalu[10]:
+1. **Performa Deteksi ML:** Macro-F1, *Precision*, *Recall*, dan *Accuracy* dievaluasi pada *test set* global maupun *test set* lokal klien di akhir setiap fase pembelajaran. Indikator $Recall_{\text{SSH-Patator}}$ ditetapkan sebagai metrik evaluasi utama untuk mendeteksi tingkat keparahan *catastrophic forgetting*.
+2. **Retensi Continual Learning:** Metrik *Backward Transfer* (BWT) dihitung untuk mengukur retensi memori terhadap tugas masa lalu[10]. Pada paradigma pembelajaran sekuensial dengan $T$ tugas, didefinisikan matriks evaluasi performa $R \in \mathbb{R}^{T \times T}$, di mana elemen $R_{i, j}$ merepresentasikan skor evaluasi (Macro-F1 atau Recall kelas lama) pada data uji Tugas $j$ setelah model menyelesaikan pembelajaran pada Tugas $i$ ($i \ge j$). Formulasi umum BWT dinyatakan sebagai[10]:
+
+$$
+\text{BWT} = \frac{1}{T-1} \sum_{j=1}^{T-1} (R_{T, j} - R_{j, j})
+$$
+
+Pada skenario dua fase sekuensial penelitian ini ($T=2$), formulasi tereduksi menjadi:
 
 $$
 \text{BWT} = R_{2, 1} - R_{1, 1}
 $$
 
-di mana $R_{i, j}$ merepresentasikan skor performa (Macro-F1 dan Recall spesifik kelas lama) pada data uji Tugas $j$ setelah model menyelesaikan pembelajaran Fase $i$. Nilai $BWT < 0$ menunjukkan terjadinya kelupaan katastropik, sedangkan $BWT \approx 0$ menunjukkan keberhasilan retensi memori.
+di mana $R_{1, 1}$ adalah skor performa pada data uji Task 1 (SSH-Patator) segera setelah Fase 1 selesai, dan $R_{2, 1}$ adalah skor performa pada data uji Task 1 yang sama setelah model menyelesaikan pelatihan Fase 2. Nilai $\text{BWT} < 0$ merefleksikan tingkat keparahan kelupaan katastropik, sedangkan $\text{BWT} \approx 0$ membuktikan keberhasilan retensi representasi memori.
 
-3. **Efisiensi Komputasi & Instance:**
-   - *Inference Time:* Pengukuran waktu inferensi dilakukan dengan menerapkan fase pemanasan (*warm-up phase*) sebanyak 100 sampel aliran pertama untuk menstabilkan alokasi memori *cache* CPU. Selanjutnya, model mengeksekusi inferensi pada 10.000 aliran data uji independen secara sekuensial. Waktu pemrosesan dicatat menggunakan pewaktu berpresisi tinggi monotonic nanosecond clock (`time.perf_counter_ns()`), dan dilaporkan dalam rata-rata mikrodetik per aliran data ($\mu\text{s/flow}$) beserta deviasi standarnya, mengadopsi standar evaluasi skripsi rujukan Departemen Teknik Elektro FTEIC ITS[16].
-   - *Memory Footprint:* Alokasi RAM fisik puncak (*peak RAM usage*) selama fase pelatihan lokal dan penyimpanan parameter diukur secara dinamis.
-   - *Communication Payload:* Total ukuran data parameter biner yang dikirimkan per ronde federasi ($2 \times |\theta| \times 4 \text{ bita} = 2 \times 6.211 \times 4 \approx 49,7$ KB/ronde untuk transmisi uplink dan downlink), menunjukkan efisiensi komunikasi protokol gRPC Flower.
-
----
+3. **Efisiensi Komputasi & Instance Testbed:**
+   - *Inference Time:* Pengukuran waktu inferensi diawali dengan fase pemanasan (*warm-up phase*) sebanyak 100 sampel pertama untuk menstabilkan alokasi *cache* CPU. Selanjutnya, model mengeksekusi inferensi pada 10.000 aliran data uji independen secara sekuensial. Waktu pemrosesan dicatat menggunakan penanda waktu berpresisi tinggi monotonic nanosecond clock (`time.perf_counter_ns()`), dan dilaporkan dalam rata-rata mikrodetik per aliran data ($\mu\text{s/flow}$) beserta deviasi standarnya[16].
+   - *Memory Footprint:* Alokasi RAM fisik puncak (*peak RAM usage*) selama fase pelatihan lokal, kalkulasi Matriks Fisher, dan penalti regularisasi diukur menggunakan modul `tracemalloc` dan monitoring kontainer Proxmox VE.
+   - *Communication Payload:* Ukuran muatan komunikasi dihitung secara eksak dari representasi bobot numerik Float32 (4 bita per parameter):
+     * Model tunggal ($|\theta| = 6.211$ parameter): $6.211 \times 4\text{ B} = 24.844\text{ B} \approx \mathbf{24,84\text{ KB}}$ per transmisi satu arah.
+     * Beban per klien per ronde (unduh model global downlink + unggah pembaruan lokal uplink): $2 \times 24,84\text{ KB} = \mathbf{49,69\text{ KB/klien/ronde}}$.
+     * Beban komunikasi agregasi server untuk dua klien: $2 \times 49,69\text{ KB} = \mathbf{99,38\text{ KB/ronde}}$.
+4. **Estimasi Waktu Komputasi (*Computational Runtime*):**
+   Dengan alokasi 3 epoch lokal per ronde federasi pada *batch size* 128, komputasi lokal membutuhkan waktu $\approx 45$–70 detik per ronde per klien pada prosesor multi-core. Total durasi 20 ronde federasi (10 ronde Fase 1 + 10 ronde Fase 2) berkisar $\approx 75$–100 menit per seed. Total waktu eksekusi eksperimen untuk seluruh matriks E0 s.d. E4 melintasi 5 *random seed* diperkirakan mencapai $\approx 35$–45 jam komputasi CPU, yang dijadwalkan secara bertahap pada Minggu ke-9 hingga ke-11.
 
 ## 3.4 Jadwal Pelaksanaan Penelitian
 

@@ -2,7 +2,7 @@
 
 [1] Check Point Research, “Q1 2025 Global Cyber Attack Report: An almost 50% surge in cyber threats worldwide,” Check Point Software Technologies, 2025. [Daring]. Tersedia pada: https://blog.checkpoint.com/research/q1-2025-global-cyber-attack-report
 
-[2] Federal Bureau of Investigation, “2024 Internet Crime Report (IC3),” Washington, D.C., 2024. [Daring]. Tersedia pada: https://www.ic3.gov/Media/PDF/AnnualReport/2024_IC3Report.pdf
+[2] Federal Bureau of Investigation, “2023 Internet Crime Report (IC3),” Washington, D.C., 2024. [Daring]. Tersedia pada: https://www.ic3.gov/Media/PDF/AnnualReport/2023_IC3Report.pdf
 
 [3] B. McMahan, E. Moore, D. Ramage, S. Hampson, dan B. A. y Arcas, “Communication-Efficient Learning of Deep Networks from Decentralized Data,” dalam *Proceedings of the 20th International Conference on Artificial Intelligence and Statistics (AISTATS)*, PMLR, vol. 54, hlm. 1273–1282, 2017.
 
@@ -22,17 +22,17 @@
 
 [11] J. Dong, L. Wang, Z. Fang, G. Sun, S. Xu, X. Wang, dan Q. Zhu, “Federated Class-Incremental Learning,” dalam *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*, hlm. 10164–10173, 2022. doi: 10.1109/CVPR52688.2022.00992.
 
-[12] X. Jin, Y. Zhou, Z. Li, Q. Wu, dan Y. Duan, “FL-IIDS: A novel federated learning-based incremental intrusion detection system,” *Future Generation Computer Systems*, vol. 151, hlm. 57–70, 2024. doi: 10.1016/j.future.2023.09.019.
+[12] Z. Jin, J. Zhou, B. Li, X. Wu, dan C. Duan, “FL-IIDS: A novel federated learning-based incremental intrusion detection system,” *Future Generation Computer Systems*, vol. 151, hlm. 57–70, 2024. doi: 10.1016/j.future.2023.09.019.
 
-[13] A. Rosay, E. Cheval, F. Carlier, dan P. Leroux, “Network Intrusion Detection: A Comprehensive Analysis of CIC-IDS2017,” dalam *Proceedings of the 8th International Conference on Information Systems Security and Privacy (ICISSP)*, hlm. 25–36, 2022. doi: 10.5220/0010774000003120.
+[13] A. Rosay, É. Cheval, F. Carlier, dan P. Leroux, “Network Intrusion Detection: A Comprehensive Analysis of CIC-IDS2017,” dalam *Proceedings of the 8th International Conference on Information Systems Security and Privacy (ICISSP)*, hlm. 25–36, 2022. doi: 10.5220/0010774000003120.
 
-[14] R. Dube, “Faulty use of the CIC-IDS 2017 dataset in information security research,” *Journal of Computer Virology and Hacking Techniques*, vol. 20, no. 2, hlm. 203–211, 2024. doi: 10.1007/s11416-023-00509-7.
+[14] R. Dube, “Faulty use of the CIC-IDS 2017 dataset in information security research,” *Journal of Computer Virology and Hacking Techniques*, vol. 20, no. 1, hlm. 203–211, 2024. doi: 10.1007/s11416-023-00509-7.
 
 [15] G. Engelen, V. Rimmer, dan W. Joosen, “Troubleshooting an Intrusion Detection Dataset: the CICIDS2017 Case Study,” dalam *2021 IEEE Security and Privacy Workshops (SPW)*, San Francisco, CA, USA, hlm. 7–12, 2021. doi: 10.1109/SPW53761.2021.00009.
 
 [16] H. A. Rinandri, “Pendekatan Semi-Supervised Learning untuk Sistem Deteksi Intrusi Jaringan Real-Time Berbasis GNN-AE pada Arsitektur Structemp,” Tugas Akhir, Program Studi Sarjana Teknik Elektro, Departemen Teknik Elektro, Fakultas Teknologi Elektro dan Informatika Cerdas, Institut Teknologi Sepuluh Nopember, Surabaya, 2025.
 
-[17] M. Sarhan, S. Layeghy, dan M. Portmann, “Towards a Standard Feature Set of NIDS Datasets,” *Mobile Networks and Applications*, vol. 27, hlm. 357–370, 2022. doi: 10.1007/s11036-021-01843-0.
+[17] M. Sarhan, S. Layeghy, dan M. Portmann, “Towards a Standard Feature Set for Network Intrusion Detection System Datasets,” *Mobile Networks and Applications*, vol. 27, no. 1, hlm. 357–370, 2022. doi: 10.1007/s11036-021-01843-0.
 
 [18] G. M. van de Ven, T. Tuytelaars, dan A. S. Tolias, “Three types of incremental learning,” *Nature Machine Intelligence*, vol. 4, hlm. 1185–1197, 2022. doi: 10.1038/s42256-022-00568-3.
 
@@ -59,3 +59,11 @@
 [29] V. Nair dan G. E. Hinton, “Rectified Linear Units Improve Restricted Boltzmann Machines,” dalam *Proceedings of the 27th International Conference on Machine Learning (ICML)*, hlm. 807–814, 2010.
 
 [30] S. R. Dubey, S. K. Singh, dan B. B. Chaudhuri, “Activation Functions in Deep Learning: A Comprehensive Survey and Benchmark,” *Neurocomputing*, vol. 503, hlm. 92–108, 2022. doi: 10.1016/j.neucom.2022.06.111.
+
+[31] J. L. Hernandez-Ramos, G. Karopoulos, E. Chatzoglou, V. Kouliaridis, E. Marmol, A. Gonzalez-Vidal, dan G. Kambourakis, “Intrusion Detection Based on Federated Learning: A Systematic Review,” *ACM Computing Surveys*, vol. 57, no. 12, hlm. 1–65, 2025. doi: 10.1145/3731596.
+
+[32] B. Buyuktanir, S. Altinkaya, G. Karatas Baydogmus, dan K. Yildiz, “Federated learning in intrusion detection: advancements, applications, and future directions,” *Cluster Computing*, vol. 28, no. 7, 2025. doi: 10.1007/s10586-025-05325-w.
+
+[33] M. U. Rehman, H. Bahsi, dan R. Kalakoti, “Incremental Federated Learning for Intrusion Detection in IoT Networks under Evolving Threat Landscape,” *arXiv preprint arXiv:2603.10776*, 2026.
+
+[34] P. Hamedi, R. Razavi-Far, dan E. Hallaji, “Federated Continual Learning: Concepts, Challenges, and Solutions,” *arXiv preprint arXiv:2502.07059*, 2025.

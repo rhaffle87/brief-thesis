@@ -1,7 +1,7 @@
 # Keputusan Metodologi untuk Pembimbing
 
 **Last Updated:** 2026-10-06 18:30 UTC+7  
-**Status:** **DISETUJUI PEMBIMBING — RESMI TERKUNCI (READY FOR PREPROCESSING DATASETS)**  
+**Status:** **DISETUJUI PEMBIMBING - RESMI TERKUNCI (READY FOR PREPROCESSING DATASETS)**  
 **Mahasiswa:** Rafli Alif Ihza Hartono (NRP 5022211233)  
 **Departemen:** Teknik Elektro, FTEIC, Institut Teknologi Sepuluh Nopember (ITS)  
 
@@ -17,7 +17,7 @@ Berdasarkan sesi tatap muka bimbingan Tugas Akhir, 8 poin keputusan metodologis 
 | **2** | **Staging Testbed** | 💻 **Local First $\to$ Simulasi Server** | Realisasi dan pembuktian arsitektur testbed dieksekusi di workstation/laptop lokal terlebih dahulu (Docker Compose / isolated venv). Setelah pipeline terbukti konvergen dan stabil, baru dideploy ke simulasi server Proxmox VE. |
 | **3** | **Keseimbangan Bobot** | ⚖️ **Metode & Parameter Seimbang** | Pembobotan penalti EWC ($\lambda$) harus seimbang dengan loss tugas ($\mathcal{L}_{\text{task}}$), serta pembobotan kelas minoritas pada loss harus proporsional agar tidak terjadi gradient explosion atau plasticity freeze. |
 | **4** | **Hyperparameter Tuning** | 🔍 **Tuning Sistematis Diwajibkan** | Wajib menyusun rentang pencarian hyperparameter (learning rate, batch size, EWC $\lambda$, communication rounds, local epochs) dengan validasi multi-seed untuk menjamin ketahanan model. |
-| **5** | **Versi Dataset** | 📁 **Solely CIC-IDS2017 Bersih (Opsi A)** | Menggunakan secara eksklusif dataset resmi CIC-IDS2017 (Senin, Selasa, Rabu) dengan pembersihan 63 fitur unik, penghapusan 10 kolom konstan, 5 duplikat, dan penghapusan Destination Port. |
+| **5** | **Versi Dataset** | 📁 **Solely CIC-IDS2017 Bersih (Opsi A)** | Menggunakan secara eksklusif dataset resmi CIC-IDS2017 (Senin, Selasa, Rabu) dengan pembersihan 62 fitur unik, penghapusan 10 kolom konstan, 5 duplikat, dan penghapusan Destination Port. |
 | **6** | **Partisi Data Normal** | 🔀 **Random Split 50/50 All Days (Opsi A)** | Data Normal dari Senin, Selasa, dan Rabu digabung lalu dibagi acak 50% untuk Task 1 dan 50% untuk Task 2 guna mengeliminasi bias pola harian (*day-pattern confound*). |
 | **7** | **Komposisi Kelas DoS** | 🌊 **Keep As-Is (Opsi A)** | Mempertahankan distribusi alami 4 subvarian DoS (Hulk ~89%, GoldenEye ~5%, slowloris ~3%, Slowhttptest ~3%) yang digabung menjadi satu kelas "DoS" volumetrik realistis. |
 | **8** | **Handling Imbalance** | ⚖️ **Weighted Loss / Keep All Data (Opsi C)** | Mempertahankan seluruh data bersih (~1,53 juta baris unik) tanpa pemangkasan data massal. Ketimpangan kelas diatasi menggunakan Weighted Cross-Entropy Loss dengan bobot invers frekuensi terkalibrasi. |
@@ -29,7 +29,7 @@ Berdasarkan sesi tatap muka bimbingan Tugas Akhir, 8 poin keputusan metodologis 
 
 ### KEPUTUSAN 1: Versi Dataset (DISETUJUI: CIC-IDS2017 Bersih)
 
-* **Keputusan Final:** **CIC-IDS2017 Original** (63 fitur numerik unik + 1 Label).
+* **Keputusan Final:** **CIC-IDS2017 Original** (62 fitur numerik unik + 1 Label).
 * **Fitur yang Dibuang:**
   1. **10 Kolom Konstan (Variansi = 0):** `Bwd PSH Flags`, `Fwd URG Flags`, `Bwd URG Flags`, `CWE Flag Count`, `Fwd Avg Bytes/Bulk`, `Fwd Avg Packets/Bulk`, `Fwd Avg Bulk Rate`, `Bwd Avg Bytes/Bulk`, `Bwd Avg Packets/Bulk`, `Bwd Avg Bulk Rate`.
   2. **5 Kolom Duplikat 100% Identik (Hash Match):** `Fwd Header Length.1`, `Subflow Fwd Bytes`, `Subflow Fwd Packets`, `Subflow Bwd Packets`, `SYN Flag Count`.

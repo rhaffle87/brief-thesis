@@ -11,26 +11,22 @@ Tipografi: Trebuchet MS / Times New Roman, Bold, Center
 <br><br>
 
 ### **PROPOSAL TUGAS AKHIR - EC234701**
-*(14 pt Bold)*
 
 <br>
 
 ## **ANALISIS KINERJA DETEKSI NETWORK TRAFFIC INTRUSION MENGGUNAKAN METODE FEDERATED-CONTINUAL LEARNING PADA TESTBED PRIVATE CLOUD SERVER**
 ### *Studi Pengaruh Elastic Weight Consolidation dan Federated Averaging pada Distribusi Data Non-IID Dua Client*
-*(18 pt Bold)*
 
 <br><br>
 
 **RAFLI ALIF IHZA HARTONO**  
 **NRP 5048231003**  
-*(14 pt Bold)*
 
 <br><br>
 
 **Dosen Pembimbing:**  
 **Dr. Ir. Achmad Affandi, DEA.**  
 **NIP 196510141990021001**  
-*(14 pt Bold)*
 
 <br><br><br>
 
@@ -40,6 +36,5 @@ Tipografi: Trebuchet MS / Times New Roman, Bold, Center
 **INSTITUT TEKNOLOGI SEPULUH NOPEMBER**  
 **SURABAYA**  
 **2026**  
-*(12 pt)*
 
 </div>

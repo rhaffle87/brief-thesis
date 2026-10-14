@@ -91,7 +91,7 @@ E:\Projects\thesis/
 | **Dashboard/** | 4 | ✅ Aktif | Central hub, timeline, checklist, matriks E0-E5 |
 | **Proposal/** | 2 | ✅ Lengkap | Briefing scope TA & referensi skripsi kakak tingkat |
 | **Literatur/** | 25 md + 25 di PDFs/ | ✅ Terverifikasi | 25 paper terverifikasi 100%, 0 broken links |
-| **Metodologi/** | 6 | ✅ Terverifikasi | Dokumentasi EDA 63 fitur, verifikasi & skrip bantu |
+| **Metodologi/** | 6 | ✅ Terverifikasi | Dokumentasi EDA 62 fitur, verifikasi & skrip bantu |
 | **Eksperimen/** | 1 | ⬜ Menunggu | Alokasi pencatatan log E0-E5 (README panduan siap) |
 | **Hasil/** | 1 | ⬜ Menunggu | Alokasi tabel, grafik, & perbandingan BWT (README siap) |
 | **Penulisan/** | 1 | ⬜ Menunggu | Alokasi draf Bab 1-5 (README panduan siap) |
@@ -107,13 +107,13 @@ E:\Projects\thesis/
 
 ## 🔒 Konvensi Teknis Baku
 
-### 1. Fitur Dataset CIC-IDS2017 (Aturan 63 Fitur)
+### 1. Fitur Dataset CIC-IDS2017 (Aturan 62 Fitur)
 - **Total Kolom Mentah:** 79 kolom (78 fitur numerik + 1 kolom Label).
 - **Kolom Konstan Dibuang (10 kolom zero-variance):**  
   `Bwd PSH Flags`, `Fwd URG Flags`, `Bwd URG Flags`, `CWE Flag Count`, `Fwd Avg Bytes/Bulk`, `Fwd Avg Packets/Bulk`, `Fwd Avg Bulk Rate`, `Bwd Avg Bytes/Bulk`, `Bwd Avg Packets/Bulk`, `Bwd Avg Bulk Rate`.
 - **Kolom Duplikat Dibuang (5 kolom 100% identik):**  
   `Fwd Header Length.1`, `Subflow Fwd Bytes`, `Subflow Fwd Packets`, `Subflow Bwd Packets`, `SYN Flag Count`.
-- **Fitur Bersih Tersisa:** **63 Fitur Unik + 1 Label** (Total 64 kolom).
+- **Fitur Bersih Tersisa:** **62 Fitur Unik + 1 Label** (Total 64 kolom).
 - **3 Kolom Nyaris Identik (99,99%) Dicatat untuk Pertimbangan:**  
   `Avg Fwd Segment Size`, `Avg Bwd Segment Size`, `Subflow Bwd Bytes`.
 
