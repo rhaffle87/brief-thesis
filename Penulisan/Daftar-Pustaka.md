@@ -14,19 +14,19 @@
 
 [7] I. Sharafaldin, A. H. Lashkari, dan A. A. Ghorbani, “Toward Generating a New Intrusion Detection Dataset and Intrusion Traffic Characterization,” dalam *Proceedings of the 4th International Conference on Information Systems Security and Privacy (ICISSP)*, hlm. 108–116, 2018. doi: 10.5220/0006639801080116.
 
-[8] S. I. Popoola, G. Gui, O. B. Adeboye, B. Adebisi, dan M. Gidlund, “Federated Deep Learning for Zero-Day Attacks Detection in IoT Networks,” *IEEE Transactions on Industrial Informatics*, vol. 17, no. 12, hlm. 8437–8444, 2021. doi: 10.1109/TII.2021.3093904.
+[8] S. I. Popoola, R. Ande, B. Adebisi, G. Gui, M. Hammoudeh, dan O. Jogunola, “Federated Deep Learning for Zero-Day Botnet Attack Detection in IoT-Edge Devices,” *IEEE Internet of Things Journal*, vol. 9, no. 5, hlm. 3930–3944, 2022. doi: 10.1109/JIOT.2021.3100755.
 
-[9] R. Ruzafa-Alcazar, P. Fernandez-Saura, M. A. Gomez-Marmol, dan F. J. Garcia-Clemente, “D-FLIDS: Decentralized Federated Learning-based Intrusion Detection System,” *Computers & Security*, vol. 109, hlm. 102388, 2021. doi: 10.1016/j.cose.2021.102388.
+[9] P. Ruzafa-Alcázar, P. Fernández-Saura, E. Mármol-Campos, A. González-Vidal, J. L. Hernández-Ramos, J. Bernal-Bernabe, dan A. F. Skarmeta, “Intrusion Detection Based on Privacy-Preserving Federated Learning for the Industrial IoT,” *IEEE Transactions on Industrial Informatics*, vol. 19, no. 2, hlm. 1145–1154, 2023. doi: 10.1109/TII.2021.3126728.
 
 [10] D. Lopez-Paz dan M. Ranzato, “Gradient Episodic Memory for Continual Learning,” dalam *Advances in Neural Information Processing Systems (NeurIPS)*, vol. 30, hlm. 6467–6476, 2017.
 
-[11] H. Chen, C. Zhang, M. Dong, dan J. Lu, “Federated Class-Incremental Learning,” dalam *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*, hlm. 1–10, 2021.
+[11] J. Dong, L. Wang, Z. Fang, G. Sun, S. Xu, X. Wang, dan Q. Zhu, “Federated Class-Incremental Learning,” dalam *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*, hlm. 10164–10173, 2022. doi: 10.1109/CVPR52688.2022.00992.
 
-[12] A. Al-Abassi, H. Karimipour, A. Dehghantanha, dan R. M. Parizi, “Continual Learning for Cyber Threat Intelligence in Critical Infrastructure Networks,” *IEEE Transactions on Industrial Informatics*, vol. 19, no. 4, hlm. 5567–5576, 2023. doi: 10.1109/TII.2022.3211516.
+[12] X. Jin, Y. Zhou, Z. Li, Q. Wu, dan Y. Duan, “FL-IIDS: A novel federated learning-based incremental intrusion detection system,” *Future Generation Computer Systems*, vol. 151, hlm. 57–70, 2024. doi: 10.1016/j.future.2023.09.019.
 
-[13] A. Rosay, F. Carlier, dan P. Leroux, “Network Intrusion Detection: A Comprehensive Analysis of CIC-IDS2017,” dalam *Proceedings of the 8th International Conference on Information Systems Security and Privacy (ICISSP)*, hlm. 111–118, 2022. doi: 10.5220/0010774000003120.
+[13] A. Rosay, E. Cheval, F. Carlier, dan P. Leroux, “Network Intrusion Detection: A Comprehensive Analysis of CIC-IDS2017,” dalam *Proceedings of the 8th International Conference on Information Systems Security and Privacy (ICISSP)*, hlm. 25–36, 2022. doi: 10.5220/0010774000003120.
 
-[14] S. Dube, “Faulty use of the CIC-IDS 2017 dataset in information security research,” *International Journal of Information Security*, vol. 23, hlm. 1801–1818, 2024. doi: 10.1007/s11416-023-00509-7.
+[14] R. Dube, “Faulty use of the CIC-IDS 2017 dataset in information security research,” *Journal of Computer Virology and Hacking Techniques*, vol. 20, no. 2, hlm. 203–211, 2024. doi: 10.1007/s11416-023-00509-7.
 
 [15] G. Engelen, V. Rimmer, dan W. Joosen, “Troubleshooting an Intrusion Detection Dataset: the CICIDS2017 Case Study,” dalam *2021 IEEE Security and Privacy Workshops (SPW)*, San Francisco, CA, USA, hlm. 7–12, 2021. doi: 10.1109/SPW53761.2021.00009.
 

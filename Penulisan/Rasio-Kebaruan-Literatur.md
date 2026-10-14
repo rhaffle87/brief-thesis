@@ -50,13 +50,13 @@ Sebanyak 15 pustaka terkini diterbitkan dalam 5 tahun terakhir, mendominasi stud
 
 1. `[1]` Check Point Research (**2025**) – *Q1 2025 Global Cyber Attack Report* (Laporan industri global terbaru lonjakan serangan siber).
 2. `[2]` Federal Bureau of Investigation (**2024**) – *2024 Internet Crime Report* (Statistik kerugian insiden siber global).
-3. `[8]` Popoola dkk. (**2021**) – *Federated Deep Learning for Zero-Day Attacks Detection in IoT Networks* (IEEE TII, studi FL NIDS).
-4. `[9]` Ruzafa-Alcázar dkk. (**2021**) – *D-FLIDS: Decentralized Federated Learning-based Intrusion Detection System* (Computers & Security).
-5. `[11]` Chen dkk. (**2021**) – *Federated Class-Incremental Learning* (CVPR 2021, integrasi FL dan penambahan kelas sekuensial).
-6. `[12]` Al-Abassi dkk. (**2023**) – *Continual Learning for Cyber Threat Intelligence in Critical Infrastructure Networks* (IEEE TII).
-7. `[13]` Rosay dkk. (**2022**) – *Network Intrusion Detection: A Comprehensive Analysis of CIC-IDS2017* (ICISSP 2022, audit dataset).
-8. `[14]` Dube (**2024**) – *Faulty use of the CIC-IDS 2017 dataset in information security research* (IJIS 2024, audit kritis integritas data).
-9. `[15]` Engelen dkk. (**2021**) – *Troubleshooting an Intrusion Detection Dataset: The CICIDS2017 Case Study* (IEEE SPW 2021, analisis kebocoran porta soket).
+3. `[8]` Popoola dkk. (**2022**) - *Federated Deep Learning for Zero-Day Botnet Attack Detection in IoT-Edge Devices* (IEEE Internet of Things Journal, studi FL NIDS).
+4. `[9]` Ruzafa-Alcázar dkk. (**2023**) - *Intrusion Detection Based on Privacy-Preserving Federated Learning for the Industrial IoT* (IEEE Transactions on Industrial Informatics).
+5. `[11]` Dong dkk. (**2022**) - *Federated Class-Incremental Learning* (CVPR 2022, integrasi FL dan penambahan kelas sekuensial).
+6. `[12]` Jin dkk. (**2024**) - *FL-IIDS: A novel federated learning-based incremental intrusion detection system* (Future Generation Computer Systems, Elsevier).
+7. `[13]` Rosay dkk. (**2022**) - *Network Intrusion Detection: A Comprehensive Analysis of CIC-IDS2017* (ICISSP 2022, audit dataset).
+8. `[14]` Dube (**2024**) - *Faulty use of the CIC-IDS 2017 dataset in information security research* (Journal of Computer Virology and Hacking Techniques, Springer).
+9. `[15]` Engelen dkk. (**2021**) - *Troubleshooting an Intrusion Detection Dataset: The CICIDS2017 Case Study* (IEEE SPW 2021, analisis kebocoran porta soket).
 10. `[16]` Rinandri (**2025**) – *Pendekatan Semi-Supervised Learning untuk Sistem Deteksi Intrusi Terfederasi* (Skripsi rujukan lokal Departemen Teknik Elektro FTEIC ITS sebagai baseline komparasi).
 11. `[17]` Sarhan dkk. (**2022**) – *Towards a Standard Feature Set of NIDS Datasets* (Standarisasi fitur aliran NetFlow).
 12. `[18]` Van de Ven dkk. (**2022**) – *Three types of incremental learning* (Taksonomi standar Task-IL, Domain-IL, dan Class-IL di Nature Machine Intelligence).
@@ -70,8 +70,8 @@ Sebanyak 15 pustaka terkini diterbitkan dalam 5 tahun terakhir, mendominasi stud
 
 | Jenis Publikasi | Jumlah | Persentase | Rincian Entri |
 | :--- | :--- | :--- | :--- |
-| **Jurnal Ilmiah Internasional Bereputasi** (IEEE, Elsevier, Nature, PNAS, Springer) | **14** | **46,7%** | `[5]`, `[8]`, `[9]`, `[12]`, `[14]`, `[17]`, `[18]`, `[19]`, `[20]`, `[24]`, `[30]` |
-| **Prosiding Konferensi Internasional Top-Tier** (NeurIPS, ICML, ICLR, CVPR, AISTATS, ICISSP, IEEE SPW) | **9** | **30,0%** | `[3]`, `[7]`, `[10]`, `[11]`, `[13]`, `[15]`, `[21]`, `[25]`, `[27]`, `[28]`, `[29]` |
+| **Jurnal Ilmiah Internasional Bereputasi** (IEEE, Elsevier, Nature, PNAS, Springer) | **11** | **36,7%** | `[5]`, `[8]`, `[9]`, `[12]`, `[14]`, `[17]`, `[18]`, `[19]`, `[20]`, `[24]`, `[30]` |
+| **Prosiding Konferensi Internasional Top-Tier** (NeurIPS, ICML, ICLR, CVPR, AISTATS, ICISSP, IEEE SPW) | **11** | **36,7%** | `[3]`, `[7]`, `[10]`, `[11]`, `[13]`, `[15]`, `[21]`, `[25]`, `[27]`, `[28]`, `[29]` |
 | **Buku Teks Akademik Resmi / Buku Babon** (MIT Press, Pearson, Springer) | **3** | **10,0%** | `[6]`, `[23]`, `[26]` |
 | **Laporan Resmi Lembaga Keamanan Siber** (Check Point, FBI) | **2** | **6,7%** | `[1]`, `[2]` |
 | **Repositori Pra-cetak Ilmiah Terverifikasi** (arXiv) | **2** | **6,7%** | `[4]`, `[22]` |
@@ -79,6 +79,6 @@ Sebanyak 15 pustaka terkini diterbitkan dalam 5 tahun terakhir, mendominasi stud
 | **Total** | **30** | **100,0%** | – |
 
 **Kesimpulan:**
-- **76,7%** referensi bersumber langsung dari publikasi primer peer-reviewed (*Jurnal Ilmiah Internasional* dan *Konferensi Top-Tier*).
+- **73,3%** referensi bersumber langsung dari publikasi primer peer-reviewed (*Jurnal Ilmiah Internasional* dan *Konferensi Top-Tier*).
 - Sitasi tugas akhir alumnus (`[16]`) dibatasi secara ketat menjadi **1 pustaka saja (3,3%)**, murni ditempatkan pada Sub-bab 2.3 (Tabel 2.1) dan Sub-bab 2.12.3 sebagai tolok ukur komparasi lokal lingkungan Departemen Teknik Elektro FTEIC ITS.
 - Seluruh teori dasar, formulasi matematika, arsitektur perangkat lunak, algoritma optimasi, dan metrik evaluasi kini 100% didukung oleh pustaka primer orisinal internasional.

@@ -10,7 +10,7 @@ Direktori ini dialokasikan untuk penulisan naskah laporan resmi Departemen Tekni
 - [Abstrak.md](Abstrak.md): Abstrak Bahasa Indonesia (Lampiran 3) dan Abstract Bahasa Inggris (Lampiran 4) dengan batasan 200 kata, 5 elemen terstruktur, dan kata kunci.
 - [Bab-1-Pendahuluan.md](Bab-1-Pendahuluan.md): Latar belakang, rumusan masalah (RM1 & RM2), 9 batasan masalah metodologis, tujuan penelitian, manfaat teoretis & praktis, serta sistematika penulisan.
 - [Bab-2-Tinjauan-Pustaka.md](Bab-2-Tinjauan-Pustaka.md): Tinjauan pustaka dan landasan teori mendalam (NIDS, isu kritis CIC-IDS2017 & mitigasi *port leakage*, FL & FedAvg, CL & EWC, weighted loss), tabel komparasi 14 literatur bereputasi (2021–2026), serta definisi metrik evaluasi.
-- [Bab-3-Metodologi-Penelitian.md](Bab-3-Metodologi-Penelitian.md): Metodologi penelitian terstruktur sesuai Bab II Pedoman ITS (3.1 Metode yang Digunakan, 3.2 Bahan dan Peralatan yang Digunakan, 3.3 Urutan Pelaksanaan Penelitian [Diagram Alir, Praproses 63 Fitur, MLP, Skenario E0–E4, Optuna], 3.4 Jadwal Pelaksanaan Penelitian).
+- [Bab-3-Metodologi-Penelitian.md](Bab-3-Metodologi-Penelitian.md): Metodologi penelitian terstruktur sesuai Bab II Pedoman ITS (3.1 Metode yang Digunakan, 3.2 Bahan dan Peralatan yang Digunakan, 3.3 Urutan Pelaksanaan Penelitian [Diagram Alir, Praproses 62 Fitur, MLP, Skenario E0–E4, Optuna], 3.4 Jadwal Pelaksanaan Penelitian).
 - [Daftar-Pustaka.md](Daftar-Pustaka.md): Daftar referensi rujukan ilmiah standar IEEE ([1] s.d. [20]) yang disitasi di seluruh naskah proposal.
 
 ## Berkas Laporan Akhir (Tahap Pasca-Seminar Proposal):

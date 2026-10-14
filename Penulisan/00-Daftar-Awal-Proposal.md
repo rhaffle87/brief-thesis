@@ -41,7 +41,7 @@
 3.2.1 Bahan Penelitian .................................................................................................................... 25  
 3.2.2 Peralatan Penelitian ............................................................................................................... 25  
 3.3 Urutan Pelaksanaan Penelitian ................................................................................................. 26  
-3.3.1 Praproses Data dan Ekstraksi 63 Fitur Numerik .................................................................... 26  
+3.3.1 Praproses Data dan Ekstraksi 62 Fitur Numerik .................................................................... 26  
 3.3.2 Pengembangan Model Dasar MLP Kompak .......................................................................... 29  
 3.3.3 Integrasi Sistem Usulan: FedAvg dan EWC pada Lingkungan Terdistribusi ......................... 30  
 3.3.4 Penyetelan Hiperparameter Bayesian (Optuna TPE) ............................................................. 31  
@@ -80,10 +80,11 @@ Gambar 3.6 Diagram Alir Skenario Pengujian Sekuensial Non-IID ..................
 
 Tabel 2.1 Perbandingan Penelitian Terdahulu dalam Domain FL, Continual Learning, dan NIDS ..... 8  
 Tabel 3.1 Spesifikasi Lingkungan Perangkat Keras dan Perangkat Lunak ...................................... 25  
-Tabel 3.2 Ringkasan 63 Fitur Statistik Numerik Aliran Bersih CIC-IDS2017 ................................. 28  
-Tabel 3.3 Konfigurasi Parameter Pelatihan Baseline dan Ruang Pencarian Hiperparameter ..... 31  
-Tabel 3.4 Matriks Skenario Pengujian Eksperimen E0–E4 .............................................................. 32  
-Tabel 3.5 Jadwal Pelaksanaan Penelitian Tugas Akhir ................................................................... 34  
+Tabel 3.2 Ringkasan 62 Fitur Statistik Numerik Aliran Bersih CIC-IDS2017 ................................. 28  
+Tabel 3.3 Alokasi Partisi Data Non-IID dan Peran Klien pada Setiap Fase Pembelajaran ............ 29  
+Tabel 3.4 Konfigurasi Parameter Pelatihan Baseline dan Ruang Pencarian Hiperparameter ..... 31  
+Tabel 3.5 Matriks Skenario Pengujian Eksperimen E0–E4 .............................................................. 32  
+Tabel 3.6 Jadwal Pelaksanaan Penelitian Tugas Akhir ................................................................... 34  
 
 ---
 
