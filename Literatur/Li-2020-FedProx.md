@@ -36,7 +36,7 @@ prioritas: opsional-pendukung
 
 ## 📌 3 Temuan Utama
 
-1. **Formulasi Istilah Proksimal (Proximal Term):** Menambahkan regularisasi proksimal $rac{\mu}{2} \|w - w^t\|^2$ ke dalam fungsi objektif loss lokal klien, yang membatasi agar pembaruan model lokal tidak menyimpang terlalu jauh dari model global $w^t$.
+1. **Formulasi Istilah Proksimal (Proximal Term):** Menambahkan regularisasi proksimal $\frac{\mu}{2} \|w - w^t\|^2$ ke dalam fungsi objektif loss lokal klien, yang membatasi agar pembaruan model lokal tidak menyimpang terlalu jauh dari model global $w^t$.
 2. **Jaminan Konvergensi Teoretis:** Memberikan bukti konvergensi analitis untuk data non-IID dan kondisi perangkat komputasi yang tidak homogen (stragglers/variabel jumlah epoch lokal).
 3. **Stabilitas Pelatihan di Bawah Heterogenitas:** Menunjukkan bahwa penambahan suku proksimal mencegah osilasi bobot dan distorsi agregasi yang umum terjadi pada FedAvg murni saat dihadapkan pada non-IID ekstrem.
 
