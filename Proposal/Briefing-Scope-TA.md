@@ -140,11 +140,17 @@ Setelah seluruh baris duplikat mentah dibersihkan dari CSV hari Senin, Selasa, d
 Berdasarkan arahan dosen pembimbing, pemangkasan ekstrem (*undersampling* hingga 3.200 sampel per kelas) dihindari karena akan membuang 99,6% data Normal dan 98% data DoS yang berharga. Keputusan yang dibekukan adalah **Pilihan C: Weighted Loss (Keep All Clean Data)**:
 
 1. **Retensi Data Maksimal:** Seluruh 1,53 juta baris data unik dipertahankan, memastikan model terpapar pada variabilitas trafik riil skala besar.
+
 2. **Formulasi Weighted Cross-Entropy Loss:**
+
    $$\mathcal{L}_{\text{CE}}(y, \hat{y}) = - \sum_{c=1}^{C} w_c \cdot y_c \log(\hat{y}_c)$$
+
    Di mana bobot kelas $w_c$ dihitung berdasarkan kebalikan frekuensi sampel terstandarisasi:
+
    $$w_c = \frac{N}{|C| \times N_c}$$
+
    Dengan demikian, kesalahan prediksi pada kelas minoritas SSH-Patator dikenai penalti gradien yang jauh lebih berat dibanding kelas mayoritas Normal, mencegah model terbias menjadi *majority classifier*.
+
 3. **Pengamanan Gradient Clipping (Norm $\le 1.0$):**
    Untuk mencegah terjadinya lonjakan gradien (*gradient explosion*) saat batch kebetulan memuat banyak sampel SSH, loop optimasi PyTorch wajib menerapkan `torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)`.
 4. **Profil Ganda (Production vs. Fast Dev Profile):**
@@ -172,7 +178,7 @@ $$\text{Input}(62) \longrightarrow \text{Linear}(64) + \text{ReLU} + \text{Dropo
 *Gambar 4a: Topologi Jaringan Syaraf Tiruan Feedforward (Multi-Layer Perceptron) dengan Input Layer (62 fitur), Hidden Layers (64 dan 32 neuron teraktivasi ReLU), dan Output Layer (3 neuron klasifikasi softmax). Sumber: Glosser.ca (2013), "Colored neural network", Wikimedia Commons, lisensi CC BY-SA 3.0.*
 
 ![Visualisasi Graph Komputasi MLP pada Netron](../Aset/netron_mlp_architecture.png)  
-*Gambar 4b: Graph komputasi arsitektur MLP skripsi (Input: `flow_features_63` $\to$ Gemm/Linear: 64 $\to$ Relu $\to$ Dropout: 0.2 $\to$ Gemm/Linear: 32 $\to$ Relu $\to$ Gemm/Linear: 3 $\to$ `class_logits_3`) yang diekspor dari PyTorch ke format ONNX ([Aset/mlp_intrusion_model.onnx](../Aset/mlp_intrusion_model.onnx)) dan divisualisasikan melalui [Netron](https://netron.app).*
+*Gambar 4b: Graph komputasi arsitektur MLP skripsi (Input: `flow_features_62` → Gemm/Linear: 64 → ReLU → Dropout: 0.2 → Gemm/Linear: 32 → ReLU → Gemm/Linear: 3 → `class_logits_3`) yang diekspor dari PyTorch ke format ONNX ([Aset/mlp_intrusion_model.onnx](../Aset/mlp_intrusion_model.onnx)) dan divisualisasikan melalui [Netron](https://netron.app).*
 
 ### 6.2 Protokol Sistematis Hyperparameter Tuning & Penyeimbangan Parameter
 Sesuai arahan pembimbing bahwa metode dan parameter harus seimbang bobotnya, proses pencarian parameter (*hyperparameter search*) dirancang terstruktur menggunakan data validasi (15% split terstratifikasi) lintas 5 seed acak:
@@ -298,32 +304,47 @@ Evaluasi dihitung berdasarkan Matriks Kontingensi (*Confusion Matrix*) multikela
 *Gambar 10: Struktur Komprehensif Matriks Kontingensi (Confusion Matrix) dengan formulasi True Positive (TP), False Positive (FP), True Negative (TN), False Negative (FN), serta metrik turunan Accuracy, Sensitivity/Recall, Specificity, dan Precision. Sumber: Wikimedia Commons, lisensi CC BY-SA 4.0.*
 
 ### 1. Akurasi (Accuracy)
+
 Persentase total prediksi yang tepat terhadap seluruh populasi data uji:
+
 $$\text{Accuracy} = \frac{\sum_{c=1}^{|C|} TP_c}{\sum_{c=1}^{|C|} (TP_c + FP_c + FN_c + TN_c)}$$
+
 *Catatan Ilmiah:* Akurasi global tidak sensitif terhadap *catastrophic forgetting* karena didominasi oleh performa kelas Normal dan DoS yang baru saja dipelajari.
 
 ### 2. Presisi (Precision per-class $c$)
+
 Kemampuan model menghindari salah deteksi (*False Alarm / False Positive*):
+
 $$\text{Precision}_c = \frac{TP_c}{TP_c + FP_c}$$
 
 ### 3. Recall / Sensitivitas (Recall per-class $c$) - *Metrik Kunci Retensi*
+
 Kemampuan model menjaring seluruh serangan yang ada (*Missed Detection Prevention*):
+
 $$\text{Recall}_c = \frac{TP_c}{TP_c + FN_c}$$
-*Signifikansi Khusus:* **$Recall_{\text{SSH-Patator}}$ adalah indikator paling sensitif terhadap catastrophic forgetting.** Ketika model lupa ingatan, $Recall_{\text{SSH-Patator}}$ akan runtuh mendekati 0%.
+
+*Signifikansi Khusus:* Nilai $Recall_{\text{SSH-Patator}}$ adalah indikator paling sensitif terhadap *catastrophic forgetting*. Ketika model lupa ingatan, $Recall_{\text{SSH-Patator}}$ akan runtuh mendekati 0%.
 
 ### 4. Macro-Averaged F1-Score ($Macro-F1$)
+
 Rata-rata harmonik antara Presisi dan Recall dengan pembobotan setara antar-kelas:
+
 $$F1_c = 2 \times \frac{\text{Precision}_c \times \text{Recall}_c}{\text{Precision}_c + \text{Recall}_c}$$
-$$Macro-F1 = \frac{1}{|C|} \sum_{c=1}^{|C|} F1_c$$
+
+$$\text{Macro-F1} = \frac{1}{|C|} \sum_{c=1}^{|C|} F1_c$$
+
 *Signifikansi Khusus:* Memastikan kelas minoritas diperlakukan setara dengan kelas mayoritas tanpa bias volume.
 
 ### 5. Backward Transfer (BWT) - *Metrik Inti Continual Learning*
+
 Mengukur secara presisi seberapa besar degradasi retensi memori tugas lama setelah mempelajari tugas baru:
-$$BWT = R_{2,1} - R_{1,1}$$
+
+$$\text{BWT} = R_{2,1} - R_{1,1}$$
+
 *Interpretasi Ilmiah:*
-* **$BWT < 0$:** Mengindikasikan terjadinya *Catastrophic Forgetting* (makin negatif nilainya, makin parah kelupaan model).
-* **$BWT \approx 0$:** Mengindikasikan metode EWC berhasil mengunci memori tugas lama dengan sempurna tanpa degradasi.
-* **$BWT > 0$:** Mengindikasikan terjadinya transfer pembelajaran positif (*positive backward transfer*).
+* **$\text{BWT} < 0$:** Mengindikasikan terjadinya *Catastrophic Forgetting* (makin negatif nilainya, makin parah kelupaan model).
+* **$\text{BWT} \approx 0$:** Mengindikasikan metode EWC berhasil mengunci memori tugas lama dengan sempurna tanpa degradasi.
+* **$\text{BWT} > 0$:** Mengindikasikan terjadinya transfer pembelajaran positif (*positive backward transfer*).
 
 ---
 
