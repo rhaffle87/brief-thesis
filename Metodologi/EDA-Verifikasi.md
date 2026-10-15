@@ -9,7 +9,7 @@
 
 ## 1. Jumlah Baris dan Distribusi Label per File Mentah
 
-Skrip eksekusi: `E:/Projects/fl-cl/scripts/eda/eda_full_pandas.py`
+Skrip eksekusi: `Skrip/EDA/eda_full_pandas.py`
 
 ### Monday-WorkingHours.pcap_ISCX.csv
 - Total baris: 529.918 (79 kolom)
@@ -56,7 +56,7 @@ Skrip eksekusi: `E:/Projects/fl-cl/scripts/eda/eda_full_pandas.py`
 
 ## 2. Analisis Kolom Konstan (Zero Variance)
 
-Skrip eksekusi: `E:/Projects/fl-cl/scripts/eda/constant_columns_check.py`  
+Skrip eksekusi: `Skrip/EDA/constant_columns_check.py`  
 Dataset: 1.529.677 baris (data 3 kelas setelah dedup)
 
 Daftar 10 kolom dengan variansi tepat 0 (semua baris bernilai identik):
@@ -121,7 +121,7 @@ Metode: Hashing nilai array per kolom pada 1.529.677 baris.
 
 ## 5. Uji Destination Port dan Tiga Kondisi Pohon Keputusan (5 Seed)
 
-Skrip eksekusi: `E:/Projects/fl-cl/scripts/eda/port_test_classification.py`  
+Skrip eksekusi: `Skrip/EDA/port_test_classification.py`  
 Sampel: 3.219 per kelas (seimbang, dibatasi jumlah minimum SSH-Patator), 5 seed (42-46).
 
 ### Hasil Per-Seed (Macro-F1):

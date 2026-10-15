@@ -13,14 +13,15 @@
 - **Cadangan Riil (Snapshot):** `E:\Projects\thesis_backup_20261002\` (snapshot sebelum restrukturisasi massal tanggal 2–3 Oktober 2026).
 - **Integritas Tautan:** 190 tautan internal aktif tervalidasi (0 broken links).
 
-### B. Repositori Kode Sumber (FL-CL)
-- **Path Utama:** `E:\Projects\fl-cl\`
-- **Lingkungan Virtual Python:** `E:\Projects\fl-cl\.venv\` (Python 3.10/3.13)
-- **Skrip EDA & Verifikasi:** `E:\Projects\fl-cl\scripts\eda\`
-  - `scan_vault_links.py` (Pemindaian tautan vault)
-  - `verify_column_hashes.py` (Verifikasi kolom konstan & duplikat via array hash)
-  - `port_test_classification.py` (Uji kebocoran fitur port 5-seed)
+### B. Skrip EDA & Verifikasi Internal Repositori (Thesis)
+- **Path Skrip Utama:** `E:\Projects\thesis\Skrip\`
+- **Modul EDA & Audit Fitur:** `E:\Projects\thesis\Skrip\EDA\` (15 skrip tervalidasi)
+  - `scan_vault_links.py` (Pemindaian tautan internal Markdown)
+  - `verify_column_hashes.py` & `rosay_column_check.py` (Verifikasi kolom konstan & duplikat via hash array)
+  - `port_test_classification.py` (Uji kebocoran fitur port 5-seed: Macro-F1 96,44%)
   - `feature_importance_analysis.py` (Analisis dominasi fitur tunggal)
+  - `preprocess_lycos.py` (Skrip standardisasi format dataset)
+- **Repositori Implementasi Eksternal (FL-CL):** `E:\Projects\fl-cl\` (Lingkungan Virtual `.venv` dan modul runtime FL)
 
 ---
 

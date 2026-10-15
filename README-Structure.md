@@ -122,7 +122,7 @@ E:\Projects\thesis/
 - Seluruh PDF tersimpan di `Literatur/PDFs/` atau `Literatur/PDFs/Opsional/`.
 - Validasi tautan dapat dijalankan sewaktu-waktu menggunakan:
   ```bash
-  python E:/Projects/fl-cl/scripts/eda/scan_vault_links.py
+  python Skrip/EDA/scan_vault_links.py
   ```
 
 ---

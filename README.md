@@ -165,7 +165,7 @@ Eksperimen diuji melintasi 5 random seed (42, 43, 44, 45, 46) untuk memastikan s
 ### Skrip Preprocessing Dataset:
 Pipeline pembersihan data dieksekusi melalui skrip otomatis:
 ```powershell
-python scripts/preprocess_cicids2017.py --input Datasets/CIC-IDS2017 --output Datasets/clean
+python Skrip/preprocess_cicids2017.py --input Datasets/CIC-IDS2017 --output Datasets/clean
 ```
 
 ---

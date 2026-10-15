@@ -1,7 +1,7 @@
 # Exploratory Data Analysis - CIC-IDS2017
 
 **Date:** 2026-10-02 15:05 UTC+7  
-**Command:** `E:/Projects/fl-cl/.venv/Scripts/python.exe scripts/eda/eda_full_pandas.py`  
+**Command:** `E:/Projects/fl-cl/.venv/Scripts/python.exe Skrip/EDA/eda_full_pandas.py`  
 **Dataset:** CIC-IDS2017 Original (FULL SCAN with pandas, ALL 79 columns)
 
 ---
@@ -118,7 +118,7 @@ Zero variance columns (all values identical):
 
 **Test Method:** Decision Tree, balanced sample (3,219/class), 5 seeds (42-46), 70/30 split  
 **Date:** 2026-10-02 17:10 UTC+7  
-**Script:** `E:/Projects/fl-cl/scripts/eda/port_test_classification.py`  
+**Script:** `Skrip/EDA/port_test_classification.py`  
 **Previous Error:** Earlier test used biased 50K sample (only Mon/Wed first rows). Results below use FULL deduplicated data.
 
 ### Port Distribution by Class (Full Data After Deduplication)

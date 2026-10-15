@@ -140,7 +140,7 @@ Mengacu pada skripsi [Referensi-Skripsi-Hafizh.pdf](../Proposal/Referensi-Skrips
 
 ## 📋 DAFTAR KELENGKAPAN (CHECKLIST PREPROCESSING DATASET)
 
-Dengan disetujuinya seluruh poin di atas, modul praproses data (`scripts/preprocess_cicids2017.py`) siap dieksekusi dengan spesifikasi keluaran terstandarisasi:
+Dengan disetujuinya seluruh poin di atas, modul praproses data (`Skrip/preprocess_cicids2017.py`) siap dieksekusi dengan spesifikasi keluaran terstandarisasi:
 
 - [x] Sumber input mentah: Berkas CSV resmi UNB (Monday, Tuesday, Wednesday).
 - [x] Eliminasi 10 kolom konstan + 5 kolom identik + 1 kolom `Destination Port`.

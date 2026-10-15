@@ -79,7 +79,7 @@ Berdasarkan hasil tatap muka bimbingan bersama dosen pembimbing, seluruh poin kr
 
 ## 🚀 Kesiapan Langkah Berikutnya (Next Steps)
 
-1. **Preprocessing Dataset:** Menjalankan modul ekstraksi `scripts/preprocess_cicids2017.py` menghasilkan berkas partisi tabular Parquet bersih.
+1. **Preprocessing Dataset:** Menjalankan modul ekstraksi `Skrip/preprocess_cicids2017.py` menghasilkan berkas partisi tabular Parquet bersih.
 2. **Local Baseline (E0):** Melatih model MLP terpusat sebagai patokan skor atas.
 3. **Local Continual Learning (E1 & E2):** Mengukur degradasi naive vs pemulihan EWC pada Task 1 (SSH) $\to$ Task 2 (DoS).
 4. **Federated Execution (E3 & E4):** Menjalankan simulasi client Flower secara lokal, dilanjutkan evaluasi klaster Proxmox VE.

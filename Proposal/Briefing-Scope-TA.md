@@ -430,4 +430,4 @@ Mengacu pada skripsi [Referensi-Skripsi-Hafizh.pdf](Referensi-Skripsi-Hafizh.pdf
 
 ## 🟢 KESIMPULAN STATUS RUANG LINGKUP: READY FOR PREPROCESSING DATASETS
 
-Seluruh keputusan metodologis (1 s.d. 9) telah disetujui resmi oleh dosen pembimbing. Tidak ada lagi parameter ambigu atau risiko scope creep. Pipeline ekstraksi dataset (`scripts/preprocess_cicids2017.py`) resmi dinyatakan **READY TO RUN**.
+Seluruh keputusan metodologis (1 s.d. 9) telah disetujui resmi oleh dosen pembimbing. Tidak ada lagi parameter ambigu atau risiko scope creep. Pipeline ekstraksi dataset (`Skrip/preprocess_cicids2017.py`) resmi dinyatakan **READY TO RUN**.

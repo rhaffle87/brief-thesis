@@ -556,15 +556,7 @@ flowchart TD
 
 Untuk mengidentifikasi akar penyebab kegagalan NIDS terdistribusi dan merumuskan solusi teknis yang sistematis, disusun diagram sebab-akibat (*Fishbone Diagram*) sebagaimana diilustrasikan pada Gambar 3.2.
 
-```mermaid
-flowchart LR
-    subgraph Fishbone [Analisis Akar Penyebab Masalah]
-        M1[DATA: Heterogenitas Non-IID & Ketimpangan Kelas Ekstrem] --> CAUSE[DEGRADASI RETENSI DETEKSI NIDS TERDISTRIBUSI]
-        M2[MODEL: Catastrophic Forgetting & Shortcut Learning Port] --> CAUSE
-        M3[INFRASTRUKTUR: Regulasi Privasi Data & Batasan Bandwidth] --> CAUSE
-        M4[METODE: Trade-off Stabilitas vs Plastisitas Bobot] --> CAUSE
-    end
-```
+![Gambar 3.2 Fishbone Diagram Identifikasi Tantangan NIDS Terdistribusi](../Aset/fishbone_diagram_tantangan_nids.png)  
 *Gambar 3.2 Fishbone Diagram Identifikasi Tantangan NIDS Terdistribusi.*
 
 ---
