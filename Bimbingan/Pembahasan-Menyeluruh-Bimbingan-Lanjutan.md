@@ -294,9 +294,10 @@ Ketika dosen bertanya: *"Kampus ITS punya puluhan sektor pagar, kenapa di propos
 
 ---
 
-## 9. Konsolidasi Ketetapan Dataset CIC-IDS2017
+## 9. Konsolidasi Ketetapan Dataset CIC-IDS2017 & Pemetaan Dataset Luar Domain IDS
 
-Dosen pembimbing dan mahasiswa telah menyepakati bahwa **Dataset CIC-IDS2017 tetap dipertahankan secara definitif**. Seluruh keputusan teknis data yang telah dibekukan tetap berlaku 100%:
+### 9.1 Skenario Domain Network IDS: Ketetapan Dataset CIC-IDS2017 (Tetap & Terkunci)
+Jika penelitian tetap berada pada domain deteksi intrusi jaringan (*Network-based IDS*), **Dataset CIC-IDS2017 tetap dipertahankan secara definitif**. Seluruh keputusan teknis data yang telah diverifikasi empiris tetap berlaku 100%:
 
 1. **3 Kelas Target Representatif:**
    - **Normal (BENIGN):** 1.332.710 flow unik (Senin, Selasa, Rabu).
@@ -311,6 +312,24 @@ Dosen pembimbing dan mahasiswa telah menyepakati bahwa **Dataset CIC-IDS2017 tet
 4. **Arsitektur Model MLP Kompak:**
    - 62 Input $\to$ 64 Hidden (ReLU + Dropout 0.2) $\to$ 32 Hidden (ReLU) $\to$ 3 Output (Softmax).
    - Total kapasitas: **6.211 parameter teroptimasi** ($24,84\text{ KB}$), ideal untuk edge node.
+
+---
+
+### 9.2 Skenario Luar Domain Network IDS: Tabel Literature Review Menyeluruh Dataset Alternatif
+Jika dosen pembimbing menghendaki penelitian beralih atau diperluas ke luar domain trafik jaringan (misalnya menyesuaikan topik riset laboratorium atau analogi sensor pagar kampus ITS 180 hektar), dataset harus disesuaikan secara ketat dengan domain fisik yang diteliti. Berikut adalah tabel komparasi dataset alternatif non-jaringan:
+
+| No | Domain Riset | Nama Dataset Benchmark | Tipe & Karakteristik Sensor | Ukuran Data & Format | Skenario Sekuensial Continual Learning (Task 1 $\to$ Task 2) | Kesesuaian FCL di Edge | Risiko & Tantangan bagi Mahasiswa | Referensi Publikasi |
+|:--:|:---|:---|:---|:---|:---|:---:|:---|:---|
+| 1 | **Perimeter Intrusion Detection (Analogi Pagar Kampus ITS)** | **UCR Time Series Archive (Fence/Vibration Subsets)** / **UCI HAR** | Akselerometer 3-sumbu, piezoelektrik, dan geophone seismik pada pagar kawat/tanah. | Puluhan ribu sekuens sinyal 1D (gelombang getaran $x, y, z$). | **Task 1:** Deteksi hewan/cuaca (angin, hujan, kucing) vs Intruder Panjat.<br>**Task 2:** Intruder Potong Kawat / Gali Tanah (Task baru). | ⭐⭐⭐⭐ **Tinggi** (Model 1D-CNN atau MLP getaran). | Memerlukan konversi domain sinyal waktu (FFT/Wavelet) ke fitur statistik sebelum training. | Chen et al. (IEEE TIM, 2021); UCI ML Repository |
+| 2 | **Industrial SCADA / Critical Infrastructure** | **SWaT (Secure Water Treatment)** & **WADI** | 51 sensor fisik instalasi air (level air, laju alir, tekanan pipa, aktuator valve pompa). | 946.721 sampel operasional normal + 446.000 sampel serangan siber-fisik (tabular). | **Task 1:** Serangan manipulasi sensor level air $\to$<br>**Task 2:** Serangan pembobolan katup pipa kimia bertekanan tinggi. | ⭐⭐⭐⭐⭐ **Sangat Tinggi** (Tabular kontinu mirip CIC-IDS2017). | Dataset sangat besar, membutuhkan pemahaman domain teknik proses industri. | Mathur et al. (CyberICPS 2016); iTrust SUTD |
+| 3 | **Smart Campus IoT Environmental Anomaly** | **Intel Berkeley Lab Data** / **SMD (Server Machine Dataset)** | Sensor nirkabel lingkungan: Suhu, Kelembapan, Cahaya, Tegangan baterai node. | 2,3 juta pembacaan sensor berkala dari 54 sensor node terdistribusi. | **Task 1:** Anomali kebocoran suhu/kebakaran $\to$<br>**Task 2:** Anomali drop tegangan baterai mendadak akibat badai/interferensi. | ⭐⭐⭐ **Sedang** | Pola anomali relatif sederhana; disparitas non-IID kurang menantang untuk FCL. | Bodik et al. (ACM SIGCOMM 2004) |
+| 4 | **Internet of Medical Things (IoMT Healthcare)** | **PhysioNet MIT-BIH Arrhythmia Database** | Rekaman sinyal elektrokardiogram (ECG) 2-lead dari berbagai pasien terdistribusi. | 48 rekaman raw ECG (panjang 30 menit per pasien, anotasi detak jantung). | **Task 1:** Deteksi Premature Ventricular Contractions (PVC) $\to$<br>**Task 2:** Deteksi Supraventricular Ectopic Beats (SVEB). | ⭐⭐⭐⭐ **Tinggi** (Privasi antar-rumah sakit sangat cocok untuk FL). | Menuntut landasan medis yang kuat, kurang umum untuk mahasiswa Teknik Telekomunikasi. | Moody & Mark (IEEE EMB 2001) |
+| 5 | **Autonomous Vehicles / Connected Cars (V2X)** | **CAN-Intrusion-Dataset (Car-Hacking Dataset)** | Log komunikasi bus CAN (Controller Area Network) internal kendaraan roda empat. | Jutaan baris frame pesan CAN (CAN ID, DLC, Data bytes). | **Task 1:** Serangan DoS pada bus CAN $\to$<br>**Task 2:** Serangan Fuzzing & Spoofing RPM/Gear transmisi kendaraan. | ⭐⭐⭐⭐ **Tinggi** (Tabular biner, payload ultra-ringan). | Terbatas pada jaringan bus kendaraan lokal, bukan skala jaringan luas seperti kampus. | Song et al. (IEEE T-ITS 2020) |
+
+### 9.3 Rekomendasi Mahasiswa kepada Pembimbing
+Berdasarkan perbandingan teknis di atas, mahasiswa merekomendasikan:
+1. **Pilihan Utama (Direkomendasikan Tetap):** Tetap berada pada **Network IDS dengan CIC-IDS2017**, karena seluruh pipeline pra-pemrosesan (62 fitur tanpa port leakage, 1,53 juta baris, weighted loss, pembagian non-IID Klien A/B) telah selesai dikembangkan, divalidasi dengan 15 modul analitik skrip, dan siap dieksekusi tanpa risiko ketidakpastian data baru.
+2. **Pilihan Alternatif (Jika Pembimbing Wajib Menyelaraskan dengan Proyek Sensor Fisik ITS):** Mengadopsi domain **Perimeter Intrusion Detection (Sensor Akselerometer Pagar)** atau **Industrial SCADA (SWaT)** yang memiliki struktur tabular numerik serupa sehingga algoritma FedAvg + EWC dapat langsung ditransfer tanpa merombak arsitektur model secara fundamental.
 
 ---
 
