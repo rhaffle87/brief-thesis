@@ -52,9 +52,10 @@ Untuk memastikan kejelasan komunikasi akademik dan pembelaan skripsi, seluruh si
 ![Protokol Komunikasi Federated Learning Terpusat](../Aset/federated_learning_architecture_web.png)  
 *Gambar 2: Siklus protokol Federated Learning terpusat: Server menginisialisasi model global $\theta_0$, klien mengunduh bobot dan melakukan pelatihan lokal pada data privat, kemudian mengirim pembaruan parameter kembali ke server untuk diagregasi menggunakan FedAvg. Sumber: MarcT0K (2023), "Centralized federated learning protocol", Wikimedia Commons, lisensi CC BY-SA 4.0.*
 
-### 2.2 Rumusan Masalah (FINAL & TERKUNCI)
-1. **RM 1:** Bagaimana kinerja deteksi intrusi model yang dilatih secara terdistribusi (*Federated Averaging* / FedAvg) dibandingkan dengan model yang dilatih secara lokal pada masing-masing klien dengan distribusi data non-IID?
-2. **RM 2:** Bagaimana pengaruh metode *Elastic Weight Consolidation* (EWC) terhadap mitigasi *catastrophic forgetting* saat model mempelajari kelas serangan baru secara sekuensial, baik pada skenario pelatihan lokal maupun terdistribusi (FedAvg + EWC)?
+### 2.2 Rumusan Masalah (FINAL & TERKUNCI - 3 Poin)
+1. **RM 1 (Arsitektural / Umum):** Bagaimana rancang bangun dan kelayakan arsitektur *Federated-Continual Learning* (FCL) yang mengintegrasikan agregasi terdistribusi (*Federated Averaging*) dan regularisasi parameter lokal (*Elastic Weight Consolidation*) untuk deteksi intrusi jaringan di bawah kondisi heterogenitas data non-IID?
+2. **RM 2 (Analisis Komparasi Terdistribusi vs Lokal):** Bagaimana kinerja deteksi intrusi model yang dilatih secara terdistribusi (*Federated Averaging* / FedAvg) dibandingkan dengan model yang dilatih secara lokal pada masing-masing klien dengan distribusi data non-IID?
+3. **RM 3 (Analisis Mitigasi Catastrophic Forgetting):** Bagaimana pengaruh metode *Elastic Weight Consolidation* (EWC) terhadap mitigasi *catastrophic forgetting* saat model mempelajari kelas serangan baru secara sekuensial, baik pada skenario pelatihan lokal maupun terdistribusi (FedAvg + EWC)?
 
 ---
 
