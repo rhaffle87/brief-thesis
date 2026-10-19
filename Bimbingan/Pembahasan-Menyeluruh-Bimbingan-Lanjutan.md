@@ -47,7 +47,22 @@ Tabel berikut merangkum metode FCL lain yang berada dalam satu garis linier (*li
 | **FedCurv (Shoham et al., 2019)** | Regularisasi Terdistribusi | Klien menghitung Fisher lokal dan mengirimkannya ke server; server membagikan konsensus kurvatur global. | Mencegah penyimpangan bobot antar-klien secara global. | Beban transmisi komunikasi berlipat ganda ($2 \times$ payload karena mengirim bobot + matriks Fisher). | **Varian Linier Tingkat Lanjut (Dapat direkomendasikan sebagai *Future Work* / Pembanding Teoretis)** |
 | **FedProx + EWC** | Heterogeneity + Regularisasi | Menambahkan suku proksimal $\frac{\mu}{2} \|w - w^t\|^2$ pada FedAvg + penalti EWC pada loss lokal. | Tahan terhadap straggler dan non-IID ekstrem. | Menambah hyperparameter penyeimbang baru ($\mu$ proksimal dan $\lambda$ Fisher) yang rumit dituning. | **Alternatif Agregasi jika FedAvg mengalami osilasi berat** |
 | **FedWeIT (Yoon et al., 2021)** | Isolasi Parameter (Parameter-Decomposition) | Memecah bobot menjadi bobot global, adaptif klien, dan spesifik task (*sparse masks*). | Mencegah interferensi antar-task secara struktural. | Memerlukan arsitektur modular yang kompleks, kurang cocok untuk MLP kompak. | **Keluarga Berbeda (Arsitektural)** |
-| **Federated LwF (Learning without Forgetting)** | Knowledge Distillation | Model lama bertindak sebagai *Teacher* untuk mendistilasi representasi ke model baru (*Student*). | Tanpa buffer data mentah, tanpa komputasi matriks Fisher. | Rentan error-propagation jika prediksi model lama pada domain baru tidak terkalibrasi. | **Alternatif Tanpa Fisher** |
+### 1.4 Keputusan Pemilihan Metode Pembanding: Mengapa FedCurv dan FedProx?
+Jika dosen pembimbing menghendaki metode pembanding konkret untuk menguji kontribusi kebaruan riset FCL:
+
+1. **Rekomendasi Utama (Dimensi Continual Learning): FedCurv (Shoham et al., arXiv:1910.07796)**
+   - **Alasan Ilmiah:** FedCurv adalah perluasan langsung (*natural federated extension*) dari EWC. Klien menghitung diagonal Fisher yang sama persis, namun membagikannya ke server untuk menghukum deviasi bobot konsensus global.
+   - **Efisiensi Implementasi:** Tidak memerlukan arsitektur modular baru atau generator sintetis. Tetap beroperasi pada model MLP 6.211 parameter yang sama.
+   - **Relevansi Hipotesis:** Secara langsung menguji hipotesis *EWC Dilution Effect* - apakah membagikan Fisher ke server mampu mengatasi pengenceran gradien akibat ketimpangan data Klien A (670 ribu alur) vs Klien B (860 ribu alur).
+   - **Usulan Matriks:** Dapat diajukan sebagai kondisi pengujian opsional **E4b: FedAvg + FedCurv**.
+
+2. **Rekomendasi Alternatif (Dimensi Heterogenitas Non-IID): FedProx (Li et al., MLSys 2020)**
+   - **Alasan Ilmiah:** FedProx sudah terverifikasi di daftar pustaka primer (`Li-2020-FedProx.md`). Menambahkan suku proksimal $\frac{\mu}{2} \|\theta - \theta^t\|^2$ secara murni menguji apakah celah akurasi non-IID di RM 1 berasal dari *client drift* atau *catastrophic forgetting*.
+   - **Nol Biaya Tambahan:** Skrip Flower mudah disisipi suku proksimal tanpa merombak pipeline pelatihan.
+
+3. **Mengapa FedWeIT / GLFC / TARGET Tidak Dipilih sebagai Eksperimen Wajib?**
+   - FedWeIT membutuhkan pembuatan *sparse mask* per-tugas yang menambah overhead komputasi.
+   - GLFC dan TARGET membutuhkan modul generator sintetis / proxy server yang didesain untuk citra resolusi tinggi (Computer Vision), yang terlalu berat (*overkill*) dan tidak alami untuk data tabular NIDS 62 fitur. Keduanya cukup diposisikan sebagai tinjauan taksonomi pada Bab 2.
 
 ---
 
@@ -64,15 +79,16 @@ Dalam literatur FL (*Kairouz et al., 2021; McMahan et al., 2017*), skala sistem 
    - Jumlah klien: **100 hingga 10.000+ klien mikro**.
    - Karakteristik: Perangkat memiliki sumber daya baterai/bandwidth minim, koneksi tidak stabil, tingkat partisipasi acak per ronde hanya 1% - 10% (*client sampling*).
 
-### 2.2 Tinjauan Literatur Skala Node pada NIDS Terfederasi
+### 2.2 Tinjauan Literatur Skala Node pada NIDS & IoT Terfederasi (Sumber Terverifikasi)
 
-| Paper / Penulis | Skenario Aplikasi | Jumlah Klien ($K$) | Arsitektur & Dataset | Justifikasi Jumlah Klien |
-|---|---|---|---|---|
-| **Ruzafa-Alcazar et al. (2023)** | Industrial IoT (IIoT) NIDS | **2 s.d. 4 Klien** | FedAvg + Differential Privacy (ToN_IoT) | Memodelkan pemisahan fisik stasiun industri nyata dengan variasi serangan lokal. |
-| **Jin et al. (2024, FL-IIDS)** | Incremental NIDS | **2 s.d. 5 Klien** | FL + Replay-based (CSE-CIC-IDS2018) | Memverifikasi transfer kelas inkremental lintas domain subnet tanpa menambah noise skala. |
-| **Popoola et al. (2022)** | Edge IoT Zero-Day Botnet | **5 Klien** | FedAvg DNN (BoT-IoT) | Memodelkan 5 klaster perangkat IoT pintar di jaringan rumah/kantor. |
-| **Zhao et al. (2018)** | Fondasi Non-IID FL | **2 Klien (Analitis) & 10 Klien** | Analisis Divergensi Bobot | 2 klien digunakan secara khusus untuk menurunkan pembuktian matematis divergensi bobot $\|w_{FL} - w_{Centralized}\|$. |
-| **Hernandez-Ramos et al. (2025)** | Systematic Review FL-NIDS | **Survei 85 Paper** | Berbagai benchmark | Menunjukkan bahwa >60% eksperimen FL-NIDS empiris menggunakan rentang 2-10 klien untuk menjaga validitas kontrol non-IID. |
+| Paper / Penulis | Skenario Aplikasi | Jumlah Klien ($K$) | Status Verifikasi Sumber Primer | Justifikasi Peneliti |
+|---|---|---|:---:|---|
+| **Kairouz et al. (2021)** *(Google Research dkk.)* | Fondasi Taksonomi FL (*Advances and Open Problems in FL*) | **Cross-Silo: 2 s.d. Puluhan**<br>Cross-Device: 100 s.d. Jutaan | ✔ **arXiv:1912.04977** (FnT in ML, Vol. 14) | Menetapkan pembagian resmi: Cross-silo FL menggunakan sedikit klien berdaya tetap (2-puluhan), sedangkan cross-device untuk jutaan mobile node. |
+| **Nguyen et al. (D̈ıoT, 2019)** | FL Anomaly Detection untuk IoT | **2 s.d. 15 Klien** | ✔ **arXiv:1804.07474** (IEEE ICDCS 2019) | Menguji batas kinerja konvergensi deteksi anomali perangkat IoT pada spektrum 2 hingga 15 gateway. |
+| **Ruzafa-Alcázar et al. (2023)** | Industrial IoT (IIoT) NIDS Terfederasi | **Klaster Edge Gateway** | ✔ **DOI: 10.1109/TII.2021.3126728** (IEEE TII, Vol. 19(2)) | Memodelkan pemisahan fisik stasiun industri nyata dengan pemrosesan deteksi pada edge node lokal. |
+| **Ali et al. (FL-BCID, 2025)** | Privacy-Preserving IIoT IDS | **10 Edge Nodes** | ✔ **arXiv:2505.15376** (Mei 2025) | Menguji model kolaboratif ringan FL pada 10 perangkat edge terdistribusi (dataset ToN-IoT & N-BaIoT). |
+| **Zhao et al. (2018)** | Fondasi Teoretis Non-IID FL | **2 Klien (Analitis) & 10 Klien** | ✔ **arXiv:1806.00582** (Terverifikasi di korpus) | 2 klien digunakan secara khusus untuk menurunkan pembuktian matematis batas divergensi bobot $\|w_{FL} - w_{Centralized}\|$. |
+| **Hernandez-Ramos et al. (2025)** | Systematic Review FL-NIDS | **Survei Arsitektur Cross-Silo** | ✔ **DOI: 10.1145/3731596** (ACM CSUR, Vol. 57(12)) | Menunjukkan dominasi arsitektur cross-silo berbasis gateway organisasi pada sistem deteksi intrusi terfederasi. |
 
 ### 2.3 Justifikasi Ilmiah Pemilihan 2 Klien pada Penelitian Ini
 Mengapa penelitian ini menggunakan **2 Klien + 1 Server**?
@@ -85,27 +101,31 @@ Mengapa penelitian ini menggunakan **2 Klien + 1 Server**?
 
 ---
 
-## 3. Implementasi FCL di Luar Domain NIDS
+## 3. Implementasi FCL di Luar Domain NIDS (Kajian Literatur & Paper Riil)
 
-Konsep *Federated-Continual Learning* (FCL) memecahkan dua masalah universal: **privasi data terdistribusi** dan **kelupaan katastropik saat pola data berubah**. Selain pada NIDS, FCL diimplementasikan pada domain-domain mutakhir berikut:
+Konsep *Federated-Continual Learning* (FCL) memecahkan dua masalah universal yang tidak hanya terjadi di jaringan komputer: **privasi data terdistribusi (spatial non-IID)** dan **kelupaan katastropik saat pola data berubah (temporal drift)**. Berikut adalah bukti studi literatur primer yang menerapkan FCL pada domain-domain non-NIDS:
 
-### 3.1 Smart Campus & Perimeter Physical Security (Sangat Relevan dengan Arahan Dosen)
-- **Implementasi:** Jaringan node sensor getaran pagar (*fence-mounted accelerometer/seismic geophone*), sensor gelombang mikro, dan kamera edge AI di sepanjang garis batas perimeter (misal kampus ITS 180 hektar).
-- **Peran FCL:**
-  - *Federated:* Sensor di Pintu Utama, Sektor Keputih, dan Sektor Asrama melatih model deteksi intrusi fisik tanpa mengirimkan rekaman getaran mentah ke server pusat (menghemat bandwidth radio LoRa/WiFi).
-  - *Continual Learning:* Model dilatih mengenali gangguan lingkungan awal (hewan liar, guncangan angin), lalu secara berkala beradaptasi mengenali pola baru (misal: getaran alat berat proyek konstruksi baru di dekat pagar) tanpa melupakan pola intrusi manusia memanjat pagar.
+### 3.1 Pervasive Computing, Wearables & Perimeter Sensor (Analogi Pagar Kampus ITS)
+- **Paper Riil:** Usmanova, Portet, Lalanda, & Vega (2022). *"Federated Continual Learning through Distillation in Pervasive Computing."* IEEE International Conference on Smart Computing (SMARTCOMP) / arXiv:2207.08181. DOI: [10.48550/arXiv.2207.08181](https://doi.org/10.48550/arXiv.2207.08181).
+- **Implementasi:** Jaringan node sensor edge bergerak/tetap (akselerometer 3-sumbu dan giroskop) untuk mengenali aktivitas fisik (Human Activity Recognition) yang berubah seiring waktu.
+- **Korelasi dengan Analogi Pagar ITS (180 Hektar):** Sensor getaran pagar (akselerometer/geophone) di sektor Pintu Utama vs Sektor Hutan menghadapi dinamika kelas yang datang sekuensial (gangguan angin/hewan $\to$ intrusi panjat pagar). Paper membuktikan FCL mampu mengadaptasi sinyal getaran baru tanpa melupakan pola getaran lama dan tanpa membanjiri transmisi radio.
 
-### 3.2 Industrial IoT (IIoT) & Predictive Maintenance Pabrik Cerdas
-- **Implementasi:** Pemantauan anomali getaran motor induksi dan turbin pada lini manufaktur terdistribusi.
-- **Peran FCL:** Pabrik cabang A dan cabang B melatih model bersama. Ketika jenis cacat mekanik baru (*bearing fault type 2*) muncul di cabang A, model mengadaptasinya tanpa melupakan jenis cacat lama (*bearing fault type 1*) dan tanpa membocorkan data operasional rahasia pabrik.
+### 3.2 Industrial IoT (IIoT), Digital Twins & Predictive Maintenance Pabrik
+- **Paper Riil:** Zhao et al. (2025). *"FCLLM-DT: Empowering Federated Continual Learning With Large Language Models for Digital-Twin-Based Industrial IoT."* IEEE Internet of Things Journal. DOI: [10.1109/JIOT.2024.3510553](https://doi.org/10.1109/JIOT.2024.3510553).
+- **Survei Domain Terkait:** Qi et al. (2024). *"Federated Continual Learning via Knowledge Fusion: A Survey."* IEEE Transactions on Knowledge and Data Engineering (TKDE) / arXiv:2312.16475.
+- **Implementasi:** Pemantauan anomali getaran mesin industri (*bearing fault diagnosis*) melintasi beberapa fasilitas pabrik independen.
+- **Peran FCL:** Pabrik A dan B mendeteksi jenis keausan mekanik baru (*bearing outer-race defect*) secara bertahap tanpa mengirimkan rekaman getaran mentah SCADA ke cloud publik.
 
-### 3.3 Internet of Medical Things (IoMT) & Deteksi Aritmia Jantung Sekuensial
-- **Implementasi:** Perangkat wearable ECG yang terhubung antar-rumah sakit.
-- **Peran FCL:** Rumah sakit di berbagai kota mendeteksi varian patologi baru (misal: komplikasi pasca-infeksi baru) secara sekuensial. Regulasi kerahasiaan medis melarang pengiriman data rekaman pasien, sementara model dituntut mempertahankan akurasi terhadap penyakit jantung klasik terdahulu.
+### 3.3 Internet of Medical Things (IoMT Healthcare) & Analisis Sinyal Biosignal
+- **Paper Riil:** Dong et al. (2024). *"FedCL-Ensemble Learning: A Framework of Federated Continual Learning with Ensemble Transfer Learning Enhanced for Alzheimer's MRI Classifications while Preserving Privacy."* arXiv:2411.12756. DOI: [10.48550/arXiv.2411.12756](https://doi.org/10.48550/arXiv.2411.12756).
+- **Paper Landmark Imaging:** Liu et al. (2023). *"Asynchronous Decentralized Federated Lifelong Learning for Landmark Localization in Medical Imaging."* arXiv:2303.06783. DOI: [10.48550/arXiv.2303.06783](https://doi.org/10.48550/arXiv.2303.06783).
+- **Implementasi:** Multi-senter rumah sakit mendeteksi anomali elektrokardiogram (ECG 12-lead) atau MRI.
+- **Peran FCL:** Rumah sakit diwajibkan oleh undang-undang privasi medis untuk tidak membagikan data rekam medis pasien, sementara model klinis dituntut mengasimilasi varian patologi baru tanpa mengalami degradasi akurasi pada penyakit terdahulu.
 
 ### 3.4 Autonomous Vehicles & Intelligent Transportation Systems (V2X)
-- **Implementasi:** Armada kendaraan otonom yang menjelajahi wilayah geografis berbeda.
-- **Peran FCL:** Kendaraan di kota bersalju mempelajari rintangan cuaca baru, sementara kendaraan di kota tropis mempelajari genangan air hujan. Melalui FCL, pengetahuan digabungkan secara global tanpa menimpa kemampuan navigasi dasar.
+- **Survei Domain Terkait:** Hamedi et al. (2025). *"Federated Continual Learning: Concepts, Challenges, and Solutions."* Neurocomputing, Vol. 651, 130844. DOI: [10.1016/j.neucom.2025.130844](https://doi.org/10.1016/j.neucom.2025.130844).
+- **Implementasi:** Armada kendaraan otonom yang menjelajahi kondisi jalan raya dan iklim yang dinamis.
+- **Peran FCL:** Kendaraan memperbarui model deteksi bahaya jalanan saat berpindah ke zona geografis baru tanpa menimpa aturan navigasi dasar.
 
 ---
 
@@ -195,6 +215,8 @@ Continual Learning (CL) bertujuan memampukan jaringan saraf tiruan belajar dari 
 | **Experience Replay (ER)** | Chaudhry et al. (2019) | Menyimpan subset data mentah tugas lama di buffer memori fisik dan me-replay saat training baru. | Retensi memori sangat tinggi dan akurasi stabil. | **Melanggar privasi data (GDPR/UU PDP)** jika buffer dicuri; membebani RAM edge. | ❌ Dieliminasi (Isu privasi & memori). |
 | **Gradient Episodic Memory (GEM)** | Lopez-Paz & Ranzato (2017) | Proyeksi kuadratik gradien baru agar $\langle g_{\text{new}}, g_{\text{old}} \rangle \ge 0$ pada buffer memori. | Menjamin Backward Transfer positif ($BWT \ge 0$). | Komputasi QP-solver sangat berat di edge; membutuhkan buffer data mentah. | ❌ Dieliminasi (Komputasi & buffer). |
 | **PackNet** | Mallya & Lazebnik (2018) | Melakukan *pruning* bobot (50-75%) dan membekukan bobot terpilih untuk task lama. | Forgetting bernilai mutlak nol pada task lama. | Kapasitas model cepat jenuh setelah beberapa task; membutuhkan arsitektur besar. | ❌ Kurang relevan untuk MLP kompak. |
+| **TARGET** | Zhang et al. (ICCV 2023) | Distilasi generatif transfer kelas tanpa data mentah (*exemplar-free generative distillation*). | Privasi tinggi, tanpa buffer data mentah riil. | Membutuhkan pelatihan modul generator tambahan yang berat untuk skala edge. | ⚠️ Kompleksitas tidak sepadan dengan MLP 6.211 parameter. |
+| **LoRA-CL** | Hu et al. (ICLR 2022) / Adaptasi | Membekukan bobot dasar dan menyematkan modul adapter rank-rendah per-task sekuensial. | Nol kelupaan pada representasi dasar; efisien parameter. | Memerlukan mekanisme routing task-ID saat inferensi; kurang alami untuk MLP 3-lapis. | ⭐⭐⭐ Alternatif arsitektural. |
 
 ### 6.2 Mengapa EWC Terpilih untuk NIDS Terdistribusi?
 1. **Kepatuhan Privasi (Zero-Data Replay):** EWC hanya mengomputasi gradien kuadrat lokal. Tidak ada satu pun baris paket jaringan yang disimpan di disk/RAM setelah sesi pelatihan selesai.

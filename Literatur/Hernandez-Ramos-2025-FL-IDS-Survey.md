@@ -1,10 +1,10 @@
 ---
 type: literatur
 title: "Intrusion Detection Based on Federated Learning: A Systematic Review"
-authors: "Jose Luis Hernandez-Ramos, Jorge Bernal Bernabe, Antonio Skarmeta"
+authors: "Jose Luis Hernandez-Ramos, Georgios Karopoulos, Emmanouil Chatzoglou, Vasileios Kouliaridis, Felix J. Garcia Clemente, Antonio Gonzalez-Vidal, Georgios Kambourakis"
 year: 2025
-venue: "IEEE Communications Surveys & Tutorials"
-doi: "10.1109/COMST.2024.3499824"
+venue: "ACM Computing Surveys (CSUR)"
+doi: "10.1145/3731596"
 arxiv: ""
 pdf: "PDFs/HernandezRamos-2025-FL-IDS-Survey.pdf"
 dibaca_dari_pdf: ya
@@ -24,13 +24,13 @@ prioritas: inti-terkait
 
 ## Metadata
 
-**Penulis:** Jose Luis Hernandez-Ramos, Jorge Bernal Bernabe, Antonio Skarmeta  
-**Institusi:** University of Murcia, Spain  
+**Penulis:** Jose Luis Hernandez-Ramos, Georgios Karopoulos, Emmanouil Chatzoglou, Vasileios Kouliaridis, Felix J. Garcia Clemente, Antonio Gonzalez-Vidal, Georgios Kambourakis  
+**Institusi:** European Commission Joint Research Centre (JRC) / University of the Aegean / University of Murcia  
 **Tahun:** 2025  
-**Venue:** IEEE Communications Surveys & Tutorials (IEEE COMST), Vol. 27  
-**DOI:** 10.1109/COMST.2024.3499824  
+**Venue:** ACM Computing Surveys (CSUR), Vol. 57, No. 12  
+**DOI:** 10.1145/3731596  
 **PDF Lokal:** [HernandezRamos-2025-FL-IDS-Survey.pdf](PDFs/HernandezRamos-2025-FL-IDS-Survey.pdf)  
-**Status Verifikasi:** ✔ Terverifikasi dari naskah PDF IEEE COMST (65 halaman)  
+**Status Verifikasi:** ✔ Terverifikasi resmi Crossref API  
 **Relevansi Scope:** ⭐⭐⭐⭐⭐ CRITICAL - Tinjauan sistematis terlengkap tentang state-of-the-art arsitektur FL untuk IDS  
 
 ---
