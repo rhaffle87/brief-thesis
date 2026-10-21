@@ -12,7 +12,7 @@ Spesifikasi Metodologis Terkunci:
 - Input: Monday (Normal), Tuesday (SSH-Patator), Wednesday (DoS 4-varian)
 - Filter 3 Kelas: Normal (BENIGN), SSH-Patator, DoS (Hulk, GoldenEye, slowloris, slowhttptest)
 - Eksklusi: FTP-Patator (5.933 baris), Heartbleed (11 baris)
-- Deduplikasi: Pembersihan 132.909 baris duplikat mentah (1.529.677 baris bersih)
+- Deduplikasi: Pembersihan 138.098 baris duplikat mentah pada ruang 78 fitur pra-seleksi (1.520.488 baris bersih, verifikasi empiris 2026-10-21)
 - Seleksi Fitur (62 Fitur Numerik Bersih + 1 Label):
   * 10 Kolom konstan variansi nol dibuang
   * 5 Kolom duplikat identik (r=1.0) dibuang
@@ -133,10 +133,40 @@ def filter_classes(df: pd.DataFrame) -> pd.DataFrame:
     return df_filtered
 
 
-def clean_anomalies_and_deduplicate(df: pd.DataFrame) -> pd.DataFrame:
-    """Membersihkan nilai Inf/NaN dan menghapus baris duplikat identik."""
+def clean_anomalies_and_deduplicate(df: pd.DataFrame, drop_conflicting_labels: bool = False) -> pd.DataFrame:
+    """Membersihkan nilai Inf/NaN dan menghapus baris duplikat identik.
+
+    Deduplikasi dijalankan pada ruang 78 fitur numerik pra-seleksi dengan
+    mekanisme keep="first" dan menghasilkan 1.520.488 baris unik (artefak
+    saat ini dibekukan pada perilaku ini, verifikasi empiris 2026-10-21).
+
+    Audit konflik label (vektor fitur identik multipel baris namun label
+    berbeda — artefak ekstraksi statistik CICFlowMeter, sejalan temuan
+    Engelen et al., 2021) dihitung sebelum deduplikasi:
+      - Ruang 78 fitur (pra-seleksi): 4.486 baris lintas-label pada 72 grup
+        vektor fitur identik (didominasi satu grup besar 3.361 baris
+        campuran Normal/DoS); 0 konflik pada SSH-Patator.
+      - keep="first" (default): mempertahankan baris pertama tiap grup fitur
+        apa pun labelnya — total 1.520.488 baris. Angka "74" yang beredar di
+        dokumen audit = selisih (duplikat fitur 138.098 - duplikat eksak
+        138.024), yaitu jumlah baris konflik yang terbuang sebagai efek
+        samping keep="first" — bukan 37 pasang terpisah.
+      - drop_conflicting_labels=True: seluruh 4.486 baris konflik dieliminasi
+        terlebih dahulu, lalu deduplikasi keep="first" dijalankan pada sisa
+        -> 1.520.414 baris (selisih bersih -74 baris terhadap default).
+
+    Konflik lintas-label tersisa di ruang 62 fitur final (pasca-penghapusan
+    16 kolom) dicatat sebagai peringatan di select_features(); tidak
+    dieliminasi secara default agar artefak tetap tereproduksi.
+
+    Args:
+        drop_conflicting_labels: Jika True, eliminasi seluruh baris yang
+            berada pada grup vektor fitur identik dengan label berbeda sebelum
+            deduplikasi. Default False mempertahankan perilaku historis
+            keep="first" (artefak 1.520.488 baris).
+    """
     logger.info("Langkah 3/7: Penanganan nilai anomali Inf/NaN dan deduplikasi alur...")
-    
+
     # Deteksi dan konversi Inf ke NaN
     num_cols = df.select_dtypes(include=[np.number]).columns
     inf_count = np.isinf(df[num_cols].values).sum()
@@ -148,13 +178,45 @@ def clean_anomalies_and_deduplicate(df: pd.DataFrame) -> pd.DataFrame:
     logger.info("  Baris memuat NaN: %s baris (dihapus)", f"{nan_rows:,}")
     df = df.dropna(subset=num_cols).copy()
 
-    # Deduplikasi alur (menggunakan seluruh fitur asli)
+    # Audit duplikat eksak vs konflik lintas-label (ruang fitur pra-seleksi)
     feature_cols_all = [c for c in num_cols if c not in ["Day_Source"]]
+    exact_dup_count = int(df.duplicated(subset=feature_cols_all + ["Label_Clean"], keep="first").sum())
+    feat_hash = pd.util.hash_pandas_object(df[feature_cols_all], index=False)
+    labels_per_vector = df.groupby(feat_hash)["Label_Clean"].transform("nunique")
+    conflict_mask = labels_per_vector > 1
+    n_conflict_rows = int(conflict_mask.sum())
+    n_conflict_groups = (
+        int(df.loc[conflict_mask].groupby(feat_hash[conflict_mask]).ngroups) if n_conflict_rows else 0
+    )
+    logger.info("  Audit duplikat eksak (fitur+label): %s baris", f"{exact_dup_count:,}")
+    if n_conflict_rows:
+        logger.info(
+            "  Audit konflik lintas-label: %s baris pada %d grup vektor fitur identik (label berbeda)",
+            f"{n_conflict_rows:,}", n_conflict_groups,
+        )
+    else:
+        logger.info("  Audit konflik lintas-label: 0 baris")
+
+    if drop_conflicting_labels and n_conflict_rows:
+        # Validasi integritas hash: seluruh baris konflik wajib bagian dari grup
+        # duplikat fitur nyata; jika tidak (tabrakan hash), eliminasi dibatalkan.
+        in_feat_dup = df.duplicated(subset=feature_cols_all, keep=False)
+        if bool((conflict_mask & ~in_feat_dup).any()):
+            logger.warning("  Kecurigaan tabrakan hash — eliminasi konflik DIBATALKAN demi keamanan data.")
+        else:
+            n_before = len(df)
+            df = df.loc[~conflict_mask].copy()
+            logger.info(
+                "  drop_conflicting_labels=True: %s baris konflik dieliminasi (sisa %s baris)",
+                f"{n_before - len(df):,}", f"{len(df):,}",
+            )
+
+    # Deduplikasi alur (menggunakan seluruh fitur asli pra-seleksi)
     dup_mask = df.duplicated(subset=feature_cols_all, keep="first")
     dup_count = dup_mask.sum()
     logger.info("  Baris duplikat identik ditemukan: %s baris (%0.2f%%)",
                 f"{dup_count:,}", (dup_count / len(df)) * 100)
-    
+
     df_dedup = df[~dup_mask].copy()
     logger.info("Total baris unik pasca-deduplikasi: %s baris", f"{len(df_dedup):,}")
     return df_dedup
@@ -179,6 +241,21 @@ def select_features(df: pd.DataFrame) -> tuple[pd.DataFrame, list[str]]:
         logger.warning("PERINGATAN: Jumlah fitur numerik adalah %d, bukan 62!", len(feature_names))
     else:
         logger.info("VERIFIKASI SUKSES: Tepat 62 fitur numerik statistik flow.")
+
+    # Audit residu di ruang fitur final: penghapusan 16 kolom dapat menyebabkan
+    # baris yang tadinya unik di ruang 78 fitur menjadi identik di ruang 62 fitur.
+    resid_exact = int(df_selected.duplicated(subset=feature_names + ["Label_Clean"], keep="first").sum())
+    resid_hash = pd.util.hash_pandas_object(df_selected[feature_names], index=False)
+    resid_conflict = int(
+        (df_selected.groupby(resid_hash)["Label_Clean"].transform("nunique") > 1).sum()
+    )
+    if resid_exact or resid_conflict:
+        logger.warning(
+            "  Residu ruang 62 fitur final: %s duplikat eksak (fitur+label) + %s baris konflik lintas-label "
+            "(dipertahankan; deduplikasi dijalankan pada ruang 78 fitur pra-seleksi — lihat docstring "
+            "clean_anomalies_and_deduplicate)",
+            f"{resid_exact:,}", f"{resid_conflict:,}",
+        )
 
     return df_selected, feature_names
 
@@ -353,12 +430,23 @@ def main():
         default=42,
         help="Random seed untuk reprodusibilitas pembagian data",
     )
+    parser.add_argument(
+        "--drop-conflicting-labels",
+        action="store_true",
+        help=(
+            "Eliminasi seluruh baris pada grup vektor fitur identik dengan label berbeda "
+            "(4.486 baris, 72 grup di ruang 78 fitur) sebelum deduplikasi -> 1.520.414 baris. "
+            "Default mempertahankan keep='first' historis (1.520.488 baris)."
+        ),
+    )
     args = parser.parse_args()
 
     logger.info("Memulai Praproses CIC-IDS2017 (Project Root: %s)", PROJECT_ROOT)
     df_raw = load_raw_csvs(args.input)
     df_filtered = filter_classes(df_raw)
-    df_clean = clean_anomalies_and_deduplicate(df_filtered)
+    df_clean = clean_anomalies_and_deduplicate(
+        df_filtered, drop_conflicting_labels=args.drop_conflicting_labels
+    )
     df_selected, feature_names = select_features(df_clean)
     partitions = partition_federated_data(df_selected, feature_names, test_ratio=0.20, seed=args.seed)
     stats = compute_federated_scaling_and_weights(partitions, feature_names)
