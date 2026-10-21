@@ -1,11 +1,11 @@
 ---
 type: literatur
-title: "Federated Continual Learning: Concepts, Challenges, and Solutions"
-authors: "Parisa Hamedi, Vahid Pourahmadi, Hamidreza Soltanian-Zadeh"
+title: "Federated continual learning: Concepts, challenges, and solutions"
+authors: "Parisa Hamedi, Roozbeh Razavi-Far, Ehsan Hallaji"
 year: 2025
-venue: "IEEE Communications Surveys & Tutorials / arXiv preprint"
-doi: "10.48550/arXiv.2402.14815"
-arxiv: "2402.14815"
+venue: "Neurocomputing, Vol. 629, 2025, 130844"
+doi: "10.1016/j.neucom.2025.130844"
+arxiv: "2502.07059"
 pdf: "PDFs/Hamedi-2025-FCL-Survey.pdf"
 dibaca_dari_pdf: ya
 status: ✔ terverifikasi
@@ -24,13 +24,14 @@ prioritas: inti-terkait
 
 ## Metadata
 
-**Penulis:** Parisa Hamedi, Vahid Pourahmadi, Hamidreza Soltanian-Zadeh  
-**Institusi:** Amirkabir University of Technology, Tehran, Iran  
+**Penulis:** Parisa Hamedi, Roozbeh Razavi-Far, Ehsan Hallaji  
+**Institusi:** University of Windsor, Windsor, ON, Canada  
 **Tahun:** 2025  
-**Venue:** arXiv:2402.14815  
+**Venue:** Neurocomputing, Vol. 629, 130844 (Elsevier) / arXiv:2502.07059  
+**DOI:** 10.1016/j.neucom.2025.130844  
 **PDF Lokal:** [Hamedi-2025-FCL-Survey.pdf](PDFs/Hamedi-2025-FCL-Survey.pdf)  
-**Status Verifikasi:** ✔ Terverifikasi dari naskah PDF  
-**Relevansi Scope:** ⭐⭐⭐⭐⭐ CRITICAL - Survey komprehensif 30 halaman yang membedah irisan Federated Learning dan Continual Learning  
+**Status Verifikasi:** ✔ Terverifikasi dari Crossref REST API & ScienceDirect  
+**Relevansi Scope:** ⭐⭐⭐⭐⭐ CRITICAL - Survey komprehensif yang membedah irisan Federated Learning dan Continual Learning  
 
 ---
 

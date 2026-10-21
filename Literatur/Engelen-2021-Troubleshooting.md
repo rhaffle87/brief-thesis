@@ -1,10 +1,10 @@
 ---
 type: literatur
 title: "Troubleshooting an Intrusion Detection Dataset: The CICIDS2017 Case Study"
-authors: "Gints Engelen, Vincent Rimmer, Wouter Joosen"
+authors: "Gints Engelen, Vera Rimmer, Wouter Joosen"
 year: 2021
-venue: "IEEE Security & Privacy Workshops (SPW)"
-doi: "10.1109/SPW53761.2021.00011"
+venue: "2021 IEEE Security and Privacy Workshops (SPW)"
+doi: "10.1109/SPW53761.2021.00009"
 arxiv: "2101.06093"
 pdf: "PDFs/Opsional/Engelen-2021-CICIDS2017-Troubleshooting.pdf"
 dibaca_dari_pdf: ya
@@ -24,13 +24,13 @@ prioritas: inti-terkait
 
 ## Metadata
 
-**Penulis:** Gints Engelen, Vincent Rimmer, Wouter Joosen  
+**Penulis:** Gints Engelen, Vera Rimmer, Wouter Joosen  
 **Institusi:** imec-DistriNet, KU Leuven, Belgium  
 **Tahun:** 2021  
-**Venue:** IEEE Security and Privacy Workshops (SPW) 2021  
-**DOI:** 10.1109/SPW53761.2021.00011  
+**Venue:** 2021 IEEE Security and Privacy Workshops (SPW)  
+**DOI:** 10.1109/SPW53761.2021.00009  
 **PDF Lokal:** [Engelen-2021-CICIDS2017-Troubleshooting.pdf](PDFs/Opsional/Engelen-2021-CICIDS2017-Troubleshooting.pdf)  
-**Status Verifikasi:** ✔ Terverifikasi dari naskah PDF IEEE SPW  
+**Status Verifikasi:** ✔ Terverifikasi dari Crossref REST API & IEEE Xplore  
 **Relevansi Scope:** ⭐⭐⭐⭐⭐ CRITICAL - Studi forensik anomali dan cacat data pada CIC-IDS2017  
 
 ---

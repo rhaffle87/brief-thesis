@@ -53,7 +53,7 @@ reviewed: 25
 
 6. **Hamedi et al. (2025)** - Federated Continual Learning: Concepts, Challenges, and Solutions
    - Status: ✅ Downloaded [Hamedi-2025-FCL-Survey.pdf](PDFs/Hamedi-2025-FCL-Survey.pdf)
-   - DOI: arXiv:2502.07059 (PREPRINT)
+   - DOI: 10.1016/j.neucom.2025.130844 / arXiv:2502.07059
    - Note: [Hamedi-2025-FCL-Survey](Hamedi-2025-FCL-Survey.md)
 
 7. **Gholizade et al. (2026)** - Federated continual learning: A comprehensive survey

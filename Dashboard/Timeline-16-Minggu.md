@@ -10,7 +10,7 @@
 | **7-8** | Naive vs EWC lokal | ⬜ TODO | Forgetting selesai |
 | **9-10** | FL Flower + FedAvg di Proxmox | ⬜ TODO | FL berjalan |
 | **11-12** | FL+EWC dan eksperimen inti (E0-E4) | ⬜ TODO | Core selesai |
-| **13** | Multi-seed, persiapan E5 (opsional) | ⬜ TODO | Mean ± std |
+| **13** | Multi-seed E0-E4 (5 random seeds) | ⬜ TODO | Mean ± std, signifikansi statistik |
 | **14** | Analisis hasil, grafik, tabel | ⬜ TODO | Draft hasil |
 | **15-16** | Penulisan buku TA, revisi, sidang | ⬜ TODO | Final |
 

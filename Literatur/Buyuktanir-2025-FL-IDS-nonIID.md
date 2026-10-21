@@ -1,10 +1,10 @@
 ---
 type: literatur
 title: "Federated learning in intrusion detection: advancements, applications, and future directions"
-authors: "Busra Buyuktanir, Sahsene Altinkaya, Gozde Karatas Baydogmus, Kazim Yildiz"
+authors: "Busra Buyuktanir, Şahsene Altinkaya, Gozde Karatas Baydogmus, Kazim Yildiz"
 year: 2025
-venue: "Artificial Intelligence Review (Springer)"
-doi: "10.1007/s10462-025-11231-6"
+venue: "Cluster Computing (Springer)"
+doi: "10.1007/s10586-025-05325-w"
 arxiv: ""
 pdf: "PDFs/Buyuktanir-2025-FL-IDS.pdf"
 dibaca_dari_pdf: ya
@@ -24,13 +24,13 @@ prioritas: inti-terkait
 
 ## Metadata
 
-**Penulis:** Busra Buyuktanir, Sahsene Altinkaya, Gozde Karatas Baydogmus, Kazim Yildiz  
+**Penulis:** Busra Buyuktanir, Şahsene Altinkaya, Gozde Karatas Baydogmus, Kazim Yildiz  
 **Institusi:** Marmara University, Istanbul Technical University (Turkey)  
-**Tahun:** 2025 (Published August 2025)  
-**Venue:** Artificial Intelligence Review (Springer)  
-**DOI:** 10.1007/s10462-025-11231-6  
+**Tahun:** 2025  
+**Venue:** Cluster Computing (Springer)  
+**DOI:** 10.1007/s10586-025-05325-w  
 **PDF Lokal:** [Buyuktanir-2025-FL-IDS.pdf](PDFs/Buyuktanir-2025-FL-IDS.pdf)  
-**Status Verifikasi:** ✔ Terverifikasi dari naskah PDF Springer  
+**Status Verifikasi:** ✔ Terverifikasi dari Crossref REST API & SpringerLink  
 **Relevansi Scope:** ⭐⭐⭐⭐⭐ CRITICAL - Survey komprehensif terkini (2025) fokus pada FL-IDS, non-IID data, dan dinamika serangan baru  
 
 ---

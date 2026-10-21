@@ -38,7 +38,7 @@ Sistem dirancang dengan topologi terdistribusi menggunakan framework **Flower** 
 ```mermaid
 flowchart LR
     A["CIC-IDS2017 Raw<br/>(Mon, Tue, Wed)"] --> B["Data Cleaning<br/>- 10 Constant cols<br/>- 5 Duplicate cols<br/>- Drop Dest Port"]
-    B --> C["63 Numeric Features<br/>+ 1 Clean Label<br/>(1.53M Total Flows)"]
+    B --> C["62 Numeric Features<br/>+ 1 Clean Label<br/>(1.53M Total Flows)"]
     C --> D["Task 1: Normal + SSH<br/>(Normal 50% Random Split)"]
     C --> E["Task 2: Normal + DoS<br/>(Normal 50% Random Split)"]
     D --> F["Stratified 70/15/15<br/>(Train / Val / Test)"]
@@ -136,11 +136,11 @@ Eksperimen diuji melintasi 5 random seed (42, 43, 44, 45, 46) untuk memastikan s
 
 | Kode | Skenario | Paradigma Komputasi | Mitigasi Forgetting | Tujuan Pengujian |
 |---|---|---|---|---|
-| **E0** | Isolated Local Baseline | Lokal per Client | Tanpa Mitigasi | Mengukur performa murni lokal tanpa kolaborasi. |
-| **E1** | Centralized Baseline | Terpusat (Upper Bound) | Joint Retraining | Mengukur batas atas akurasi ideal jika data digabung. |
-| **E2** | Pure FedAvg Baseline | Terfederasi (FedAvg) | Tanpa Mitigasi | Mengukur keparahan catastrophic forgetting pada FL standar. |
-| **E3** | **FL + Continual Learning (EWC)** | **Terfederasi (FedAvg)** | **Local EWC Penalty** | **Inovasi Inti:** Menguji efektivitas retensi memori Task 1. |
-| **E4** | FL + Experience Replay | Terfederasi (FedAvg) | Local Replay Buffer | Pembanding berbasis rehearsal untuk EWC. |
+| **E0** | Joint/Centralized Benchmark | Terpusat (Upper Bound) | Joint Retraining | Mengukur batas atas akurasi ideal jika data digabung tanpa FL/CL. |
+| **E1** | Local Naive Sequential | Lokal per Client | Tanpa Mitigasi | Mengukur keparahan catastrophic forgetting pada pelatihan sekuensial lokal. |
+| **E2** | Local EWC Sequential | Lokal per Client | Local EWC Penalty | Menguji efektivitas penalti Fisher lokal dalam meredam forgetting. |
+| **E3** | Federated Naive Baseline | Terfederasi (FedAvg) | Tanpa Mitigasi | Mengukur konvergensi dan forgetting pada FL standar non-IID 2-klien. |
+| **E4** | **Federated CL (Metode Usulan)** | **Terfederasi (FedAvg)** | **Local EWC Penalty** | **Inovasi Inti:** Menguji efektivitas retensi memori Task 1 pada kolaborasi federasi. |
 
 *(Catatan: E5 Live Traffic Injection secara resmi dieliminasi dari lingkup penelitian berdasarkan arahan pembimbing pada 06 Oktober 2026).*
 
