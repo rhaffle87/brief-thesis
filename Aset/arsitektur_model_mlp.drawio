@@ -6,7 +6,7 @@
         <mxCell id="1" parent="0" />
 
         <!-- Title -->
-        <mxCell id="title" value="&lt;b&gt;ARSITEKTUR MULTILAYER PERCEPTRON (MLP) KOMPAK UNTUK NIDS TERDISTRIBUSI&lt;/b&gt;&lt;br&gt;Total Parameter: 6.275 Bobot &amp;amp; Bias (~25,1 KB) | Masukan: 63 Fitur Numerik Bersih | Keluaran: 3 Logits Kelas" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fillColor=#f8f9fa;strokeColor=#d6d8db;fontSize=14;fontColor=#212529;" vertex="1" parent="1">
+        <mxCell id="title" value="&lt;b&gt;ARSITEKTUR MULTILAYER PERCEPTRON (MLP) KOMPAK UNTUK NIDS TERDISTRIBUSI&lt;/b&gt;&lt;br&gt;Total Parameter: 6.211 Bobot &amp;amp; Bias (~24,8 KB) | Masukan: 62 Fitur Numerik Bersih | Keluaran: 3 Logits Kelas" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fillColor=#f8f9fa;strokeColor=#d6d8db;fontSize=14;fontColor=#212529;" vertex="1" parent="1">
           <mxGeometry x="60" y="30" width="1040" height="50" as="geometry" />
         </mxCell>
 
@@ -72,7 +72,7 @@
         </mxCell>
 
         <!-- Parameter Summary Card -->
-        <mxCell id="summary" value="&lt;b&gt;REKAPITULASI KOMPUTASI MODEL MLP NIDS:&lt;/b&gt;&lt;br&gt;• Dimensi Masukan ($x$): 63 Fitur Aliran Statistik Bersih (Standardisasi Z-score lokal)&lt;br&gt;• Komposisi Parameter: Linear 1 (4.096) + Linear 2 (2.080) + Linear 3 (99) = &lt;b&gt;6.275 Parameter Bobot &amp;amp; Bias&lt;/b&gt;&lt;br&gt;• Ukuran Biner Memori: $6.275 \times 4\text{ bita (float32)} \approx 25,1\text{ KB}$ (Sangat ringan untuk sinkronisasi FL Flower &amp;amp; komputasi perangkat edge)&lt;br&gt;• Mekanisme Pelatihan: Optimasi SGD / AdamW lokal + Penalti Regularisasi EWC ($\lambda \cdot F_i (\theta_i - \theta_{1, i}^*)^2$) + Agregasi FedAvg Global" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontColor=#424242;fontSize=11;align=left;spacingLeft=14;" vertex="1" parent="1">
+        <mxCell id="summary" value="&lt;b&gt;REKAPITULASI KOMPUTASI MODEL MLP NIDS:&lt;/b&gt;&lt;br&gt;• Dimensi Masukan ($x$): 62 Fitur Aliran Statistik Bersih (Standardisasi Z-score lokal)&lt;br&gt;• Komposisi Parameter: Linear 1 (4.032) + Linear 2 (2.080) + Linear 3 (99) = &lt;b&gt;6.211 Parameter Bobot &amp;amp; Bias&lt;/b&gt;&lt;br&gt;• Ukuran Biner Memori: $6.211 \times 4\text{ bita (float32)} \approx 24,8\text{ KB}$ (Sangat ringan untuk sinkronisasi FL Flower &amp;amp; komputasi perangkat edge)&lt;br&gt;• Mekanisme Pelatihan: Optimasi SGD / AdamW lokal + Penalti Regularisasi EWC ($\lambda \cdot F_i (\theta_i - \theta_{1, i}^*)^2$) + Agregasi FedAvg Global" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#bdbdbd;fontColor=#424242;fontSize=11;align=left;spacingLeft=14;" vertex="1" parent="1">
           <mxGeometry x="60" y="380" width="1040" height="90" as="geometry" />
         </mxCell>
 

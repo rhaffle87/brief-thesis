@@ -11,7 +11,7 @@
   <!-- Title Header -->
   <rect x="30" y="20" width="1060" height="54" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadow)"/>
   <text x="560" y="44" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">ARSITEKTUR MULTILAYER PERCEPTRON (MLP) KOMPAK UNTUK NIDS TERDISTRIBUSI</text>
-  <text x="560" y="63" text-anchor="middle" font-size="12" fill="#64748b">Kapasitas: 6.275 Parameter Bobot &amp; Bias (~25,1 KB) | Masukan: 63 Fitur Numerik Bersih | Keluaran: 3 Logits Kelas</text>
+  <text x="560" y="63" text-anchor="middle" font-size="12" fill="#64748b">Kapasitas: 6.211 Parameter Bobot &amp; Bias (~24,8 KB) | Masukan: 62 Fitur Numerik Bersih | Keluaran: 3 Logits Kelas</text>
 
   <!-- 1. Input Layer Block -->
   <g transform="translate(30, 95)" filter="url(#shadow)">
@@ -21,7 +21,7 @@
     
     <rect x="15" y="45" width="180" height="190" rx="6" fill="#ffffff" stroke="#bae6fd" stroke-width="1"/>
     <text x="25" y="68" font-size="13" font-weight="700" fill="#0284c7">Vektor Aliran Bersih</text>
-    <text x="25" y="86" font-size="11" font-weight="600" fill="#0f172a">Dimensi: 63 Fitur</text>
+    <text x="25" y="86" font-size="11" font-weight="600" fill="#0f172a">Dimensi: 62 Fitur</text>
     
     <text x="25" y="112" font-size="10" fill="#475569">• 5 Waktu &amp; Durasi</text>
     <text x="25" y="128" font-size="10" fill="#475569">• 10 Inter-Arrival Time (IAT)</text>
@@ -119,8 +119,8 @@
   <g transform="translate(30, 365)" filter="url(#shadow)">
     <rect width="1060" height="95" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
     <text x="20" y="25" font-size="12" font-weight="700" fill="#0f172a">REKAPITULASI KOMPUTASI DAN SPESIFIKASI ARSITEKTUR MODEL:</text>
-    <text x="20" y="45" font-size="11" fill="#334155">• <tspan font-weight="600">Total Parameter:</tspan> 4.096 (Linear 1) + 2.080 (Linear 2) + 99 (Linear 3) = <tspan font-weight="700" fill="#0f172a">6.275 Bobot dan Bias Terlatih</tspan>.</text>
-    <text x="20" y="63" font-size="11" fill="#334155">• <tspan font-weight="600">Ukuran Memori Model Biner:</tspan> 6.275 × 4 bita (float32) ≈ 25,1 KB (sangat ringkas untuk pertukaran parameter Flower FL pada perangkat edge).</text>
+    <text x="20" y="45" font-size="11" fill="#334155">• <tspan font-weight="600">Total Parameter:</tspan> 3.968 (Linear 1) + 64 (Bias 1) + 2.080 (Linear 2) + 99 (Linear 3) = <tspan font-weight="700" fill="#0f172a">6.211 Bobot dan Bias Terlatih</tspan>.</text>
+    <text x="20" y="63" font-size="11" fill="#334155">• <tspan font-weight="600">Ukuran Memori Model Biner:</tspan> 6.211 × 4 bita (float32) ≈ 24,8 KB (sangat ringkas untuk pertukaran parameter Flower FL pada perangkat edge).</text>
     <text x="20" y="81" font-size="11" fill="#334155">• <tspan font-weight="600">Fungsi Kerugian &amp; Regularisasi:</tspan> Weighted Cross-Entropy Loss (penanganan ketimpangan kelas 414:1) + Penalti EWC Kuadratik (λ · FIM · Δθ²).</text>
   </g>
 </svg>
