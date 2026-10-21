@@ -84,5 +84,5 @@ Sebanyak 19 pustaka terkini diterbitkan dalam rentang 5 tahun terakhir, mendomin
 
 **Kesimpulan:**
 - **70,6%** referensi bersumber langsung dari publikasi primer peer-reviewed (*Jurnal Ilmiah Internasional* dan *Konferensi Top-Tier*).
-- Sitasi tugas akhir alumnus (`[16]`) dibatasi secara ketat menjadi **1 pustaka saja (2,9%)**, murni ditempatkan pada Sub-bab 2.3 (Tabel 2.1) dan Sub-bab 2.12.3 sebagai tolok ukur komparasi lokal lingkungan Departemen Teknik Elektro FTEIC ITS.
+- Sitasi tugas akhir alumnus (`[16]`) dibatasi secara ketat menjadi **1 pustaka saja (2,9%)**, murni ditempatkan pada Sub-bab 2.13.3 sebagai tolok ukur komparasi efisiensi profil komputasi lokal di lingkungan Departemen Teknik Elektro FTEIC ITS.
 - Seluruh teori dasar, formulasi matematika, arsitektur perangkat lunak, algoritma optimasi, dan metrik evaluasi kini 100% didukung oleh pustaka primer orisinal internasional.
