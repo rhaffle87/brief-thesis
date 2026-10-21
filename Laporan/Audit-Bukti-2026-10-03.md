@@ -241,11 +241,11 @@ Thesis vault: E:/Projects/thesis/ (renamed to simple folders; backup at E:/Proje
 
 ### Perintah: `eda_full_pandas.py`
 - Baris mentah sebelum dedup: 1.668.530
-- Total duplikat (semua 79 kolom): 132.909 (7,97%)
-- Baris setelah dedup: 1.535.621 (1.529.677 baris pada data 3 kelas)
+- Total duplikat (semua 79 kolom): 138.098 (7,97%)
+- Baris setelah dedup: 1.520.488 (1.520.488 baris pada data 3 kelas)
 - Distribusi kelas (setelah dedup):
-  - BENIGN: 1.332.710
-  - DoS (4 varian digabung): 193.748 (Hulk = 89,21%)
+  - BENIGN: 1.323.561
+  - DoS (4 varian digabung): 193.708 (Hulk = 89,21%)
   - SSH-Patator: 3.219 (faktor pembatas ukuran seimbang)
 
 ### Perintah: `constant_columns_check.py`
@@ -319,7 +319,7 @@ Daftar 10 kolom dengan variansi tepat 0,000000:
 | Pindai Tautan Rusak | Python regex scan `\[\[([^\]|#]+)` | Total: 142, Resolved: 97, Unresolved: 45 | ✅ Selesai (45 terpetakan) |
 | Cek Baris SUPERSEDED | Python scan first line Laporan/*.md | Baris 1 belum disematkan pada tiap berkas fisik | ⚠️ Belum (Perlu Phase 2) |
 | Audit Memori | `cat MEMORY.md` + scan pending | Memori bersih, usulan draf siap | ✅ Selesai (Menunggu izin) |
-| Uji Ulang EDA (Duplikat & Konstan) | `eda_full_pandas.py`, `constant_columns_check.py` | Duplikat 132.909 (7,97%), 10 konstan (variance=0) | ✅ Selesai (Terverifikasi) |
+| Uji Ulang EDA (Duplikat & Konstan) | `eda_full_pandas.py`, `constant_columns_check.py` | Duplikat 138.098 (7,97%), 10 konstan (variance=0) | ✅ Selesai (Terverifikasi) |
 | Uji Kolom Identik (Hashing) | Python array hashing | 8 grup identik/redundansi tinggi terpetakan | ✅ Selesai (Terverifikasi) |
 | Uji Ulang Port (5 Seed) | `port_test_classification.py` | Port-only 96,44%, No-port 98,02%, All 99,35% (selisih 0,0000) | ✅ Selesai (Terverifikasi) |
 | Koreksi Fitur | Hitungan matematis data mentah | 78 - 10 - 3 = 65 fitur unik (+ 1 Label) | ✅ Selesai (Terverifikasi) |

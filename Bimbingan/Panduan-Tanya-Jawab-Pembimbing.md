@@ -1,12 +1,12 @@
 # Panduan Tanya-Jawab & Skenario Pembelaan (Defense Cheat Sheet) untuk Bimbingan
 
 **Topik:** Analisis Kinerja Deteksi Network Traffic Intrusion Menggunakan Metode Federated-Continual Learning pada Testbed Private Cloud Server  
-**Mahasiswa:** Rafli Alif Ihza Hartono (NRP 5022211233)  
+**Mahasiswa:** Rafli Alif Ihza Hartono (NRP 5048231003)
 **Tujuan:** Panduan siap pakai untuk menjawab pertanyaan kritis dan sanggahan dosen pembimbing saat sesi tatap muka.  
 
 ---
 
-## 🛡️ Skenario Antisipasi Pertanyaan Dosen Pembimbing
+## Skenario Antisipasi Pertanyaan Dosen Pembimbing
 
 ### Pertanyaan 1: "Mengapa FL hanya menggunakan 2 client dan 3 kelas serangan? Kenapa tidak 5 atau 10 client?"
 - **Strategi Jawaban:** *Kombinasi Isolasi Ilmiah & Topologi Realistis Sensor Jaringan.*
@@ -67,11 +67,11 @@
      - Tugas akhir ini secara spesifik membatasi lingkup pada 3 kelas: **Normal, SSH-Patator (Task 1), dan DoS (Task 2)**.
      - **Senin:** Menyediakan 529.918 flow **Normal murni** (tanpa serangan) sebagai baseline aktivitas rutin.
      - **Selasa:** Menyediakan serangan **SSH-Patator** (3.219 flow unik bersih) untuk Client A / Task 1.
-     - **Rabu:** Menyediakan serangan **DoS** 4 varian lengkap (193.748 flow unik bersih) untuk Client B / Task 2.
+     - **Rabu:** Menyediakan serangan **DoS** 4 varian lengkap (193.708 flow unik bersih) untuk Client B / Task 2.
      - Ketiga berkas hari ini sudah mencakup **100% kelas penelitian** secara lengkap dan berimbang.
   2. **Kelangkaan Sampel Ekstrem pada Hari Kamis:**
      - Hari Kamis memuat Web Attacks dan Infiltration, dengan volume serangan mikro: *Sql Injection hanya 21 baris*, *Infiltration hanya 36 baris*, dan *XSS hanya 652 baris*.
-     - Kuantitas sekecil ini secara metodologis **tidak memenuhi syarat daya statistik (*statistical power*)** untuk dipartisi ke dalam 2 client non-IID, 3 split (train 70%, val 15%, test 15%), dan 5 random seed tanpa memicu overfitting parah atau kegagalan konvergensi.
+     - Kuantitas sekecil ini secara metodologis **tidak memenuhi syarat daya statistik (*statistical power*)** untuk dipartisi ke dalam 2 client non-IID, global test 20% dan validation 20% dari train pool saat tuning, dan 5 random seed tanpa memicu overfitting parah atau kegagalan konvergensi.
   3. **Cacat Desinkronisasi Pelabelan Parah pada Hari Kamis (Rosay et al., 2022):**
      - Literatur audit dataset (*Rosay et al., 2022*) membuktikan bahwa berkas hari Kamis menderita *pcap timestamp offset* parah, di mana ribuan paket normal salah diberi label serangan dan sebaliknya. Menyertakan hari Kamis justru merusak integritas evaluasi model.
   4. **Karakteristik Trafik Hari Jumat Tidak Sesuai Desain Skenario:**
@@ -97,7 +97,7 @@
 - **Poin Jawaban:**
   1. **Inference Latency Profiling (Waktu Inferensi per Flow dalam $\mu\text{s}$):**
      - Mengacu pada skripsi Hafizh (2024, Hal. 102) yang mengukur latensi 10,07 $\mu\text{s}$ per flow untuk membuktikan kesiapan *near real-time*.
-     - Model MLP kompak kita (Input 63 $\to$ Linear 64 $\to$ Linear 32 $\to$ Linear 3) diuji rata-rata waktu inferensinya per flow pada test set untuk membuktikan kelayakan implementasi pada gateway sensor edge berkecepatan tinggi.
+     - Model MLP kompak kita (Input 62 $\to$ Linear 64 $\to$ Linear 32 $\to$ Linear 3) diuji rata-rata waktu inferensinya per flow pada test set untuk membuktikan kelayakan implementasi pada gateway sensor edge berkecepatan tinggi.
   2. **Memory Footprint (Pembuktian EWC vs Replay Buffer):**
      - EWC hanya membutuhkan penyimpanan parameter bobot optimal $\theta^*$ dan matriks informasi Fisher diagonal $F_i$ (ukurannya konstan dan identik dengan ukuran parameter model MLP, hanya beberapa puluh kilobyte).
      - Sebaliknya, Experience Replay mengharuskan buffer memori menyimpan ribuan data flow mentah (puluhan hingga ratusan megabyte). Pengukuran alokasi RAM membuktikan keunggulan efisiensi memori EWC pada perangkat edge.
@@ -110,7 +110,7 @@
 
 ---
 
-## 📋 Checklist Berkas yang Dibawa Saat Bimbingan
+## Checklist Berkas yang Dibawa Saat Bimbingan
 
 1. **Cetakan Fisik / PDF Siap Tampil (2–3 Halaman):**  
    - Buka: [Bahan-Paparan-Pembimbing](Bahan-Paparan-Pembimbing.md) atau [Ringkasan-Untuk-Pembimbing](../Keputusan/Ringkasan-Untuk-Pembimbing.md).

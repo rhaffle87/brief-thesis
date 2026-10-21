@@ -3,13 +3,13 @@
 **Judul Penelitian:**  
 Analisis Kinerja Deteksi Network Traffic Intrusion Menggunakan Metode Federated-Continual Learning pada Testbed Private Cloud Server  
 
-**Mahasiswa:** Rafli Alif Ihza Hartono (NRP 5022211233)  
+**Mahasiswa:** Rafli Alif Ihza Hartono (NRP 5048231003)
 **Departemen:** Teknik Elektro, FTEIC, Institut Teknologi Sepuluh Nopember (ITS)  
 **Dokumen Pendukung Utama:** [Ringkasan-Untuk-Pembimbing](../Keputusan/Ringkasan-Untuk-Pembimbing.md), [Briefing-Scope-TA](../Proposal/Briefing-Scope-TA.md), [EDA-CIC-IDS2017](../Metodologi/EDA-CIC-IDS2017.md), [Crosscheck](../Literatur/Crosscheck.md)  
 
 ---
 
-## 📌 Bagian 1: Latar Belakang & Celah Penelitian
+## Bagian 1: Latar Belakang & Celah Penelitian
 
 1. **Dinamika Ancaman & Kebutuhan Model Adaptif:**  
    Serangan siber berkembang secara dinamis. Model ML deteksi intrusi yang dilatih satu kali (*static offline training*) akan mengalami penurunan performa saat menghadapi varian serangan baru di masa mendatang.
@@ -22,7 +22,7 @@ Analisis Kinerja Deteksi Network Traffic Intrusion Menggunakan Metode Federated-
 
 ---
 
-## 🎯 Bagian 2: Rumusan Masalah & Batasan Scope
+## Bagian 2: Rumusan Masalah & Batasan Scope
 
 ### Rumusan Masalah (2 Poin Baku Sesuai Standar Skripsi S1 Teknik Elektro ITS)
 1. **RM 1:** Bagaimana kinerja deteksi intrusi model yang dilatih secara federated (FedAvg) dibandingkan dengan pelatihan lokal pada data non-IID dua klien?
@@ -36,14 +36,14 @@ Analisis Kinerja Deteksi Network Traffic Intrusion Menggunakan Metode Federated-
 
 ---
 
-## 🔬 Bagian 3: Temuan Audit Empiris Dataset CIC-IDS2017
+## Bagian 3: Temuan Audit Empiris Dataset CIC-IDS2017
 
 Berdasarkan pemindaian menyeluruh 1,53 juta baris data mentah:
 
 1. **Hasil Deduplikasi Data Mentah:**
    - Total baris awal: 1.668.530 baris.
-   - Duplikat identik: 132.909 baris (7,97%).
-   - Baris 3-kelas bersih setelah dedup: **1.529.677 baris** (BENIGN 1.332.710; DoS 193.748; SSH-Patator 3.219).
+   - Duplikat identik: 138.098 baris (7,97%).
+   - Baris 3-kelas bersih setelah dedup: **1.520.488 baris** (BENIGN 1.323.561; DoS 193.708; SSH-Patator 3.219).
 2. **Standar Fitur Baku (62 Fitur Unik + 1 Label):**
    - Dari 78 fitur asli:
      - Dibuang **10 kolom konstan bervariansi 0** (misal: `Bwd PSH Flags`, `Fwd URG Flags`, dll.).
@@ -56,29 +56,29 @@ Berdasarkan pemindaian menyeluruh 1,53 juta baris data mentah:
 4. **Justifikasi Pemilihan Berkas Senin, Selasa, dan Rabu (Eliminasi Kamis & Jumat):**
    - **Senin (529K flow):** Menyediakan trafik Normal murni baseline tanpa serangan.
    - **Selasa (445K flow):** Menyediakan serangan SSH-Patator (3.219 flow bersih) untuk Task 1.
-   - **Rabu (692K flow):** Menyediakan serangan DoS 4 subvarian (193.748 flow bersih) untuk Task 2.
+   - **Rabu (692K flow):** Menyediakan serangan DoS 4 subvarian (193.708 flow bersih) untuk Task 2.
    - **Kamis Dieliminasi:** Web Attacks & Infiltration memiliki sampel terlalu sedikit (Sql Injection 21, Infiltration 36; tidak layak secara statistik) serta mengalami desinkronisasi pelabelan pcap parah (*Rosay et al., 2022*).
    - **Jumat Dieliminasi:** PortScan adalah reconnaissance pasif, Botnet cacat fragmentasi alur, dan DDoS LOIC memicu bias confounding dengan DoS Rabu tanpa menyumbang kelas baru.
 
 ---
 
-## 📋 Bagian 4: Tujuh Poin Konfirmasi dengan Dosen Pembimbing
+## Bagian 4: Tujuh Poin Konfirmasi dengan Dosen Pembimbing
 
 | No | Poin Keputusan | Bukti / Dasar Pertimbangan | Keputusan Pembimbing | Status Konfirmasi |
 |---|---|---|---|---|
-| **1** | **Dataset & 62 Fitur** | Anomali 10 konstan & 5 duplikat terbukti via array hashing | Pakai solely CIC-IDS2017 resmi dengan 62 fitur unik | ✅ **DISETUJUI** |
-| **2** | **Partisi Data Normal** | Klasifikasi Normal Selasa vs Rabu akurasi 62,44% (ada pola hari) | Random split 50/50 data Normal all-days (hindari bias hari) | ✅ **DISETUJUI (Opsi A)** |
-| **3** | **Komposisi Kelas DoS** | Total DoS 193.748 baris; DoS Hulk mendominasi 89,2% | Pertahankan distribusi alami (volumetrik realistis) | ✅ **DISETUJUI (Opsi A)** |
-| **4** | **Handling Imbalance** | Menghindari data loss 99% akibat subsampling ekstrem | Weighted Loss (Keep All Clean Data ~1.53M baris) | ✅ **DISETUJUI (Opsi C)** |
-| **5** | **Perlakuan Port** | Port-only F1 = 96,44% (*shortcut learning*) | Buang Destination Port (fokus ke dinamika flow) | ✅ **DISETUJUI** |
-| **6** | **Injeksi Trafik** | Terlalu banyak parameter jaringan dinamis | Dieliminasi (fokus evaluasi offline batch) | ✅ **DISETUJUI (Ditiadakan)** |
-| **7** | **Staging Testbed** | Memastikan kestabilan pipeline sebelum masuk server | Local First → Simulasi Server Proxmox VE | ✅ **DISETUJUI** |
-| **8** | **Keseimbangan Bobot** | Penalti EWC λ dan class weights harus seimbang | Penyeimbangan bobot metode & parameter + Gradient Clipping | ✅ **DISETUJUI** |
-| **9** | **Hyperparameter Tuning**| Menjamin ketahanan dan reproduktifitas model | Grid/Random search sistematis pada 5 seed | ✅ **DISETUJUI** |
+| **1** | **Dataset & 62 Fitur** | Anomali 10 konstan & 5 duplikat terbukti via array hashing | Pakai solely CIC-IDS2017 resmi dengan 62 fitur unik | **DISETUJUI** |
+| **2** | **Partisi Data Normal** | Klasifikasi Normal Selasa vs Rabu akurasi 62,44% (ada pola hari) | Random split 50/50 data Normal all-days (hindari bias hari) | **DISETUJUI (Opsi A)** |
+| **3** | **Komposisi Kelas DoS** | Total DoS 193.708 baris; DoS Hulk mendominasi 89,2% | Pertahankan distribusi alami (volumetrik realistis) | **DISETUJUI (Opsi A)** |
+| **4** | **Handling Imbalance** | Menghindari data loss 99% akibat subsampling ekstrem | Weighted Loss (Keep All Clean Data ~1.53M baris) | **DISETUJUI (Opsi C)** |
+| **5** | **Perlakuan Port** | Port-only F1 = 96,44% (*shortcut learning*) | Buang Destination Port (fokus ke dinamika flow) | **DISETUJUI** |
+| **6** | **Injeksi Trafik** | Terlalu banyak parameter jaringan dinamis | Dieliminasi (fokus evaluasi offline batch) | **DISETUJUI (Ditiadakan)** |
+| **7** | **Staging Testbed** | Memastikan kestabilan pipeline sebelum masuk server | Local First → Simulasi Server Proxmox VE | **DISETUJUI** |
+| **8** | **Keseimbangan Bobot** | Penalti EWC λ dan class weights harus seimbang | Penyeimbangan bobot metode & parameter + Gradient Clipping | **DISETUJUI** |
+| **9** | **Hyperparameter Tuning**| Menjamin ketahanan dan reproduktifitas model | Grid/Random search sistematis pada 5 seed | **DISETUJUI** |
 
 ---
 
-## 🧪 Bagian 5: Matriks Pengujian Eksperimen (E0 – E5)
+## Bagian 5: Matriks Pengujian Eksperimen (E0 – E5)
 
 ```
        [ E0: Centralized Joint Baseline ] (Batas Atas Ideal)
@@ -97,13 +97,13 @@ Berdasarkan pemindaian menyeluruh 1,53 juta baris data mentah:
 - **E2 (Lokal EWC):** Pelatihan sekuensial lokal dengan penalti kuadratik Fisher. Mengukur pemulihan retensi.
 - **E3 (FedAvg Naive):** Pelatihan terdistribusi 2 klien tanpa continual learning.
 - **E4 (FedAvg + EWC):** **Metode usulan utama**. Menjawab apakah FL dan EWC saling melengkapi.
-- **E5 (Live Traffic):** ❌ **Dieliminasi**. Injeksi live traffic resmi ditiadakan oleh pembimbing untuk menjaga kemurnian evaluasi algoritma FL-CL.
+- **E5 (Live Traffic):** **Dieliminasi**. Injeksi live traffic resmi ditiadakan oleh pembimbing untuk menjaga kemurnian evaluasi algoritma FL-CL.
 
 *Setiap eksperimen dieksekusi pada **5 seed acak terstandarisasi (42, 43, 44, 45, 46)** dan disajikan dalam format Mean ± Std.*
 
 ---
 
-## ⚙️ Bagian 6: Parameter Evaluasi Komputasi vs QoS Jaringan (Mengacu pada Skripsi Hafizh, 2024)
+## Bagian 6: Parameter Evaluasi Komputasi vs QoS Jaringan (Mengacu pada Skripsi Hafizh, 2024)
 
 1. **Parameter QoS Jaringan Mentah Ditiadakan (Out of Scope):**  
    - Metrik fisik seperti throughput, bandwidth link, packet loss, dan jitter ditiadakan selaras dengan peniadaan injeksi live traffic oleh pembimbing.  
@@ -121,7 +121,7 @@ Berdasarkan pemindaian menyeluruh 1,53 juta baris data mentah:
 
 ---
 
-## 📚 Bagian 7: Landasan Pustaka 5 Tahun Terakhir (2021 – 2026)
+## Bagian 7: Landasan Pustaka 5 Tahun Terakhir (2021 – 2026)
 
 Tugas akhir ini didukung oleh **13 artikel jurnal/prosiding internasional bereputasi dalam 5 tahun terakhir**:
 
@@ -146,7 +146,7 @@ Serta didukung **3 buku teks akademik terkini**:
 
 ---
 
-## 🗓️ Bagian 8: Rencana Kerja & Milestone Berikutnya
+## Bagian 8: Rencana Kerja & Milestone Berikutnya
 
 - **Minggu 1–2 (Saat Ini):** Konfirmasi 7 poin ruang lingkup dan persetujuan dosen pembimbing.
 - **Minggu 3–4:** Ekstraksi data 62 fitur, stratified split seimbang, pembekuan dataset (*Freeze Point 1*).

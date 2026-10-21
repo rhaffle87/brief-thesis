@@ -32,7 +32,7 @@
   - `Monday-WorkingHours.pcap_ISCX.csv` (100% BENIGN)
   - `Tuesday-WorkingHours.pcap_ISCX.csv` (BENIGN + SSH-Patator + FTP-Patator)
   - `Wednesday-workingHours.pcap_ISCX.csv` (BENIGN + 4 varian DoS: Hulk, GoldenEye, slowloris, Slowhttptest)
-- **Lokasi Cache Dedup:** `E:\Projects\thesis\Datasets\interim\cic_3class_dedup.parquet` (1.529.677 baris, 3 kelas).
+- **Lokasi Cache Dedup:** `E:\Projects\thesis\Datasets\interim\cic_3class_dedup.parquet` (1.520.488 baris, 3 kelas).
 - **Catatan LYCOS-IDS2017:** Tautan unduh resmi server Universitas Le Mans berstatus *404 Not Found*. Diputuskan secara formal menggunakan CIC-IDS2017 resmi dengan batasan terdokumentasi (lihat [DATASET-UNAVAILABLE-LYCOS.md](Metodologi/DATASET-UNAVAILABLE-LYCOS.md)).
 
 ### B. Aturan Seleksi Fitur (62 Fitur Unik + 1 Label)
@@ -55,7 +55,7 @@
 2. **Algoritma Terkunci:**
    - **FL:** Hanya FedAvg dengan topologi 2 client + 1 server aggregator ([Keputusan-Pembekuan-FL.md](Keputusan/Keputusan-Pembekuan-FL.md)).
    - **CL:** Hanya EWC vs Naive Fine-Tuning sekuensial ([Keputusan-Pembekuan-CL.md](Keputusan/Keputusan-Pembekuan-CL.md)).
-   - **Arsitektur Model:** Single MLP (Input: 63 → Dense: 64 (ReLU) → Dense: 32 (ReLU) → Output: 3 (Softmax)).
+   - **Arsitektur Model:** Single MLP (Input: 62 → Dense: 64 (ReLU) → Dense: 32 (ReLU) → Output: 3 (Softmax)).
 
 ---
 

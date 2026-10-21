@@ -27,7 +27,7 @@ updated: 2026-10-06
 | Komponen | Keputusan Final | Dibekukan Minggu |
 |----------|-----------------|------------------|
 | **Dataset** | CIC-IDS2017 (3 kelas: Normal, SSH-Patator, DoS; **62 fitur unik + 1 Label**; Weighted Loss - Keep All Clean Data) | Minggu 4 (TERKUNCI) |
-| **Model** | MLP only (Input: 63 → 64 → 32 → Output: 3) + Hyperparameter Tuning | Minggu 6 |
+| **Model** | MLP only (Input: 62 → 64 → 32 → Output: 3) + Hyperparameter Tuning | Minggu 6 |
 | **FL Algorithm** | FedAvg only (2 client + 1 server, Local First → Proxmox Simulation) | Minggu 10 |
 | **CL Algorithm** | EWC only vs naive fine-tuning (Balanced Weighting λ) | Minggu 8 |
 

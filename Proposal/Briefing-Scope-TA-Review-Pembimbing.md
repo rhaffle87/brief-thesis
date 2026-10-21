@@ -57,7 +57,7 @@ Tujuan utama sesi diskusi ini adalah menyelaraskan ekspektasi dosen pembimbing a
 ### 3. Pemilihan Dataset: CIC-IDS2017 (Senin, Selasa, Rabu) & Eksklusi Kamis-Jumat
 
 * **Keputusan Saat Ini:**  
-  Hanya menggunakan berkas rekaman hari **Senin** (Normal), **Selasa** (SSH-Patator), dan **Rabu** (DoS: Hulk, GoldenEye, slowloris, slowhttptest). Berkas hari **Kamis** dan **Jumat** dieksklusi secara total. Volume bersih: 1.529.677 flow.
+  Hanya menggunakan berkas rekaman hari **Senin** (Normal), **Selasa** (SSH-Patator), dan **Rabu** (DoS: Hulk, GoldenEye, slowloris, slowhttptest). Berkas hari **Kamis** dan **Jumat** dieksklusi secara total. Volume bersih: 1.520.488 flow.
 * **Dasar Ilmiah & Bukti:**  
   1. *Kamis (Web Attacks & Infiltration):* Menderita cacat desinkronisasi timestamp pelabelan yang parah (Rosay et al., 2022) serta kelangkaan sampel mikro ekstrem (SQL Injection hanya 21 baris, Infiltration hanya 36 baris). Tidak memenuhi syarat daya statistik untuk split multi-klien dan 5 random seeds.  
   2. *Jumat (Botnet & PortScan):* PortScan adalah aktivitas *reconnaissance*, bukan serangan penetrasi aktif; botnet mengalami bug fragmentasi alur 1-paket CICFlowMeter (Dube, 2024).  
@@ -101,7 +101,7 @@ Tujuan utama sesi diskusi ini adalah menyelaraskan ekspektasi dosen pembimbing a
 * **Keputusan Saat Ini:**  
   Menerapkan **Pilihan C: Weighted Cross-Entropy Loss** pada seluruh 1,53 juta baris data bersih terdeduplikasi, dipadukan dengan *Gradient Clipping* (norm $\le 1.0$). Tidak melakukan undersampling dan tidak melakukan oversampling SMOTE.
 * **Dasar Ilmiah & Bukti:**  
-  Perbandingan data bersih: Normal (1.332.710), DoS (193.748), SSH-Patator (3.219). Rasio ketimpangan $\approx 414 : 60 : 1$.  
+  Perbandingan data bersih: Normal (1.323.561), DoS (193.708), SSH-Patator (3.219). Rasio ketimpangan $\approx 411 : 60 : 1$.  
   - *Undersampling ke 3.200 baris:* Membuang 99,6% data normal dan 98% data DoS, merusak variabilitas trafik nyata.  
   - *SMOTE:* Menghasilkan interpolasi sintetik titik data buatan yang tidak memiliki keterkaitan fisik dengan dinamika protokol TCP nyata, serta rentan menghasilkan flow yang tidak realistis pada arsitektur terdistribusi.  
   - *Weighted Loss:* Memberikan bobot penalti gradien lebih besar untuk kelas minoritas secara proporsional ($w_c = \frac{N}{|C| \cdot N_c}$) tanpa memanipulasi data mentah.

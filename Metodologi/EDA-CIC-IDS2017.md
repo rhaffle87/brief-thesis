@@ -11,7 +11,7 @@
 ### Rosay Column Duplicates (CICFlowMeter Bug)
 
 **Test Date:** 2026-10-02 17:50 UTC+7  
-**Dataset:** Full deduplicated (1,529,677 rows)  
+**Dataset:** Full deduplicated (1,520,488 rows)  
 **Method:** Value-identical comparison
 
 **4 Pairs Tested:**
@@ -32,11 +32,11 @@
 - 5 kolom identik (duplicates): `Fwd Header Length.1`, `Subflow Fwd Bytes`, `Subflow Fwd Packets`, `Subflow Bwd Packets`, `SYN Flag Count`
 
 **Hasil akhir:**
-- 78 − 10 − 5 = **63 fitur unik numerik**
+- 78 − 10 − 5 = **62 fitur unik numerik**
 - + 1 Label
 - = **64 kolom final dataset bersih** (+ 2 kolom metadata `Day` & `Label_Original` = 66 kolom di dataframe interim)
 
-**Catatan:** Cache parquet interim memiliki 66 kolom bersih (63 fitur + 1 Label + Day + Label_Original) yang siap dipartisi. Kolom metadata `Day` dan `Label_Original` dikeluarkan sebelum pelatihan.
+**Catatan:** Cache parquet interim memiliki 66 kolom bersih (62 fitur + 1 Label + Day + Label_Original) yang siap dipartisi. Kolom metadata `Day` dan `Label_Original` dikeluarkan sebelum pelatihan.
 
 ---
 
@@ -65,7 +65,7 @@ Zero variance columns (all values identical):
 | Monday-WorkingHours.pcap_ISCX.csv | 529,918 | 79 | 26,935 (5.08%) | 'Fwd Header Length' |
 | Tuesday-WorkingHours.pcap_ISCX.csv | 445,909 | 79 | 24,065 (5.40%) | 'Fwd Header Length' |
 | Wednesday-workingHours.pcap_ISCX.csv | 692,703 | 79 | 81,909 (11.82%) | 'Fwd Header Length' |
-| **TOTAL** | **1,668,530** | 79 | **132,909 (7.97%)** | All files |
+| **TOTAL** | **1,668,530** | 79 | **138,098 (7.97%)** | All files |
 
 ---
 
@@ -99,7 +99,7 @@ Zero variance columns (all values identical):
   - DoS Slowhttptest: 5,228 (0.86%)
   - Heartbleed: 11 (0.00%)
 
-**DoS Total (after dedup):** 193,748 (Hulk = 89.2%)
+**DoS Total (after dedup):** 193,708 (Hulk = 89.2%)
 
 ---
 
@@ -254,21 +254,21 @@ High no-port performance (98%) is partly due to OTHER shortcuts, not solely "int
 
 | Class | Count (before) | Count (after dedup) | Percentage |
 |-------|----------------|---------------------|------------|
-| Normal | 1,402,023 | 1,332,710 | 86.8% |
+| Normal | 1,402,023 | 1,323,561 | 86.8% |
 | SSH-Patator | 5,897 | 3,219 | 0.2% |
-| DoS (merged) | 252,661 | 193,748 | 12.6% |
+| DoS (merged) | 252,661 | 193,708 | 12.6% |
 | FTP-Patator | 7,938 | 5,933 | 0.4% ❌ EXCLUDE |
 | Heartbleed | 11 | 11 | 0.0% ❌ EXCLUDE |
-| **Total usable** | **1,660,581** | **1,529,677** | 100% |
+| **Total usable** | **1,660,581** | **1,520,488** | 100% |
 
-**Deduplicated loss:** 132,909 rows (7.97%)
+**Deduplicated loss:** 138,098 rows (7.97%)
 
 ---
 
 ## 📋 5 KEPUTUSAN METODOLOGIS HASIL BIMBINGAN (TERKUNCI)
 
 ### 1. Versi Dataset ✅ DISETUJUI
-**Keputusan:** CIC-IDS2017 Original (Senin, Selasa, Rabu) dengan 63 fitur unik numerik + 1 Label.  
+**Keputusan:** CIC-IDS2017 Original (Senin, Selasa, Rabu) dengan 62 fitur unik numerik + 1 Label.  
 **Justifikasi:** Kompatibilitas literatur, pemetaan anomali tervalidasi peer-reviewed (*Rosay 2022; Dube 2024*).
 
 ### 2. Strategi Partisi Normal ✅ DISETUJUI (Opsi A)
@@ -277,10 +277,10 @@ High no-port performance (98%) is partly due to OTHER shortcuts, not solely "int
 
 ### 3. Komposisi Serangan DoS ✅ DISETUJUI (Opsi A)
 **Keputusan:** Keep As-Is (Distribusi Alami).  
-**Justifikasi:** Mempertahankan proporsi realistis serangan DoS volumetrik (Hulk 89,2%, GoldenEye 5,3%, slowloris 2,8%, Slowhttptest 2,7%) sebagai satu kelas agregat DoS (193.748 flow).
+**Justifikasi:** Mempertahankan proporsi realistis serangan DoS volumetrik (Hulk 89,2%, GoldenEye 5,3%, slowloris 2,8%, Slowhttptest 2,7%) sebagai satu kelas agregat DoS (193.708 flow).
 
 ### 4. Penanganan Class Imbalance ✅ DISETUJUI (Opsi C: Weighted Loss, Keep All Data)
-**Keputusan:** Mempertahankan seluruh 1.529.677 flow bersih tanpa *undersampling* ekstrem.  
+**Keputusan:** Mempertahankan seluruh 1.520.488 flow bersih tanpa *undersampling* ekstrem.  
 **Justifikasi:** Undersampling ekstrem (hingga batas 3.200 sampel SSH) membuang 99,6% data Normal dan 98% data DoS. Ketimpangan diatasi dengan **Weighted Cross-Entropy Loss** berbasis bobot invers frekuensi dan dilindungi oleh *gradient clipping* (norm $\le 1.0$).
 
 ### 5. Perlakuan Destination Port ✅ DISETUJUI (Dibuang / Opsi A)
@@ -296,7 +296,7 @@ High no-port performance (98%) is partly due to OTHER shortcuts, not solely "int
 ## 📝 Konfigurasi Default Praproses (Terkunci)
 
 - ❌ Exclude FTP-Patator (5.933), Heartbleed (11) - di luar lingkup 3 kelas.
-- Remove 132.909 baris duplikat identik (7,97%) pada 79 kolom.
+- Remove 138.098 baris duplikat identik (7,97%) pada 79 kolom.
 - Remove 10 kolom konstan (zero variance).
 - Remove 5 kolom duplikat identik (`Fwd Header Length.1`, `Subflow Fwd Bytes`, `Subflow Fwd Packets`, `Subflow Bwd Packets`, `SYN Flag Count`).
 - Remove `Destination Port` (shortcut leakage).

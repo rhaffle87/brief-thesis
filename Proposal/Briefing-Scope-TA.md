@@ -76,13 +76,13 @@ Dalam penelitian keamanan siber dan deteksi anomali trafik jaringan, terdapat be
 
 ### 3.2 Alasan Spesifik Pemilihan Hari: Mengapa Hanya Senin, Selasa, dan Rabu? (Eliminasi Kamis & Jumat)
 
-Dataset resmi CIC-IDS2017 terdiri atas 8 berkas CSV yang merekam aktivitas selama 5 hari kerja (Senin s.d. Jumat) dengan total 2,83 juta baris. Penelitian Tugas Akhir ini **secara spesifik dan eksklusif hanya menggunakan berkas hari Senin, Selasa, dan Rabu** (1.668.530 baris mentah; 1.529.677 baris bersih). Keputusan ini didasarkan pada lima (5) pertimbangan ilmiah yang ketat:
+Dataset resmi CIC-IDS2017 terdiri atas 8 berkas CSV yang merekam aktivitas selama 5 hari kerja (Senin s.d. Jumat) dengan total 2,83 juta baris. Penelitian Tugas Akhir ini **secara spesifik dan eksklusif hanya menggunakan berkas hari Senin, Selasa, dan Rabu** (1.668.530 baris mentah; 1.520.488 baris bersih). Keputusan ini didasarkan pada lima (5) pertimbangan ilmiah yang ketat:
 
 | Hari | File CSV & Karakteristik Trafik | Volume Baris | Status & Peran Ilmiah dalam Penelitian |
 |---|---|---|---|
 | **Senin (Monday)** | `Monday-WorkingHours.pcap_ISCX.csv`<br>Trafik Normal (BENIGN) 100% murni. | 529.918 | ✅ **DIPAKAI (Baseline Normal)**: Menyediakan distribusi trafik normal murni tanpa kontaminasi serangan sama sekali sebagai representasi aktivitas operasional rutin. |
 | **Selasa (Tuesday)** | `Tuesday-WorkingHours.pcap_ISCX.csv`<br>Normal + FTP-Patator + **SSH-Patator**. | 445.909 | ✅ **DIPAKAI (Task 1 / Client A)**: Menyediakan kelas **SSH-Patator** (3.219 flow bersih) sebagai representasi serangan Brute Force autentikasi. *(FTP-Patator dieksklusi karena di luar 3 kelas cakupan).* |
-| **Rabu (Wednesday)** | `Wednesday-workingHours.pcap_ISCX.csv`<br>Normal + **DoS (Hulk, GoldenEye, slowloris, slowhttptest)** + Heartbleed. | 692.703 | ✅ **DIPAKAI (Task 2 / Client B)**: Menyediakan kelas **DoS** (193.748 flow bersih) dengan 4 subvarian lengkap sebagai representasi serangan penolakan layanan web. *(Heartbleed dieksklusi karena hanya 11 flow).* |
+| **Rabu (Wednesday)** | `Wednesday-workingHours.pcap_ISCX.csv`<br>Normal + **DoS (Hulk, GoldenEye, slowloris, slowhttptest)** + Heartbleed. | 692.703 | ✅ **DIPAKAI (Task 2 / Client B)**: Menyediakan kelas **DoS** (193.708 flow bersih) dengan 4 subvarian lengkap sebagai representasi serangan penolakan layanan web. *(Heartbleed dieksklusi karena hanya 11 flow).* |
 | **Kamis (Thursday)** | `Thursday-...-WebAttacks.csv`<br>`Thursday-...-Infilteration.csv`<br>Web Attacks & Infiltration. | 458.968 | ❌ **DIELIMINASI (Cacat Sampel & Labeling Parah)**:<br>1. *Kelangkaan Sampel Ekstrem*: Sql Injection hanya 21 baris, Infiltration hanya 36 baris, XSS 652 baris. Jumlah ini tidak memenuhi syarat daya statistik (*statistical power*) untuk dibagi ke 2 client FL, train/val/test split, dan 5 seeds.<br>2. *Desinkronisasi Label Parah*: Rosay et al. (2022) membuktikan berkas hari Kamis memiliki cacat desinkronisasi waktu (*timestamp offset*) parah di mana ribuan flow normal salah dilabeli sebagai serangan dan sebaliknya. |
 | **Jumat (Friday)** | `Friday-...-Morning.csv` (Botnet)<br>`Friday-...-PortScan.csv`<br>`Friday-...-DDos.csv` (DDoS LOIC) | 703.245 | ❌ **DIELIMINASI (Tidak Relevan & Confounding)**:<br>1. *PortScan (158K)*: Merupakan aktivitas pemindaian (*reconnaissance*), bukan eksploitasi aktif jaringan.<br>2. *Botnet ARES (1,9K)*: Mengalami *flow fragmentation bug* pada CICFlowMeter (koneksi terpecah menjadi flow 1-paket kosong).<br>3. *DDoS LOIC (128K)*: Tumpang tindih secara konseptual dengan DoS hari Rabu, namun membawa fingerprint alat LOIC yang berbeda. Memasukkannya akan menimbulkan bias: apakah model gagal mendeteksi karena *forgetting* atau karena perbedaan signature alat serang.<br>4. *Overhead Nirfaedah*: Menambah 700K baris tanpa menambah kelas SSH/DoS yang diteliti. |
 
@@ -132,10 +132,10 @@ Fitur nomor port tujuan (`Destination Port`) dieksklusi secara sengaja dari inpu
 
 ### 5.1 Realitas Data Mentah Pasca-Deduplikasi
 Setelah seluruh baris duplikat mentah dibersihkan dari CSV hari Senin, Selasa, dan Rabu (menggunakan 62 fitur unik):
-* **Normal (BENIGN):** 1.332.710 flow (87,1%)
-* **DoS (Hulk, GoldenEye, slowloris, slowhttptest):** 193.748 flow (12,7%)
+* **Normal (BENIGN):** 1.323.561 flow (87,1%)
+* **DoS (Hulk, GoldenEye, slowloris, slowhttptest):** 193.708 flow (12,7%)
 * **SSH-Patator (Brute Force):** **Hanya 3.219 flow unik** (0,2%)
-* **Total Keseluruhan Data Bersih:** **1.529.677 flow unik** (Rasio ketimpangan ~ 414 : 60 : 1).
+* **Total Keseluruhan Data Bersih:** **1.520.488 flow unik** (Rasio ketimpangan ~ 411 : 60 : 1).
 
 ### 5.2 Keputusan Bimbingan: Opsi C (Weighted Loss, Keep All Data)
 Berdasarkan arahan dosen pembimbing, pemangkasan ekstrem (*undersampling* hingga 3.200 sampel per kelas) dihindari karena akan membuang 99,6% data Normal dan 98% data DoS yang berharga. Keputusan yang dibekukan adalah **Pilihan C: Weighted Loss (Keep All Clean Data)**:
@@ -436,7 +436,7 @@ Mengacu pada skripsi [Referensi-Skripsi-Hafizh.pdf](Referensi-Skripsi-Hafizh.pdf
 
 ### 12.3 Metrik Efisiensi Inferensi Near Real-Time (Latency per Flow $\mu\text{s}$)
 * Mengadopsi metodologi Hafizh (2024, Hal. 102) yang mengukur latensi inferensi 10,07 $\mu\text{s}$ per flow.
-* Model MLP kompak penelitian ini (Input 63 $\to$ Linear 64 $\to$ Linear 32 $\to$ Linear 3) diuji rata-rata waktu inferensinya per flow pada test set untuk memvalidasi bahwa model sangat ringan dan siap dioperasikan pada throughput data tinggi di gateway jaringan.
+* Model MLP kompak penelitian ini (Input 62 $\to$ Linear 64 $\to$ Linear 32 $\to$ Linear 3) diuji rata-rata waktu inferensinya per flow pada test set untuk memvalidasi bahwa model sangat ringan dan siap dioperasikan pada throughput data tinggi di gateway jaringan.
 
 ### 12.4 Hyperparameter Tuning Terstruktur (Optuna / 5-Seed Grid)
 * Melakukan pencarian konfigurasi parameter optimal secara sistematis untuk:

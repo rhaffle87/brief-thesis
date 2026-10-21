@@ -35,7 +35,7 @@ Berdasarkan hasil tatap muka bimbingan bersama dosen pembimbing, seluruh poin kr
 - **Justifikasi Pembimbing:** Menggunakan secara eksklusif berkas resmi UNB CIC-IDS2017 (**Senin, Selasa, Rabu**):
   - **Senin:** Normal murni baseline (529K flow).
   - **Selasa:** SSH-Patator (3.219 flow bersih) untuk Task 1 / Client A.
-  - **Rabu:** DoS 4 subvarian (193.748 flow bersih) untuk Task 2 / Client B.
+  - **Rabu:** DoS 4 subvarian (193.708 flow bersih) untuk Task 2 / Client B.
   - **Kamis Dieliminasi:** Web Attacks & Infiltration memiliki sampel terlalu sedikit (Sql Injection 21, Infiltration 36; tidak layak statistik) serta cacat pelabelan pcap parah (*Rosay et al., 2022*).
   - **Jumat Dieliminasi:** PortScan adalah reconnaissance pasif, Botnet menderita bug fragmentasi flow, dan DDoS LOIC memicu bias confounding dengan DoS Rabu.
   - Dibuang 10 kolom konstan, 5 kolom duplikat identik, dan `Destination Port` (mencegah shortcut learning). Total fitur bersih: **62 fitur numerik unik + 1 Label**.
@@ -46,11 +46,11 @@ Berdasarkan hasil tatap muka bimbingan bersama dosen pembimbing, seluruh poin kr
 
 ### 7. Komposisi Kelas Serangan DoS Alami (Keep As-Is)
 - **Status:** **DISETUJUI (Pilihan A)**
-- **Justifikasi Pembimbing:** Mempertahankan komposisi alami subtipe DoS (Hulk ~89,2%, GoldenEye ~5,3%, slowloris ~2,8%, Slowhttptest ~2,7%) yang digabung menjadi satu kelas volumetrik `DoS` (total 193.748 flow).
+- **Justifikasi Pembimbing:** Mempertahankan komposisi alami subtipe DoS (Hulk ~89,2%, GoldenEye ~5,3%, slowloris ~2,8%, Slowhttptest ~2,7%) yang digabung menjadi satu kelas volumetrik `DoS` (total 193.708 flow).
 
 ### 8. Penanganan Class Imbalance: Weighted Loss (Keep All Clean Data)
 - **Status:** **DISETUJUI (Pilihan C)**
-- **Justifikasi Pembimbing:** Mempertahankan seluruh 1.529.677 baris data bersih tanpa pemangkasan massal. Menggunakan fungsi Weighted Cross-Entropy Loss dengan bobot invers frekuensi terkalibrasi untuk melindungi kelas minoritas (SSH-Patator).
+- **Justifikasi Pembimbing:** Mempertahankan seluruh 1.520.488 baris data bersih tanpa pemangkasan massal. Menggunakan fungsi Weighted Cross-Entropy Loss dengan bobot invers frekuensi terkalibrasi untuk melindungi kelas minoritas (SSH-Patator).
 
 ### 9. Parameter Evaluasi Komputasi & Eliminasi QoS Jaringan (Mengacu Skripsi Hafizh, 2024)
 - **Status:** **DISETUJUI (Profiling Instance & Overhead Komunikasi)**

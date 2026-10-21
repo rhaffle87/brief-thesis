@@ -78,7 +78,7 @@ E:\Projects\thesis/
 │
 └── Datasets/                # Repositori data lokal
     ├── CIC-IDS2017/         # CSV mentah resmi UNB (Monday, Tuesday, Wednesday)
-    ├── interim/             # Cache parquet hasil dedup (1.529.677 baris)
+    ├── interim/             # Cache parquet hasil dedup (1.520.488 baris)
     └── LYCOS-IDS2017/       # Skrip studi pembanding LycoSTand / Rosay (2022)
 ```
 

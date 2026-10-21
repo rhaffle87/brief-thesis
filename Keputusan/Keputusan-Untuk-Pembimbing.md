@@ -37,7 +37,7 @@ Berdasarkan sesi tatap muka bimbingan Tugas Akhir, 8 poin keputusan metodologis 
 * **Justifikasi Eksklusif Berkas Senin, Selasa, dan Rabu (Eliminasi Kamis & Jumat):**
   - **Senin (Monday):** Menyediakan 529.918 flow **Normal murni** tanpa kontaminasi serangan sebagai baseline.
   - **Selasa (Tuesday):** Menyediakan kelas **SSH-Patator** (3.219 flow bersih) untuk **Task 1 (Client A)**.
-  - **Rabu (Wednesday):** Menyediakan kelas **DoS** 4 varian lengkap (193.748 flow bersih) untuk **Task 2 (Client B)**.
+  - **Rabu (Wednesday):** Menyediakan kelas **DoS** 4 varian lengkap (193.708 flow bersih) untuk **Task 2 (Client B)**.
   - **Kamis Dieliminasi:** Web Attacks & Infiltration mengalami **kelangkaan sampel ekstrem** (Sql Injection hanya 21 baris, Infiltration hanya 36 baris; tidak layak statistik) serta menderita **cacat desinkronisasi pelabelan pcap parah** (*Rosay et al., 2022*).
   - **Jumat Dieliminasi:** PortScan adalah reconnaissance pasif (bukan intrusi eksploitasi), Botnet ARES cacat fragmentasi alur (Dube et al., 2024), dan DDoS LOIC menimbulkan bias kerancuan (*confounding*) dengan DoS Rabu tanpa menambah sampel SSH/DoS baru.
 * **Transparansi Akademik:** Kritik Rosay et al. (2022) dan Dube et al. (2024) dikutip secara transparan di Bab 3 skripsi sebagai konteks integritas riset.
@@ -60,7 +60,7 @@ Berdasarkan sesi tatap muka bimbingan Tugas Akhir, 8 poin keputusan metodologis 
   - DoS GoldenEye: 10.286 flow (5,3%)
   - DoS slowloris: 5.385 flow (2,8%)
   - DoS Slowhttptest: 5.228 flow (2,7%)
-  - **Total DoS:** 193.748 flow.
+  - **Total DoS:** 193.708 flow.
 * **Tindakan:** Seluruh 4 varian disatukan ke dalam satu kelas label `DoS`. Tidak dilakukan pemangkasan buatan ke subvarian terkecil (5.5K) agar karakteristik serangan volumetrik dunia nyata tetap terjaga.
 
 ---
@@ -69,10 +69,10 @@ Berdasarkan sesi tatap muka bimbingan Tugas Akhir, 8 poin keputusan metodologis 
 
 * **Keputusan Final:** **Weighted Loss (Keep All Clean Data)**.
 * **Distribusi Kelas Bersih (Setelah Dedup 79 Kolom):**
-  - Normal: 1.332.710 baris (87,1%)
-  - DoS: 193.748 baris (12,7%)
+  - Normal: 1.323.561 baris (87,1%)
+  - DoS: 193.708 baris (12,7%)
   - SSH-Patator: 3.219 baris (0,2%)
-  - **Total Data Bersih:** **1.529.677 baris unik**.
+  - **Total Data Bersih:** **1.520.488 baris unik**.
 * **Formulasi Loss Berbobot (Weighted Cross-Entropy):**
   $$\mathcal{L}_{\text{CE}}(y, \hat{y}) = - \sum_{c=1}^{C} w_c \cdot y_c \log(\hat{y}_c)$$
   Di mana bobot kelas $w_c$ dikalkulasi berdasarkan frekuensi invers terstandarisasi:
@@ -144,7 +144,7 @@ Dengan disetujuinya seluruh poin di atas, modul praproses data (`Skrip/preproces
 
 - [x] Sumber input mentah: Berkas CSV resmi UNB (Monday, Tuesday, Wednesday).
 - [x] Eliminasi 10 kolom konstan + 5 kolom identik + 1 kolom `Destination Port`.
-- [x] Deduplikasi 132.909 baris identik $\to$ tersisa 1.529.677 baris bersih.
+- [x] Deduplikasi 138.098 baris identik $\to$ tersisa 1.520.488 baris bersih.
 - [x] Imputasi nilai `Inf` $\to$ kuantil maksimum / 1e9, dan `NaN` $\to$ 0.
 - [x] Partisi Normal 50/50 all-days untuk Task 1 dan Task 2.
 - [x] Partisi 2 Client Non-IID:

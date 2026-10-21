@@ -41,7 +41,7 @@ Skrip/
   1. *Penyaringan 3 Kelas Target:* Normal (BENIGN), SSH-Patator, dan DoS (gabungan Hulk, GoldenEye, slowloris, slowhttptest).
   2. *Eksklusi:* FTP-Patator (5.933 alur) dan Heartbleed (11 alur).
   3. *Pembersihan Nilai Ekstrem:* Konversi Inf ke NaN dan eliminasi baris bernilai NaN.
-  4. *Deduplikasi:* Eliminasi 132.909 baris duplikat mentah (menyisakan 1.529.677 baris bersih).
+  4. *Deduplikasi:* Eliminasi 138.098 baris duplikat mentah (menyisakan 1.520.488 baris bersih).
   5. *Seleksi Fitur Terkunci (62 Fitur):* Eliminasi 10 kolom konstan variansi nol, 5 kolom duplikat identik ($r=1.0$), dan kolom `Destination Port` (anti-*shortcut learning*).
   6. *Partisi Terdistribusi Non-IID:*
      - Klien A: Normal (50%) + SSH-Patator (100%)
@@ -61,7 +61,7 @@ Skrip/
 * **Signifikansi:** Menjadi bukti ilmiah mandiri untuk mengeksklusi `Destination Port` dari naskah proposal.
 
 ### 3. Verifikasi Kolom Konstan (`EDA/constant_columns_check.py`)
-* **Fungsi:** Memindai kolom bervariansi nol pada seluruh 1.529.677 baris data bersih.
+* **Fungsi:** Memindai kolom bervariansi nol pada seluruh 1.520.488 baris data bersih.
 * **Hasil:** 10 kolom bervariansi tepat 0,000000 (`Bwd PSH Flags`, `Fwd URG Flags`, `Bwd URG Flags`, `CWE Flag Count`, `Fwd Avg Bytes/Bulk`, `Fwd Avg Packets/Bulk`, `Fwd Avg Bulk Rate`, `Bwd Avg Bytes/Bulk`, `Bwd Avg Packets/Bulk`, `Bwd Avg Bulk Rate`).
 
 ### 4. Verifikasi Kolom Duplikat (`EDA/verify_column_hashes.py`)

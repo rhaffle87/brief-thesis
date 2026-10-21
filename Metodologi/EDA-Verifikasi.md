@@ -3,7 +3,7 @@
 **Tanggal Eksekusi:** 2026-10-03  
 **Lingkungan:** `E:/Projects/fl-cl/.venv/Scripts/python.exe`  
 **Dataset Mentah:** `E:/Projects/thesis/Datasets/CIC-IDS2017/` (Monday, Tuesday, Wednesday CSV)  
-**Dataset Cache:** `E:/Projects/thesis/Datasets/interim/cic_3class_dedup.parquet` (1.529.677 baris)
+**Dataset Cache:** `E:/Projects/thesis/Datasets/interim/cic_3class_dedup.parquet` (1.520.488 baris)
 
 ---
 
@@ -44,20 +44,20 @@ Skrip eksekusi: `Skrip/EDA/eda_full_pandas.py`
   - DoS slowloris: 5.385 (0,88%)
   - DoS Slowhttptest: 5.228 (0,86%)
   - Heartbleed: 11 (0,00%)
-- DoS Total (setelah dedup, 4 varian digabung): 193.748 baris (Hulk mendominasi 89,21%)
+- DoS Total (setelah dedup, 4 varian digabung): 193.708 baris (Hulk mendominasi 89,21%)
 
 ### Rekapitulasi Data Mentah
 - Total baris sebelum dedup: 1.668.530
-- Total duplikat (semua kolom): 132.909 (7,97%)
-- Total baris setelah dedup: 1.535.621
-- Total data 3 kelas (BENIGN + SSH-Patator + DoS, tanpa FTP-Patator dan Heartbleed): 1.529.677 baris
+- Total duplikat (semua kolom): 138.098 (7,97%)
+- Total baris setelah dedup: 1.520.488
+- Total data 3 kelas (BENIGN + SSH-Patator + DoS, tanpa FTP-Patator dan Heartbleed): 1.520.488 baris
 
 ---
 
 ## 2. Analisis Kolom Konstan (Zero Variance)
 
 Skrip eksekusi: `Skrip/EDA/constant_columns_check.py`  
-Dataset: 1.529.677 baris (data 3 kelas setelah dedup)
+Dataset: 1.520.488 baris (data 3 kelas setelah dedup)
 
 Daftar 10 kolom dengan variansi tepat 0 (semua baris bernilai identik):
 1. `Bwd PSH Flags` (variance = 0,000000, 1 nilai unik)
@@ -75,7 +75,7 @@ Daftar 10 kolom dengan variansi tepat 0 (semua baris bernilai identik):
 
 ## 3. Analisis Pasangan Kolom Identik (Hashing Seluruh Kolom)
 
-Metode: Hashing nilai array per kolom pada 1.529.677 baris.
+Metode: Hashing nilai array per kolom pada 1.520.488 baris.
 
 ### Grup Kolom Identik Tepat (100% Identik):
 1. `Fwd Header Length` == `Fwd Header Length.1` (100,0000%, corr = 1,000000)
@@ -89,7 +89,7 @@ Metode: Hashing nilai array per kolom pada 1.529.677 baris.
 
 ### Pasangan Serupa tetapi Tidak Identik:
 - `Average Packet Size` vs `Packet Length Mean`:
-  - Identik: 13,69% (209.425 / 1.529.677 baris)
+  - Identik: 13,69% (209.425 / 1.520.488 baris)
   - Korelasi Pearson: 0,997691
   - Kesimpulan: Bukan kolom identik, tetapi fitur turunan dengan korelasi sangat tinggi.
 
@@ -109,13 +109,13 @@ Metode: Hashing nilai array per kolom pada 1.529.677 baris.
   3. `Subflow Fwd Packets` (duplikat persis `Total Fwd Packets`)
   4. `Subflow Bwd Packets` (duplikat persis `Total Backward Packets`)
   5. `SYN Flag Count` (duplikat persis `Fwd PSH Flags`)
-- Perhitungan: 78 fitur - 10 konstan - 5 duplikat = **63 fitur unik numerik** (+ 1 kolom `Label` = **64 kolom dataset bersih**, atau 66 kolom jika menyertakan kolom pembantu `Day` dan `Label_Original` di dataframe interim).
+- Perhitungan: 78 fitur - 10 konstan - 5 duplikat = **62 fitur unik numerik** (+ 1 kolom `Label` = **64 kolom dataset bersih**, atau 66 kolom jika menyertakan kolom pembantu `Day` dan `Label_Original` di dataframe interim).
 
 ### Opsi B (Pembersihan Lengkap Termasuk Pasangan Floating-Point Rosay 2022):
 - Menghapus 8 kolom redundan (`Fwd Header Length.1`, `Subflow Fwd Bytes`, `Subflow Bwd Bytes`, `Subflow Fwd Packets`, `Subflow Bwd Packets`, `Avg Fwd Segment Size`, `Avg Bwd Segment Size`, `SYN Flag Count`):
 - Perhitungan: 78 fitur - 10 konstan - 8 duplikat = **60 fitur unik** (+ 1 kolom `Label` = 61 kolom total).
 
-*Catatan penting: Cache parquet interim memiliki 66 kolom karena menyertakan kolom metadata `Day` dan `Label_Original`. Kedua kolom pembantu ini dikeluarkan sebelum pelatihan sehingga menyisakan 63 input fitur + 1 label target.*
+*Catatan penting: Cache parquet interim memiliki 66 kolom karena menyertakan kolom metadata `Day` dan `Label_Original`. Kedua kolom pembantu ini dikeluarkan sebelum pelatihan sehingga menyisakan 62 input fitur + 1 label target.*
 
 ---
 

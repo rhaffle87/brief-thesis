@@ -47,4 +47,4 @@
 - **Konflik lintas-label** (vektor identik, label berbeda) adalah target audit; keputusan eliminasi hanya melalui flag eksplisit, bukan perilaku default.
 - **Proyeksi 78→62** (penghapusan 16 kolom) menambah duplikat sisa di ruang final; dicatat sebagai peringatan runtime di `select_features()`, tidak dihapus otomatis.
 - Sitasi Engelen et al. (2021) pada Bab 3 dibatasi pada yang memang dibahas paper (kesalahan konstruksi aliran & penempelan label), bukan konflik vektor fitur.
-- Angka-angka pada dokumen lama (1.529.677 / 193.748 / 414:1) berasal dari run praproses terdahulu; artefak saat ini dan manifest ini adalah rujukan kanonik baru.
+- Angka-angka pada dokumen lama (1.520.488 / 193.708 / 414:1) berasal dari run praproses terdahulu; artefak saat ini dan manifest ini adalah rujukan kanonik baru.

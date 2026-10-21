@@ -1051,11 +1051,11 @@ Continue with 5 remaining high-priority papers OR verify 4 unverified notes befo
 ## ✅ Completed Tasks
 
 ### 1. Full EDA with Corrected Measurements ✅
-- **Duplicates (ALL 79 columns):** 132,909 (7.97%) - NOT 263K
-- **After dedup:** 1,535,621 rows total
-  - Normal: 1,332,710 (86.8%)
+- **Duplicates (ALL 79 columns):** 138,098 (7.97%) - NOT 263K
+- **After dedup:** 1,520,488 rows total
+  - Normal: 1,323,561 (86.8%)
   - SSH: 3,219 (0.2%) ← **SEVERE imbalance after dedup!**
-  - DoS: 193,748 (12.6%)
+  - DoS: 193,708 (12.6%)
 
 ### 2. Port Leakage Test MEASURED ✅
 **Method:** Decision Tree (depth=3), 2,535 balanced samples per class, seed=42
@@ -1166,7 +1166,7 @@ Continue with 5 remaining high-priority papers OR verify 4 unverified notes befo
 **Corrected (full data):** Monday 9.51%, Tuesday 10.30%, Wednesday 11.03%
 
 ### 4. EDA Report Updated ✅
-- Duplicate count: 132,909 (7.97%) using ALL columns
+- Duplicate count: 138,098 (7.97%) using ALL columns
 - Port leakage section replaced with corrected evidence
 - Decision 2: Day pattern evidence added
 - Decision 4: SSH 3.2K limit impact documented
@@ -1970,7 +1970,7 @@ _Archive → Arsip ✅
 
 **Klaim usang:**
 - "LYCOS-IDS2017 tidak tersedia" → **BENAR: LYCOS tersedia di Datasets/**
-- "Duplikat 263.252 (15.8%)" → **BENAR: 132.909 (7.97%) setelah cek semua kolom**
+- "Duplikat 263.252 (15.8%)" → **BENAR: 138.098 (7.97%) setelah cek semua kolom**
 - "Port test macro-F1 93.94%" → **BENAR: 96.44% port-only, 98.02% no-port (setelah koreksi metodologi)**
 
 ### 2. SESSION-REPORT-2026-10-02.md

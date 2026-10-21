@@ -22,7 +22,7 @@ Dokumen ini merupakan catatan historis opsi-opsi metodologi yang semula berstatu
   * **Status:** ✅ **DISETUJUI / TERKUNCI (Opsi CIC-IDS2017 Original)**.
   * **Keputusan Pembimbing:** Menggunakan secara eksklusif berkas resmi UNB **CIC-IDS2017 (Senin, Selasa, Rabu)**.
   * **Strategi Pembersihan:** Transparansi penuh mengutip kritik Rosay et al. (2022) [Rosay-2022-LycoSTand](../Literatur/Rosay-2022-LycoSTand.md) dan Dube et al. (2024) [Dube-2024-Faulty-CIC-IDS2017](../Literatur/Dube-2024-Faulty-CIC-IDS2017.md).
-  * Menghapus 10 kolom konstan bervariansi 0, 5 kolom duplikat identik, serta `Destination Port` (mencegah *shortcut learning*). Menyisakan **63 fitur unik numerik + 1 Label**.
+  * Menghapus 10 kolom konstan bervariansi 0, 5 kolom duplikat identik, serta `Destination Port` (mencegah *shortcut learning*). Menyisakan **62 fitur unik numerik + 1 Label**.
 
 ---
 
@@ -44,10 +44,10 @@ Dokumen ini merupakan catatan historis opsi-opsi metodologi yang semula berstatu
   * Mengusulkan opsi pemangkasan (*undersampling*) ekstrem mayoritas Normal hingga batas ~3.200 atau ~6.000 sampel per kelas (total hanya ~18K flow).
 * **Fakta Aktual Codebase & Keputusan Final (6 Okt 2026):**
   * **Distribusi Terukur Riil (Pasca-Deduplikasi 79 Kolom):**
-    * **Normal (BENIGN):** 1.332.710 flow (87,1%)
-    * **DoS (4 Subvarian):** 193.748 flow (12,7%)
+    * **Normal (BENIGN):** 1.323.561 flow (87,1%)
+    * **DoS (4 Subvarian):** 193.708 flow (12,7%)
     * **SSH-Patator:** **3.219 flow bersih** (0,2%)
-    * **Total Bersih 3 Kelas:** **1.529.677 flow unik** (rasio ketimpangan ~ 414 : 60 : 1).
+    * **Total Bersih 3 Kelas:** **1.520.488 flow unik** (rasio ketimpangan ~ 411 : 60 : 1).
   * **Status:** ✅ **DISETUJUI / TERKUNCI (Opsi C: Weighted Loss, Keep All Data)**.
   * **Keputusan Pembimbing:** Menolak keras opsi undersampling ekstrem karena akan membuang 99,6% data Normal dan 98% data DoS yang berharga. Seluruh 1,53 juta flow bersih dipertahankan (*keep all clean data*).
   * Ketimpangan kelas diatasi secara analitis menggunakan **Weighted Cross-Entropy Loss** dengan bobot invers frekuensi terstandarisasi:
@@ -66,7 +66,7 @@ Dokumen ini merupakan catatan historis opsi-opsi metodologi yang semula berstatu
     2. **5 Kolom Duplikat Identik (Hash Match 100%):** `Fwd Header Length.1`, `Subflow Fwd Bytes`, `Subflow Fwd Packets`, `Subflow Bwd Packets`, `SYN Flag Count`.
     3. **1 Kolom Shortcut Leakage:** `Destination Port`. Uji empiris 5-seed membuktikan port saja mencapai Macro-F1 96,44% (*shortcut learning* menghafal port 22/80).
   * **Status:** ✅ **DISETUJUI / TERKUNCI**.
-  * **Hasil Akhir:** Tepat **63 fitur unik numerik + 1 Label** (total 64 kolom dataset bersih; 66 kolom pada dataframe interim dengan kolom metadata `Day` & `Label_Original`). Tidak dipangkas ke 15–30 fitur arbitrer agar seluruh profil statistik flow tetap utuh.
+  * **Hasil Akhir:** Tepat **62 fitur unik numerik + 1 Label** (total 64 kolom dataset bersih; 66 kolom pada dataframe interim dengan kolom metadata `Day` & `Label_Original`). Tidak dipangkas ke 15–30 fitur arbitrer agar seluruh profil statistik flow tetap utuh.
 
 ---
 
@@ -74,9 +74,9 @@ Dokumen ini merupakan catatan historis opsi-opsi metodologi yang semula berstatu
 
 Berikut adalah daftar batasan ruang lingkup yang telah dikunci secara permanen:
 
-1. ✅ **Dataset:** Solely CIC-IDS2017 (Senin, Selasa, Rabu; 63 fitur unik numerik + 1 Label).
+1. ✅ **Dataset:** Solely CIC-IDS2017 (Senin, Selasa, Rabu; 62 fitur unik numerik + 1 Label).
 2. ✅ **Kelas Deteksi:** Tepat 3 kelas (Normal, SSH-Patator, DoS gabungan 4 subvarian).
-3. ✅ **Model:** Single Multilayer Perceptron (MLP) kompak (Input: 63 $\to$ Dense: 64 $\to$ Dense: 32 $\to$ Output: 3) dengan Hyperparameter Tuning sistematis. Tidak menggunakan CNN, LSTM, maupun Transformer.
+3. ✅ **Model:** Single Multilayer Perceptron (MLP) kompak (Input: 62 $\to$ Dense: 64 $\to$ Dense: 32 $\to$ Output: 3) dengan Hyperparameter Tuning sistematis. Tidak menggunakan CNN, LSTM, maupun Transformer.
 4. ✅ **Algoritma FL:** Federated Averaging (FedAvg) murni dengan topologi 2 Klien + 1 Server Agregator (Flower framework).
 5. ✅ **Algoritma CL:** Elastic Weight Consolidation (EWC) dengan penalti kuadratik Fisher vs. Naive Fine-Tuning. Memory replay (GEM, A-GEM) ditiadakan demi privasi.
 6. ✅ **Partisi Klien (Non-IID):** Client A = Normal (50%) + SSH-Patator; Client B = Normal (50%) + DoS.
@@ -92,4 +92,4 @@ Berikut adalah daftar batasan ruang lingkup yang telah dikunci secara permanen:
 ## 📝 Catatan Audit Arsip
 
 - **Status Riwayat:** Dokumen ini resmi ditutup sebagai draf pending. Tidak ada lagi keputusan metodologis yang berstatus *pending* atau menunggu persetujuan pembimbing.
-- **Transisi:** Tahapan proyek beralih dari fase formulasi metodologi ke fase **implementasi praproses dataset** (`cic_3class_dedup.parquet` $\to$ 63 fitur, stratified split, weighted loss).
+- **Transisi:** Tahapan proyek beralih dari fase formulasi metodologi ke fase **implementasi praproses dataset** (`cic_3class_dedup.parquet` $\to$ 62 fitur, stratified split, weighted loss).
