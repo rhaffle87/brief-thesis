@@ -30,7 +30,7 @@ Analisis Kinerja Deteksi Network Traffic Intrusion Menggunakan Metode Federated-
 
 ### 4 Titik Pembekuan Ruang Lingkup (*Anti-Scope Creep*)
 - **Dataset:** Hanya **CIC-IDS2017** (Senin, Selasa, Rabu). 3 Kelas: Normal, SSH-Patator, DoS.
-- **Model:** Hanya **MLP** kompak (`Input(63) → Linear(64) → Linear(32) → Linear(3)`).
+- **Model:** Hanya **MLP** kompak (`Input(62) → Linear(64) → Linear(32) → Linear(3)`).
 - **Federated Learning:** Hanya **FedAvg** dengan **2 Client + 1 Server** (Client A: Normal+SSH; Client B: Normal+DoS).
 - **Continual Learning:** Hanya **EWC** vs **Naive Fine-Tuning** (Urutan: Task 1 SSH $\to$ Task 2 DoS).
 

@@ -39,7 +39,8 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 import argparse
 import json
 import logging
-from pathlib import numpy as np
+
+import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
