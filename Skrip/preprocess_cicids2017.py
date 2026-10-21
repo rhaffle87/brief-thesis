@@ -143,7 +143,7 @@ def clean_anomalies_and_deduplicate(df: pd.DataFrame, drop_conflicting_labels: b
     Audit konflik label (vektor fitur identik multipel baris namun label
     berbeda — artefak ekstraksi statistik CICFlowMeter, sejalan temuan
     Engelen et al., 2021) dihitung sebelum deduplikasi:
-      - Ruang 78 fitur (pra-seleksi): 4.486 baris lintas-label pada 72 grup
+      - Ruang 78 fitur (pra-seleksi): 4.486 baris lintas-label pada 74 grup
         vektor fitur identik (didominasi satu grup besar 3.361 baris
         campuran Normal/DoS); 0 konflik pada SSH-Patator.
       - keep="first" (default): mempertahankan baris pertama tiap grup fitur
@@ -435,7 +435,7 @@ def main():
         action="store_true",
         help=(
             "Eliminasi seluruh baris pada grup vektor fitur identik dengan label berbeda "
-            "(4.486 baris, 72 grup di ruang 78 fitur) sebelum deduplikasi -> 1.520.414 baris. "
+            "(4.486 baris, 74 grup di ruang 78 fitur) sebelum deduplikasi -> 1.520.414 baris. "
             "Default mempertahankan keep='first' historis (1.520.488 baris)."
         ),
     )
